@@ -13,15 +13,27 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text("Title Water Text")
-                Text("Oz of water drank  *  X% of goal")
+                Spacer()
                 
+                Text("Title Water Text")
+                    .font(.custom("ArialRoundedMTBold", size: 45))
+                    //Fix later: Create dynamic text scaling to fit width of view
+                
+                Text("Oz of water drank  ||  X% of goal")
+                    .font(.custom("ArialRoundedMT", size: 20))
+                
+                Spacer()
                 Spacer()
                 
                 CupView(percent: Int(self.waterLevelPercent))
                 
                 Spacer()
+                Spacer()
                 
+                Text("Scroll")
+                
+                Spacer()
+                Spacer()
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
