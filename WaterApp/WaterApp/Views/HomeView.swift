@@ -8,12 +8,34 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var percent = 50.0
+    @State private var waterLevelPercent = 0.0
     
     var body: some View {
-        VStack {
-            CupView(percent: Int(self.percent))
-            Slider(value: self.$percent, in: 0...100)
+        NavigationStack {
+            VStack {
+                Text("Water")
+                
+                CupView(percent: Int(self.waterLevelPercent))
+                
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "calendar")
+                            
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        //
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                    }
+                }
+            }
         }
     }
 }
@@ -25,5 +47,5 @@ struct HomeView: View {
 //}
 
 #Preview {
-    CupView(percent: 50)
+    HomeView()
 }
