@@ -21,7 +21,7 @@ struct CupView: View {
                     .font(Font.system(size: 0.25 * min(wave.size.width, wave.size.height) ))
                 
                 Circle()
-                    .stroke(Color.blue, lineWidth: 0.03 * min(wave.size.width, wave.size.height))
+                    .stroke(Color.white, lineWidth: 0.03 * min(wave.size.width, wave.size.height))
                     .overlay(
                         WaveMotion(offset: Angle(degrees: self.waveOffset.degrees), percent: Double(percent)/100)
                             .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
