@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct WaveMotion: Shape {
-    
     var offset: Angle
     var percent: Double
     
@@ -44,7 +43,6 @@ struct WaveMotion: Shape {
         
         return p
     }
-    
 }
 
 #Preview {
