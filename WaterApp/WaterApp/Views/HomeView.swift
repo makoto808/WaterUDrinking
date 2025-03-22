@@ -58,7 +58,7 @@ struct Wave: Shape {
     }
     
 }
-
+    
 struct CircleWaveView: View {
     
     @State private var waveOffset = Angle(degrees: 0)
