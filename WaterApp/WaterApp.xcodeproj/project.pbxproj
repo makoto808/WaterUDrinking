@@ -15,6 +15,8 @@
 		07F3C7452D8EEDFE00427A9A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07F3C73D2D8EEDFE00427A9A /* Preview Assets.xcassets */; };
 		07F3C7462D8EEDFE00427A9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07F3C73F2D8EEDFE00427A9A /* Assets.xcassets */; };
 		07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C74B2D8EEF4600427A9A /* HomeView.swift */; };
+		07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7512D8EF69500427A9A /* WaveMotion.swift */; };
+		07F3C7542D8EF8DF00427A9A /* CupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7532D8EF8DF00427A9A /* CupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		07F3C7402D8EEDFE00427A9A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		07F3C7412D8EEDFE00427A9A /* WaterAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAppApp.swift; sourceTree = "<group>"; };
 		07F3C74B2D8EEF4600427A9A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		07F3C7512D8EF69500427A9A /* WaveMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveMotion.swift; sourceTree = "<group>"; };
+		07F3C7532D8EF8DF00427A9A /* CupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				07F3C74B2D8EEF4600427A9A /* HomeView.swift */,
+				07F3C7512D8EF69500427A9A /* WaveMotion.swift */,
+				07F3C7532D8EF8DF00427A9A /* CupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -299,8 +305,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */,
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
 				07F3C7432D8EEDFE00427A9A /* ContentView.swift in Sources */,
+				07F3C7542D8EF8DF00427A9A /* CupView.swift in Sources */,
 				07F3C7442D8EEDFE00427A9A /* WaterAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
