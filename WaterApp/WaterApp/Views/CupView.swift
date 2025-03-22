@@ -13,20 +13,21 @@ struct CupView: View {
     let percent: Int
     
     var body: some View {
-        
-        GeometryReader { geo in
+        GeometryReader { wave in
+            
             ZStack {
                 Text("\(self.percent)%")
-                    .foregroundColor(.black)
-                    .font(Font.system(size: 0.25 * min(geo.size.width, geo.size.height) ))
+                    .foregroundColor(.primary)
+                    .font(Font.system(size: 0.25 * min(wave.size.width, wave.size.height) ))
+                
                 Circle()
-                    .stroke(Color.blue, lineWidth: 0.025 * min(geo.size.width, geo.size.height))
+                    .stroke(Color.blue, lineWidth: 0.03 * min(wave.size.width, wave.size.height))
                     .overlay(
-                        WaveMotion(offset: Angle(degrees: self.waveOffset.degrees), percent: Double(percent)/100)
+                        Wave(offset: Angle(degrees: self.waveOffset.degrees), percent: Double(percent)/100)
                             .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
-                            .clipShape(Circle().scale(0.92))
-                    )
+                            .clipShape(Circle().scale(0.92)))
             }
+            .padding(.horizontal)
         }
         
         .aspectRatio(1, contentMode: .fit)
