@@ -13,24 +13,28 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text("Water")
+                Text("Title Water Text")
+                Text("Oz of water drank  *  X% of goal")
+                
+                Spacer()
                 
                 CupView(percent: Int(self.waterLevelPercent))
+                
+                Spacer()
                 
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
-                        
+                        //Access water streak / data for previous days
                     } label: {
                         Image(systemName: "calendar")
-                            
                     }
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        //
+                        //Access settings page
                     } label: {
                         Image(systemName: "gearshape.fill")
                     }
