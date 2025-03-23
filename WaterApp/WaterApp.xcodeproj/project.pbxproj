@@ -17,6 +17,7 @@
 		07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C74B2D8EEF4600427A9A /* HomeView.swift */; };
 		07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7512D8EF69500427A9A /* WaveMotion.swift */; };
 		07F3C7542D8EF8DF00427A9A /* CupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7532D8EF8DF00427A9A /* CupView.swift */; };
+		07F3C7562D90CA1700427A9A /* DrinkSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7552D90CA1700427A9A /* DrinkSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		07F3C74B2D8EEF4600427A9A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		07F3C7512D8EF69500427A9A /* WaveMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveMotion.swift; sourceTree = "<group>"; };
 		07F3C7532D8EF8DF00427A9A /* CupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupView.swift; sourceTree = "<group>"; };
+		07F3C7552D90CA1700427A9A /* DrinkSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,8 +148,9 @@
 			isa = PBXGroup;
 			children = (
 				07F3C74B2D8EEF4600427A9A /* HomeView.swift */,
-				07F3C7512D8EF69500427A9A /* WaveMotion.swift */,
 				07F3C7532D8EF8DF00427A9A /* CupView.swift */,
+				07F3C7552D90CA1700427A9A /* DrinkSelectionView.swift */,
+				07F3C7512D8EF69500427A9A /* WaveMotion.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			files = (
 				07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */,
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
+				07F3C7562D90CA1700427A9A /* DrinkSelectionView.swift in Sources */,
 				07F3C7432D8EEDFE00427A9A /* ContentView.swift in Sources */,
 				07F3C7542D8EF8DF00427A9A /* CupView.swift in Sources */,
 				07F3C7442D8EEDFE00427A9A /* WaterAppApp.swift in Sources */,

@@ -10,7 +10,8 @@ import SwiftUI
 struct HomeView: View {
     @State private var waterLevelPercent = 35.0
     
-    let backgroundBlue = Color(red: 0.5686, green: 0.8627, blue: 1.0)
+    let backgroundBlue = Color(red: 0.9373, green: 0.9607, blue: 0.9607)
+    //can this be refactored?
     
     var body: some View {
         NavigationStack {
@@ -36,17 +37,7 @@ struct HomeView: View {
                     Spacer()
                     Spacer()
                     
-                    ScrollView(.horizontal) {
-                        HStack(spacing: 20) {
-                            ForEach(0..<10) {
-                                Text("Item \($0)")
-                                    .foregroundStyle(.white)
-                                    .font(.largeTitle)
-                                    .frame(width: 80, height: 80)
-                                    .background(.red)
-                            }
-                        }
-                    }
+                    DrinkSelectionView()
                     
                     Spacer()
                     Spacer()
