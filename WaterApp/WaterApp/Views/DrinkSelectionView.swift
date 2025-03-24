@@ -8,21 +8,22 @@
 import SwiftUI
 
 struct DrinkSelectionView: View {
-//    @State var beverageName: [String] = ["Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"]
+    @State private var image: [String] = ["waterBottle", "tea", "coffee", "soda", "juice", "milk", "energyDrink", "beer"]
+    @State private var drinkName: [String] = ["Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"]
     
     var body: some View {
         VStack {
             ScrollView(.horizontal) {
-                HStack(spacing: -40) {
-                    ForEach(0..<8) { _ in
-                        VStack(spacing: -15) {
-                            Image("waterBottle")
+                HStack(spacing: -20) {
+                    ForEach(0..<8) { beverage in
+                        VStack(spacing: 10) {
+                            Image(image[beverage])
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 150, height: 150)
-                            Text("Water")
+                                .frame(width: 150, height: 110)
+                            Text(drinkName[beverage])
                                 .foregroundStyle(.gray)
-                                .font(.custom("ArialRoundedMT", size: 16))
+                                .font(.custom("ArialRoundedMTBold", size: 16))
                         }
                     }
                 }
