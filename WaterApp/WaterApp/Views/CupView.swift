@@ -14,7 +14,6 @@ struct CupView: View {
     
     var body: some View {
         GeometryReader { wave in
-            
             ZStack {
                 Text("\(self.percent)%")
                     .foregroundColor(.primary)
@@ -28,8 +27,8 @@ struct CupView: View {
                             .clipShape(Circle().scale(0.92)))
             }
             .padding(.horizontal)
+            
         }
-        
         .aspectRatio(1, contentMode: .fit)
         .onAppear {
             withAnimation(Animation.linear(duration: 2).repeatForever(autoreverses: false)) {

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DrinkSelectionView: View {
+//    @State var beverageName: [String] = ["Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"]
+    
     var body: some View {
         VStack {
             ScrollView(.horizontal) {
@@ -18,7 +20,7 @@ struct DrinkSelectionView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 150, height: 150)
-                            Text("Water Bottle")
+                            Text("Water")
                                 .foregroundStyle(.gray)
                                 .font(.custom("ArialRoundedMT", size: 16))
                         }
@@ -28,6 +30,9 @@ struct DrinkSelectionView: View {
         }
     }
 }
+
+// need to create array of drink images and titles
+// add in button after 8th drink for other options of drinks. will not replace anything in first 8 
 
 #Preview {
     DrinkSelectionView()
