@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    //    @StateObject private var vm = HomeView() ???
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            Text("You need to drink more water!")
+            NavigationLink(destination: HomeView()) {
+                Text("Enter")
+            }
         }
-        .padding()
     }
 }
 

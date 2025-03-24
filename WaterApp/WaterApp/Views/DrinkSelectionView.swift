@@ -13,7 +13,7 @@ struct DrinkSelectionView: View {
     
     var body: some View {
         VStack {
-            ScrollView(.horizontal) {
+            ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: -20) {
                     ForEach(0..<8) { beverage in
                         VStack(spacing: 10) {

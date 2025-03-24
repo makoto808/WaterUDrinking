@@ -11,7 +11,7 @@ struct HomeView: View {
     @State private var waterLevelPercent = 35.0
     
     let backgroundBlue = Color(red: 0.9373, green: 0.9607, blue: 0.9607)
-    //can this be refactored?
+    //can this be refactored into a separate file?
     
     var body: some View {
         NavigationStack {
@@ -63,6 +63,7 @@ struct HomeView: View {
                     }
                 }
             }
+        .navigationBarBackButtonHidden(true)
         }
     }
 
