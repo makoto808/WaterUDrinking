@@ -21,10 +21,12 @@ struct HomeView: View {
                 
                 VStack {
                     Spacer()
+                    Spacer()
                     
                     Text("Title Water Text")
                         .font(.custom("ArialRoundedMTBold", size: 45))
                     //Fix later: Create dynamic text scaling to fit width of view
+                    //can be refactored?
                     
                     Text("Oz of water drank  ||  X% of goal")
                         .font(.custom("ArialRoundedMT", size: 20))
