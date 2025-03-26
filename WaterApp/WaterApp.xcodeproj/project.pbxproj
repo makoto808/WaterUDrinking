@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		072787282D94C14700D56B96 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072787272D94C14700D56B96 /* CalendarView.swift */; };
 		07F3C7382D8EEDF700427A9A /* WaterAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7352D8EEDF700427A9A /* WaterAppUITests.swift */; };
 		07F3C7392D8EEDF700427A9A /* WaterAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7362D8EEDF700427A9A /* WaterAppUITestsLaunchTests.swift */; };
 		07F3C73C2D8EEDF900427A9A /* WaterAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C73A2D8EEDF900427A9A /* WaterAppTests.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		072787272D94C14700D56B96 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		07F3C7082D8EEDE800427A9A /* WaterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F3C7182D8EEDEB00427A9A /* WaterAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F3C7222D8EEDEB00427A9A /* WaterAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +81,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		072787242D94C04100D56B96 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		072787252D94C06300D56B96 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		072787262D94C12700D56B96 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				072787272D94C14700D56B96 /* CalendarView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		072787292D94C15C00D56B96 /* Cup */ = {
+			isa = PBXGroup;
+			children = (
+				07F3C74B2D8EEF4600427A9A /* HomeView.swift */,
+				07F3C7532D8EF8DF00427A9A /* CupView.swift */,
+				07F3C7552D90CA1700427A9A /* DrinkSelectionView.swift */,
+				07F3C7512D8EF69500427A9A /* WaveMotion.swift */,
+			);
+			path = Cup;
+			sourceTree = "<group>";
+		};
 		07F3C6FF2D8EEDE800427A9A = {
 			isa = PBXGroup;
 			children = (
@@ -130,36 +165,20 @@
 				07F3C73E2D8EEDFE00427A9A /* Preview Content */,
 				07F3C73F2D8EEDFE00427A9A /* Assets.xcassets */,
 				07F3C74A2D8EEE2A00427A9A /* App */,
-				07F3C7492D8EEE2000427A9A /* Models */,
+				072787252D94C06300D56B96 /* Models */,
 				07F3C7482D8EEE1700427A9A /* Views */,
-				07F3C7472D8EEE0E00427A9A /* ViewModels */,
+				072787242D94C04100D56B96 /* View Models */,
 			);
 			path = WaterApp;
-			sourceTree = "<group>";
-		};
-		07F3C7472D8EEE0E00427A9A /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		07F3C7482D8EEE1700427A9A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				07F3C74B2D8EEF4600427A9A /* HomeView.swift */,
-				07F3C7532D8EF8DF00427A9A /* CupView.swift */,
-				07F3C7552D90CA1700427A9A /* DrinkSelectionView.swift */,
-				07F3C7512D8EF69500427A9A /* WaveMotion.swift */,
+				072787292D94C15C00D56B96 /* Cup */,
+				072787262D94C12700D56B96 /* Calendar */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		07F3C7492D8EEE2000427A9A /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		07F3C74A2D8EEE2A00427A9A /* App */ = {
@@ -309,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */,
+				072787282D94C14700D56B96 /* CalendarView.swift in Sources */,
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
 				07F3C7562D90CA1700427A9A /* DrinkSelectionView.swift in Sources */,
 				07F3C7432D8EEDFE00427A9A /* ContentView.swift in Sources */,
