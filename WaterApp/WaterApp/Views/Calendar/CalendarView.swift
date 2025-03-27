@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct CalendarView: View {
+    @State private var date = Date()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            DatePicker(
+                "Start Date",
+                selection: $date,
+                displayedComponents: [.date]
+            )
+            .datePickerStyle(.graphical)
+        }
+        
+        Button("Add Previous Drink") {
+            
+        }
+        .buttonBorderShape(.capsule)
+        .buttonStyle(.borderedProminent)
+        //make custom color button later
     }
 }
 
