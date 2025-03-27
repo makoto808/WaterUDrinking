@@ -10,28 +10,33 @@ import SwiftUI
 struct CalendarView: View {
     @State private var date = Date()
     
-    var body: some View {
-        VStack {
-            
-            BarChart()
-            
-            DatePicker(
-                "Start Date",
-                selection: $date,
-                displayedComponents: [.date]
-            )
-            .datePickerStyle(.graphical)
-        }
-        .padding(.horizontal)
+    let backgroundWhite = Color(red: 0.9373, green: 0.9607, blue: 0.9607)
     
-        
-        Button("Add Previous Drink", systemImage: "lock") {
+    var body: some View {
+        ZStack {
+            Color.backgroundWhite.ignoresSafeArea()
             
+            VStack {
+                BarChart()
+                
+                DatePicker(
+                    "Start Date",
+                    selection: $date,
+                    displayedComponents: [.date]
+                )
+                .datePickerStyle(.graphical)
+                //make custom color button later
+                //able to make as apple fitness ring app?
+                
+                Button("Add Previous Drink", systemImage: "lock") {
+                    //toggle systemImage if on premium account or not
+                }
+                .buttonBorderShape(.capsule)
+                .buttonStyle(.borderedProminent)
+            }
+            .padding(.horizontal)
         }
-        .buttonBorderShape(.capsule)
-        .buttonStyle(.borderedProminent)
-        //make custom color button later
-        //toggle systemImage if on premium account or not
+//        .background(Color.backgroundWhite) "Does not ignore safe area for whatever              reason??
     }
 }
 

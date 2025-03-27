@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		072787282D94C14700D56B96 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072787272D94C14700D56B96 /* CalendarView.swift */; };
 		07CED0272D94CFF500498D17 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0262D94CFF500498D17 /* BarChart.swift */; };
+		07CED0292D953BF300498D17 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0282D953BF300498D17 /* Extensions.swift */; };
 		07F3C7382D8EEDF700427A9A /* WaterAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7352D8EEDF700427A9A /* WaterAppUITests.swift */; };
 		07F3C7392D8EEDF700427A9A /* WaterAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7362D8EEDF700427A9A /* WaterAppUITestsLaunchTests.swift */; };
 		07F3C73C2D8EEDF900427A9A /* WaterAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C73A2D8EEDF900427A9A /* WaterAppTests.swift */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		072787272D94C14700D56B96 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		07CED0262D94CFF500498D17 /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
+		07CED0282D953BF300498D17 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		07F3C7082D8EEDE800427A9A /* WaterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F3C7182D8EEDEB00427A9A /* WaterAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F3C7222D8EEDEB00427A9A /* WaterAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,6 +199,7 @@
 			children = (
 				07F3C7402D8EEDFE00427A9A /* ContentView.swift */,
 				07F3C7412D8EEDFE00427A9A /* WaterAppApp.swift */,
+				07CED0282D953BF300498D17 /* Extensions.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07CED0272D94CFF500498D17 /* BarChart.swift in Sources */,
+				07CED0292D953BF300498D17 /* Extensions.swift in Sources */,
 				07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */,
 				072787282D94C14700D56B96 /* CalendarView.swift in Sources */,
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,

@@ -10,15 +10,9 @@ import SwiftUI
 struct HomeView: View {
     @State private var waterLevelPercent = 35.0
     
-    let backgroundBlue = Color(red: 0.9373, green: 0.9607, blue: 0.9607)
-    //can this be refactored into a separate file?
-    
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ZStack {
-                Color(backgroundBlue)
-                    .ignoresSafeArea()
-                
                 VStack {
                     Spacer()
                     Spacer()
@@ -45,14 +39,17 @@ struct HomeView: View {
                     Spacer()
                 }
             }
+            .background(Color.backgroundWhite)
+            
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                        Button {
-                            //Access water streak / data for previous days
-                        } label: {
-                            Image(systemName: "calendar")
+                        NavigationLink(destination: CalendarView()) {
+                            Image(systemName: "calendar") //Access water streak / data for previous days
+                                
                         }
                     }
+                    
+                    
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
