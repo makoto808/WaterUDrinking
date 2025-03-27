@@ -10,45 +10,63 @@ import Charts
 
 struct BarChart: View {
     
-    let viewMonths: [ViewMonth] = [
-        .init(date: Date.from(year: 2025, month: 1, day: 1), viewCount: 30),
-        .init(date: Date.from(year: 2025, month: 2, day: 1), viewCount: 55),
-        .init(date: Date.from(year: 2025, month: 3, day: 1), viewCount: 24),
-        .init(date: Date.from(year: 2025, month: 4, day: 1), viewCount: 64),
-        .init(date: Date.from(year: 2025, month: 5, day: 1), viewCount: 36),
-        .init(date: Date.from(year: 2025, month: 6, day: 1), viewCount: 41),
-        .init(date: Date.from(year: 2025, month: 7, day: 1), viewCount: 29)
+    let viewDay: [ViewDay] = [ //sample data
+        .init(date: Date.from(year: 2025, day: 1), ouncesOfWater: 30),
+        .init(date: Date.from(year: 2025, day: 2), ouncesOfWater: 55),
+        .init(date: Date.from(year: 2025, day: 3), ouncesOfWater: 36),
+        .init(date: Date.from(year: 2025, day: 4), ouncesOfWater: 81),
+        .init(date: Date.from(year: 2025, day: 5), ouncesOfWater: 36),
+        .init(date: Date.from(year: 2025, day: 6), ouncesOfWater: 41),
+        .init(date: Date.from(year: 2025, day: 7), ouncesOfWater: 29)
     ]
-    
     
     var body: some View {
         VStack {
+            Text("Daily Water Intake")
+                .font(.custom("ArialRoundedMTBold", size: 23))
+            
             Chart {
-                ForEach(viewMonths) { viewMonth in
+                RuleMark(y: .value("Goal", 64))
+                    .foregroundStyle(Color.mint)
+                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [10]))
+                    .annotation(alignment: .leading) {
+                        Text("Goal")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                
+                ForEach(viewDay) { viewDay in
                     BarMark(
-                        x: .value("Month", viewMonth.date, unit: .month),
-                        y: .value("Views", viewMonth.viewCount))
+                        x: .value("Day", viewDay.date, unit: .day),
+                        y: .value("Ounces of Water", viewDay.ouncesOfWater))
                 }
                 .foregroundStyle(Color.cyan.gradient)
+                .cornerRadius(5)
             }
         }
-        .frame(height: 180)
+        .frame(height: 270)
+        .chartXAxis {
+            AxisMarks(values: viewDay.map { $0.date }) { date in
+                AxisValueLabel(format: .dateTime.day(), centered: true)
+                }
+            }
+        }
     }
-}
+
 
 #Preview {
     BarChart()
 }
 
-struct ViewMonth: Identifiable {
+struct ViewDay: Identifiable {
     let id = UUID()
     let date: Date
-    let viewCount: Int
+    let ouncesOfWater: Int
 }
 
 extension Date {
-    static func from(year: Int, month: Int, day: Int) -> Date {
-        let components = DateComponents(year: year, month: month, day: day)
+    static func from(year: Int, day: Int) -> Date {
+        let components = DateComponents(year: year, day: day)
         return Calendar.current.date(from: components)!
     }
 }

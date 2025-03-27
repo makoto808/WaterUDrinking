@@ -12,6 +12,9 @@ struct CalendarView: View {
     
     var body: some View {
         VStack {
+            
+            BarChart()
+            
             DatePicker(
                 "Start Date",
                 selection: $date,
@@ -19,13 +22,16 @@ struct CalendarView: View {
             )
             .datePickerStyle(.graphical)
         }
+        .padding(.horizontal)
+    
         
-        Button("Add Previous Drink") {
+        Button("Add Previous Drink", systemImage: "lock") {
             
         }
         .buttonBorderShape(.capsule)
         .buttonStyle(.borderedProminent)
         //make custom color button later
+        //toggle systemImage if on premium account or not
     }
 }
 
