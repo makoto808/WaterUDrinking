@@ -26,6 +26,12 @@ struct DrinkSelectionView: View {
                                 .font(.custom("ArialRoundedMTBold", size: 16))
                         }
                     }
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1.0 : 0.0)
+                            .offset(y: phase.isIdentity ? 0 : 50)
+                }
+                
                 }
             }
         }
@@ -38,3 +44,8 @@ struct DrinkSelectionView: View {
 #Preview {
     DrinkSelectionView()
 }
+
+//struct MenuItem: Identifiable {
+//    let id = UUID().uuidString
+//    let name: String
+//    let img: String

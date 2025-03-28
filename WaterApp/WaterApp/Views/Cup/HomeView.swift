@@ -45,17 +45,12 @@ struct HomeView: View {
                     ToolbarItem(placement: .topBarLeading) {
                         NavigationLink(destination: CalendarView()) {
                             Image(systemName: "calendar") //Access water streak / data for previous days
-                                
                         }
                     }
-                    
-                    
-                    
+         
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            //Access settings page
-                        } label: {
-                            Image(systemName: "gearshape.fill")
+                        NavigationLink(destination: SettingsListView()) {
+                            Image(systemName: "gearshape.fill") //Access settings page
                         }
                     }
                 }
@@ -64,13 +59,17 @@ struct HomeView: View {
         }
     }
 
+#Preview {
+    HomeView()
+}
+
+// NOTES TO DO:
+// Lock portrait mode throughout entire app
+// Dynamically change title text based off day of week i.e. (Thirsty Thursdays)
+
 
 //struct ContentView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        CupView(percent: 58)
 //    }
 //}
-
-#Preview {
-    HomeView()
-}
