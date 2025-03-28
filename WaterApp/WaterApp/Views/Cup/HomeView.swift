@@ -10,15 +10,9 @@ import SwiftUI
 struct HomeView: View {
     @State private var waterLevelPercent = 35.0
     
-    let backgroundBlue = Color(red: 0.9373, green: 0.9607, blue: 0.9607)
-    //can this be refactored into a separate file?
-    
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ZStack {
-                Color(backgroundBlue)
-                    .ignoresSafeArea()
-                
                 VStack {
                     Spacer()
                     Spacer()
@@ -45,20 +39,18 @@ struct HomeView: View {
                     Spacer()
                 }
             }
+            .background(Color.backgroundWhite)
+            
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                        Button {
-                            //Access water streak / data for previous days
-                        } label: {
-                            Image(systemName: "calendar")
+                        NavigationLink(destination: CalendarView()) {
+                            Image(systemName: "calendar") //Access water streak / data for previous days
                         }
                     }
-                    
+         
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            //Access settings page
-                        } label: {
-                            Image(systemName: "gearshape.fill")
+                        NavigationLink(destination: SettingsListView()) {
+                            Image(systemName: "gearshape.fill") //Access settings page
                         }
                     }
                 }
@@ -67,13 +59,17 @@ struct HomeView: View {
         }
     }
 
+#Preview {
+    HomeView()
+}
+
+// NOTES TO DO:
+// Lock portrait mode throughout entire app
+// Dynamically change title text based off day of week i.e. (Thirsty Thursdays)
+
 
 //struct ContentView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        CupView(percent: 58)
 //    }
 //}
-
-#Preview {
-    HomeView()
-}
