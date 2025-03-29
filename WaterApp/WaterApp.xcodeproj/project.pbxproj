@@ -89,13 +89,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		072787242D94C04100D56B96 /* View Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "View Models";
-			sourceTree = "<group>";
-		};
 		072787252D94C06300D56B96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +123,13 @@
 				07CED0322D96925C00498D17 /* SettingsListView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		07CED0362D97888400498D17 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		07F3C6FF2D8EEDE800427A9A = {
@@ -185,7 +185,7 @@
 				07F3C74A2D8EEE2A00427A9A /* App */,
 				072787252D94C06300D56B96 /* Models */,
 				07F3C7482D8EEE1700427A9A /* Views */,
-				072787242D94C04100D56B96 /* View Models */,
+				07CED0362D97888400498D17 /* ViewModels */,
 			);
 			path = WaterApp;
 			sourceTree = "<group>";
