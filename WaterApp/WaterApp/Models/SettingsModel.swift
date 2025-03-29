@@ -7,12 +7,27 @@
 
 import SwiftUI
 
-struct SettingsModel: View {
+struct SettingsModel: Identifiable, Hashable {
+    var name: String
+    var icon: String
+    let id = UUID()
+}
+
+struct SettingsRow: View {
+    let setting: SettingsModel
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text(setting.icon)
+            
+            Text(setting.name)
+                .font(.title)
+            
+            Spacer()
+        }
     }
 }
 
-#Preview {
-    SettingsModel()
-}
+//#Preview {
+//    SettingsModel(name: "Cocktail List", icon: "🍹")
+//}
