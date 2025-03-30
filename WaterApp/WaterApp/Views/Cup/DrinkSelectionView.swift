@@ -20,16 +20,11 @@ struct DrinkSelectionView: View {
                     HStack(spacing: -20) {
                         ForEach(drinkImage.indices, id: \.self) { drink in
                             VStack(spacing: 10) {
-//                                Button{
-//                                    print(drinkName[drink])
                                     NavigationLink(destination: DrinkFillView()) {
-                                   
                                             Image(drinkImage[drink])
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: 150, height: 110)
-                                        
-                                        //creates unnecessary white background. affects the homeview
                                     }
                                 
                                 Text(drinkName[drink])
@@ -42,7 +37,6 @@ struct DrinkSelectionView: View {
                                 .opacity(phase.isIdentity ? 1.0 : 0.0)
                                 .offset(y: phase.isIdentity ? 0 : 50)
                         }
-                        
                     }
                 }
             }

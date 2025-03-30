@@ -20,9 +20,8 @@ struct HomeView: View {
                     Text("Title Water Text")
                         .font(.custom("ArialRoundedMTBold", size: 45))
                     //Fix later: Create dynamic text scaling to fit width of view
-                    //can be refactored?
                     
-                    Text("Oz of water drank  ||  X% of goal")
+                    Text("You drank 32 oz of water!")
                         .font(.custom("ArialRoundedMT", size: 20))
                     
                     Spacer()
@@ -50,7 +49,7 @@ struct HomeView: View {
          
                     ToolbarItem(placement: .topBarTrailing) {
                         NavigationLink(destination: SettingsListView()) {
-                            Image(systemName: "gearshape.fill") //Access settings page
+                            Image(systemName: "gearshape.fill")
                         }
                     }
                 }

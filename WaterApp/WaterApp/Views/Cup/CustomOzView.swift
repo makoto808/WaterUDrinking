@@ -28,6 +28,7 @@ struct CustomOzView: View {
                             keyboardFocused = true
                         }
                     }
+                
                 Text("oz")
                     .font(.custom("ArialRoundedMTBold", size: 40))
                     .frame(width: 80)
@@ -53,7 +54,6 @@ struct CustomOzView: View {
             .padding(50)
             .onAppear {
                 focus = true
-                  
             }
         }
     }
