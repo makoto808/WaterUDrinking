@@ -7,41 +7,43 @@
 
 import SwiftUI
 
-
-
 struct DrinkSelectionView: View {
     @State private var drinkImage: [String] = ["waterBottle", "tea", "coffee", "soda", "juice", "milk", "energyDrink", "beer"]
     @State private var drinkName: [String] = ["Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"]
     
     @State private var scale = 1.0
     
-
     var body: some View {
-        VStack {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: -20) {
-                    ForEach(drinkImage.indices, id: \.self) { drink in
-                        VStack(spacing: 10) {
-                            Button {
-                                print(drinkName[drink])
-                            } label: {
-                                Image(drinkImage[drink])
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 150, height: 110)
+        NavigationStack {
+            VStack {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: -20) {
+                        ForEach(drinkImage.indices, id: \.self) { drink in
+                            VStack(spacing: 10) {
+//                                Button{
+//                                    print(drinkName[drink])
+                                    NavigationLink(destination: DrinkFillView()) {
+                                   
+                                            Image(drinkImage[drink])
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 150, height: 110)
+                                        
+                                        //creates unnecessary white background. affects the homeview
+                                    }
+                                
+                                Text(drinkName[drink])
+                                    .foregroundStyle(.gray)
+                                    .font(.custom("ArialRoundedMTBold", size: 16))
                             }
-                       
-                            Text(drinkName[drink])
-                                .foregroundStyle(.gray)
-                                .font(.custom("ArialRoundedMTBold", size: 16))
                         }
+                        .scrollTransition { content, phase in
+                            content
+                                .opacity(phase.isIdentity ? 1.0 : 0.0)
+                                .offset(y: phase.isIdentity ? 0 : 50)
+                        }
+                        
                     }
-                    .scrollTransition { content, phase in
-                        content
-                            .opacity(phase.isIdentity ? 1.0 : 0.0)
-                            .offset(y: phase.isIdentity ? 0 : 50)
-                    }
-                    
                 }
             }
         }

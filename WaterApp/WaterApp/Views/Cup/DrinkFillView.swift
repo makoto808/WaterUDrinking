@@ -7,23 +7,9 @@
 
 import SwiftUI
 
-struct CustomOzView: View {
-    @Environment(\.dismiss) var dismiss
-    var body: some View {
-        Button {
-            dismiss()
-        } label: {
-            Image(systemName: "x.circle")
-                .resizable()
-                .frame(width: 40, height: 40)
-        }
-    }
-}
-
 struct DrinkFillView: View {
     @State private var showingCustomOzView = false
     @State private var value = 0.0
-    
     @State private var settingsDetent = PresentationDetent.medium
     
     var body: some View {
@@ -32,14 +18,13 @@ struct DrinkFillView: View {
             Spacer()
             
             Slider(value: $value, in: 0...16.95, step: 0.1)
-//              .rotationEffect(Angle(degrees: 270))
             .padding(30)
             
             ZStack{
                 Image("waterBottle")
                     .resizable()
                     .frame(width: 500, height: 500, alignment: .center)
-                //TODO: adds another layer for fill effect
+                //TODO: adds another layer for fill effect with Slider()
             }
             
             Text("\(value.formatted()) oz")
@@ -76,7 +61,7 @@ struct DrinkFillView: View {
                 }
                 .sheet(isPresented: $showingCustomOzView) {
                     CustomOzView()
-                        .presentationDetents([.fraction(3/4)], selection: $settingsDetent)
+                        .presentationDetents([.fraction(2/6)], selection: $settingsDetent)
                 }
             }
             .padding(25)
@@ -85,6 +70,8 @@ struct DrinkFillView: View {
         }
     }
 }
+
+
 
 #Preview {
     DrinkFillView()
