@@ -7,20 +7,15 @@
 
 import SwiftUI
 
-struct BounceButtonStyle: ButtonStyle {
-    public func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 3.0 : 1.0)
-    }
-}
+
 
 struct DrinkSelectionView: View {
     @State private var drinkImage: [String] = ["waterBottle", "tea", "coffee", "soda", "juice", "milk", "energyDrink", "beer"]
     @State private var drinkName: [String] = ["Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"]
     
     @State private var scale = 1.0
-    @State private var selected: Bool = false
     
+
     var body: some View {
         VStack {
             ScrollView(.horizontal, showsIndicators: false) {
@@ -35,25 +30,7 @@ struct DrinkSelectionView: View {
                                     .scaledToFit()
                                     .frame(width: 150, height: 110)
                             }
-                        
-                            .buttonStyle(BounceButtonStyle())
-                                
-//                            .onTapGesture {
-//                                selected.toggle()
-//                            }
-//                            .scaleEffect(self.selected ? 3 : 1)
-//                            } label : {
-//                                Image(drinkImage[drink])
-//                                    .resizable()
-//                                    .scaledToFit()
-//                                    
-////                                    .buttonStyle(BounceButtonStyle())
-//                                    .frame(width: 150, height: 110)
-//                                
-//                                  .animation(.default, value: scale)
-//                                
-//                            }
-//                            
+                       
                             Text(drinkName[drink])
                                 .foregroundStyle(.gray)
                                 .font(.custom("ArialRoundedMTBold", size: 16))
@@ -72,21 +49,17 @@ struct DrinkSelectionView: View {
 }
 
 
-//    .aspectRatio(contentMode: .fill)
-//    .aspectRatio(contentMode: zoomed ? .fill : .fill)
 
-// need to create array of drink images and titles
 // add in button after 8th drink for other options of drinks. will not replace anything in first 8
 
 #Preview {
     DrinkSelectionView()
 }
 
-//struct MenuItem: Identifiable {
-//    let id = UUID().uuidString
-//    let name: String
-//    let img: String
 
-
-
-
+//struct BounceButtonStyle: ButtonStyle {
+//    public func makeBody(configuration: Self.Configuration) -> some View {
+//        configuration.label
+//            .scaleEffect(configuration.isPressed ? 3.0 : 1.0)
+//    }
+//}

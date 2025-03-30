@@ -113,9 +113,9 @@
 			children = (
 				07F3C74B2D8EEF4600427A9A /* HomeView.swift */,
 				07F3C7532D8EF8DF00427A9A /* CupView.swift */,
+				07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */,
 				07F3C7552D90CA1700427A9A /* DrinkSelectionView.swift */,
 				07F3C7512D8EF69500427A9A /* WaveMotion.swift */,
-				07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */,
 			);
 			path = Cup;
 			sourceTree = "<group>";

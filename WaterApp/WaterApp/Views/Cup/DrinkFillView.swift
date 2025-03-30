@@ -8,18 +8,35 @@
 import SwiftUI
 
 struct DrinkFillView: View {
+    @State private var value = 0.0
+    
     var body: some View {
         VStack {
+            Slider(
+                           value: $value,
+                           in: 0...16.95,
+                           step: 0.1
+                       )
+            .padding(30)
+                       
             Spacer()
             Spacer()
             
-            Image("waterBottle")
-                .resizable()
-                .frame(width: 500, height: 500, alignment: .center)
-            
-            Text("16.9 oz")
+            ZStack{
+                Image("waterBottle")
+                    .resizable()
+                    .frame(width: 500, height: 500, alignment: .center)
+                
+                Image("waterBottle")
+                    .resizable()
+                    .frame(width: 500, height: 500, alignment: .center)
+            }
+            Text("\(value.formatted()) oz")
                 .font(.custom("ArialRoundedMTBold", size: 45))
                 
+            
+            
+            
             Spacer()
             
             HStack {
@@ -30,7 +47,7 @@ struct DrinkFillView: View {
                         .resizable()
                         .frame(width: 60, height: 60)
                 }
-
+                
                 Spacer()
                 
                 Button("+ WATER") {
@@ -38,7 +55,7 @@ struct DrinkFillView: View {
                 }
                 .buttonBorderShape(.capsule)
                 .buttonStyle(.borderedProminent)
-               
+                
                 
                 Spacer()
                 
