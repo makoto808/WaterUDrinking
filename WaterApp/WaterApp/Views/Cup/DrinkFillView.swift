@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DrinkFillView: View {
     @State private var showingCustomOzView = false
+    @State private var showingCustomDrinkView = false
     @State private var value = 0.0
     @State private var settingsDetent = PresentationDetent.medium
     
@@ -26,6 +27,10 @@ struct DrinkFillView: View {
                     .frame(width: 500, height: 500, alignment: .center)
                 //TODO: adds another layer for fill effect with Slider()
             }
+            .sheet(isPresented: $showingCustomDrinkView) {
+                CustomDrinkView()
+                    .presentationDetents([.fraction(2/6)], selection: $settingsDetent)
+            }
             
             Text("\(value.formatted()) oz")
                 .font(.custom("ArialRoundedMTBold", size: 45))
@@ -35,6 +40,7 @@ struct DrinkFillView: View {
             HStack {
                 Button {
                 //TODO: select similar drinks within of different sizes
+                    showingCustomDrinkView.toggle()
                 } label: {
                     Image("waterBottle")
                         .resizable()
