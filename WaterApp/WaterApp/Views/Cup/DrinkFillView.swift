@@ -29,7 +29,6 @@ struct DrinkFillView: View {
             }
             .sheet(isPresented: $showingCustomDrinkView) {
                 CustomDrinkView()
-                    .presentationDetents([.fraction(2/6)], selection: $settingsDetent)
             }
             
             Text("\(value.formatted()) oz")

@@ -8,32 +8,116 @@
 import SwiftUI
 
 struct CustomDrinkView: View {
-    @State private var drinkImage: [String] = ["waterBottle", "energyDrink"]
-    @State private var drinkName: [String] = ["Water", "Energy Drink"]
     
     var body: some View {
-        NavigationStack {
-            Text("HI")
-            HStack(spacing: -20) {
-                ForEach(drinkImage.indices, id: \.self) { drink in
-                    VStack(spacing: 10) {
-                        /*NavigationLink(destination: DrinkFillView())*/
-                        Button {
-                        }label: { Image(drinkImage[drink])
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 150, height: 110)
-                        }
+        List {
+            Section {
+                HStack {
+                    Image("waterBottle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 70)
+                        .cornerRadius(4)
+                    
+                    VStack(alignment: .leading, spacing: 5){
                         
-                        Text(drinkName[drink])
-                            .foregroundStyle(.gray)
-                            .font(.custom("ArialRoundedMTBold", size: 16))
+                        Text("Organic Water")
+                            .fontWeight(.semibold)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.5)
+                        
+                        Text("100% Rate of Hydration")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
                     }
                 }
-                .scrollTransition { content, phase in
-                    content
-                        .opacity(phase.isIdentity ? 1.0 : 0.0)
-                        .offset(y: phase.isIdentity ? 0 : 50)
+            }
+            
+            Section {
+                HStack {
+                    Image("waterBottle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 70)
+                        .cornerRadius(4)
+                    
+                    VStack(alignment: .leading, spacing: 5){
+                        
+                        Text("Mineral Water")
+                            .fontWeight(.semibold)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.5)
+                        
+                        Text("100% Rate of Hydration")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
+            
+            Section {
+                HStack {
+                    Image("waterBottle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 70)
+                        .cornerRadius(4)
+                    
+                    VStack(alignment: .leading, spacing: 5){
+                        
+                        Text("Sparkling Water")
+                            .fontWeight(.semibold)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.5)
+                        
+                        Text("100% Rate of Hydration")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
+            
+            Section {
+                HStack {
+                    Image("waterBottle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 70)
+                        .cornerRadius(4)
+                    
+                    VStack(alignment: .leading, spacing: 5){
+                        
+                        Text("Coconut Water")
+                            .fontWeight(.semibold)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.5)
+                        
+                        Text("90% Rate of Hydration")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
+            
+            Section {
+                HStack {
+                    Image("waterBottle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 70)
+                        .cornerRadius(4)
+                    
+                    VStack(alignment: .leading, spacing: 5){
+                        
+                        Text("Electrolyte Water")
+                            .fontWeight(.semibold)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.5)
+                        
+                        Text("100% Rate of Hydration")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
         }
@@ -42,7 +126,7 @@ struct CustomDrinkView: View {
 
 
 
+
 #Preview {
     CustomDrinkView()
 }
-
