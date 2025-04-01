@@ -17,8 +17,8 @@ struct CustomOzView: View {
         VStack {
             Spacer()
             
-            HStack {
-                TextField("", text: self.$text.max(4))
+            HStack(spacing: -40) {
+                TextField("", text: self.$text.max(2))
                     .font(.custom("ArialRoundedMTBold", size: 40))
                     .focused($keyboardFocused)
                     .frame(width: 80)
