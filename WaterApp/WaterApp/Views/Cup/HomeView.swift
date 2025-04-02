@@ -12,7 +12,7 @@ struct HomeView: View {
     @State private var goToCalendar = false
     @State private var goToSettings = false
     
-    @State private var waterLevelPercent = 35.0
+//    @State private var waterLevelPercent = 35.0
     
     var body: some View {
         NavigationStack(path: $path) {
