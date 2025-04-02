@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var path = [String]()
+    @State private var goToCalendar = false
+    @State private var goToSettings = false
+    
     @State private var waterLevelPercent = 35.0
     
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $path) {
             ZStack {
                 VStack {
                     Spacer()
@@ -20,15 +24,14 @@ struct HomeView: View {
                     Text("Title Water Text")
                         .font(.custom("ArialRoundedMTBold", size: 45))
                     //Fix later: Create dynamic text scaling to fit width of view
-                    //can be refactored?
                     
-                    Text("Oz of water drank  ||  X% of goal")
+                    Text("You drank 32 oz of water!")
                         .font(.custom("ArialRoundedMT", size: 20))
                     
                     Spacer()
                     Spacer()
                     
-                    CupView(percent: Int(self.waterLevelPercent))
+                    CupView()/*percent: Int(self.waterLevelPercent))*/
                     
                     Spacer()
                     Spacer()
@@ -41,29 +44,39 @@ struct HomeView: View {
             }
             .background(Color.backgroundWhite)
             
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        NavigationLink(destination: CalendarView()) {
-                            Image(systemName: "calendar") //Access water streak / data for previous days
-                        }
+            
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(role: nil, action: {
+                        goToCalendar = true
+                    }) {
+                        Label("Calendar", systemImage: "calendar")
                     }
-         
-                    ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink(destination: SettingsListView()) {
-                            Image(systemName: "gearshape.fill") //Access settings page
-                        }
+                    .navigationDestination(isPresented: $goToCalendar) {
+                        CalendarView()
+                    } //TODO: transition from left to right
+                }
+                
+                ToolbarItem(placement: .primaryAction) {
+                    Button(role: nil, action: {
+                        goToSettings = true
+                    }) {
+                        Label("Calendar", systemImage: "gearshape.fill")
+                    }
+                    .navigationDestination(isPresented: $goToSettings) {
+                        SettingsListView()
                     }
                 }
             }
-        .navigationBarBackButtonHidden(true)
         }
     }
+}
 
 #Preview {
     HomeView()
 }
 
-// NOTES TO DO:
+// TODO: NOTES TO DO:
 // Lock portrait mode throughout entire app
 // Dynamically change title text based off day of week i.e. (Thirsty Thursdays)
 
