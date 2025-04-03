@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct DrinkSelectionView: View {
-    @State var vm = DrinkListVM()
-    
+    @Environment(DrinkListVM.self) private var vm
     @State private var scale = 1.0
     
     var body: some View {
+        @Bindable var vm = vm
         NavigationStack {
             VStack {
                 ScrollView(.horizontal, showsIndicators: false) {

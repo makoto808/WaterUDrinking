@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    //    @StateObject private var vm = HomeView() ???
+    @State private var vm = DrinkListVM()
     
     var body: some View {
         NavigationStack {
             HomeView()
         }
+        .environment(vm)
     }
 }
 

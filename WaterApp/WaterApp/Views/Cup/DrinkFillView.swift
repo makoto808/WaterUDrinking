@@ -57,7 +57,7 @@ struct DrinkFillView: View {
                     if value == 0 {
                         showAlert = true
                     } else {
-                        print("Add + WATER")
+                        item.volume += value
                     }
                 }
                 .buttonBorderShape(.capsule)

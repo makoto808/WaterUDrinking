@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct HomeView: View {
-    
     @State private var goToCalendar = false
     @State private var goToSettings = false
     
-    //    @State private var waterLevelPercent = 35.0
+    @State private var waterTotalOz: Double = 0
     
     var body: some View {
         NavigationStack {
@@ -25,9 +24,14 @@ struct HomeView: View {
                         .font(.custom("ArialRoundedMTBold", size: 45))
                     //Fix later: Create dynamic text scaling to fit width of view
                     
-                    Text("You drank 32 oz of water!")
-                        .font(.custom("ArialRoundedMT", size: 20))
-                    
+                    if waterTotalOz == 0 {
+                        Text("You are dehydrated!")
+                            .font(.custom("ArialRoundedMT", size: 20))
+                    } else if waterTotalOz > 0 {
+                        Text("You drank \(waterTotalOz, specifier: "%.1f") oz of water!")
+                            .font(.custom("ArialRoundedMT", size: 20))
+                    }
+                   
                     Spacer()
                     Spacer()
                     

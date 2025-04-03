@@ -9,6 +9,7 @@ import Foundation
 import Observation
 
 @Observable final class DrinkListVM: ObservableObject {
+/*    var path: [Int] = []*/ //ryan lesson 146
     
     var items: [DrinkItem] = [
         DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
