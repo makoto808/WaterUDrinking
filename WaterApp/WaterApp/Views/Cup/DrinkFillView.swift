@@ -13,7 +13,7 @@ struct DrinkFillView: View {
     @State private var value = 0.0
     @State private var settingsDetent = PresentationDetent.medium
     
-    
+    @Binding var item: DrinkItem
     
     var body: some View {
         VStack {
@@ -24,7 +24,7 @@ struct DrinkFillView: View {
             .padding(30)
             
             ZStack{
-                Image("waterBottle")
+                Image(item.img)
                     .resizable()
                     .frame(width: 500, height: 500, alignment: .center)
                 //TODO: adds another layer for fill effect with Slider()
@@ -43,7 +43,7 @@ struct DrinkFillView: View {
                 //TODO: select similar drinks within of different sizes
                     showingCustomDrinkView.toggle()
                 } label: {
-                    Image("waterBottle")
+                    Image(item.img)
                         .resizable()
                         .frame(width: 40, height: 40)
                 }
@@ -82,5 +82,5 @@ struct DrinkFillView: View {
 
 
 #Preview {
-    DrinkFillView()
+    DrinkFillView(item: .constant(DrinkItem(name: "Water", img: "waterBottle")))
 }

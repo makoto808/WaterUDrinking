@@ -19,7 +19,7 @@ struct SettingsListView: View {
                 List {
                     Section {
                         Button("Give us a review") {
-                            
+
                         }
                     }
                     
@@ -45,9 +45,6 @@ struct SettingsListView: View {
                     }
                     
                     Section {
-                        Button("Start time of day") {
-                            
-                        }
                         Button("Measurements") {
                             
                         }

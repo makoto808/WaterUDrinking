@@ -5,11 +5,16 @@
 //  Created by Gregg Abe on 4/2/25.
 //
 
+import StoreKit
 import SwiftUI
 
 struct SettingsReviewView: View {
+    @Environment(\.requestReview) var requestReview
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button("Give us a review!") {
+            requestReview()
+        }
     }
 }
 
