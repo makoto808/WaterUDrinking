@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var path = [String]()
+    
     @State private var goToCalendar = false
     @State private var goToSettings = false
     
-//    @State private var waterLevelPercent = 35.0
+    //    @State private var waterLevelPercent = 35.0
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack {
             ZStack {
                 VStack {
                     Spacer()
@@ -46,29 +46,21 @@ struct HomeView: View {
             
             
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(role: nil, action: {
-                        goToCalendar = true
-                    }) {
-                        Label("Calendar", systemImage: "calendar")
-                    }
-                    .navigationDestination(isPresented: $goToCalendar) {
-                        CalendarView()
-                    } //TODO: transition from left to right
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink(destination: CalendarView()) {
+                        Image(systemName: "calendar")
+                    } //TODO: transition from left to right,
+                    //Access water streak / data for previous days
                 }
                 
-                ToolbarItem(placement: .primaryAction) {
-                    Button(role: nil, action: {
-                        goToSettings = true
-                    }) {
-                        Label("Calendar", systemImage: "gearshape.fill")
-                    }
-                    .navigationDestination(isPresented: $goToSettings) {
-                        SettingsListView()
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink(destination: SettingsListView()) {
+                        Image(systemName: "gearshape.fill")
                     }
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

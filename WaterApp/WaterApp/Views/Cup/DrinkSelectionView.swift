@@ -20,7 +20,7 @@ struct DrinkSelectionView: View {
                     HStack(spacing: -20) {
                         ForEach(drinkImage.indices, id: \.self) { drink in
                             VStack(spacing: 10) {
-                                    NavigationLink(destination: DrinkFillView()) {
+                                NavigationLink(destination: DrinkFillView()) {
                                             Image(drinkImage[drink])
                                                 .resizable()
                                                 .scaledToFit()

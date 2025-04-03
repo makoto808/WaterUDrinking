@@ -13,6 +13,8 @@ struct DrinkFillView: View {
     @State private var value = 0.0
     @State private var settingsDetent = PresentationDetent.medium
     
+    
+    
     var body: some View {
         VStack {
             Spacer()
@@ -50,6 +52,7 @@ struct DrinkFillView: View {
                 
                 Button("+ WATER ") {
                 //TODO: adds value to cup HomeView
+                    
                 }
                 .buttonBorderShape(.capsule)
                 .buttonStyle(.borderedProminent)

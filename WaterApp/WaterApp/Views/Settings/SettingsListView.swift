@@ -14,68 +14,73 @@ struct SettingsListView: View {
         ZStack {
             Color.backgroundWhite.ignoresSafeArea()
             
-            List {
-                Section {
-                    Button("Give us a review") {
-                        
+            
+            VStack {
+                List {
+                    Section {
+                        Button("Give us a review") {
+                            
+                        }
+                    }
+                    
+                    Section {
+                        Button("Edit your goal") {
+                            
+                        }
+                        Button("Set a reminder") {
+                            
+                        }
+                    }
+                    
+                    Section {
+                        Button("Cocktail Menu") {
+                            
+                        }
+                        Button("Widgets") {
+                            
+                        }
+                        Button("App Icons") {
+                            
+                        }
+                    }
+                    
+                    Section {
+                        Button("Start time of day") {
+                            
+                        }
+                        Button("Measurements") {
+                            
+                        }
+                        Button("Apple Health Sync") {
+                            
+                        }
+                        Button("Apple WatchOS") {
+                            
+                        }
+                        Button("iCloud Backup") {
+                            
+                        }
+                    }
+                    
+                    Section {
+                        Button("Language") {
+                            
+                        }
+                        Button("Help & Support") {
+                            
+                        }
+                    }
+                    
+                    Section {
+                        Button("Hydrate your friends!") {
+                            
+                        }
+                        .buttonBorderShape(.capsule)
+                        .buttonStyle(.borderedProminent)
                     }
                 }
+                .listStyle(.automatic)
                 
-                Section {
-                    Button("Edit your goal") {
-                        
-                    }
-                    Button("Set a reminder") {
-                        
-                    }
-                }
-                
-                Section {
-                    Button("Cocktail Menu") {
-                        
-                    }
-                    Button("Widgets") {
-                        
-                    }
-                    Button("App Icons") {
-                        
-                    }
-                }
-                
-                Section {
-                    Button("Start time of day") {
-                        
-                    }
-                    Button("Measurements") {
-                        
-                    }
-                    Button("Apple Health Sync") {
-                        
-                    }
-                    Button("Apple WatchOS") {
-                        
-                    }
-                    Button("iCloud Backup") {
-                        
-                    }
-                }
-                
-                Section {
-                    Button("Language") {
-                        
-                    }
-                    Button("Help & Support") {
-                        
-                    }
-                }
-                
-                Section {
-                    Button("Hydrate your friends!") {
-                        
-                    }
-                    .buttonBorderShape(.capsule)
-                    .buttonStyle(.borderedProminent)
-                }
             }
         }
     }
