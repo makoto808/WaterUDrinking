@@ -78,7 +78,7 @@ struct SettingsListView: View {
                         .buttonBorderShape(.capsule)
                         .buttonStyle(.borderedProminent)
                     }
-                }
+                } 
                 .listStyle(.automatic)
                 
             }
