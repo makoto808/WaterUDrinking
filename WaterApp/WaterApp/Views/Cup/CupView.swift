@@ -10,7 +10,8 @@ import SwiftUI
 struct CupView: View {
     @State private var waveOffset = Angle(degrees: 0)
     
-    @State private var percent: Int = 0
+    @State private var percent: Int = 35
+    @State private var waterTotal: Double = 0
     
     var body: some View {
         GeometryReader { wave in
