@@ -11,4 +11,5 @@ struct DrinkItem: Identifiable {
     let id = UUID().uuidString
     var name: String
     var img: String
+    var volume: Double
 }

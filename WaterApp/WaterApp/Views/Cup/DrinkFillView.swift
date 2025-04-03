@@ -12,7 +12,9 @@ struct DrinkFillView: View {
     @State private var showingCustomDrinkView = false
     @State private var value = 0.0
     @State private var settingsDetent = PresentationDetent.medium
+    @State private var showAlert = false
     
+    @State var vm = DrinkListVM()
     @Binding var item: DrinkItem
     
     var body: some View {
@@ -20,8 +22,8 @@ struct DrinkFillView: View {
             Spacer()
             Spacer()
             
-            Slider(value: $value, in: 0...16.95, step: 0.1)
-            .padding(30)
+            Slider(value: $value, in: 0...20, step: 0.1)
+                .padding(30)
             
             ZStack{
                 Image(item.img)
@@ -40,7 +42,7 @@ struct DrinkFillView: View {
             
             HStack {
                 Button {
-                //TODO: select similar drinks within of different sizes
+                    //TODO: select similar drinks within of different sizes
                     showingCustomDrinkView.toggle()
                 } label: {
                     Image(item.img)
@@ -51,12 +53,19 @@ struct DrinkFillView: View {
                 Spacer()
                 
                 Button("+ WATER ") {
-                //TODO: adds value to cup HomeView
-                    
+                    //TODO: adds value to cup HomeView, return to HomeView
+                    if value == 0 {
+                        showAlert = true
+                    } else {
+                        print("Add + WATER")
+                    }
                 }
                 .buttonBorderShape(.capsule)
                 .buttonStyle(.borderedProminent)
                 .font(.custom("ArialRoundedMTBold", size: 25))
+                .alert("You didn't drink anything!", isPresented: $showAlert) {
+                    Button("Dismiss") {}
+                }
                 
                 Spacer()
                 
@@ -76,11 +85,12 @@ struct DrinkFillView: View {
             
             Spacer()
         }
+        .background(Color.backgroundWhite)
     }
 }
 
 
 
 #Preview {
-    DrinkFillView(item: .constant(DrinkItem(name: "Water", img: "waterBottle")))
+    DrinkFillView(item: .constant(DrinkItem(name: "Water", img: "waterBottle", volume: 0.0)))
 }
