@@ -52,7 +52,7 @@ struct DrinkFillView: View {
                 
                 Spacer()
                 
-                Button("+ WATER ") {
+                Button("+ \(item.name) ") {
                     //TODO: adds value to cup HomeView, return to HomeView
                     if value == 0 {
                         showAlert = true
@@ -63,6 +63,7 @@ struct DrinkFillView: View {
                 .buttonBorderShape(.capsule)
                 .buttonStyle(.borderedProminent)
                 .font(.custom("ArialRoundedMTBold", size: 25))
+                .textCase(.uppercase)
                 .alert("You didn't drink anything!", isPresented: $showAlert) {
                     Button("Dismiss") {}
                 }

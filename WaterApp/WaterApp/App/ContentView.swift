@@ -12,10 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            Text("You need to drink more water!")
-            NavigationLink(destination: HomeView()) {
-                Text("Enter")
-            }
+            HomeView()
         }
     }
 }
