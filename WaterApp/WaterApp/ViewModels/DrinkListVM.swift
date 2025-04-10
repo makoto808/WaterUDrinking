@@ -21,19 +21,19 @@ import Observation
         DrinkItem(name: "Energy Drink", img: "energyDrink", volume: 0.0),
         DrinkItem(name: "Beer", img: "beer", volume: 0.0)
     ]
+
+
+        {
+        didSet {
+            let sum = items.reduce(0.0) { $0 + ($1.volume + Double($1.volume))
+            }
+            totalOz = sum
+        }
+    }
+    
+var totalOz: Double = 0.0
+    
 }
-//        {
-//        didSet {
-//            let sum = items.reduce(0.0) { partialResult, nextItem in
-//                partialResult + (nextItem.volume + Double(nextItem.value))
-//            }
-//            total = sum
-//        }
-//    }
-//    
-//    var total: Double = 0
-//    
-//}
 
 //@State private var drinkImage: [String] = ["waterBottle", "tea", "coffee", "soda", "juice", "milk", "energyDrink", "beer"]
 //@State private var drinkName: [String] = ["Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"]

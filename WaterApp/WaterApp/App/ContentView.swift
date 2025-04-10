@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var vm = DrinkListVM()
+    @State var vm = DrinkListVM()
     
     var body: some View {
         NavigationStack {
-            HomeView()
+            HomeView(item: .constant(DrinkItem(name: "Water", img: "waterBottle", volume: 0.0)))
         }
         .environment(vm)
     }
