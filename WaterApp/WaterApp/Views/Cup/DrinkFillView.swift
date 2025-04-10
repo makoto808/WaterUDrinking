@@ -24,7 +24,7 @@ struct DrinkFillView: View {
         
         return total
     }
-    
+     
     var body: some View {
         NavigationStack {
             VStack {
