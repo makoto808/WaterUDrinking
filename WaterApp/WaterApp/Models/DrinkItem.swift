@@ -9,6 +9,7 @@ import Foundation
 
 struct DrinkItem: Identifiable {
     let id = UUID().uuidString
-    let name: String
-    let img: String
+    var name: String
+    var img: String
+    var volume: Double
 }

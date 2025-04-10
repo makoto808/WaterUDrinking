@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+    @Environment(DrinkListVM.self) private var vm
     @State private var goToCalendar = false
     @State private var goToSettings = false
     
-    //    @State private var waterLevelPercent = 35.0
+    @Binding var item: DrinkItem
     
     var body: some View {
         NavigationStack {
@@ -25,9 +25,14 @@ struct HomeView: View {
                         .font(.custom("ArialRoundedMTBold", size: 45))
                     //Fix later: Create dynamic text scaling to fit width of view
                     
-                    Text("You drank 32 oz of water!")
-                        .font(.custom("ArialRoundedMT", size: 20))
-                    
+                    if item.volume == 0.0 {
+                        Text("You are dehydrated!")
+                            .font(.custom("ArialRoundedMT", size: 20))
+                    } else if item.volume > 0.0 {
+                    Text("You drank \(item.volume, specifier: "%.1f") oz of water!")
+                            .font(.custom("ArialRoundedMT", size: 20))
+                    }
+                   
                     Spacer()
                     Spacer()
                     
@@ -65,7 +70,7 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(item: .constant(DrinkItem(name: "Water", img: "waterBottle", volume: 0.0)))
 }
 
 // TODO: NOTES TO DO:

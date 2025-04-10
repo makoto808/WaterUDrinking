@@ -8,26 +8,25 @@
 import SwiftUI
 
 struct DrinkSelectionView: View {
-    @State private var drinkImage: [String] = ["waterBottle", "tea", "coffee", "soda", "juice", "milk", "energyDrink", "beer"]
-    @State private var drinkName: [String] = ["Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"]
-    
+    @Environment(DrinkListVM.self) private var vm
     @State private var scale = 1.0
     
     var body: some View {
+        @Bindable var vm = vm
         NavigationStack {
             VStack {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: -20) {
-                        ForEach(drinkImage.indices, id: \.self) { drink in
+                        ForEach($vm.items) { $drink in
                             VStack(spacing: 10) {
-                                NavigationLink(destination: DrinkFillView()) {
-                                            Image(drinkImage[drink])
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 150, height: 110)
-                                    }
+                                NavigationLink(destination: DrinkFillView(item: $drink)) {
+                                    Image(drink.img)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 150, height: 110)
+                                }
                                 
-                                Text(drinkName[drink])
+                                Text(drink.name)
                                     .foregroundStyle(.gray)
                                     .font(.custom("ArialRoundedMTBold", size: 16))
                             }
@@ -40,6 +39,7 @@ struct DrinkSelectionView: View {
                     }
                 }
             }
+            .background(Color.backgroundWhite)
         }
     }
 }
@@ -59,3 +59,7 @@ struct DrinkSelectionView: View {
 //            .scaleEffect(configuration.isPressed ? 3.0 : 1.0)
 //    }
 //}
+
+
+//    @State private var drinkImage: [String] = ["waterBottle", "tea", "coffee", "soda", "juice", "milk", "energyDrink", "beer"]
+//    @State private var drinkName: [String] = ["Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"]

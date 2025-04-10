@@ -8,15 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    //    @StateObject private var vm = HomeView() ???
+    @State var vm = DrinkListVM()
     
     var body: some View {
         NavigationStack {
-            Text("You need to drink more water!")
-            NavigationLink(destination: HomeView()) {
-                Text("Enter")
-            }
+            HomeView(item: .constant(DrinkItem(name: "Water", img: "waterBottle", volume: 0.0)))
         }
+        .environment(vm)
     }
 }
 
