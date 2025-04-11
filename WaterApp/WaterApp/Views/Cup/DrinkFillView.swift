@@ -31,8 +31,8 @@ struct DrinkFillView: View {
                 Spacer()
                 Spacer()
                 
-                Slider(value: $value, in: 0...20, step: 0.1)
-                    .padding(30)
+                Text("\(value.formatted()) oz")
+                    .font(.custom("ArialRoundedMTBold", size: 45))
                 
                 ZStack{
                     Image(item.img)
@@ -44,10 +44,8 @@ struct DrinkFillView: View {
                     CustomDrinkView()
                 }
                 
-                Text("\(value.formatted()) oz")
-                    .font(.custom("ArialRoundedMTBold", size: 45))
-                
-                Spacer()
+                Slider(value: $value, in: 0...20, step: 0.1)
+                    .padding(30)
                 
                 HStack {
                     Button {
@@ -93,6 +91,7 @@ struct DrinkFillView: View {
                 }
                 .padding(25)
                 
+                Spacer()
                 Spacer()
             }
             .background(Color.backgroundWhite)
