@@ -13,8 +13,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $vm.navPath) {
             HomeView()
-                .navigationDestination(for: NavPath.self)
-            { navPath in
+                .navigationDestination(for: NavPath.self) { navPath in
                 switch navPath {
                 case .calendar:
                     CalendarView()
