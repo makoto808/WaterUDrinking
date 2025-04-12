@@ -20,7 +20,6 @@ struct DrinkFillView: View {
     
     var startOz: Double {
         let total = value + vm.totalOz
-        
         return total
     }
     
