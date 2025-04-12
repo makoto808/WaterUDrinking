@@ -11,8 +11,19 @@ struct ContentView: View {
     @State var vm = DrinkListVM()
     
     var body: some View {
-        NavigationStack {
-            HomeView(item: .constant(DrinkItem(name: "Water", img: "waterBottle", volume: 0.0)))
+        NavigationStack(path: $vm.navPath) {
+            HomeView()
+                .navigationDestination(for: NavPath.self)
+            { navPath in
+                switch navPath {
+                case .calendar:
+                    CalendarView()
+                case .settings:
+                    SettingsListView()
+                case .drinkFillView:
+                    Text("")
+                }
+            }
         }
         .environment(vm)
     }

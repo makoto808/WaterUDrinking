@@ -29,6 +29,7 @@
 		07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7512D8EF69500427A9A /* WaveMotion.swift */; };
 		07F3C7542D8EF8DF00427A9A /* CupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7532D8EF8DF00427A9A /* CupView.swift */; };
 		07F3C7562D90CA1700427A9A /* DrinkSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7552D90CA1700427A9A /* DrinkSelectionView.swift */; };
+		07FBA8B62DAA53A000133F70 /* NavPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA8B52DAA53A000133F70 /* NavPath.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		07F3C7512D8EF69500427A9A /* WaveMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveMotion.swift; sourceTree = "<group>"; };
 		07F3C7532D8EF8DF00427A9A /* CupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupView.swift; sourceTree = "<group>"; };
 		07F3C7552D90CA1700427A9A /* DrinkSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkSelectionView.swift; sourceTree = "<group>"; };
+		07FBA8B52DAA53A000133F70 /* NavPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavPath.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			children = (
 				07CED0342D96A02600498D17 /* SettingsModel.swift */,
 				07B3A0032D9DF79100000BF2 /* DrinkItem.swift */,
+				07FBA8B52DAA53A000133F70 /* NavPath.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				07CED0332D96925C00498D17 /* SettingsListView.swift in Sources */,
 				07CED0352D96A02600498D17 /* SettingsModel.swift in Sources */,
 				07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */,
+				07FBA8B62DAA53A000133F70 /* NavPath.swift in Sources */,
 				07CED0292D953BF300498D17 /* Extensions.swift in Sources */,
 				07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */,
 				072787282D94C14700D56B96 /* CalendarView.swift in Sources */,

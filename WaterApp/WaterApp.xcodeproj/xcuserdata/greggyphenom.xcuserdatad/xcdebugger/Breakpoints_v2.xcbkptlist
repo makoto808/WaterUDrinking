@@ -20,34 +20,6 @@
             landmarkType = "0">
             <Locations>
                <Location
-                  uuid = "4A3FD24B-FD69-40F5-9AAE-DF6F0871310C - ea6e85bccc820a1e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WaterApp.DrinkListVM._items.setter : Swift.Array&lt;WaterApp.DrinkItem&gt;"
-                  moduleName = "WaterApp.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///var/folders/r_/sk4kzsqd4zs3hrtyk4w5cq600000gn/T/-c961a9.@__swiftmacro_8WaterApp11DrinkListVMC5items18ObservationTrackedfMp_.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1"
-                  endingLineNumber = "1">
-               </Location>
-               <Location
-                  uuid = "4A3FD24B-FD69-40F5-9AAE-DF6F0871310C - 16701e27d3ecc01f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WaterApp.DrinkListVM._items.modify : Swift.Array&lt;WaterApp.DrinkItem&gt;"
-                  moduleName = "WaterApp.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///var/folders/r_/sk4kzsqd4zs3hrtyk4w5cq600000gn/T/-c961a9.@__swiftmacro_8WaterApp11DrinkListVMC5items18ObservationTrackedfMp_.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1"
-                  endingLineNumber = "1">
-               </Location>
-               <Location
                   uuid = "4A3FD24B-FD69-40F5-9AAE-DF6F0871310C - 382765c5b0a52737"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
@@ -60,6 +32,62 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "4A3FD24B-FD69-40F5-9AAE-DF6F0871310C - 8c637f3e1926ed78"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WaterApp.DrinkListVM._items.setter : Swift.Array&lt;WaterApp.DrinkItem&gt;"
+                  moduleName = "WaterApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/r_/sk4kzsqd4zs3hrtyk4w5cq600000gn/T/-ea4d23.@__swiftmacro_8WaterApp11DrinkListVMC5items18ObservationTrackedfMp_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1"
+                  endingLineNumber = "1">
+               </Location>
+               <Location
+                  uuid = "4A3FD24B-FD69-40F5-9AAE-DF6F0871310C - 707de4a506482779"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WaterApp.DrinkListVM._items.modify : Swift.Array&lt;WaterApp.DrinkItem&gt;"
+                  moduleName = "WaterApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/r_/sk4kzsqd4zs3hrtyk4w5cq600000gn/T/-ea4d23.@__swiftmacro_8WaterApp11DrinkListVMC5items18ObservationTrackedfMp_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1"
+                  endingLineNumber = "1">
+               </Location>
+               <Location
+                  uuid = "4A3FD24B-FD69-40F5-9AAE-DF6F0871310C - 7a6d49f30d5b4b90"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WaterApp.DrinkListVM._items.setter : Swift.Array&lt;WaterApp.DrinkItem&gt;"
+                  moduleName = "WaterApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/r_/sk4kzsqd4zs3hrtyk4w5cq600000gn/T/-9af290.@__swiftmacro_8WaterApp11DrinkListVMC5items18ObservationTrackedfMp_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1"
+                  endingLineNumber = "1">
+               </Location>
+               <Location
+                  uuid = "4A3FD24B-FD69-40F5-9AAE-DF6F0871310C - 8673d26812358191"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WaterApp.DrinkListVM._items.modify : Swift.Array&lt;WaterApp.DrinkItem&gt;"
+                  moduleName = "WaterApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/r_/sk4kzsqd4zs3hrtyk4w5cq600000gn/T/-9af290.@__swiftmacro_8WaterApp11DrinkListVMC5items18ObservationTrackedfMp_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1"
+                  endingLineNumber = "1">
                </Location>
             </Locations>
          </BreakpointContent>
