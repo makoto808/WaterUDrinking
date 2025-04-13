@@ -11,6 +11,7 @@ import Observation
 @Observable final class DrinkListVM {
     var navPath: [NavPath] = [] //ryan lesson 146
     
+    var selectedItemIndex: Int?
     var items: [DrinkItem] = [
         DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
         DrinkItem(name: "Tea", img: "tea", volume: 0.0),
@@ -27,7 +28,19 @@ import Observation
         }
     }
     
-    private(set) var totalOz: Double = 0.0
+    var totalOz: Double = 0.0
+    
+    func setSelectedItemIndex(for drink: DrinkItem) {
+        var index: Int?
+        for i in 0..<items.count {
+            let currentItem = items[i]
+            if currentItem.name == drink.name {
+                index = i
+                break
+            }
+        }
+        selectedItemIndex = index
+    }
 }
 
 

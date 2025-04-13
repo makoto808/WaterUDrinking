@@ -16,15 +16,15 @@ struct DrinkFillView: View {
     @State private var showAlert = false
     @State private var value = 0.0
     
-    @Binding var item: DrinkItem
+    let item: DrinkItem
     
     var startOz: Double {
         let total = value + vm.totalOz
-        
         return total
     }
     
     var body: some View {
+        @Bindable var vm = vm
         VStack {
             Spacer()
             Spacer()
@@ -58,13 +58,12 @@ struct DrinkFillView: View {
                 Spacer()
                 
                 Button("+ \(item.name) ") {
-                    //TODO: adds value to cup HomeView, return to HomeView
+                    guard let i = vm.selectedItemIndex else { return }
                     if value == 0 {
                         showAlert = true
                     } else {
-                        value += value
-                        print("\(value)")
-//                        vm.navPath.removeAll()
+                        vm.items[i].volume += value
+                        vm.navPath.removeLast()
                     }
                 }
                 .buttonBorderShape(.capsule)
@@ -94,10 +93,15 @@ struct DrinkFillView: View {
             Spacer()
         }
         .background(Color.backgroundWhite)
+        .onAppear {
+            vm.setSelectedItemIndex(for: item)
+        }
+        .onDisappear {
+            vm.selectedItemIndex = nil
+        }
     }
 }
 
-
 #Preview {
-    DrinkFillView(item: .constant(DrinkItem(name: "Water", img: "waterBottle", volume: 0.0)))
+    DrinkFillView(item: DrinkItem(name: "Water", img: "waterBottle", volume: 0.0))
 }
