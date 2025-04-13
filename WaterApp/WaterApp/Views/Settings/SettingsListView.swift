@@ -66,6 +66,9 @@ struct SettingsListView: View {
                         Button("Help & Support") {
                             
                         }
+                        Button("Have an App Idea?") {
+                            
+                        }
                     }
                     
                     Section {

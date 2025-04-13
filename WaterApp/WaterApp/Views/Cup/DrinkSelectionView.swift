@@ -13,34 +13,34 @@ struct DrinkSelectionView: View {
     
     var body: some View {
         @Bindable var vm = vm
-        NavigationStack {
-            VStack {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: -20) {
-                        ForEach($vm.items) { $drink in
-                            VStack(spacing: 10) {
-                                NavigationLink(destination: DrinkFillView(item: $drink)) {
-                                    Image(drink.img)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 150, height: 110)
-                                }
-                                
-                                Text(drink.name)
-                                    .foregroundStyle(.gray)
-                                    .font(.custom("ArialRoundedMTBold", size: 16))
+        VStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: -20) {
+                    ForEach($vm.items) { $drink in
+                        VStack(spacing: 10) {
+                            Button {
+                                vm.navPath.append(.drinkFillView(drink))
+                            } label: {
+                                Image(drink.img)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 150, height: 110)
                             }
+                            
+                            Text(drink.name)
+                                .foregroundStyle(.gray)
+                                .font(.custom("ArialRoundedMTBold", size: 16))
                         }
-                        .scrollTransition { content, phase in
-                            content
-                                .opacity(phase.isIdentity ? 1.0 : 0.0)
-                                .offset(y: phase.isIdentity ? 0 : 50)
-                        }
+                    }
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1.0 : 0.0)
+                            .offset(y: phase.isIdentity ? 0 : 50)
                     }
                 }
             }
-            .background(Color.backgroundWhite)
         }
+        .background(Color.backgroundWhite)
     }
 }
 

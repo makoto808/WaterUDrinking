@@ -1,3 +1,8 @@
 .
 ..
 WaterApp/WaterApp.xcodeproj/project.xcworkspace/xcuserdata/greggyphenom.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+WaterApp/WaterApp.xcodeproj/project.xcworkspace/xcuserdata/
+WaterApp/WaterApp.xcodeproj/xcuserdata/ryankanno.xcuserdatad/

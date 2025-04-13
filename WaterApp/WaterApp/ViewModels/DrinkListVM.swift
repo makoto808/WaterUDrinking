@@ -8,9 +8,10 @@
 import Foundation
 import Observation
 
-@Observable final class DrinkListVM: ObservableObject {
-/*    var path: [Int] = []*/ //ryan lesson 146
+@Observable final class DrinkListVM {
+    var navPath: [NavPath] = [] //ryan lesson 146
     
+    var selectedItemIndex: Int?
     var items: [DrinkItem] = [
         DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
         DrinkItem(name: "Tea", img: "tea", volume: 0.0),
@@ -20,20 +21,27 @@ import Observation
         DrinkItem(name: "Milk", img: "milk", volume: 0.0),
         DrinkItem(name: "Energy Drink", img: "energyDrink", volume: 0.0),
         DrinkItem(name: "Beer", img: "beer", volume: 0.0)
-    ]
-
-
-        {
+    ] {
         didSet {
-            let sum = items.reduce(0.0) { $0 + ($1.volume + Double($1.volume))
-            }
+            let sum = items.reduce(0.0) { $0 + ($1.volume + Double($1.volume)) }
             totalOz = sum
         }
     }
     
-var totalOz: Double = 0.0
+    var totalOz: Double = 0.0
     
+    func setSelectedItemIndex(for drink: DrinkItem) {
+        var index: Int?
+        for i in 0..<items.count {
+            let currentItem = items[i]
+            if currentItem.name == drink.name {
+                index = i
+                break
+            }
+        }
+        selectedItemIndex = index
+    }
 }
 
-//@State private var drinkImage: [String] = ["waterBottle", "tea", "coffee", "soda", "juice", "milk", "energyDrink", "beer"]
-//@State private var drinkName: [String] = ["Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"]
+
+//@Observable does not need to confrom to ObservableObject

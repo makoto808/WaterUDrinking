@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DrinkItem: Identifiable {
+struct DrinkItem: Identifiable, Hashable {
     let id = UUID().uuidString
     var name: String
     var img: String
