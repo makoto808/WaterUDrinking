@@ -10,5 +10,5 @@ import Foundation
 enum NavPath: Hashable {
     case calendar
     case settings
-    case drinkFillView
+    case drinkFillView(DrinkItem)
 }

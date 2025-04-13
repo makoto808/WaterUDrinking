@@ -19,8 +19,8 @@ struct ContentView: View {
                     CalendarView()
                 case .settings:
                     SettingsListView()
-                case .drinkFillView:
-                    Text("")
+                case .drinkFillView(let drink):
+                    DrinkFillView(item: drink)
                 }
             }
         }

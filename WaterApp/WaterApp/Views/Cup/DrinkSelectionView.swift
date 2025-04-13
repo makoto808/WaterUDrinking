@@ -18,7 +18,9 @@ struct DrinkSelectionView: View {
                 HStack(spacing: -20) {
                     ForEach($vm.items) { $drink in
                         VStack(spacing: 10) {
-                            NavigationLink(destination: DrinkFillView(item: $drink)) {
+                            Button {
+                                vm.navPath.append(.drinkFillView(drink))
+                            } label: {
                                 Image(drink.img)
                                     .resizable()
                                     .scaledToFit()

@@ -16,7 +16,7 @@ struct DrinkFillView: View {
     @State private var showAlert = false
     @State private var value = 0.0
     
-    @Binding var item: DrinkItem
+    let item: DrinkItem
     
     var startOz: Double {
         let total = value + vm.totalOz
@@ -93,10 +93,15 @@ struct DrinkFillView: View {
             Spacer()
         }
         .background(Color.backgroundWhite)
+        .onAppear {
+            vm.setSelectedItemIndex(for: item)
+        }
+        .onDisappear {
+            vm.selectedItemIndex = nil
+        }
     }
 }
 
-
 #Preview {
-    DrinkFillView(item: .constant(DrinkItem(name: "Water", img: "waterBottle", volume: 0.0)))
+    DrinkFillView(item: DrinkItem(name: "Water", img: "waterBottle", volume: 0.0))
 }
