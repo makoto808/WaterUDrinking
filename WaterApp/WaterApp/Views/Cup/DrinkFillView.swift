@@ -58,13 +58,12 @@ struct DrinkFillView: View {
                 Spacer()
                 
                 Button("+ \(item.name) ") {
-                    //TODO: adds value to cup HomeView, return to HomeView
+                    guard let i = vm.selectedItemIndex else { return }
                     if value == 0 {
                         showAlert = true
                     } else {
-                        value += value
-                        print("\(value)")
-//                        vm.navPath.removeAll()
+                        vm.items[i].volume += value
+                        vm.navPath.removeLast()
                     }
                 }
                 .buttonBorderShape(.capsule)
