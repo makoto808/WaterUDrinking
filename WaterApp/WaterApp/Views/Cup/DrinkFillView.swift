@@ -24,6 +24,7 @@ struct DrinkFillView: View {
     }
     
     var body: some View {
+        @Bindable var vm = vm
         VStack {
             Spacer()
             Spacer()
