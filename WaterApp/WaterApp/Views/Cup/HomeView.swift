@@ -26,7 +26,7 @@ struct HomeView: View {
                     Text("You are dehydrated!")
                         .font(.custom("ArialRoundedMT", size: 20))
                 } else if vm.totalOz > 0.0 {
-                    Text("You drank \(vm.totalOz, specifier: "%.1f") oz of water!")
+                    Text("You drank \(vm.totalOz, specifier: "%.1f") oz today!")
                         .font(.custom("ArialRoundedMT", size: 20))
                 }
                 
