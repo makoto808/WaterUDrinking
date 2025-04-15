@@ -24,17 +24,20 @@ struct HomeView: View {
                     .allowsTightening(true)
                     .minimumScaleFactor(0.30)
                     .padding(.horizontal, 20)
-                //Fix later: Create dynamic text scaling to fit width of view
+                
+                Spacer()
                 
                 if vm.totalOz == 0.0 {
                     Text("You are dehydrated!")
                         .font(.custom("ArialRoundedMT", size: 20))
                 } else if vm.totalOz > 0.0 {
-                    HStack {
-                        Text("You drank \(vm.totalOz, specifier: "%.1f") oz today!")
-                            .font(.custom("ArialRoundedMT", size: 20))
-                    } //TODO: if number ends in .0 , hide the .0
-                }
+                    Text("You drank \(vm.totalOz, specifier: "%.1f") oz today! XX% of your goal!")
+                        .font(.custom("ArialRoundedMT", size: 20))
+                        .lineLimit(1)
+                        .allowsTightening(true)
+                        .minimumScaleFactor(0.30)
+                        .padding(.horizontal, 20)
+                } //TODO: if number ends in .0 , hide the .0
                 
                 Spacer()
                 Spacer()

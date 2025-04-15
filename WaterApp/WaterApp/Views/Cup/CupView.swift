@@ -13,12 +13,6 @@ struct CupView: View {
     
     var ozGoal: Double = 120
     
-    var percentageResult: Double {
-        let result = vm.totalOz / ozGoal
-        
-        return result
-    }
-    
     var body: some View {
         GeometryReader { wave in
             ZStack {
