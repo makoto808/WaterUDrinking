@@ -18,8 +18,12 @@ struct HomeView: View {
                 Spacer()
                 Spacer()
                 
-                Text("Title Water Text")
+                Text("Thirsty Thursdays")
                     .font(.custom("ArialRoundedMTBold", size: 45))
+                    .lineLimit(1)
+                    .allowsTightening(true)
+                    .minimumScaleFactor(0.30)
+                    .padding(.horizontal, 20)
                 //Fix later: Create dynamic text scaling to fit width of view
                 
                 if vm.totalOz == 0.0 {
