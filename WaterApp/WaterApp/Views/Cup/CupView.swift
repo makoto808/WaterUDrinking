@@ -8,22 +8,28 @@
 import SwiftUI
 
 struct CupView: View {
+    @Environment(DrinkListVM.self) private var vm
     @State private var waveOffset = Angle(degrees: 0)
     
-    @State private var percent: Int = 35
-    @State private var waterTotal: Double = 0
+    var ozGoal: Double = 120
+    
+    var percentageResult: Double {
+        let result = vm.totalOz / ozGoal
+        
+        return result
+    }
     
     var body: some View {
         GeometryReader { wave in
             ZStack {
-                Text("\(self.percent)%")
-                    .foregroundColor(.primary)
-                    .font(Font.system(size: 0.25 * min(wave.size.width, wave.size.height) ))
+//                Text("\(self.vm.totalOz)%")
+//                    .foregroundColor(.primary)
+//                    .font(Font.system(size: 0.25 * min(wave.size.width, wave.size.height) ))
                 
                 Circle()
                     .stroke(Color.gray, lineWidth: 0.03 * min(wave.size.width, wave.size.height))
                     .overlay(
-                        WaveMotion(offset: Angle(degrees: self.waveOffset.degrees), percent: Double(percent)/100)
+                        WaveMotion(offset: Angle(degrees: self.waveOffset.degrees), percent: Double(vm.totalOz)/ozGoal)
                             .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
                             .clipShape(Circle().scale(0.92)))
             }
@@ -39,6 +45,6 @@ struct CupView: View {
     }
 }
 
-#Preview {
-    CupView()
-}
+//#Preview {
+//    CupView()
+//}

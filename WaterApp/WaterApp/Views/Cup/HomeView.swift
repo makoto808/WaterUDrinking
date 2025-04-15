@@ -26,14 +26,16 @@ struct HomeView: View {
                     Text("You are dehydrated!")
                         .font(.custom("ArialRoundedMT", size: 20))
                 } else if vm.totalOz > 0.0 {
-                    Text("You drank \(vm.totalOz, specifier: "%.1f") oz today!")
-                        .font(.custom("ArialRoundedMT", size: 20))
+                    HStack {
+                        Text("You drank \(vm.totalOz, specifier: "%.1f") oz today!")
+                            .font(.custom("ArialRoundedMT", size: 20))
+                    } //TODO: if number ends in .0 , hide the .0
                 }
                 
                 Spacer()
                 Spacer()
                 
-                CupView()/*percent: Int(self.waterLevelPercent))*/
+                CupView(ozGoal: 120)
                 
                 Spacer()
                 Spacer()
