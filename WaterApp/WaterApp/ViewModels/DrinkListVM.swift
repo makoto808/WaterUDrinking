@@ -23,7 +23,7 @@ import Observation
         DrinkItem(name: "Beer", img: "beer", volume: 0.0)
     ] {
         didSet {
-            let sum = items.reduce(0.0) { $0 + ($1.volume + Double($1.volume)) }
+            let sum = items.reduce(0.0) { $0 + $1.volume }
             totalOz = sum
         }
     }

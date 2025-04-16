@@ -18,22 +18,12 @@ struct HomeView: View {
                 Spacer()
                 Spacer()
                 
-                Text("Title Water Text")
-                    .font(.custom("ArialRoundedMTBold", size: 45))
-                //Fix later: Create dynamic text scaling to fit width of view
-                
-                if vm.totalOz == 0.0 {
-                    Text("You are dehydrated!")
-                        .font(.custom("ArialRoundedMT", size: 20))
-                } else if vm.totalOz > 0.0 {
-                    Text("You drank \(vm.totalOz, specifier: "%.1f") oz of water!")
-                        .font(.custom("ArialRoundedMT", size: 20))
-                }
+                TitleView()
                 
                 Spacer()
                 Spacer()
                 
-                CupView()/*percent: Int(self.waterLevelPercent))*/
+                CupView(ozGoal: 120)
                 
                 Spacer()
                 Spacer()

@@ -18,11 +18,6 @@ struct DrinkFillView: View {
     
     let item: DrinkItem
     
-    var startOz: Double {
-        let total = value + vm.totalOz
-        return total
-    }
-    
     var body: some View {
         @Bindable var vm = vm
         VStack {
