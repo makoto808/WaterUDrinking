@@ -64,10 +64,3 @@ struct HomeView: View {
 // TODO: NOTES TO DO:
 // Lock portrait mode throughout entire app
 // Dynamically change title text based off day of week i.e. (Thirsty Thursdays)
-
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CupView(percent: 58)
-//    }
-//}
