@@ -28,13 +28,12 @@ struct TitleView: View {
                 .font(.custom("ArialRoundedMT", size: 20))
                 .padding(.horizontal, 20)
         } else if vm.totalOz > 0.0 {
-            Text("You drank \(vm.totalOz, specifier: "%.1f") oz today!    XX% of your goal!")
+            Text("You drank \(vm.totalOz.clean) oz today!    XX% of your goal!")
                 .font(.custom("ArialRoundedMT", size: 20))
                 .lineLimit(1)
                 .allowsTightening(true)
                 .minimumScaleFactor(0.30)
                 .padding(.horizontal, 20)
-            //TODO: if number ends in .0 , hide the .0
         }
     }
 }
@@ -42,3 +41,10 @@ struct TitleView: View {
 #Preview {
     TitleView()
 }
+
+/////if result.truncatingRemainder(dividingBy: 1) == 0 {
+//display.text = "\(Int(result))"
+//} else {
+//display.text = "\(result)"
+//}
+//}
