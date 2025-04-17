@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		072749672DB0CD20006E6C30 /* CalendarHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072749662DB0CD20006E6C30 /* CalendarHomeView.swift */; };
 		072787282D94C14700D56B96 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072787272D94C14700D56B96 /* CalendarView.swift */; };
 		07381C242D998381003216FA /* CustomOzView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07381C232D998381003216FA /* CustomOzView.swift */; };
 		07381C272D9B78E6003216FA /* CustomDrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07381C262D9B78E6003216FA /* CustomDrinkView.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		072749662DB0CD20006E6C30 /* CalendarHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHomeView.swift; sourceTree = "<group>"; };
 		072787272D94C14700D56B96 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		07381C232D998381003216FA /* CustomOzView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOzView.swift; sourceTree = "<group>"; };
 		07381C262D9B78E6003216FA /* CustomDrinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDrinkView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		072787262D94C12700D56B96 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				072749662DB0CD20006E6C30 /* CalendarHomeView.swift */,
 				072787272D94C14700D56B96 /* CalendarView.swift */,
 				07CED0262D94CFF500498D17 /* BarChart.swift */,
 			);
@@ -386,6 +389,7 @@
 				07F3C7432D8EEDFE00427A9A /* ContentView.swift in Sources */,
 				07381C242D998381003216FA /* CustomOzView.swift in Sources */,
 				073BC1752DAF2FB000863F93 /* TitleView.swift in Sources */,
+				072749672DB0CD20006E6C30 /* CalendarHomeView.swift in Sources */,
 				07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */,
 				07F3C7542D8EF8DF00427A9A /* CupView.swift in Sources */,
 				07381C272D9B78E6003216FA /* CustomDrinkView.swift in Sources */,
