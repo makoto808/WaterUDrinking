@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 
-struct BarChart: View {
+struct BarChart: View { //TODO: Data for previous days (weekly view)
     
     let viewDay: [ViewDay] = [ //sample data
         .init(date: Date.from(year: 2025, day: 1), ouncesOfWater: 30),
@@ -50,6 +50,7 @@ struct BarChart: View {
                 AxisValueLabel(format: .dateTime.day(), centered: true)
                 }
             }
+        .background(Color.backgroundWhite.ignoresSafeArea())
         }
     }
 

@@ -9,8 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(DrinkListVM.self) private var vm
-    @State private var goToCalendar = false
-    @State private var goToSettings = false
     
     var body: some View {
         ZStack {
@@ -42,8 +40,7 @@ struct HomeView: View {
                 } label: {
                     Image(systemName: "calendar")
                 }
-            } //TODO: transition from left to right,
-            //Access water streak / data for previous days
+            }
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
@@ -63,11 +60,5 @@ struct HomeView: View {
 
 // TODO: NOTES TO DO:
 // Lock portrait mode throughout entire app
+// Transition HomeView from left to right to access CalendarView
 // Dynamically change title text based off day of week i.e. (Thirsty Thursdays)
-
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CupView(percent: 58)
-//    }
-//}

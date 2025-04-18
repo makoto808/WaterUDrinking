@@ -11,7 +11,7 @@ struct CupView: View {
     @Environment(DrinkListVM.self) private var vm
     @State private var waveOffset = Angle(degrees: 0)
     
-    var ozGoal: Double = 120
+    @State var ozGoal: Double = 120
     
     var body: some View {
         GeometryReader { wave in

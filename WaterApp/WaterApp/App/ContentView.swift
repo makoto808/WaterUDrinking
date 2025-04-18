@@ -16,7 +16,7 @@ struct ContentView: View {
                 .navigationDestination(for: NavPath.self) { navPath in
                 switch navPath {
                 case .calendar:
-                    CalendarView()
+                    CalendarHomeView()
                 case .settings:
                     SettingsListView()
                 case .drinkFillView(let drink):
