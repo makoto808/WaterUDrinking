@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 
 @main
 struct WaterAppApp: App {
@@ -14,6 +13,5 @@ struct WaterAppApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: DrinkItem.self)
     }
 }

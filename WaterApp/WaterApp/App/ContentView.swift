@@ -6,10 +6,20 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var context
     @State var vm = DrinkListVM()
+    
+    let modelContainer: ModelContainer
+    
+    init() {
+        do {
+            modelContainer = try ModelContainer(for: CachedDailyTotal.self)
+        } catch {
+            fatalError("Failed to create ModelContainer")
+        }
+    }
     
     var body: some View {
         NavigationStack(path: $vm.navPath) {
