@@ -15,7 +15,7 @@ struct ContentView: View {
     
     init() {
         do {
-            modelContainer = try ModelContainer(for: CachedDailyTotal.self)
+            modelContainer = try ModelContainer(for: CachedDrinkItem.self)
         } catch {
             fatalError("Failed to create ModelContainer")
         }
