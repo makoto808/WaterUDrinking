@@ -62,7 +62,7 @@ import SwiftData
     @objc private func cacheDrinkItems() {
 //        let cachedDrinks = items.map({ CachedDailyTotal($0) })
         let cachedDrinks = items.map { item in
-            return CachedDailyTotal(item)
+            return CachedDrinkItem(item)
         }
         do {
             try modelContext?.transaction {
