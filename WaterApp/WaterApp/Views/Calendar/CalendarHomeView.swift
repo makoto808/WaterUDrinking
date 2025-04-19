@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CalendarHomeView: View { //TODO: Access water streak (Apple Fitness rings style)
+    @State private var vm = CalendarHomeVM()
     
     var body: some View {
         ZStack {
@@ -20,6 +21,7 @@ struct CalendarHomeView: View { //TODO: Access water streak (Apple Fitness rings
             }
             .padding(.horizontal)
         }
+        .environment(vm)
     }
 }
 
