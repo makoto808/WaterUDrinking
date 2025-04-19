@@ -36,6 +36,9 @@ struct ContentView: View {
             }
         }
         .environment(vm)
+        .onAppear {
+            vm.setModelContext(modelContainer.mainContext)
+        }
     }
 }
 
