@@ -7,9 +7,13 @@
 
 import Foundation
 import Observation
+import SwiftData
 
 @Observable final class CalendarHomeVM {
+    private var modelContext: ModelContext?
     
-    
-    
+    func setModelContext(_ modelContext: ModelContext) {
+        self.modelContext = modelContext
+        self.modelContext!.autosaveEnabled = true
+    }
 }
