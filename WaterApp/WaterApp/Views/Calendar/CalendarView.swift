@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct CalendarView: View { //TODO: Access water streak (Apple Fitness rings style)
+    @Environment(CalendarHomeVM.self) private var vm
     @State private var date = Date()
     
     var body: some View {
         VStack {
+            // TODO: - Figure out how to get the date of whatever date "button" was tapped so we can pass it to vm.getCachedItems(for date: Date)
             DatePicker(
                 "Start Date",
                 selection: $date,

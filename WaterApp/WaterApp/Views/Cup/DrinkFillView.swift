@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct DrinkFillView: View {
+    @Environment(\.modelContext) private var context
     @Environment(DrinkListVM.self) private var vm
-    
+        
     @State private var settingsDetent = PresentationDetent.medium
     @State private var showingCustomOzView = false
     @State private var showingCustomDrinkView = false
@@ -96,7 +97,7 @@ struct DrinkFillView: View {
         }
     }
 }
-
-#Preview {
-    DrinkFillView(item: DrinkItem(name: "Water", img: "waterBottle", volume: 0.0))
-}
+//
+//#Preview {
+//    DrinkFillView(item: DrinkItem(name: "Water", img: "waterBottle", volume: 0.0))
+//}
