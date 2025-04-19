@@ -8,8 +8,8 @@
 import Foundation
 import SwiftData
 
-@Model
-class DrinkItem: Identifiable, Hashable {
+/// Use this to display in DrinkSelectionView
+struct DrinkItem: Identifiable, Hashable {
     var id: String
     var name: String
     var img: String
@@ -20,5 +20,40 @@ class DrinkItem: Identifiable, Hashable {
         self.name = name
         self.img = img
         self.volume = volume
+    }
+    
+    init(_ drinkItem: CachedDrinkItem) {
+        self.id = drinkItem.id
+        self.name = drinkItem.name
+        self.img = drinkItem.img
+        self.volume = drinkItem.volume
+    }
+}
+
+// TODO: - Add variable to determine how we sort this when retrieving from SwiftData ModelContext
+@Model class CachedDrinkItem: Identifiable, Hashable {
+    var id: String
+    var date: Date
+    var name: String
+    var img: String
+    var volume: Double
+    var arrayOrderValue: Int
+    
+    init(date: Date, name: String, img: String, volume: Double, arrayOrderValue: Int) {
+        self.id = UUID().uuidString
+        self.date = date
+        self.name = name
+        self.img = img
+        self.volume = volume
+        self.arrayOrderValue = arrayOrderValue
+    }
+    
+    init(_ drinkItem: DrinkItem) {
+        self.id = drinkItem.id
+        self.date = .now
+        self.name = drinkItem.name
+        self.img = drinkItem.img
+        self.volume = drinkItem.volume
+        self.arrayOrderValue = 0
     }
 }

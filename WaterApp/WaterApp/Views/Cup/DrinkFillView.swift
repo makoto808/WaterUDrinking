@@ -6,14 +6,11 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct DrinkFillView: View {
     @Environment(\.modelContext) private var context
     @Environment(DrinkListVM.self) private var vm
-    
-    @Query private var items: [DrinkItem]
-    
+        
     @State private var settingsDetent = PresentationDetent.medium
     @State private var showingCustomOzView = false
     @State private var showingCustomDrinkView = false

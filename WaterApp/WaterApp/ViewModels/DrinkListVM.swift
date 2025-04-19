@@ -5,13 +5,17 @@
 //  Created by Gregg Abe on 4/2/25.
 //
 
-import Foundation
+import UIKit
 import Observation
+import SwiftData
 
 @Observable final class DrinkListVM {
+    private var modelContext: ModelContext?
     var navPath: [NavPath] = [] //ryan lesson 146
     
     var selectedItemIndex: Int?
+    
+    /// Used to display in `DrinkSelectionView`
     var items: [DrinkItem] = [
         DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
         DrinkItem(name: "Tea", img: "tea", volume: 0.0),
@@ -30,6 +34,14 @@ import Observation
     
     var totalOz: Double = 0.0
     
+    init() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(cacheDrinkItems),
+            name: UIApplication.didEnterBackgroundNotification,
+            object: nil)
+    }
+    
     func setSelectedItemIndex(for drink: DrinkItem) {
         var index: Int?
         for i in 0..<items.count {
@@ -40,6 +52,28 @@ import Observation
             }
         }
         selectedItemIndex = index
+    }
+    
+    func setModelContext(_ modelContext: ModelContext) {
+        self.modelContext = modelContext
+        self.modelContext!.autosaveEnabled = true
+    }
+    
+    @objc private func cacheDrinkItems() {
+//        let cachedDrinks = items.map({ CachedDailyTotal($0) })
+        let cachedDrinks = items.map { item in
+            return CachedDrinkItem(item)
+        }
+        do {
+            try modelContext?.transaction {
+                for drink in cachedDrinks {
+                    modelContext?.insert(drink)
+                }
+                try modelContext?.save()
+            }
+        } catch {
+            print(error)
+        }
     }
 }
 
