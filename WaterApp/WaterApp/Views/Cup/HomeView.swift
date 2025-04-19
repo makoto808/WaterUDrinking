@@ -54,9 +54,9 @@ struct HomeView: View {
     }
 }
 
-#Preview {
-    HomeView()
-}
+//#Preview {
+//    HomeView()
+//}
 
 // TODO: NOTES TO DO:
 // Lock portrait mode throughout entire app

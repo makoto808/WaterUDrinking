@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var context
     @State var vm = DrinkListVM()
     
     var body: some View {

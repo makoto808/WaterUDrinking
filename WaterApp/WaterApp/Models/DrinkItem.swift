@@ -6,10 +6,19 @@
 //
 
 import Foundation
+import SwiftData
 
-struct DrinkItem: Identifiable, Hashable {
-    let id = UUID().uuidString
+@Model
+class DrinkItem: Identifiable, Hashable {
+    var id: String
     var name: String
     var img: String
     var volume: Double
+    
+    init(name: String, img: String, volume: Double) {
+        self.id = UUID().uuidString
+        self.name = name
+        self.img = img
+        self.volume = volume
+    }
 }
