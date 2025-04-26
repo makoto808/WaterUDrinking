@@ -13,110 +13,65 @@ struct CustomDrinkView: View {
         List {
             Section {
                 HStack {
-                    Image("waterBottle")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 70)
-                        .cornerRadius(4)
+                    Image("waterBottle").CDVresize()
                     
-                    VStack(alignment: .leading, spacing: 5){
+                    VStack(alignment: .leading, spacing: 5) {
                         
-                        Text("Organic Water")
-                            .fontWeight(.semibold)
-                            .lineLimit(2)
-                            .minimumScaleFactor(0.5)
+                        Text("Organic Water").fontCDVTitle()
                         
-                        Text("100% Rate of Hydration")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                        Text("100% Rate of Hydration").fontCDVSubtitle()
                     }
                 }
             }
             
             Section {
                 HStack {
-                    Image("waterBottle")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 70)
-                        .cornerRadius(4)
+                    Image("waterBottle").CDVresize()
                     
-                    VStack(alignment: .leading, spacing: 5){
+                    VStack(alignment: .leading, spacing: 5) {
                         
-                        Text("Mineral Water")
-                            .fontWeight(.semibold)
-                            .lineLimit(2)
-                            .minimumScaleFactor(0.5)
+                        Text("Mineral Water").fontCDVTitle()
                         
-                        Text("100% Rate of Hydration")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                        Text("100% Rate of Hydration").fontCDVSubtitle()
                     }
                 }
             }
             
             Section {
                 HStack {
-                    Image("waterBottle")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 70)
-                        .cornerRadius(4)
+                    Image("waterBottle").CDVresize()
                     
-                    VStack(alignment: .leading, spacing: 5){
+                    VStack(alignment: .leading, spacing: 5) {
                         
-                        Text("Sparkling Water")
-                            .fontWeight(.semibold)
-                            .lineLimit(2)
-                            .minimumScaleFactor(0.5)
+                        Text("Sparkling Water").fontCDVTitle()
                         
-                        Text("100% Rate of Hydration")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                        Text("100% Rate of Hydration").fontCDVSubtitle()
                     }
                 }
             }
             
             Section {
                 HStack {
-                    Image("waterBottle")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 70)
-                        .cornerRadius(4)
+                    Image("waterBottle").CDVresize()
                     
-                    VStack(alignment: .leading, spacing: 5){
+                    VStack(alignment: .leading, spacing: 5) {
                         
-                        Text("Coconut Water")
-                            .fontWeight(.semibold)
-                            .lineLimit(2)
-                            .minimumScaleFactor(0.5)
+                        Text("Coconut Water").fontCDVTitle()
                         
-                        Text("90% Rate of Hydration")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                        Text("90% Rate of Hydration").fontCDVSubtitle()
                     }
                 }
             }
             
             Section {
                 HStack {
-                    Image("waterBottle")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 70)
-                        .cornerRadius(4)
+                    Image("waterBottle").CDVresize()
                     
-                    VStack(alignment: .leading, spacing: 5){
+                    VStack(alignment: .leading, spacing: 5) {
                         
-                        Text("Electrolyte Water")
-                            .fontWeight(.semibold)
-                            .lineLimit(2)
-                            .minimumScaleFactor(0.5)
+                        Text("Electrolyte Water").fontCDVTitle()
                         
-                        Text("100% Rate of Hydration")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                        Text("100% Rate of Hydration").fontCDVSubtitle()
                     }
                 }
             }

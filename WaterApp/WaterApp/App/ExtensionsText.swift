@@ -31,4 +31,20 @@ extension Text {
             .minimumScaleFactor(0.30)
             .padding(.horizontal, 20)
     }
+    
+    //Fonts for CustomDrinkView
+    func fontCDVTitle() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 16))
+            .fontWeight(.semibold)
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+    }
+    
+    func fontCDVSubtitle() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 16))
+            .font(.subheadline)
+            .foregroundColor(.secondary)
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+    }
 }

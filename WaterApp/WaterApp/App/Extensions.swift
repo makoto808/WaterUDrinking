@@ -11,6 +11,15 @@ extension Color {
     static let backgroundWhite = Color(red: 0.9373, green: 0.9607, blue: 0.9607)
 }
 
+extension Image {
+    func CDVresize() -> some View {
+        self.resizable()
+            .scaledToFit()
+            .frame(height: 70)
+            .cornerRadius(4)
+    }
+}
+
 extension Binding where Value == String {
     func max(_ limit: Int) -> Self {
         if self.wrappedValue.count > limit {
