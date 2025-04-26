@@ -5,7 +5,6 @@
 //  Created by Gregg Abe on 4/25/25.
 //
 
-import Foundation
 import SwiftUI
 
 extension Double {
@@ -17,6 +16,16 @@ extension Double {
 extension Text {
     func titleFont() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 45))
+            .foregroundStyle(.primary)
+            .lineLimit(1)
+            .allowsTightening(true)
+            .minimumScaleFactor(0.30)
+            .padding(.horizontal, 20)
+    }
+    
+    func fontSmall() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 20))
+            .foregroundStyle(.primary)
             .lineLimit(1)
             .allowsTightening(true)
             .minimumScaleFactor(0.30)
