@@ -45,21 +45,8 @@ struct DrinkSelectionView: View {
 }
 
 
-
-// add in button after 8th drink for other options of drinks. will not replace anything in first 8
+// TODO: add in button after 8th drink for other options of drinks. will not replace anything in first 8
 
 #Preview {
     DrinkSelectionView()
 }
-
-
-//struct BounceButtonStyle: ButtonStyle {
-//    public func makeBody(configuration: Self.Configuration) -> some View {
-//        configuration.label
-//            .scaleEffect(configuration.isPressed ? 3.0 : 1.0)
-//    }
-//}
-
-
-//    @State private var drinkImage: [String] = ["waterBottle", "tea", "coffee", "soda", "juice", "milk", "energyDrink", "beer"]
-//    @State private var drinkName: [String] = ["Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"]

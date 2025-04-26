@@ -15,7 +15,7 @@ import SwiftData
     
     var selectedItemIndex: Int?
     
-    /// Used to display in `DrinkSelectionView`
+//    Used to display in DrinkSelectionView
     var items: [DrinkItem] = [
         DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
         DrinkItem(name: "Tea", img: "tea", volume: 0.0),

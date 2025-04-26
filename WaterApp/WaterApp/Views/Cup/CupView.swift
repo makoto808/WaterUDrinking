@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CupView: View {
     @Environment(DrinkListVM.self) private var vm
+    
     @State private var waveOffset = Angle(degrees: 0)
     
     @State var ozGoal: Double = 120
@@ -28,7 +29,6 @@ struct CupView: View {
                             .clipShape(Circle().scale(0.92)))
             }
             .padding(.horizontal)
-            
         }
         .aspectRatio(1, contentMode: .fit)
         .onAppear {
