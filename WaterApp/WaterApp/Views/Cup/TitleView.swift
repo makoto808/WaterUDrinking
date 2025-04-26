@@ -15,14 +15,14 @@ struct TitleView: View {
     
     var body: some View {
             switch dayOfWeek {
-            case 1: titleFont("Sunday Sips")
-            case 2: titleFont("Motivational Monday")
-            case 3: titleFont("Tonic Tuesday")
-            case 4: titleFont("Water Wednesday")
-            case 5: titleFont("Thirsty Thursdays")
-            case 6: titleFont("Friday Fizz")
-            case 7: titleFont("Saturday Sips")
-            default: Text("Unknown")
+            case 1: Text("Sunday Sips").titleFont()
+            case 2: Text("Motivational Monday").titleFont()
+            case 3: Text("Tonic Tuesday").titleFont()
+            case 4: Text("Water Wednesday").titleFont()
+            case 5: Text("Thirsty Thursdays").titleFont()
+            case 6: Text("Friday Fizz").titleFont()
+            case 7: Text("Saturday Sips").titleFont()
+            default: Text("Unknown").titleFont()
         }
 
         Spacer()
@@ -46,17 +46,6 @@ struct TitleView: View {
     }
 }
 
-    func titleFont(_ title: String) -> some View {
-        Text(title)
-            .font(.custom("ArialRoundedMTBold", size: 45))
-            .lineLimit(1)
-            .allowsTightening(true)
-            .minimumScaleFactor(0.30)
-            .padding(.horizontal, 20)
-    }
-
-
-    
 //
 //#Preview {
 //    TitleView()

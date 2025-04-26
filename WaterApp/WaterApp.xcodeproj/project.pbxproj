@@ -20,6 +20,7 @@
 		07CED0292D953BF300498D17 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0282D953BF300498D17 /* Extensions.swift */; };
 		07CED0332D96925C00498D17 /* SettingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0322D96925C00498D17 /* SettingsListView.swift */; };
 		07CED0352D96A02600498D17 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0342D96A02600498D17 /* SettingsModel.swift */; };
+		07EA0BE02DBCC4E8001033AB /* ExtensionsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EA0BDF2DBCC4E8001033AB /* ExtensionsText.swift */; };
 		07F3C7382D8EEDF700427A9A /* WaterAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7352D8EEDF700427A9A /* WaterAppUITests.swift */; };
 		07F3C7392D8EEDF700427A9A /* WaterAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7362D8EEDF700427A9A /* WaterAppUITestsLaunchTests.swift */; };
 		07F3C73C2D8EEDF900427A9A /* WaterAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C73A2D8EEDF900427A9A /* WaterAppTests.swift */; };
@@ -66,6 +67,7 @@
 		07CED0282D953BF300498D17 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		07CED0322D96925C00498D17 /* SettingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListView.swift; sourceTree = "<group>"; };
 		07CED0342D96A02600498D17 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		07EA0BDF2DBCC4E8001033AB /* ExtensionsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsText.swift; sourceTree = "<group>"; };
 		07F3C7082D8EEDE800427A9A /* WaterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F3C7182D8EEDEB00427A9A /* WaterAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F3C7222D8EEDEB00427A9A /* WaterAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,6 +238,7 @@
 				07F3C7402D8EEDFE00427A9A /* ContentView.swift */,
 				07F3C7412D8EEDFE00427A9A /* WaterAppApp.swift */,
 				07CED0282D953BF300498D17 /* Extensions.swift */,
+				07EA0BDF2DBCC4E8001033AB /* ExtensionsText.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
 				07B3A0082D9E0FBB00000BF2 /* SettingsReviewView.swift in Sources */,
 				07F3C7562D90CA1700427A9A /* DrinkSelectionView.swift in Sources */,
+				07EA0BE02DBCC4E8001033AB /* ExtensionsText.swift in Sources */,
 				07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */,
 				07F3C7432D8EEDFE00427A9A /* ContentView.swift in Sources */,
 				07381C242D998381003216FA /* CustomOzView.swift in Sources */,
