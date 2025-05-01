@@ -79,9 +79,6 @@ struct CustomDrinkView: View {
     }
 }
 
-
-
-
 #Preview {
     CustomDrinkView()
 }
