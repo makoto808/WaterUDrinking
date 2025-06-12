@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SettingsListView: View {
+    @Environment(DrinkListVM.self) private var vm
+    
     let backgroundWhite = Color(red: 0.9373, green: 0.9607, blue: 0.9607)
     
     var body: some View {
@@ -24,8 +26,10 @@ struct SettingsListView: View {
                     }
                     
                     Section {
-                        Button("Edit your goal") {
-                            
+                        Button {
+                            vm.navPath.append(.dailyWaterGoal)
+                        } label: {
+                            Text("Edit Your Goal")
                         }
                         Button("Set a reminder") {
                             

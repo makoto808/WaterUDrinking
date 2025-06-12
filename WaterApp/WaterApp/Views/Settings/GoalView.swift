@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GoalView: View {
+    @Environment(DrinkListVM.self) private var vm
+    
     @State private var dailyWaterGoal: String = ""
     @State private var waveOffset = Angle(degrees: 0)
     
@@ -53,7 +55,7 @@ struct GoalView: View {
                     
                 } else {
                     Button("Right On!") {
-                        
+                        // Add logic to save to oz goal
                     }
                     .buttonBorderShape(.capsule)
                     .buttonStyle(.borderedProminent)
