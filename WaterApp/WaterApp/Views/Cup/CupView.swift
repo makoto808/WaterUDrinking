@@ -39,6 +39,6 @@ struct CupView: View {
     }
 }
 
-//#Preview {
-//    CupView()
-//}
+#Preview {
+    CupView()
+}
