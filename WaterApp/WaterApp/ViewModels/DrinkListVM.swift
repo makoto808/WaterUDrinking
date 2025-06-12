@@ -15,7 +15,7 @@ import SwiftData
     
     var selectedItemIndex: Int?
     
-    /// Used to display in `DrinkSelectionView`
+//    Used to display in DrinkSelectionView
     var items: [DrinkItem] = [
         DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
         DrinkItem(name: "Tea", img: "tea", volume: 0.0),
@@ -29,10 +29,15 @@ import SwiftData
         didSet {
             let sum = items.reduce(0.0) { $0 + $1.volume }
             totalOz = sum
+            
+            let sum2 = totalOz / totalOzGoal * 100
+            percentTotal = sum2
         }
     }
     
     var totalOz: Double = 0.0
+    var percentTotal: Double = 0.0
+    var totalOzGoal: Double = 120
     
     init() {
         NotificationCenter.default.addObserver(
@@ -60,7 +65,6 @@ import SwiftData
     }
     
     @objc private func cacheDrinkItems() {
-//        let cachedDrinks = items.map({ CachedDailyTotal($0) })
         let cachedDrinks = items.map { item in
             return CachedDrinkItem(item)
         }
@@ -79,3 +83,4 @@ import SwiftData
 
 
 //@Observable does not need to confrom to ObservableObject
+

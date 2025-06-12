@@ -5,10 +5,10 @@
 //  Created by Gregg Abe on 4/2/25.
 //
 
-import Foundation
 import SwiftData
+import Foundation
 
-/// Use this to display in DrinkSelectionView
+//Use this to display in DrinkSelectionView
 struct DrinkItem: Identifiable, Hashable {
     var id: String
     var name: String

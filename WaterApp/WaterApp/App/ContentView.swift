@@ -5,11 +5,11 @@
 //  Created by Gregg Abe on 3/22/25.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ContentView: View {
-    @State private var vm = DrinkListVM()
+    @State private var drinkListVM = DrinkListVM()
     @State private var calendarHomeVM = CalendarHomeVM()
     
     let modelContainer: ModelContainer
@@ -23,7 +23,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationStack(path: $vm.navPath) {
+        NavigationStack(path: $drinkListVM.navPath) {
             HomeView()
                 .navigationDestination(for: NavPath.self) { navPath in
                 switch navPath {
@@ -37,9 +37,9 @@ struct ContentView: View {
                 }
             }
         }
-        .environment(vm)
+        .environment(drinkListVM)
         .onAppear {
-            vm.setModelContext(modelContainer.mainContext)
+            drinkListVM.setModelContext(modelContainer.mainContext)
             calendarHomeVM.setModelContext(modelContainer.mainContext)
         }
     }

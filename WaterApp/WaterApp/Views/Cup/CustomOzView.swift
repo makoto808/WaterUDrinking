@@ -9,7 +9,9 @@ import SwiftUI
 
 struct CustomOzView: View {
     @Environment(\.dismiss) var dismiss
+    
     @State private var text: String = ""
+    
     @FocusState private var focus: Bool
     @FocusState private var keyboardFocused: Bool
     
