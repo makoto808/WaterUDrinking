@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GoalView: View {
-        @Environment(DrinkListVM.self) private var vm
+    @Environment(DrinkListVM.self) private var vm
     
     @State private var dailyWaterGoal: String = ""
     @State private var waveOffset = Angle(degrees: 0)
@@ -24,7 +24,7 @@ struct GoalView: View {
                 .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
                 .ignoresSafeArea()
                 .onAppear {
-                    withAnimation(Animation.linear(duration: 2).repeatForever(autoreverses: false)) {
+                    withAnimation(Animation.linear(duration: 3.5).repeatForever(autoreverses: false)) {
                         self.waveOffset = Angle(degrees: 360)
                     }
                 }
