@@ -97,5 +97,11 @@ struct DrinkFillView: View {
 
 
 #Preview {
-    DrinkFillView(item: DrinkItem(name: "Water", img: "waterBottle", volume: 0.0))
+    let mockItem = DrinkItem(name: "Water", img: "waterBottle", volume: 8.0)
+    
+    let mockVM = DrinkListVM()
+    mockVM.items = [mockItem] // Include the item so `setSelectedItemIndex` works
+    
+    return DrinkFillView(item: mockItem)
+        .environment(mockVM)
 }
