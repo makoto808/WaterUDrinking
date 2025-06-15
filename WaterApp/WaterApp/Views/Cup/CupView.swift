@@ -17,9 +17,9 @@ struct CupView: View {
     var body: some View {
         GeometryReader { wave in
             ZStack {
-//                Text("\(self.vm.totalOz)%")
-//                    .foregroundColor(.primary)
-//                    .font(Font.system(size: 0.25 * min(wave.size.width, wave.size.height) ))
+                //                Text("\(self.vm.totalOz)%")
+                //                    .foregroundColor(.primary)
+                //                    .font(Font.system(size: 0.25 * min(wave.size.width, wave.size.height) ))
                 
                 Circle()
                     .stroke(Color.gray, lineWidth: 0.03 * min(wave.size.width, wave.size.height))
@@ -39,6 +39,10 @@ struct CupView: View {
     }
 }
 
-//#Preview {
-//    CupView()
-//}
+#Preview {
+    let mockVM = DrinkListVM()
+    mockVM.totalOz = 60  // Set test data here
+    return CupView()
+        .environment(mockVM)
+}
+

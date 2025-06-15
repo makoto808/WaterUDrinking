@@ -37,7 +37,7 @@ import SwiftData
     
     var totalOz: Double = 0.0
     var percentTotal: Double = 0.0
-    var totalOzGoal: Double = 120
+    var totalOzGoal: Double = 120 //Might change from GoalView
     
     init() {
         NotificationCenter.default.addObserver(

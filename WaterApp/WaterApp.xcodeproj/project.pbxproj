@@ -12,6 +12,7 @@
 		07381C242D998381003216FA /* CustomOzView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07381C232D998381003216FA /* CustomOzView.swift */; };
 		07381C272D9B78E6003216FA /* CustomDrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07381C262D9B78E6003216FA /* CustomDrinkView.swift */; };
 		073BC1752DAF2FB000863F93 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BC1742DAF2FB000863F93 /* TitleView.swift */; };
+		07645B8E2DFA93840020BF31 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07645B8D2DFA93840020BF31 /* GoalView.swift */; };
 		07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */; };
 		07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0032D9DF79100000BF2 /* DrinkItem.swift */; };
 		07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */; };
@@ -59,6 +60,7 @@
 		07381C232D998381003216FA /* CustomOzView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOzView.swift; sourceTree = "<group>"; };
 		07381C262D9B78E6003216FA /* CustomDrinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDrinkView.swift; sourceTree = "<group>"; };
 		073BC1742DAF2FB000863F93 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		07645B8D2DFA93840020BF31 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkFillView.swift; sourceTree = "<group>"; };
 		07B3A0032D9DF79100000BF2 /* DrinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkItem.swift; sourceTree = "<group>"; };
 		07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkListVM.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				07CED0322D96925C00498D17 /* SettingsListView.swift */,
 				07B3A0072D9E0FBB00000BF2 /* SettingsReviewView.swift */,
+				07645B8D2DFA93840020BF31 /* GoalView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */,
 				07F3C7542D8EF8DF00427A9A /* CupView.swift in Sources */,
 				07381C272D9B78E6003216FA /* CustomDrinkView.swift in Sources */,
+				07645B8E2DFA93840020BF31 /* GoalView.swift in Sources */,
 				07F3C7442D8EEDFE00427A9A /* WaterAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

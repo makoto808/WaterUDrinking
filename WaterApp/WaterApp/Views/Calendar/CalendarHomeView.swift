@@ -17,7 +17,7 @@ struct CalendarHomeView: View { //TODO: Access water streak (Apple Fitness rings
             VStack {
                 BarChart()
                 
-                CalendarView()
+//                CalendarView()
             }
             .padding(.horizontal)
         }

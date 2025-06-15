@@ -10,7 +10,7 @@ import SwiftUI
 struct DrinkFillView: View {
     @Environment(\.modelContext) private var context
     @Environment(DrinkListVM.self) private var vm
-        
+    
     @State private var settingsDetent = PresentationDetent.medium
     @State private var showingCustomOzView = false
     @State private var showingCustomDrinkView = false
@@ -28,15 +28,12 @@ struct DrinkFillView: View {
             Text("\(value.formatted()) oz")
                 .font(.custom("ArialRoundedMTBold", size: 45))
             
-            ZStack{
-                Image(item.img)
-                    .resizable()
-                    .frame(width: 500, height: 500, alignment: .center)
-                //TODO: adds another layer for fill effect with Slider()
-            }
-            .sheet(isPresented: $showingCustomDrinkView) {
-                CustomDrinkView()
-            }
+            Image(item.img) //TODO: adds another layer for fill effect with Slider()
+                .resizable()
+                .frame(width: 500, height: 500, alignment: .center)
+                .sheet(isPresented: $showingCustomDrinkView) {
+                    CustomDrinkView()
+                }
             
             Slider(value: $value, in: 0...20, step: 0.1)
                 .padding(30)
@@ -84,7 +81,7 @@ struct DrinkFillView: View {
                         .presentationDetents([.fraction(2/6)], selection: $settingsDetent)
                 }
             }
-            .padding(25)
+            .padding(20)
             
             Spacer()
         }
@@ -98,7 +95,13 @@ struct DrinkFillView: View {
     }
 }
 
-//
-//#Preview {
-//    DrinkFillView(item: DrinkItem(name: "Water", img: "waterBottle", volume: 0.0))
-//}
+
+#Preview {
+    let mockItem = DrinkItem(name: "Water", img: "waterBottle", volume: 8.0)
+    
+    let mockVM = DrinkListVM()
+    mockVM.items = [mockItem] // Include the item so `setSelectedItemIndex` works
+    
+    return DrinkFillView(item: mockItem)
+        .environment(mockVM)
+}
