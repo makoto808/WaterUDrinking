@@ -37,6 +37,8 @@ struct ContentView: View {
                     DrinkFillView(item: drink)
                 case .dailyWaterGoal:
                     GoalView()
+                case .reset:
+                    ResetView()
                 }
             }
         }

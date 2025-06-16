@@ -25,6 +25,12 @@ struct SettingsListView: View {
                     } label: {
                         Text("Edit Your Goal")
                     }
+                    
+                    Button {
+                        vm.navPath.append(.reset)
+                    } label: {
+                        Text("Reset Daily Total")
+                    }
                 }
                 
                 //TODO: Future Settings Tabs below
