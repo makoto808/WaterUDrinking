@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//TODO: might be better to have this under the bar chart in calendar view
 struct ResetView: View {
     @Environment(DrinkListVM.self) private var vm
     

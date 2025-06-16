@@ -17,6 +17,7 @@ struct CalendarHomeView: View { //TODO: Access water streak (Apple Fitness rings
             VStack {
                 BarChart()
                 
+                //better to implemet reset button here instead?
 //                CalendarView()
             }
             .padding(.horizontal)
