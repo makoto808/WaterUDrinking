@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct DrinkFillView: View {
-    @Environment(\.modelContext) private var context
+    @Environment(\.modelContext) private var modelContext
+
     @Environment(DrinkListVM.self) private var vm
     
     @State private var settingsDetent = PresentationDetent.medium
@@ -56,8 +58,25 @@ struct DrinkFillView: View {
                         showAlert = true
                     } else {
                         vm.items[i].volume += value
-                        vm.navPath.removeLast()
                     }
+                    let newItem = CachedDrinkItem(
+                        date: Date(),
+                        name: item.name,
+                        img: item.img,
+                        volume: value,
+                        arrayOrderValue: 0 // Or however you want to order
+                    )
+                    
+                    modelContext.insert(newItem)
+                    
+                    do {
+                        try modelContext.save()
+                    } catch {
+                        print("Failed to save: \(error.localizedDescription)")
+                    }
+
+                    vm.navPath.removeLast()
+                
                 }
                 .buttonBorderShape(.capsule)
                 .buttonStyle(.borderedProminent)
@@ -105,3 +124,4 @@ struct DrinkFillView: View {
     return DrinkFillView(item: mockItem)
         .environment(mockVM)
 }
+

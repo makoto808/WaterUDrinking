@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CupView: View {
     @Environment(DrinkListVM.self) private var vm
+    @Environment(\.modelContext) private var modelContext
+
     
     @State private var waveOffset = Angle(degrees: 0)
     

@@ -65,22 +65,60 @@ import SwiftData
     }
     
     @objc private func cacheDrinkItems() {
-        let cachedDrinks = items.map { item in
-            return CachedDrinkItem(item)
-        }
+        guard let modelContext else { return }
         do {
-            try modelContext?.transaction {
-                for drink in cachedDrinks {
-                    modelContext?.insert(drink)
+            try modelContext.transaction {
+                let oldItems = try modelContext.fetch(FetchDescriptor<CachedDrinkItem>())
+                for item in oldItems {
+                    modelContext.delete(item)
                 }
-                try modelContext?.save()
+
+                for item in items {
+                    modelContext.insert(CachedDrinkItem(item))
+                }
+
+                try modelContext.save()
             }
         } catch {
-            print(error)
+            print("Error caching drink items: \(error)")
         }
     }
+
+    
+    func loadFromCache() {
+        guard let modelContext else {
+            print("ModelContext is nil")
+            return
+        }
+
+        do {
+            let cached = try modelContext.fetch(FetchDescriptor<CachedDrinkItem>())
+            self.items = cached.map { DrinkItem($0) }
+        } catch {
+            print("Failed to load cached drink items: \(error)")
+        }
+    }
+
 }
 
 
 //@Observable does not need to confrom to ObservableObject
 
+
+
+
+//@objc private func cacheDrinkItems() {
+//    let cachedDrinks = items.map { item in
+//        return CachedDrinkItem(item)
+//    }
+//    do {
+//        try modelContext?.transaction {
+//            for drink in cachedDrinks {
+//                modelContext?.insert(drink)
+//            }
+//            try modelContext?.save()
+//        }
+//    } catch {
+//        print(error)
+//    }
+//}
