@@ -42,13 +42,13 @@ struct GoalView: View {
                 
                 HStack(spacing: 2) {
                     TextField("Enter Here", text: self.$dailyWaterGoal.max(3))
-                        .font(.custom("ArialRoundedMTBold", size: 35)) // Match with "oz"
+                        .font(.custom("ArialRoundedMTBold", size: 35))
                         .foregroundStyle(.primary)
                         .frame(width: 190)
                         .lineLimit(1)
                         .focused($keyboardFocused)
                         .keyboardType(.numberPad)
-                        .multilineTextAlignment(.trailing) // Right-aligned feels more natural with units
+                        .multilineTextAlignment(.trailing)
 
                     if !dailyWaterGoal.isEmpty {
                         Text("oz")
