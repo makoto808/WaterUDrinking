@@ -41,14 +41,23 @@ struct GoalView: View {
                     .padding(.horizontal, 5)
                 
                 HStack {
-                    TextField("Enter Here", text: (self.$dailyWaterGoal))
-                        .font(.custom("ArialRoundedMTBold", size: 35))
+                    TextField("Enter Here", text: self.$dailyWaterGoal.max(4))
+                        .font(.custom("ArialRoundedMTBold", size: 40))
                         .foregroundStyle(.primary)
+                        .frame(width: 250)
                         .lineLimit(1)
                         .focused($keyboardFocused)
-                        .keyboardType(.numberPad)
-                        .multilineTextAlignment(.center) //Aligns text to center
+                        .keyboardType(.decimalPad)
+                        .multilineTextAlignment(.center)
+                    
+                    if !dailyWaterGoal.isEmpty {
+                        Text("oz")
+                            .font(.custom("ArialRoundedMTBold", size: 35))
+                            .foregroundColor(.primary)
+                    }
                 }
+                .padding(8)
+                
                 
                 Spacer()
                 Spacer()
@@ -75,4 +84,6 @@ struct GoalView: View {
 
 #Preview {
     GoalView()
+        .environment(DrinkListVM()) // Inject environment object
 }
+

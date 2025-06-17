@@ -15,7 +15,7 @@ import SwiftData
     
     var selectedItemIndex: Int?
     
-//    Used to display in DrinkSelectionView
+    //    Used to display in DrinkSelectionView
     var items: [DrinkItem] = [
         DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
         DrinkItem(name: "Tea", img: "tea", volume: 0.0),
@@ -72,33 +72,37 @@ import SwiftData
                 for item in oldItems {
                     modelContext.delete(item)
                 }
-
+                
                 for item in items {
                     modelContext.insert(CachedDrinkItem(item))
                 }
-
+                
                 try modelContext.save()
             }
         } catch {
             print("Error caching drink items: \(error)")
         }
     }
-
+    
     
     func loadFromCache() {
         guard let modelContext else {
             print("ModelContext is nil")
             return
         }
-
+        
         do {
             let cached = try modelContext.fetch(FetchDescriptor<CachedDrinkItem>())
-            self.items = cached.map { DrinkItem($0) }
+            if cached.isEmpty {
+                print("No cached items found, keeping default drinks")
+            } else {
+                self.items = cached.map { DrinkItem($0) }
+                print("Loaded \(items.count) cached drink items")
+            }
         } catch {
             print("Failed to load cached drink items: \(error)")
         }
     }
-
 }
 
 

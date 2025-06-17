@@ -53,6 +53,7 @@ struct ResetView: View {
 
 #Preview {
     ResetView()
+        .environment(DrinkListVM())
 }
 
 

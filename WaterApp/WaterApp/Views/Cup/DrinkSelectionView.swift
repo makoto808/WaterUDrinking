@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DrinkSelectionView: View {
     @Environment(DrinkListVM.self) private var vm
+    @Environment(\.modelContext) private var modelContext
     @State private var scale = 1.0
     
     var body: some View {
