@@ -32,7 +32,8 @@ struct DrinkFillView: View {
             
             Image(item.img) //TODO: adds another layer for fill effect with Slider()
                 .resizable()
-                .frame(width: 500, height: 500, alignment: .center)
+                .scaledToFit()
+                .frame(maxWidth: 500, alignment: .center)
                 .sheet(isPresented: $showingCustomDrinkView) {
                     CustomDrinkView()
                 }
@@ -64,7 +65,7 @@ struct DrinkFillView: View {
                         name: item.name,
                         img: item.img,
                         volume: value,
-                        arrayOrderValue: 0 // Or however you want to order
+                        arrayOrderValue: 0 
                     )
                     
                     modelContext.insert(newItem)
