@@ -104,7 +104,7 @@ import SwiftData
         }
     }
 }
-
+//swift data is making DrinkSelectionView out of order
 
 //@Observable does not need to confrom to ObservableObject
 
