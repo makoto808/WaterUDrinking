@@ -75,4 +75,6 @@ struct GoalView: View {
 
 #Preview {
     GoalView()
+        .environment(DrinkListVM()) // Inject environment object
 }
+
