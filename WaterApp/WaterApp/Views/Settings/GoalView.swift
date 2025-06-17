@@ -40,7 +40,7 @@ struct GoalView: View {
                     .minimumScaleFactor(0.30)
                     .padding(.horizontal, 5)
                 
-                HStack {
+                HStack(spacing: 4) {
                     TextField("Enter Here", text: (self.$dailyWaterGoal))
                         .font(.custom("ArialRoundedMTBold", size: 35))
                         .foregroundStyle(.primary)
@@ -48,7 +48,17 @@ struct GoalView: View {
                         .focused($keyboardFocused)
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(.center) //Aligns text to center
+                    
+                    if dailyWaterGoal.isEmpty {
+                        
+                    } else {
+                        Text("oz")
+                            .foregroundColor(.primary)
+                            .font(.custom("ArialRoundedMTBold", size: 40))
+                        //                        .multilineTextAlignment(.center)
+                    }
                 }
+                .padding(8)
                 
                 Spacer()
                 Spacer()
