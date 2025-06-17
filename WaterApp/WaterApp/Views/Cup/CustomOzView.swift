@@ -19,12 +19,13 @@ struct CustomOzView: View {
         VStack {
             Spacer()
             
-            HStack(spacing: -40) {
-                TextField("", text: self.$text.max(2))
+            HStack(spacing: 4) {
+                TextField("", text: self.$text.max(4))
                     .font(.custom("ArialRoundedMTBold", size: 40))
                     .focused($keyboardFocused)
-                    .frame(width: 80)
                     .keyboardType(.decimalPad)
+                    .multilineTextAlignment(.trailing)
+                    .frame(width: 100)
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now()) {
                             keyboardFocused = true
@@ -32,9 +33,11 @@ struct CustomOzView: View {
                     }
                 
                 Text("oz")
+                    .foregroundColor(.primary)
                     .font(.custom("ArialRoundedMTBold", size: 40))
-                    .frame(width: 80)
             }
+            .padding(8)
+            
             
             HStack {
                 Button {
