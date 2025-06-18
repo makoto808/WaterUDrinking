@@ -32,6 +32,15 @@ extension Text {
             .padding(.horizontal, 20)
     }
     
+    func fontGoalViewTitle() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 45))
+            .foregroundStyle(.primary)
+            .lineLimit(1)
+            .allowsTightening(true)
+            .minimumScaleFactor(0.30)
+            .padding(.horizontal, 5)
+    }
+    
     //Fonts for CustomDrinkView
     func fontCustomDrinkViewTitle() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 16))
@@ -60,5 +69,16 @@ extension TextField {
             .keyboardType(.decimalPad)
             .multilineTextAlignment(.trailing)
             .frame(width: 100)
+    }
+    
+    func fontGoalViewTextField() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 40))
+            .foregroundStyle(.primary)
+            .frame(width: 250)
+            .lineLimit(1)
+            .allowsTightening(true)
+            .minimumScaleFactor(0.30)
+            .keyboardType(.decimalPad)
+            .multilineTextAlignment(.center)
     }
 }
