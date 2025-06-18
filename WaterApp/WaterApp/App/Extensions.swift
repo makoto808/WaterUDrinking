@@ -49,16 +49,17 @@ extension View {
             .minimumScaleFactor(0.30)
             .textCase(.uppercase)
     }
-    func buttonGoalView(maxWidth: CGFloat = .infinity) -> some View {
-        self.buttonBorderShape(.capsule)
-            .buttonStyle(.borderedProminent)
-            .font(.custom("ArialRoundedMTBold", size: 25))
-            .textCase(.uppercase)
-    }
     
     func button1(maxWidth: CGFloat = .infinity) -> some View {
         self.buttonBorderShape(.capsule)
             .buttonStyle(.borderedProminent)
             .font(.custom("ArialRoundedMTBold", size: 20))
+    }
+    
+    func button2(maxWidth: CGFloat = .infinity) -> some View {
+        self.buttonBorderShape(.capsule)
+            .buttonStyle(.borderedProminent)
+            .font(.custom("ArialRoundedMTBold", size: 25))
+            .textCase(.uppercase)
     }
 }

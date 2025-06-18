@@ -33,7 +33,7 @@ struct ResetView: View {
                 Button("Reset?") {
                     showAlert = true
                 }
-                .buttonGoalView()
+                .button2()
                 .alert("Are You Sure?", isPresented: $showAlert) {
                     Button("Cancel", role: .cancel) {}
                     Button("OK", role: .destructive) {

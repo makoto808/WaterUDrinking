@@ -59,7 +59,7 @@ struct GoalView: View {
                         // Add logic to save to oz goal
                         keyboardFocused = false
                     }
-                    .buttonGoalView()
+                    .button2()
                 }
             }
             .frame(maxWidth: .infinity)

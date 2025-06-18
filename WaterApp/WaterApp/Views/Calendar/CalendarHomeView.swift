@@ -25,22 +25,23 @@ struct CalendarHomeView: View { //TODO: Access water streak (Apple Fitness rings
                 Spacer()
 
 //                better to implemet reset button here instead?
-                    Button("Reset?") {
-                        showAlert = true
-                    }
-                    .buttonBorderShape(.capsule)
-                    .buttonStyle(.borderedProminent)
-                    .font(.custom("ArialRoundedMTBold", size: 25))
-                    .textCase(.uppercase)
-                    .alert("Are You Sure?", isPresented: $showAlert) {
-                        Button("Cancel", role: .cancel) {}
-                        Button("OK", role: .destructive) {
-                            vm.totalOz = 0
-                            vm.navPath.removeLast()
+                Button("Reset?") {
+                    showAlert = true
+                }
+                .button2()
+                .alert("Are You Sure?", isPresented: $showAlert) {
+                    Button("Cancel", role: .cancel) {}
+                    Button("OK", role: .destructive) {
+                        vm.items = vm.items.map { item in
+                            var newItem = item
+                            newItem.volume = 0.0
+                            return newItem
                         }
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding()
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+
                 
                 Spacer()
 //                CalendarView()
