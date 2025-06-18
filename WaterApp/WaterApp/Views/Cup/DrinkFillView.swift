@@ -60,15 +60,16 @@ struct DrinkFillView: View {
                     } else {
                         vm.items[i].volume += value
                     }
-                    let newItem = CachedDrinkItem(
-                        date: Date(),
-                        name: item.name,
-                        img: item.img,
-                        volume: value,
-                        arrayOrderValue: 0
-                    )
-                    
-                    modelContext.insert(newItem)
+                    if let index = vm.items.firstIndex(where: { $0.name == item.name }) {
+                        let newItem = CachedDrinkItem(
+                            date: Date(),
+                            name: item.name,
+                            img: item.img,
+                            volume: value,
+                            arrayOrderValue: index
+                        )
+                        modelContext.insert(newItem)
+                    }
                     
                     do {
                         try modelContext.save()

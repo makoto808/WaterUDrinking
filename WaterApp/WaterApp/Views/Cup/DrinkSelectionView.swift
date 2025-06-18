@@ -9,11 +9,10 @@ import SwiftUI
 
 struct DrinkSelectionView: View {
     @Environment(DrinkListVM.self) private var vm
-    @Environment(\.modelContext) private var modelContext
-    @State private var scale = 1.0
-    
+
     var body: some View {
         @Bindable var vm = vm
+
         VStack {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: -20) {
@@ -27,7 +26,7 @@ struct DrinkSelectionView: View {
                                     .scaledToFit()
                                     .frame(width: 150, height: 110)
                             }
-                            
+
                             Text(drink.name)
                                 .foregroundStyle(.gray)
                                 .font(.custom("ArialRoundedMTBold", size: 16))
@@ -43,6 +42,12 @@ struct DrinkSelectionView: View {
         }
         .background(Color.backgroundWhite)
     }
+}
+
+
+
+#Preview {
+    DrinkSelectionView()
 }
 
 

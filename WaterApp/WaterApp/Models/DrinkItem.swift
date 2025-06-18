@@ -8,29 +8,28 @@
 import SwiftData
 import Foundation
 
-//Use this to display in DrinkSelectionView
+// Use this to display in DrinkSelectionView
 struct DrinkItem: Identifiable, Hashable {
     var id: String
     var name: String
     var img: String
     var volume: Double
-    
+
     init(name: String, img: String, volume: Double) {
         self.id = UUID().uuidString
         self.name = name
         self.img = img
         self.volume = volume
     }
-    
-    init(_ drinkItem: CachedDrinkItem) {
-        self.id = drinkItem.id
-        self.name = drinkItem.name
-        self.img = drinkItem.img
-        self.volume = drinkItem.volume
+
+    init(_ cached: CachedDrinkItem) {
+        self.id = cached.id
+        self.name = cached.name
+        self.img = cached.img
+        self.volume = cached.volume
     }
 }
 
-// TODO: - Add variable to determine how we sort this when retrieving from SwiftData ModelContext
 @Model class CachedDrinkItem: Identifiable, Hashable {
     var id: String
     var date: Date
@@ -38,7 +37,7 @@ struct DrinkItem: Identifiable, Hashable {
     var img: String
     var volume: Double
     var arrayOrderValue: Int
-    
+
     init(date: Date, name: String, img: String, volume: Double, arrayOrderValue: Int) {
         self.id = UUID().uuidString
         self.date = date
@@ -47,13 +46,13 @@ struct DrinkItem: Identifiable, Hashable {
         self.volume = volume
         self.arrayOrderValue = arrayOrderValue
     }
-    
-    init(_ drinkItem: DrinkItem) {
-        self.id = drinkItem.id
+
+    init(_ item: DrinkItem) {
+        self.id = item.id
         self.date = .now
-        self.name = drinkItem.name
-        self.img = drinkItem.img
-        self.volume = drinkItem.volume
-        self.arrayOrderValue = 0
+        self.name = item.name
+        self.img = item.img
+        self.volume = item.volume
+        self.arrayOrderValue = 0 // Will be set manually on save
     }
 }
