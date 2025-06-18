@@ -21,11 +21,8 @@ struct CustomOzView: View {
             
             HStack(spacing: 4) {
                 TextField("", text: self.$text.max(4))
-                    .font(.custom("ArialRoundedMTBold", size: 40))
+                    .fontCustomOzViewTextField()
                     .focused($keyboardFocused)
-                    .keyboardType(.decimalPad)
-                    .multilineTextAlignment(.trailing)
-                    .frame(width: 100)
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now()) {
                             keyboardFocused = true
@@ -33,8 +30,7 @@ struct CustomOzView: View {
                     }
                 
                 Text("oz")
-                    .foregroundColor(.primary)
-                    .font(.custom("ArialRoundedMTBold", size: 40))
+                    .fontOzLabel()
             }
             .padding(8)
             
@@ -52,9 +48,7 @@ struct CustomOzView: View {
                 
                 Button("+ Custom Amount ", systemImage: "lock") {
                 }
-                .buttonBorderShape(.capsule)
-                .buttonStyle(.borderedProminent)
-                .font(.custom("ArialRoundedMTBold", size: 20))
+                .button1()
             }
             .padding(50)
             .onAppear {

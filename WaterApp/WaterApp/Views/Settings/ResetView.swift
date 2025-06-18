@@ -33,10 +33,7 @@ struct ResetView: View {
                 Button("Reset?") {
                     showAlert = true
                 }
-                .buttonBorderShape(.capsule)
-                .buttonStyle(.borderedProminent)
-                .font(.custom("ArialRoundedMTBold", size: 25))
-                .textCase(.uppercase)
+                .buttonGoalView()
                 .alert("Are You Sure?", isPresented: $showAlert) {
                     Button("Cancel", role: .cancel) {}
                     Button("OK", role: .destructive) {

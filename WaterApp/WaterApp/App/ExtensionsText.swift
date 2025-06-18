@@ -32,19 +32,53 @@ extension Text {
             .padding(.horizontal, 20)
     }
     
+    func fontGoalViewTitle() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 45))
+            .foregroundStyle(.primary)
+            .lineLimit(1)
+            .allowsTightening(true)
+            .minimumScaleFactor(0.30)
+            .padding(.horizontal, 5)
+    }
+    
     //Fonts for CustomDrinkView
-    func fontCDVTitle() -> some View {
+    func fontCustomDrinkViewTitle() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 16))
             .fontWeight(.semibold)
             .lineLimit(1)
             .minimumScaleFactor(0.5)
     }
     
-    func fontCDVSubtitle() -> some View {
+    func fontCustomDrinkViewSubtitle() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 16))
             .font(.subheadline)
             .foregroundColor(.secondary)
             .lineLimit(1)
             .minimumScaleFactor(0.5)
+    }
+    
+    func fontOzLabel() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 40))
+            .foregroundColor(.primary)
+    }
+}
+
+extension TextField {
+    func fontCustomOzViewTextField() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 40))
+            .keyboardType(.decimalPad)
+            .multilineTextAlignment(.trailing)
+            .frame(width: 100)
+    }
+    
+    func fontGoalViewTextField() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 40))
+            .foregroundStyle(.primary)
+            .frame(width: 250)
+            .lineLimit(1)
+            .allowsTightening(true)
+            .minimumScaleFactor(0.30)
+            .keyboardType(.decimalPad)
+            .multilineTextAlignment(.center)
     }
 }

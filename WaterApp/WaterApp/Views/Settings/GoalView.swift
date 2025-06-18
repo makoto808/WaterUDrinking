@@ -33,27 +33,16 @@ struct GoalView: View {
                 Spacer()
                 
                 Text("Daily Water Goal")
-                    .font(.custom("ArialRoundedMTBold", size: 45))
-                    .foregroundStyle(.primary)
-                    .lineLimit(1)
-                    .allowsTightening(true)
-                    .minimumScaleFactor(0.30)
-                    .padding(.horizontal, 5)
+                    .fontGoalViewTitle()
                 
                 HStack {
                     TextField("Enter Here", text: self.$dailyWaterGoal.max(4))
-                        .font(.custom("ArialRoundedMTBold", size: 40))
-                        .foregroundStyle(.primary)
-                        .frame(width: 250)
-                        .lineLimit(1)
+                        .fontGoalViewTextField()
                         .focused($keyboardFocused)
-                        .keyboardType(.decimalPad)
-                        .multilineTextAlignment(.center)
                     
                     if !dailyWaterGoal.isEmpty {
                         Text("oz")
-                            .font(.custom("ArialRoundedMTBold", size: 35))
-                            .foregroundColor(.primary)
+                            .fontOzLabel()
                     }
                 }
                 .padding(8)
@@ -70,10 +59,7 @@ struct GoalView: View {
                         // Add logic to save to oz goal
                         keyboardFocused = false
                     }
-                    .buttonBorderShape(.capsule)
-                    .buttonStyle(.borderedProminent)
-                    .font(.custom("ArialRoundedMTBold", size: 25))
-                    .textCase(.uppercase)
+                    .buttonGoalView()
                 }
             }
             .frame(maxWidth: .infinity)

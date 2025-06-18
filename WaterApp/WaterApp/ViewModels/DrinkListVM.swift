@@ -11,12 +11,12 @@ import SwiftData
 
 @Observable final class DrinkListVM {
     private var modelContext: ModelContext?
-    var navPath: [NavPath] = [] //ryan lesson 146
-    
+    var navPath: [NavPath] = []
+
     var selectedItemIndex: Int?
-    
-    //    Used to display in DrinkSelectionView
-    var items: [DrinkItem] = [
+
+    // MARK: - Default Items
+    private let defaultItems: [DrinkItem] = [
         DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
         DrinkItem(name: "Tea", img: "tea", volume: 0.0),
         DrinkItem(name: "Coffee", img: "coffee", volume: 0.0),
@@ -25,45 +25,45 @@ import SwiftData
         DrinkItem(name: "Milk", img: "milk", volume: 0.0),
         DrinkItem(name: "Energy Drink", img: "energyDrink", volume: 0.0),
         DrinkItem(name: "Beer", img: "beer", volume: 0.0)
-    ] {
+    ]
+
+    // MARK: - Drink Items
+    var items: [DrinkItem] = [] {
         didSet {
-            let sum = items.reduce(0.0) { $0 + $1.volume }
-            totalOz = sum
-            
-            let sum2 = totalOz / totalOzGoal * 100
-            percentTotal = sum2
+            totalOz = items.reduce(0.0) { $0 + $1.volume }
+            percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
         }
     }
-    
+
     var totalOz: Double = 0.0
     var percentTotal: Double = 0.0
-    var totalOzGoal: Double = 120 //Might change from GoalView
-    
+    var totalOzGoal: Double = 120
+
+    // MARK: - Fixed Order for Sorting
+    private let fixedDrinkOrder = [
+        "Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"
+    ]
+
     init() {
+        self.items = defaultItems
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(cacheDrinkItems),
             name: UIApplication.didEnterBackgroundNotification,
-            object: nil)
+            object: nil
+        )
     }
-    
+
     func setSelectedItemIndex(for drink: DrinkItem) {
-        var index: Int?
-        for i in 0..<items.count {
-            let currentItem = items[i]
-            if currentItem.name == drink.name {
-                index = i
-                break
-            }
-        }
-        selectedItemIndex = index
+        selectedItemIndex = items.firstIndex { $0.name == drink.name }
     }
-    
+
     func setModelContext(_ modelContext: ModelContext) {
         self.modelContext = modelContext
         self.modelContext!.autosaveEnabled = true
     }
-    
+
+    // MARK: - Caching
     @objc private func cacheDrinkItems() {
         guard let modelContext else { return }
         do {
@@ -72,57 +72,49 @@ import SwiftData
                 for item in oldItems {
                     modelContext.delete(item)
                 }
-                
-                for item in items {
-                    modelContext.insert(CachedDrinkItem(item))
+
+                for (index, item) in items.enumerated() {
+                    var cached = CachedDrinkItem(item)
+                    cached.arrayOrderValue = index
+                    modelContext.insert(cached)
                 }
-                
+
                 try modelContext.save()
             }
         } catch {
             print("Error caching drink items: \(error)")
         }
     }
-    
-    
+
+    // MARK: - Load from Cache
     func loadFromCache() {
         guard let modelContext else {
             print("ModelContext is nil")
             return
         }
-        
+
         do {
             let cached = try modelContext.fetch(FetchDescriptor<CachedDrinkItem>())
             if cached.isEmpty {
-                print("No cached items found, keeping default drinks")
+                print("No cached items found, using default drinks")
+                items = defaultItems
             } else {
-                self.items = cached.map { DrinkItem($0) }
-                print("Loaded \(items.count) cached drink items")
+                items = cached.map { DrinkItem($0) }
+                sortItemsByFixedOrder()
             }
         } catch {
             print("Failed to load cached drink items: \(error)")
         }
     }
+
+    // MARK: - Helper to Enforce Order
+    private func sortItemsByFixedOrder() {
+        items.sort {
+            guard
+                let firstIndex = fixedDrinkOrder.firstIndex(of: $0.name),
+                let secondIndex = fixedDrinkOrder.firstIndex(of: $1.name)
+            else { return false }
+            return firstIndex < secondIndex
+        }
+    }
 }
-
-
-//@Observable does not need to confrom to ObservableObject
-
-
-
-
-//@objc private func cacheDrinkItems() {
-//    let cachedDrinks = items.map { item in
-//        return CachedDrinkItem(item)
-//    }
-//    do {
-//        try modelContext?.transaction {
-//            for drink in cachedDrinks {
-//                modelContext?.insert(drink)
-//            }
-//            try modelContext?.save()
-//        }
-//    } catch {
-//        print(error)
-//    }
-//}

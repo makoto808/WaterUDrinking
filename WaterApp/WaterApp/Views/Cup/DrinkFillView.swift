@@ -32,7 +32,8 @@ struct DrinkFillView: View {
             
             Image(item.img) //TODO: adds another layer for fill effect with Slider()
                 .resizable()
-                .frame(width: 500, height: 500, alignment: .center)
+                .scaledToFit()
+                .frame(maxWidth: 500, alignment: .center)
                 .sheet(isPresented: $showingCustomDrinkView) {
                     CustomDrinkView()
                 }
@@ -59,15 +60,16 @@ struct DrinkFillView: View {
                     } else {
                         vm.items[i].volume += value
                     }
-                    let newItem = CachedDrinkItem(
-                        date: Date(),
-                        name: item.name,
-                        img: item.img,
-                        volume: value,
-                        arrayOrderValue: 0 // Or however you want to order
-                    )
-                    
-                    modelContext.insert(newItem)
+                    if let index = vm.items.firstIndex(where: { $0.name == item.name }) {
+                        let newItem = CachedDrinkItem(
+                            date: Date(),
+                            name: item.name,
+                            img: item.img,
+                            volume: value,
+                            arrayOrderValue: index
+                        )
+                        modelContext.insert(newItem)
+                    }
                     
                     do {
                         try modelContext.save()
@@ -78,10 +80,7 @@ struct DrinkFillView: View {
                     vm.navPath.removeLast()
                 
                 }
-                .buttonBorderShape(.capsule)
-                .buttonStyle(.borderedProminent)
-                .font(.custom("ArialRoundedMTBold", size: 25))
-                .textCase(.uppercase)
+                .drinkFilllViewButtonStyle()
                 .alert("You didn't drink anything!", isPresented: $showAlert) {
                     Button("Dismiss") {}
                 }
