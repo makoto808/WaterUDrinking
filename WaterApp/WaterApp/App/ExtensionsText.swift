@@ -33,18 +33,32 @@ extension Text {
     }
     
     //Fonts for CustomDrinkView
-    func fontCDVTitle() -> some View {
+    func fontCustomDrinkViewTitle() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 16))
             .fontWeight(.semibold)
             .lineLimit(1)
             .minimumScaleFactor(0.5)
     }
     
-    func fontCDVSubtitle() -> some View {
+    func fontCustomDrinkViewSubtitle() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 16))
             .font(.subheadline)
             .foregroundColor(.secondary)
             .lineLimit(1)
             .minimumScaleFactor(0.5)
+    }
+    
+    func fontOzLabel() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 40))
+            .foregroundColor(.primary)
+    }
+}
+
+extension TextField {
+    func fontCustomOzViewTextField() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 40))
+            .keyboardType(.decimalPad)
+            .multilineTextAlignment(.trailing)
+            .frame(width: 100)
     }
 }

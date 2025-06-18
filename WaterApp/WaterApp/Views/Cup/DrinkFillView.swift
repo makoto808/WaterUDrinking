@@ -65,7 +65,7 @@ struct DrinkFillView: View {
                         name: item.name,
                         img: item.img,
                         volume: value,
-                        arrayOrderValue: 0 
+                        arrayOrderValue: 0
                     )
                     
                     modelContext.insert(newItem)
@@ -79,10 +79,7 @@ struct DrinkFillView: View {
                     vm.navPath.removeLast()
                 
                 }
-                .buttonBorderShape(.capsule)
-                .buttonStyle(.borderedProminent)
-                .font(.custom("ArialRoundedMTBold", size: 25))
-                .textCase(.uppercase)
+                .drinkFilllViewButtonStyle()
                 .alert("You didn't drink anything!", isPresented: $showAlert) {
                     Button("Dismiss") {}
                 }
