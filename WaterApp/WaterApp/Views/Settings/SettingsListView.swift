@@ -82,7 +82,7 @@ struct SettingsListView: View {
                 //                    }
                 
             }
-            .listStyle(.automatic) //Lets swift choose appropriate list view based on device
+            .listStyle(.automatic)
             .scrollContentBackground(.hidden)
             .background(Color.backgroundWhite)
         }

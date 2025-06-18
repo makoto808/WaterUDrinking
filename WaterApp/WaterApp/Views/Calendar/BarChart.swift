@@ -23,7 +23,7 @@ struct BarChart: View { //TODO: Data for previous days (weekly view)
     var body: some View {
         VStack {
             Text("Daily Water Intake")
-                .font(.custom("ArialRoundedMTBold", size: 23))
+                .fontBarLabel()
             
             Chart {
                 RuleMark(y: .value("Goal", 64))
@@ -53,7 +53,6 @@ struct BarChart: View { //TODO: Data for previous days (weekly view)
         .background(Color.backgroundWhite.ignoresSafeArea())
         }
     }
-
 
 #Preview {
     BarChart()

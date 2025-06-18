@@ -63,3 +63,16 @@ extension View {
             .textCase(.uppercase)
     }
 }
+
+extension View {
+    func goalViewWave(offset: Binding<Angle>, percent: Double = 3.9 / 8.0) -> some View {
+        WaveMotion(offset: offset.wrappedValue, percent: percent)
+            .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
+            .ignoresSafeArea()
+            .onAppear {
+                withAnimation(.linear(duration: 3.5).repeatForever(autoreverses: false)) {
+                    offset.wrappedValue = Angle(degrees: 360)
+                }
+            }
+    }
+}

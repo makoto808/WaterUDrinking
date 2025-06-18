@@ -39,7 +39,7 @@ import SwiftData
     var percentTotal: Double = 0.0
     var totalOzGoal: Double = 120
 
-    // MARK: - Fixed Order for Sorting
+//     MARK: - Fixed Order for Sorting
     private let fixedDrinkOrder = [
         "Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"
     ]

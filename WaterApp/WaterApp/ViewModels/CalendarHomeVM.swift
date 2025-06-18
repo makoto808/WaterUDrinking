@@ -26,7 +26,6 @@ import SwiftData
                 sortBy: [SortDescriptor(\.arrayOrderValue)]
             )
             if let cachedItems = try modelContext?.fetch(descriptor) {
-                // Keep the order from CachedDrinkItem
                 items = cachedItems.map(DrinkItem.init)
             }
         } catch {

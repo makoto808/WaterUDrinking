@@ -42,12 +42,11 @@ struct CalendarHomeView: View { //TODO: Access water streak (Apple Fitness rings
                 }, message: {
                     Text("This will reset today's total.")
                 })
-                
                 .frame(maxWidth: .infinity)
                 .padding()
-
                 
                 Spacer()
+                
 //                CalendarView()
             }
             .padding(.horizontal)

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    
     @State var drinkListVM = DrinkListVM()
     @State private var calendarHomeVM = CalendarHomeVM()
     
