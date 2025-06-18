@@ -58,6 +58,7 @@ struct GoalView: View {
                     Button("Right On!") {
                         // Add logic to save to oz goal
                         keyboardFocused = false
+                        vm.navPath = []
                     }
                     .button2()
                 }

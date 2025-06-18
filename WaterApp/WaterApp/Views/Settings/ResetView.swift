@@ -37,8 +37,11 @@ struct ResetView: View {
                 .alert("Are You Sure?", isPresented: $showAlert) {
                     Button("Cancel", role: .cancel) {}
                     Button("OK", role: .destructive) {
-                        vm.totalOz = 0
-//                        vm.navPath.removeLast()
+                        vm.items = vm.items.map { item in
+                            var newItem = item
+                            newItem.volume = 0.0
+                            return newItem
+                        }
                     }
                 }
                 .frame(maxWidth: .infinity)
