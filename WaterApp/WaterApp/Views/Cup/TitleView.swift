@@ -30,11 +30,11 @@ struct TitleView: View {
         if vm.totalOz == 0.0 {
             Text("You are dehydrated!")
                 .fontSmall()
-        } else if vm.totalOz >= 120.0 {
-            Text("You are fully hydrated!")
+        } else if vm.totalOz >= vm.totalOzGoal {
+            Text("You are fully hydrated!") //TODO: Show You drank X oz today!
                 .fontSmall()
-        } else if vm.totalOz > 0.0 {
-            Text("You drank \(vm.totalOz.formatted(FloatingPointFormatStyle())) oz today! \(vm.percentTotal.rounded(.up).clean)% of your goal!")
+        } else {
+            Text("You drank \(vm.totalOz.formatted()) oz today! \(vm.percentTotal.rounded(.up).clean)% of your goal!")
                 .fontSmall()
         }
     }
