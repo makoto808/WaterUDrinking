@@ -47,7 +47,6 @@ struct GoalView: View {
                 }
                 .padding(8)
                 
-                
                 Spacer()
                 Spacer()
                 Spacer()
@@ -56,8 +55,10 @@ struct GoalView: View {
                     
                 } else {
                     Button("Right On!") {
-                        //TODO: Add number GoalView to the Calenda
                         keyboardFocused = false
+                        if let goal = Double(dailyWaterGoal) {
+                            vm.totalOzGoal = goal
+                        }
                         vm.navPath = []
                     }
                     .button2()
@@ -71,6 +72,6 @@ struct GoalView: View {
 
 #Preview {
     GoalView()
-        .environment(DrinkListVM()) // Inject environment object
+        .environment(DrinkListVM())
 }
 

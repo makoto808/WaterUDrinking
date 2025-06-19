@@ -11,24 +11,21 @@ struct CupView: View {
     @Environment(DrinkListVM.self) private var vm
     @Environment(\.modelContext) private var modelContext
 
-    
     @State private var waveOffset = Angle(degrees: 0)
-    
-    @State var ozGoal: Double = 120
-    
+
     var body: some View {
         GeometryReader { wave in
             ZStack {
-                //                Text("\(self.vm.totalOz)%")
-                //                    .foregroundColor(.primary)
-                //                    .font(Font.system(size: 0.25 * min(wave.size.width, wave.size.height) ))
-                
                 Circle()
                     .stroke(Color.gray, lineWidth: 0.03 * min(wave.size.width, wave.size.height))
                     .overlay(
-                        WaveMotion(offset: Angle(degrees: self.waveOffset.degrees), percent: Double(vm.totalOz)/ozGoal)
-                            .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
-                            .clipShape(Circle().scale(0.92)))
+                        WaveMotion(
+                            offset: self.waveOffset,
+                            percent: vm.totalOzGoal == 0 ? 0 : Double(vm.totalOz) / vm.totalOzGoal
+                        )
+                        .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
+                        .clipShape(Circle().scale(0.92))
+                    )
             }
             .padding(.horizontal)
         }
@@ -41,10 +38,13 @@ struct CupView: View {
     }
 }
 
+
 #Preview {
     let mockVM = DrinkListVM()
-    mockVM.totalOz = 60  // Set test data here
+    mockVM.totalOz = 60
+    mockVM.totalOzGoal = 100
     return CupView()
         .environment(mockVM)
 }
+
 

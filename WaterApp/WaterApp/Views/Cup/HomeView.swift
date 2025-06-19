@@ -24,7 +24,7 @@ struct HomeView: View {
                 Spacer()
                 Spacer()
                 
-                CupView(ozGoal: 120)
+                CupView()
                 
                 Spacer()
                 Spacer()
@@ -52,14 +52,22 @@ struct HomeView: View {
                     Image(systemName: "gearshape.fill")
                 }
             }
+            
         }
         .navigationBarBackButtonHidden(true)
     }
+    
 }
 
 //#Preview {
-//    HomeView()
+//    let mockVM = DrinkListVM()
+//    mockVM.totalOz = 60
+//    mockVM.totalOzGoal = 100
+//    
+//    return HomeView()
+//        .environment(mockVM)
 //}
+
 
 // TODO: NOTES TO DO:
 // Lock portrait mode throughout entire app

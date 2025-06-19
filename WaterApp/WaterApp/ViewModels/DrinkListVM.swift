@@ -68,14 +68,20 @@ import SwiftData
         guard let modelContext else { return }
         do {
             try modelContext.transaction {
-                let oldItems = try modelContext.fetch(FetchDescriptor<CachedDrinkItem>())
-                for item in oldItems {
+                // DELETE today's items only
+                let today = Calendar.current.startOfDay(for: Date())
+                let predicate = #Predicate<CachedDrinkItem> { $0.date >= today }
+                let todayItems = try modelContext.fetch(FetchDescriptor(predicate: predicate))
+
+                for item in todayItems {
                     modelContext.delete(item)
                 }
 
+                // SAVE each item fresh
                 for (index, item) in items.enumerated() {
                     var cached = CachedDrinkItem(item)
                     cached.arrayOrderValue = index
+                    cached.date = Date() // ✅ Explicitly set the date to now
                     modelContext.insert(cached)
                 }
 
@@ -94,7 +100,12 @@ import SwiftData
         }
 
         do {
-            let cached = try modelContext.fetch(FetchDescriptor<CachedDrinkItem>())
+            let today = Calendar.current.startOfDay(for: Date())
+            let predicate = #Predicate<CachedDrinkItem> { $0.date >= today }
+            let fetchDescriptor = FetchDescriptor<CachedDrinkItem>(predicate: predicate)
+
+            let cached = try modelContext.fetch(fetchDescriptor)
+
             if cached.isEmpty {
                 print("No cached items found, using default drinks")
                 items = defaultItems
@@ -104,6 +115,7 @@ import SwiftData
             }
         } catch {
             print("Failed to load cached drink items: \(error)")
+            items = defaultItems
         }
     }
 
@@ -118,3 +130,4 @@ import SwiftData
         }
     }
 }
+
