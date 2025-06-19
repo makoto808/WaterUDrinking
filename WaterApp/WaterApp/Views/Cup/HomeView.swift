@@ -52,9 +52,11 @@ struct HomeView: View {
                     Image(systemName: "gearshape.fill")
                 }
             }
+            
         }
         .navigationBarBackButtonHidden(true)
     }
+    
 }
 
 //#Preview {
