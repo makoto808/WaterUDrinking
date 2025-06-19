@@ -10,7 +10,6 @@ import Observation
 import SwiftData
 
 @Observable final class DrinkListVM {
-    private var modelContext: ModelContext?
     var navPath: [NavPath] = []
 
     var selectedItemIndex: Int?
@@ -42,22 +41,8 @@ import SwiftData
     var percentTotal: Double = 0.0
     var totalOzGoal: Double = 120
 
-    init() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(cacheDrinkItems),
-            name: UIApplication.didEnterBackgroundNotification,
-            object: nil
-        )
-    }
-
     func setSelectedItemIndex(for drink: DrinkItem) {
         selectedItemIndex = items.firstIndex { $0.name == drink.name }
-    }
-
-    func setModelContext(_ modelContext: ModelContext) {
-        self.modelContext = modelContext
-        self.modelContext!.autosaveEnabled = true
     }
     
     func parseNewCachedItem(for item: DrinkItem) -> CachedDrinkItem? {
@@ -80,65 +65,45 @@ import SwiftData
         return newItem
     }
 
-    // MARK: - Caching
-    @objc private func cacheDrinkItems() {
-        guard let modelContext else { return }
-        do {
-            try modelContext.transaction {
-                // DELETE today's items only
-                let today = Calendar.current.startOfDay(for: Date())
-                let predicate = #Predicate<CachedDrinkItem> { $0.date >= today }
-                let todayItems = try modelContext.fetch(FetchDescriptor(predicate: predicate))
-
-                for item in todayItems {
-                    modelContext.delete(item)
-                }
-
-                // SAVE each item fresh
-                for (index, item) in items.enumerated() {
-                    var cached = CachedDrinkItem(item)
-                    cached.arrayOrderValue = index
-                    cached.date = Date() // ✅ Explicitly set the date to now
-                    modelContext.insert(cached)
-                }
-
-                try modelContext.save()
-            }
-        } catch {
-            print("Error caching drink items: \(error)")
-        }
-    }
-
     // MARK: - Load from Cache
-    func loadFromCache() {
-        guard let modelContext else {
-            print("ModelContext is nil")
-            return
-        }
+    func loadFromCache(_ modelContext: ModelContext) {
         do {
-            let today = Calendar.current.startOfDay(for: Date())
-            let predicate = #Predicate<CachedDrinkItem> { $0.date >= today }
-            let fetchDescriptor = FetchDescriptor<CachedDrinkItem>(predicate: predicate)
-
-            let cached = try modelContext.fetch(fetchDescriptor)
-
-            if cached.isEmpty {
+            let cached = try fetchTodaysCachedDrinks(modelContext)
+            guard !cached.isEmpty else {
                 print("No cached items found, using default drinks")
-            } else {
-                let cachedDrinks = cached.map { DrinkItem($0) }
-                for i in 0..<items.count {
-                    let item = items[i]
-                    for cachedDrink in cachedDrinks {
-                        if cachedDrink.name == item.name {
-                            items[i].volume += cachedDrink.volume
-                            break
-                        }
+                return
+            }
+            let cachedDrinks = cached.map { DrinkItem($0) }
+            for i in 0..<items.count {
+                for cachedDrink in cachedDrinks {
+                    if cachedDrink.name == items[i].name {
+                        items[i].volume += cachedDrink.volume
                     }
                 }
             }
         } catch {
-            print("Failed to load cached drink items: \(error)")
+            print("Error fetching [CachedDrinkItem]")
         }
+    }
+    
+    func deleteTodaysItems(_ modelContext: ModelContext) {
+        do {
+            let cached = try fetchTodaysCachedDrinks(modelContext)
+            for item in cached {
+                modelContext.delete(item)
+            }
+            try modelContext.save()
+        } catch {
+            print("Error fetching [CachedDrinkItem]")
+        }
+    }
+    
+    private func fetchTodaysCachedDrinks(_ modelContext: ModelContext) throws -> [CachedDrinkItem] {
+        let today = Calendar.current.startOfDay(for: Date())
+        let predicate = #Predicate<CachedDrinkItem> { $0.date >= today }
+        let fetchDescriptor = FetchDescriptor<CachedDrinkItem>(predicate: predicate)
+        let cached = try modelContext.fetch(fetchDescriptor)
+        return cached
     }
 }
 
