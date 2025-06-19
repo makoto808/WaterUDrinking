@@ -47,7 +47,6 @@ struct GoalView: View {
                 }
                 .padding(8)
                 
-                
                 Spacer()
                 Spacer()
                 Spacer()
