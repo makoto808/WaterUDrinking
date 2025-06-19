@@ -9,20 +9,10 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-//    @Environment(\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
     
     @State private var drinkListVM = DrinkListVM()
     @State private var calendarHomeVM = CalendarHomeVM()
-    
-    let modelContainer: ModelContainer
-    
-    init() {
-        do {
-            modelContainer = try ModelContainer(for: CachedDrinkItem.self)
-        } catch {
-            fatalError("Failed to create ModelContainer")
-        }
-    }
     
     var body: some View {
         NavigationStack(path: $drinkListVM.navPath) {
@@ -45,8 +35,7 @@ struct ContentView: View {
         }
         .environment(drinkListVM)
         .onAppear {
-            drinkListVM.setModelContext(modelContainer.mainContext)
-            drinkListVM.loadFromCache()
+            drinkListVM.loadFromCache(modelContext)
 //            calendarHomeVM.setModelContext(modelContainer.mainContext)
         }
     }

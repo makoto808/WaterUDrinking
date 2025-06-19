@@ -5,9 +5,12 @@
 //  Created by Gregg Abe on 6/15/25.
 //
 
+import SwiftData
 import SwiftUI
+
 //TODO: might be better to have this under the bar chart in calendar view
 struct ResetView: View {
+    @Environment(\.modelContext) private var modelContext
     @Environment(DrinkListVM.self) private var vm
     
     @State private var showAlert = false
@@ -43,6 +46,7 @@ struct ResetView: View {
                             return newItem
                         }
                         vm.navPath = []
+                        vm.deleteTodaysItems(modelContext)
                     }
                 }, message: {
                     Text("This will reset today's total.")
