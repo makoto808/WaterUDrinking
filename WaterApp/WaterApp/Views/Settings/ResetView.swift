@@ -34,7 +34,7 @@ struct ResetView: View {
                     showAlert = true
                 }
                 .button2()
-                .alert("Are You Sure?", isPresented: $showAlert) {
+                .alert("Are You Sure?", isPresented: $showAlert, actions: {
                     Button("Cancel", role: .cancel) {}
                     Button("OK", role: .destructive) {
                         vm.items = vm.items.map { item in
@@ -42,8 +42,11 @@ struct ResetView: View {
                             newItem.volume = 0.0
                             return newItem
                         }
+                        vm.navPath = []
                     }
-                }
+                }, message: {
+                    Text("This will reset today's total.")
+                })
                 .frame(maxWidth: .infinity)
                 .padding()
             }
