@@ -61,6 +61,11 @@ extension Text {
         self.font(.custom("ArialRoundedMTBold", size: 40))
             .foregroundColor(.primary)
     }
+    
+    func fontBarLabel() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 23))
+            .foregroundColor(.primary)
+    }
 }
 
 extension TextField {

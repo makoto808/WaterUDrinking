@@ -12,4 +12,5 @@ enum NavPath: Hashable {
     case settings
     case drinkFillView(DrinkItem)
     case dailyWaterGoal
+    case resetView
 }

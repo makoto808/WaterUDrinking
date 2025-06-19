@@ -8,7 +8,7 @@
 import SwiftData
 import Foundation
 
-// Use this to display in DrinkSelectionView
+//NOTE: Use this to display in DrinkSelectionView.
 struct DrinkItem: Identifiable, Hashable {
     var id: String
     var name: String
@@ -53,6 +53,6 @@ struct DrinkItem: Identifiable, Hashable {
         self.name = item.name
         self.img = item.img
         self.volume = item.volume
-        self.arrayOrderValue = 0 // Will be set manually on save
+        self.arrayOrderValue = 0
     }
 }

@@ -33,14 +33,20 @@ struct ResetView: View {
                 Button("Reset?") {
                     showAlert = true
                 }
-                .buttonGoalView()
-                .alert("Are You Sure?", isPresented: $showAlert) {
+                .button2()
+                .alert("Are You Sure?", isPresented: $showAlert, actions: {
                     Button("Cancel", role: .cancel) {}
                     Button("OK", role: .destructive) {
-                        vm.totalOz = 0
-//                        vm.navPath.removeLast()
+                        vm.items = vm.items.map { item in
+                            var newItem = item
+                            newItem.volume = 0.0
+                            return newItem
+                        }
+                        vm.navPath = []
                     }
-                }
+                }, message: {
+                    Text("This will reset today's total.")
+                })
                 .frame(maxWidth: .infinity)
                 .padding()
             }
@@ -54,3 +60,4 @@ struct ResetView: View {
 }
 
 
+//test

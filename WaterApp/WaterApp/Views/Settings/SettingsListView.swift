@@ -14,7 +14,7 @@ struct SettingsListView: View {
         VStack {
             List {
                 Section {
-                    Button("Give us a review") {
+                    Button("Give Us A Review") {
                         //TODO: Link to appstore review
                     }
                 }
@@ -24,6 +24,12 @@ struct SettingsListView: View {
                         vm.navPath.append(.dailyWaterGoal)
                     } label: {
                         Text("Edit Your Goal")
+                    }
+                    
+                    Button {
+                        vm.navPath.append(.resetView)
+                    } label: {
+                        Text("Reset Today's Total")
                     }
                 }
                 
@@ -82,7 +88,7 @@ struct SettingsListView: View {
                 //                    }
                 
             }
-            .listStyle(.automatic) //Lets swift choose appropriate list view based on device
+            .listStyle(.automatic)
             .scrollContentBackground(.hidden)
             .background(Color.backgroundWhite)
         }

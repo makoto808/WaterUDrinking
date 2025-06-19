@@ -56,10 +56,11 @@ struct GoalView: View {
                     
                 } else {
                     Button("Right On!") {
-                        // Add logic to save to oz goal
+                        //TODO: Add number GoalView to the Calenda
                         keyboardFocused = false
+                        vm.navPath = []
                     }
-                    .buttonGoalView()
+                    .button2()
                 }
             }
             .frame(maxWidth: .infinity)
