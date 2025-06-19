@@ -9,9 +9,9 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
+//    @Environment(\.modelContext) private var modelContext
     
-    @State var drinkListVM = DrinkListVM()
+    @State private var drinkListVM = DrinkListVM()
     @State private var calendarHomeVM = CalendarHomeVM()
     
     let modelContainer: ModelContainer
@@ -45,9 +45,9 @@ struct ContentView: View {
         }
         .environment(drinkListVM)
         .onAppear {
-            drinkListVM.setModelContext(modelContext)
+            drinkListVM.setModelContext(modelContainer.mainContext)
             drinkListVM.loadFromCache()
-            calendarHomeVM.setModelContext(modelContainer.mainContext)
+//            calendarHomeVM.setModelContext(modelContainer.mainContext)
         }
     }
 }

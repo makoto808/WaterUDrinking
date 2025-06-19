@@ -5,7 +5,7 @@
 //  Created by Gregg Abe on 4/2/25.
 //
 
-import UIKit
+import SwiftUI
 import Observation
 import SwiftData
 
@@ -14,9 +14,15 @@ import SwiftData
     var navPath: [NavPath] = []
 
     var selectedItemIndex: Int?
+    
+    var settingsDetent = PresentationDetent.medium
+    var showingCustomOzView = false
+    var showingCustomDrinkView = false
+    var showAlert = false
+    var value = 0.0
 
-    // MARK: - Default Items
-    private let defaultItems: [DrinkItem] = [
+    // MARK: - Drink Items
+    var items: [DrinkItem] = [
         DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
         DrinkItem(name: "Tea", img: "tea", volume: 0.0),
         DrinkItem(name: "Coffee", img: "coffee", volume: 0.0),
@@ -25,10 +31,7 @@ import SwiftData
         DrinkItem(name: "Milk", img: "milk", volume: 0.0),
         DrinkItem(name: "Energy Drink", img: "energyDrink", volume: 0.0),
         DrinkItem(name: "Beer", img: "beer", volume: 0.0)
-    ]
-
-    // MARK: - Drink Items
-    var items: [DrinkItem] = [] {
+    ] {
         didSet {
             totalOz = items.reduce(0.0) { $0 + $1.volume }
             percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
@@ -39,13 +42,7 @@ import SwiftData
     var percentTotal: Double = 0.0
     var totalOzGoal: Double = 120
 
-//     MARK: - Fixed Order for Sorting
-    private let fixedDrinkOrder = [
-        "Water", "Tea", "Coffee", "Soda", "Juice", "Milk", "Energy Drink", "Beer"
-    ]
-
     init() {
-        self.items = defaultItems
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(cacheDrinkItems),
@@ -61,6 +58,26 @@ import SwiftData
     func setModelContext(_ modelContext: ModelContext) {
         self.modelContext = modelContext
         self.modelContext!.autosaveEnabled = true
+    }
+    
+    func parseNewCachedItem(for item: DrinkItem) -> CachedDrinkItem? {
+        guard let i = selectedItemIndex else { return nil }
+        if value == 0 {
+            showAlert = true
+        } else {
+            items[i].volume += value
+        }
+        guard let index = items.firstIndex(where: { $0.name == item.name }) else {
+            return nil
+        }
+        let newItem = CachedDrinkItem(
+            date: Date(),
+            name: item.name,
+            img: item.img,
+            volume: value,
+            arrayOrderValue: index
+        )
+        return newItem
     }
 
     // MARK: - Caching
@@ -98,7 +115,6 @@ import SwiftData
             print("ModelContext is nil")
             return
         }
-
         do {
             let today = Calendar.current.startOfDay(for: Date())
             let predicate = #Predicate<CachedDrinkItem> { $0.date >= today }
@@ -108,25 +124,20 @@ import SwiftData
 
             if cached.isEmpty {
                 print("No cached items found, using default drinks")
-                items = defaultItems
             } else {
-                items = cached.map { DrinkItem($0) }
-                sortItemsByFixedOrder()
+                let cachedDrinks = cached.map { DrinkItem($0) }
+                for i in 0..<items.count {
+                    let item = items[i]
+                    for cachedDrink in cachedDrinks {
+                        if cachedDrink.name == item.name {
+                            items[i].volume += cachedDrink.volume
+                            break
+                        }
+                    }
+                }
             }
         } catch {
             print("Failed to load cached drink items: \(error)")
-            items = defaultItems
-        }
-    }
-
-    // MARK: - Helper to Enforce Order
-    private func sortItemsByFixedOrder() {
-        items.sort {
-            guard
-                let firstIndex = fixedDrinkOrder.firstIndex(of: $0.name),
-                let secondIndex = fixedDrinkOrder.firstIndex(of: $1.name)
-            else { return false }
-            return firstIndex < secondIndex
         }
     }
 }
