@@ -9,8 +9,9 @@ import SwiftUI
 import Charts
 
 struct BarChart: View { //TODO: Data for previous days (weekly view)
+    @Environment(DrinkListVM.self) private var vm
     
-    let viewDay: [ViewDay] = [ //sample data
+    let viewDay: [ViewDay] = [
         .init(date: Date.from(year: 2025, day: 1), ouncesOfWater: 30),
         .init(date: Date.from(year: 2025, day: 2), ouncesOfWater: 55),
         .init(date: Date.from(year: 2025, day: 3), ouncesOfWater: 36),
@@ -26,7 +27,7 @@ struct BarChart: View { //TODO: Data for previous days (weekly view)
                 .fontBarLabel()
             
             Chart {
-                RuleMark(y: .value("Goal", 64))
+                RuleMark(y: .value("Goal", vm.totalOzGoal))
                     .foregroundStyle(Color.mint)
                     .lineStyle(StrokeStyle(lineWidth: 1, dash: [10]))
                     .annotation(alignment: .leading) {
@@ -48,15 +49,20 @@ struct BarChart: View { //TODO: Data for previous days (weekly view)
         .chartXAxis {
             AxisMarks(values: viewDay.map { $0.date }) { date in
                 AxisValueLabel(format: .dateTime.day(), centered: true)
-                }
             }
-        .background(Color.backgroundWhite.ignoresSafeArea())
         }
+        .background(Color.backgroundWhite.ignoresSafeArea())
     }
+}
+
 
 #Preview {
-    BarChart()
+    let vm = DrinkListVM()
+    vm.totalOzGoal = 64
+    return BarChart()
+        .environment(vm)
 }
+
 
 struct ViewDay: Identifiable {
     let id = UUID()
