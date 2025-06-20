@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CupView: View {
-    @Environment(DrinkListVM.self) private var vm
     @Environment(\.modelContext) private var modelContext
+    @Environment(DrinkListVM.self) private var drinkListVM
 
     @State private var waveOffset = Angle(degrees: 0)
 
@@ -21,7 +21,7 @@ struct CupView: View {
                     .overlay(
                         WaveMotion(
                             offset: self.waveOffset,
-                            percent: vm.totalOzGoal == 0 ? 0 : Double(vm.totalOz) / vm.totalOzGoal
+                            percent: drinkListVM.totalOzGoal == 0 ? 0 : Double(drinkListVM.totalOz) / drinkListVM.totalOzGoal
                         )
                         .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
                         .clipShape(Circle().scale(0.92))
@@ -38,7 +38,6 @@ struct CupView: View {
     }
 }
 
-
 #Preview {
     let mockVM = DrinkListVM()
     mockVM.totalOz = 60
@@ -46,5 +45,3 @@ struct CupView: View {
     return CupView()
         .environment(mockVM)
 }
-
-

@@ -9,9 +9,7 @@ import SwiftUI
 
 struct CalendarHomeView: View {
     @Environment(CalendarHomeVM.self) private var calendarHomeVM
-    @Environment(DrinkListVM.self) private var vm
-    
-    @State private var showAlert = false
+    @Environment(DrinkListVM.self) private var drinkListVM
     
     var body: some View {
         ZStack {

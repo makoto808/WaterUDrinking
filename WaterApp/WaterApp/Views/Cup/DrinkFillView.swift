@@ -4,41 +4,42 @@
 //
 //  Created by Gregg Abe on 3/29/25.
 //
-import SwiftUI
+
 import SwiftData
+import SwiftUI
+
 struct DrinkFillView: View {
     @Environment(\.modelContext) private var modelContext
-
-    @Environment(DrinkListVM.self) private var vm
+    @Environment(DrinkListVM.self) private var drinkListVM
 
     let item: DrinkItem
 
     var body: some View {
-
-        @Bindable var vm = vm
+        @Bindable var drinkListVM = drinkListVM
+        
         VStack {
             Spacer()
             Spacer()
 
-            Text("\(vm.value.formatted()) oz")
-                .font(.custom("ArialRoundedMTBold", size: 45))
+            Text("\(drinkListVM.value.formatted()) oz")
+                .fontTitle()
 
-            // TODO: adds another layer for fill effect with Slider()
+            // TODO: Adds an overly layer for fill effect with Slider()
             Image(item.img)
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: 500, alignment: .center)
-                .sheet(isPresented: $vm.showingCustomDrinkView) {
+                .sheet(isPresented: $drinkListVM.showCustomDrinkView) {
                     CustomDrinkView()
                 }
 
-            Slider(value: $vm.value, in: 0...20, step: 0.1)
+            Slider(value: $drinkListVM.value, in: 0...20, step: 0.1)
                 .padding(30)
 
             HStack {
                 Button {
-                    // TODO: select similar drinks within of different sizes
-                    vm.showingCustomDrinkView.toggle()
+                    // TODO: Select similar drinks of different varieties
+                    drinkListVM.showCustomDrinkView.toggle()
                 } label: {
                     Image(item.img)
                         .resizable()
@@ -48,7 +49,7 @@ struct DrinkFillView: View {
                 Spacer()
 
                 Button("+ \(item.name) ") {
-                    if let newItem = vm.parseNewCachedItem(for: item) {
+                    if let newItem = drinkListVM.parseNewCachedItem(for: item) {
                         modelContext.insert(newItem)
                         do {
                             try modelContext.save()
@@ -56,46 +57,47 @@ struct DrinkFillView: View {
                             print("Failed to save: \(error.localizedDescription)")
                         }
                     }
-                    vm.navPath.removeLast()
+                    drinkListVM.navPath.removeLast()
                 }
                 .drinkFilllViewButtonStyle()
-                .alert("You didn't drink anything!", isPresented: $vm.showAlert) {
+                .alert("You didn't drink anything!",
+                       isPresented: $drinkListVM.showAlert) {
                     Button("Dismiss") {}
                 }
 
                 Spacer()
 
                 Button {
-                    vm.showingCustomOzView.toggle()
+                    drinkListVM.showCustomOzView.toggle()
                 } label: {
                     Image(systemName: "ellipsis.circle")
                         .resizable()
                         .frame(width: 40, height: 40)
                 }
-                .sheet(isPresented: $vm.showingCustomOzView) {
+                .sheet(isPresented: $drinkListVM.showCustomOzView) {
                     CustomOzView()
-                        .presentationDetents([.fraction(2/6)], selection: $vm.settingsDetent)
+                        .presentationDetents([.fraction(2/6)], selection: $drinkListVM.settingsDetent)
                 }
             }
             .padding(20)
-
 
             Spacer()
         }
         .background(Color.backgroundWhite)
         .onAppear {
-            vm.setSelectedItemIndex(for: item)
+            drinkListVM.setSelectedItemIndex(for: item)
         }
         .onDisappear {
-            vm.selectedItemIndex = nil
+            drinkListVM.selectedItemIndex = nil
         }
     }
 }
+
 #Preview {
     let mockItem = DrinkItem(name: "Water", img: "waterBottle", volume: 8.0)
     
     let mockVM = DrinkListVM()
-    mockVM.items = [mockItem] // Include the item so `setSelectedItemIndex` works
+    mockVM.items = [mockItem]
     
     return DrinkFillView(item: mockItem)
         .environment(mockVM)

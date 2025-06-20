@@ -4,6 +4,7 @@
 //
 //  Created by Gregg Abe on 3/22/25.
 //
+
 import SwiftData
 import SwiftUI
 
@@ -16,7 +17,6 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path: $drinkListVM.navPath) {
             HomeView()
-
                 .navigationDestination(for: NavPath.self) { navPath in
                 switch navPath {
                 case .calendar:
@@ -39,9 +39,8 @@ struct ContentView: View {
 //            calendarHomeVM.setModelContext(modelContainer.mainContext)
         }
     }
-
-
 }
+
 #Preview {
     ContentView()
 }

@@ -14,7 +14,7 @@ extension Double {
 }
 
 extension Text {
-    func titleFont() -> some View {
+    func fontTitle() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 45))
             .foregroundStyle(.primary)
             .lineLimit(1)
@@ -65,6 +65,10 @@ extension Text {
     func fontBarLabel() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 23))
             .foregroundColor(.primary)
+    }
+    func fontGoalLine() -> some View {
+        self.font(.caption)
+            .foregroundColor(.secondary)
     }
 }
 

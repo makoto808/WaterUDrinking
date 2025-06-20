@@ -5,14 +5,13 @@
 //  Created by Gregg Abe on 3/22/25.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct HomeView: View {
-    @Environment(DrinkListVM.self) private var vm
+    @Environment(DrinkListVM.self) private var drinkListVM
     @Environment(\.modelContext) private var modelContext
 
-    
     var body: some View {
         ZStack {
             VStack {
@@ -39,7 +38,7 @@ struct HomeView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
-                    vm.navPath.append(.calendar)
+                    drinkListVM.navPath.append(.calendar)
                 } label: {
                     Image(systemName: "calendar")
                 }
@@ -47,7 +46,7 @@ struct HomeView: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    vm.navPath.append(.settings)
+                    drinkListVM.navPath.append(.settings)
                 } label: {
                     Image(systemName: "gearshape.fill")
                 }
@@ -58,17 +57,15 @@ struct HomeView: View {
     }
 }
 
-//#Preview {
-//    let mockVM = DrinkListVM()
-//    mockVM.totalOz = 60
-//    mockVM.totalOzGoal = 100
-//    
-//    return HomeView()
-//        .environment(mockVM)
-//}
+#Preview {
+    let mockVM = DrinkListVM()
+    mockVM.totalOz = 60
+    mockVM.totalOzGoal = 100
+    
+    return HomeView()
+        .environment(mockVM)
+}
 
+// TODO: Lock portrait mode throughout entire app
+// TODO: Transition HomeView from left to right to access CalendarView
 
-// TODO: NOTES TO DO:
-// Lock portrait mode throughout entire app
-// Transition HomeView from left to right to access CalendarView
-// Dynamically change title text based off day of week i.e. (Thirsty Thursdays)

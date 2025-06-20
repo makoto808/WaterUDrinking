@@ -13,11 +13,13 @@ import SwiftData
 
     var selectedItemIndex: Int?
 
+    /// Displays the height where a sheet naturally rests on the UI
     var settingsDetent = PresentationDetent.medium
-    var showingCustomOzView = false
-    var showingCustomDrinkView = false
+    var showCustomOzView = false
+    var showCustomDrinkView = false
     var showAlert = false
     var value = 0.0
+    
     // MARK: - Drink Items
     var items: [DrinkItem] = [
         DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
@@ -44,8 +46,6 @@ import SwiftData
 
     func parseNewCachedItem(for item: DrinkItem) -> CachedDrinkItem? {
         guard let i = selectedItemIndex else { return nil }
-
-
         if value == 0 {
             showAlert = true
         } else {

@@ -7,19 +7,6 @@
 
 import SwiftUI
 
-extension Color {
-    static let backgroundWhite = Color(red: 0.9373, green: 0.9607, blue: 0.9607)
-}
-
-extension Image {
-    func CDVresize() -> some View {
-        self.resizable()
-            .scaledToFit()
-            .frame(height: 70)
-            .cornerRadius(4)
-    }
-}
-
 extension Binding where Value == String {
     func max(_ limit: Int) -> Self {
         if self.wrappedValue.count > limit {
@@ -31,9 +18,22 @@ extension Binding where Value == String {
     }
 }
 
+extension Color {
+    static let backgroundWhite = Color(red: 0.9373, green: 0.9607, blue: 0.9607)
+}
+
 extension Date {
     func dayNumberOfWeek() -> Int? {
         return Calendar.current.dateComponents([.weekday], from: self).weekday
+    }
+}
+
+extension Image {
+    func CDVresize() -> some View {
+        self.resizable()
+            .scaledToFit()
+            .frame(height: 70)
+            .cornerRadius(4)
     }
 }
 
@@ -48,6 +48,11 @@ extension View {
             .allowsTightening(true)
             .minimumScaleFactor(0.30)
             .textCase(.uppercase)
+    }
+    
+    func buttonCapsule(maxWidth: CGFloat = .infinity) -> some View {
+        self.buttonBorderShape(.capsule)
+            .buttonStyle(.borderedProminent)
     }
     
     func button1(maxWidth: CGFloat = .infinity) -> some View {

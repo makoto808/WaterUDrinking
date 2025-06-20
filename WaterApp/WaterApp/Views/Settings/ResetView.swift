@@ -8,14 +8,11 @@
 import SwiftData
 import SwiftUI
 
-//TODO: might be better to have this under the bar chart in calendar view
 struct ResetView: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(DrinkListVM.self) private var vm
+    @Environment(DrinkListVM.self) private var drinkListVM
 
     @State private var showAlert = false
-
-  
     @State private var waveOffset = Angle(degrees: 0)
     
     @FocusState private var keyboardFocused: Bool
@@ -42,17 +39,16 @@ struct ResetView: View {
                 .alert("Are You Sure?", isPresented: $showAlert, actions: {
                     Button("Cancel", role: .cancel) {}
                     Button("OK", role: .destructive) {
-                        vm.items = vm.items.map { item in
+                        drinkListVM.items = drinkListVM.items.map { item in
                             var newItem = item
                             newItem.volume = 0.0
                             return newItem
                         }
-                        vm.navPath = []
-                        vm.deleteTodaysItems(modelContext)
+                        drinkListVM.navPath = []
+                        drinkListVM.deleteTodaysItems(modelContext)
                     }
                 }, message: {
                     Text("This will reset today's total.")
-
                 })
                 .frame(maxWidth: .infinity)
                 .padding()
@@ -60,6 +56,7 @@ struct ResetView: View {
         }
     }
 }
+
 #Preview {
     ResetView()
         .environment(DrinkListVM())

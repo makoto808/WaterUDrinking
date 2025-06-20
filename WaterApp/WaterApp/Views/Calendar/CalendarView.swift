@@ -7,27 +7,25 @@
 
 import SwiftUI
 
-struct CalendarView: View { //TODO: Access water streak (Apple Fitness rings style)
+struct CalendarView: View {
+    //TODO: Access previous water data, show list of drinks consumed, show CupView of that day.
     @Environment(CalendarHomeVM.self) private var vm
+    
     @State private var date = Date()
     
     var body: some View {
         VStack {
-            // TODO: - Figure out how to get the date of whatever date "button" was tapped so we can pass it to vm.getCachedItems(for date: Date)
             DatePicker(
                 "Start Date",
                 selection: $date,
                 displayedComponents: [.date]
             )
             .datePickerStyle(.graphical)
-            //make custom color button later
-            //able to make as apple fitness ring app?
             
             Button("Add Previous Drink", systemImage: "lock") {
-                //toggle systemImage if on premium account or not
+                //TODO: Toggle systemImage if on premium account or not
             }
-            .buttonBorderShape(.capsule)
-            .buttonStyle(.borderedProminent)
+            .buttonCapsule()
         }
         .padding(.horizontal)
         .background(Color.backgroundWhite.ignoresSafeArea())

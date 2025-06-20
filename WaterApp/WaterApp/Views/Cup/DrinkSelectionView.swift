@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct DrinkSelectionView: View {
-    @Environment(DrinkListVM.self) private var vm
+    @Environment(DrinkListVM.self) private var drinkListVM
 
     var body: some View {
-        @Bindable var vm = vm
+        @Bindable var drinkListVM = drinkListVM
 
         VStack {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: -20) {
-                    ForEach($vm.items) { $drink in
+                    ForEach($drinkListVM.items) { $drink in
                         VStack(spacing: 10) {
                             Button {
-                                vm.navPath.append(.drinkFillView(drink))
+                                drinkListVM.navPath.append(.drinkFillView(drink))
                             } label: {
                                 Image(drink.img)
                                     .resizable()
@@ -28,8 +28,7 @@ struct DrinkSelectionView: View {
                             }
 
                             Text(drink.name)
-                                .foregroundStyle(.gray)
-                                .font(.custom("ArialRoundedMTBold", size: 16))
+                                .fontCustomDrinkViewSubtitle()
                         }
                     }
                     .scrollTransition { content, phase in
@@ -44,15 +43,10 @@ struct DrinkSelectionView: View {
     }
 }
 
-
-
 #Preview {
     DrinkSelectionView()
+        .environment(DrinkListVM())
 }
 
+// TODO: Ability to reorder and add new drinks to DrinkSelectionView
 
-// TODO: add in button after 8th drink for other options of drinks. will not replace anything in first 8
-
-#Preview {
-    DrinkSelectionView()
-}
