@@ -57,6 +57,7 @@ struct DrinkFillView: View {
                             print("Failed to save: \(error.localizedDescription)")
                         }
                     }
+                    drinkListVM.value = 0
                     drinkListVM.navPath.removeLast()
                 }
                 .drinkFilllViewButtonStyle()
