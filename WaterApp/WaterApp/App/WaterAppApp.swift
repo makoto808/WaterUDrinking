@@ -14,6 +14,6 @@ struct WaterAppApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: CachedDrinkItem.self)
+        .modelContainer(for: [CachedDrinkItem.self, UserGoal.self])
     }
 }

@@ -36,6 +36,7 @@ struct ContentView: View {
         .environment(drinkListVM)
         .onAppear {
             drinkListVM.loadFromCache(modelContext)
+            drinkListVM.loadUserGoal(context: modelContext)
 //            calendarHomeVM.setModelContext(modelContainer.mainContext)
         }
     }

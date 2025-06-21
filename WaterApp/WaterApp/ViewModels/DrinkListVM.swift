@@ -105,9 +105,36 @@ import SwiftUI
         }
     }
     
-    func setGoalAndDismiss(_ goal: Double) {
+    func fetchUserGoal(_ context: ModelContext) -> UserGoal? {
+        var descriptor = FetchDescriptor<UserGoal>(
+            predicate: #Predicate { $0.id == "uniqueUserGoal" }
+        )
+        descriptor.fetchLimit = 1
+
+        return (try? context.fetch(descriptor).first) ?? nil
+    }
+
+    func setGoalAndDismiss(_ goal: Double, context: ModelContext) {
         self.totalOzGoal = goal
         self.navPath = []
+
+        do {
+            if let existing = fetchUserGoal(context) {
+                existing.goal = goal
+            } else {
+                let newGoal = UserGoal(goal: goal)
+                context.insert(newGoal)
+            }
+            try context.save()
+        } catch {
+            print("Failed to save goal: \(error)")
+        }
+    }
+
+    func loadUserGoal(context: ModelContext) {
+        if let savedGoal = fetchUserGoal(context) {
+            self.totalOzGoal = savedGoal.goal
+        }
     }
 
     private func fetchTodaysCachedDrinks(_ modelContext: ModelContext) throws -> [CachedDrinkItem] {
