@@ -4,9 +4,10 @@
 //
 //  Created by Gregg Abe on 4/2/25.
 //
-import SwiftUI
+
 import Observation
 import SwiftData
+import SwiftUI
 
 @Observable final class DrinkListVM {
     var navPath: [NavPath] = []
@@ -36,9 +37,16 @@ import SwiftData
             percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
         }
     }
+    
     var totalOz: Double = 0.0
     var percentTotal: Double = 0.0
-    var totalOzGoal: Double = 120
+    
+    var totalOzGoal: Double = 120 {
+        didSet {
+            percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
+        }
+    }
+
 
     func setSelectedItemIndex(for drink: DrinkItem) {
         selectedItemIndex = items.firstIndex { $0.name == drink.name }
@@ -95,6 +103,11 @@ import SwiftData
         } catch {
             print("Error fetching [CachedDrinkItem]")
         }
+    }
+    
+    func setGoalAndDismiss(_ goal: Double) {
+        self.totalOzGoal = goal
+        self.navPath = []
     }
 
     private func fetchTodaysCachedDrinks(_ modelContext: ModelContext) throws -> [CachedDrinkItem] {

@@ -55,9 +55,8 @@ struct GoalView: View {
                     Button("Right On!") {
                         keyboardFocused = false
                         if let goal = Double(dailyWaterGoal) {
-                            drinkListVM.totalOzGoal = goal
+                            drinkListVM.setGoalAndDismiss(goal)
                         }
-                        drinkListVM.navPath = []
                     }
                     .button2()
                 }
