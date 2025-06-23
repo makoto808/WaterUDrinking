@@ -14,13 +14,20 @@ import SwiftUI
 
     var selectedItemIndex: Int?
 
-    /// Displays the height where a sheet naturally rests on the UI
     var settingsDetent = PresentationDetent.medium
     var showCustomOzView = false
     var showCustomDrinkView = false
     var showAlert = false
     var value = 0.0
+    var totalOz: Double = 0.0
+    var percentTotal: Double = 0.0
     
+    var totalOzGoal: Double = 120 {
+        didSet {
+            percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
+        }
+    }
+
     // MARK: - Drink Items
     var items: [DrinkItem] = [
         DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
@@ -37,16 +44,6 @@ import SwiftUI
             percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
         }
     }
-    
-    var totalOz: Double = 0.0
-    var percentTotal: Double = 0.0
-    
-    var totalOzGoal: Double = 120 {
-        didSet {
-            percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
-        }
-    }
-
 
     func setSelectedItemIndex(for drink: DrinkItem) {
         selectedItemIndex = items.firstIndex { $0.name == drink.name }
