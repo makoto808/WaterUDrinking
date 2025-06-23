@@ -5,8 +5,8 @@
 //  Created by Gregg Abe on 4/2/25.
 //
 
-import SwiftData
 import Foundation
+import SwiftData
 
 //NOTE: Use this to display in DrinkSelectionView.
 struct DrinkItem: Identifiable, Hashable {

@@ -5,46 +5,41 @@
 //  Created by Gregg Abe on 3/29/25.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct DrinkFillView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(DrinkListVM.self) private var drinkListVM
 
-    @Environment(DrinkListVM.self) private var vm
-    
-    @State private var settingsDetent = PresentationDetent.medium
-    @State private var showingCustomOzView = false
-    @State private var showingCustomDrinkView = false
-    @State private var showAlert = false
-    @State private var value = 0.0
-    
     let item: DrinkItem
-    
+
     var body: some View {
-        @Bindable var vm = vm
+        @Bindable var drinkListVM = drinkListVM
+        
         VStack {
             Spacer()
             Spacer()
-            
-            Text("\(value.formatted()) oz")
-                .font(.custom("ArialRoundedMTBold", size: 45))
-            
-            Image(item.img) //TODO: adds another layer for fill effect with Slider()
+
+            Text("\(drinkListVM.value.formatted()) oz")
+                .fontTitle()
+
+            // TODO: Adds an overly layer for fill effect with Slider()
+            Image(item.img)
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: 500, alignment: .center)
-                .sheet(isPresented: $showingCustomDrinkView) {
+                .sheet(isPresented: $drinkListVM.showCustomDrinkView) {
                     CustomDrinkView()
                 }
-            
-            Slider(value: $value, in: 0...20, step: 0.1)
+
+            Slider(value: $drinkListVM.value, in: 0...20, step: 0.1)
                 .padding(30)
-            
+
             HStack {
                 Button {
-                    //TODO: select similar drinks within of different sizes
-                    showingCustomDrinkView.toggle()
+                    // TODO: Select similar drinks of different varieties
+                    drinkListVM.showCustomDrinkView.toggle()
                 } label: {
                     Image(item.img)
                         .resizable()
@@ -52,75 +47,59 @@ struct DrinkFillView: View {
                 }
                 
                 Spacer()
-                
-                Button("+ \(item.name) ") {
-                    guard let i = vm.selectedItemIndex else { return }
-                    if value == 0 {
-                        showAlert = true
-                    } else {
-                        vm.items[i].volume += value
-                    }
-                    if let index = vm.items.firstIndex(where: { $0.name == item.name }) {
-                        let newItem = CachedDrinkItem(
-                            date: Date(),
-                            name: item.name,
-                            img: item.img,
-                            volume: value,
-                            arrayOrderValue: index
-                        )
-                        modelContext.insert(newItem)
-                    }
-                    
-                    do {
-                        try modelContext.save()
-                    } catch {
-                        print("Failed to save: \(error.localizedDescription)")
-                    }
 
-                    vm.navPath.removeLast()
-                
+                Button("+ \(item.name) ") {
+                    if let newItem = drinkListVM.parseNewCachedItem(for: item) {
+                        modelContext.insert(newItem)
+                        do {
+                            try modelContext.save()
+                        } catch {
+                            print("Failed to save: \(error.localizedDescription)")
+                        }
+                    }
+                    drinkListVM.value = 0
+                    drinkListVM.navPath.removeLast()
                 }
                 .drinkFilllViewButtonStyle()
-                .alert("You didn't drink anything!", isPresented: $showAlert) {
+                .alert("You didn't drink anything!",
+                       isPresented: $drinkListVM.showAlert) {
                     Button("Dismiss") {}
                 }
-                
+
                 Spacer()
-                
+
                 Button {
-                    showingCustomOzView.toggle()
+                    drinkListVM.showCustomOzView.toggle()
                 } label: {
                     Image(systemName: "ellipsis.circle")
                         .resizable()
                         .frame(width: 40, height: 40)
                 }
-                .sheet(isPresented: $showingCustomOzView) {
+                .sheet(isPresented: $drinkListVM.showCustomOzView) {
                     CustomOzView()
-                        .presentationDetents([.fraction(2/6)], selection: $settingsDetent)
+                        .presentationDetents([.fraction(2/6)], selection: $drinkListVM.settingsDetent)
                 }
             }
             .padding(20)
-            
+
             Spacer()
         }
         .background(Color.backgroundWhite)
         .onAppear {
-            vm.setSelectedItemIndex(for: item)
+            drinkListVM.setSelectedItemIndex(for: item)
         }
         .onDisappear {
-            vm.selectedItemIndex = nil
+            drinkListVM.selectedItemIndex = nil
         }
     }
 }
-
 
 #Preview {
     let mockItem = DrinkItem(name: "Water", img: "waterBottle", volume: 8.0)
     
     let mockVM = DrinkListVM()
-    mockVM.items = [mockItem] // Include the item so `setSelectedItemIndex` works
+    mockVM.items = [mockItem]
     
     return DrinkFillView(item: mockItem)
         .environment(mockVM)
 }
-

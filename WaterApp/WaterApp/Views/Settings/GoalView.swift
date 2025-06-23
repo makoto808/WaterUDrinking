@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct GoalView: View {
-    @Environment(DrinkListVM.self) private var vm
+    @Environment(DrinkListVM.self) private var drinkListVM
+    @Environment(\.modelContext) private var modelContext
+
     
     @State private var dailyWaterGoal: String = ""
     @State private var waveOffset = Angle(degrees: 0)
@@ -51,15 +53,12 @@ struct GoalView: View {
                 Spacer()
                 Spacer()
                 
-                if dailyWaterGoal.isEmpty {
-                    
-                } else {
+                if !dailyWaterGoal.isEmpty {
                     Button("Right On!") {
                         keyboardFocused = false
                         if let goal = Double(dailyWaterGoal) {
-                            vm.totalOzGoal = goal
+                            drinkListVM.setGoalAndDismiss(goal, context: modelContext)
                         }
-                        vm.navPath = []
                     }
                     .button2()
                 }

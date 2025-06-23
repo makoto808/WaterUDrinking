@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsListView: View {
-    @Environment(DrinkListVM.self) private var vm
+    @Environment(DrinkListVM.self) private var drinkListVM
     
     var body: some View {
         VStack {
@@ -21,13 +21,13 @@ struct SettingsListView: View {
                 
                 Section {
                     Button {
-                        vm.navPath.append(.dailyWaterGoal)
+                        drinkListVM.navPath.append(.dailyWaterGoal)
                     } label: {
                         Text("Edit Your Goal")
                     }
                     
                     Button {
-                        vm.navPath.append(.resetView)
+                        drinkListVM.navPath.append(.resetView)
                     } label: {
                         Text("Reset Today's Total")
                     }
@@ -95,10 +95,6 @@ struct SettingsListView: View {
     }
 }
 
-
 #Preview {
     SettingsListView()
 }
-
-
-

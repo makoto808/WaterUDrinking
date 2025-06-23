@@ -5,11 +5,13 @@
 //  Created by Gregg Abe on 6/15/25.
 //
 
+import SwiftData
 import SwiftUI
-//TODO: might be better to have this under the bar chart in calendar view
+
 struct ResetView: View {
-    @Environment(DrinkListVM.self) private var vm
-    
+    @Environment(\.modelContext) private var modelContext
+    @Environment(DrinkListVM.self) private var drinkListVM
+
     @State private var showAlert = false
     @State private var waveOffset = Angle(degrees: 0)
     
@@ -37,12 +39,13 @@ struct ResetView: View {
                 .alert("Are You Sure?", isPresented: $showAlert, actions: {
                     Button("Cancel", role: .cancel) {}
                     Button("OK", role: .destructive) {
-                        vm.items = vm.items.map { item in
+                        drinkListVM.items = drinkListVM.items.map { item in
                             var newItem = item
                             newItem.volume = 0.0
                             return newItem
                         }
-                        vm.navPath = []
+                        drinkListVM.navPath = []
+                        drinkListVM.deleteTodaysItems(modelContext)
                     }
                 }, message: {
                     Text("This will reset today's total.")
@@ -58,6 +61,3 @@ struct ResetView: View {
     ResetView()
         .environment(DrinkListVM())
 }
-
-
-//test

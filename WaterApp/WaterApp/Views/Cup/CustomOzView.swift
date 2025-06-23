@@ -34,7 +34,6 @@ struct CustomOzView: View {
             }
             .padding(8)
             
-            
             HStack {
                 Button {
                     dismiss()
@@ -57,7 +56,6 @@ struct CustomOzView: View {
         }
     }
 }
-
 
 #Preview {
     CustomOzView()
