@@ -17,14 +17,12 @@ struct CalendarHomeView: View {
             
             VStack {
                 Spacer()
+                Spacer()
+                Spacer()
                 
                 BarChart()
                 
-                Spacer()
-                
                 CalendarView()
-                
-                Spacer()
             }
             .padding(.horizontal)
         }

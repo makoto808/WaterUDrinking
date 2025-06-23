@@ -12,18 +12,20 @@ struct CalendarView: View {
     @State private var selectedDate: Date? = nil
 
     private let calendar: Calendar = {
-        var cal = Calendar.current
-        cal.firstWeekday = 1 // Sunday start
-        return cal
+        var dayOfWeek = Calendar.current
+        dayOfWeek.firstWeekday = 1 // Sunday start
+        return dayOfWeek
     }()
 
-    // Mocked event dates
+    // Mock data event dates
     private let sampleEventDates: [Date] = {
         let today = Date()
         let calendar = Calendar.current
         return [
             today,
             calendar.date(byAdding: .day, value: -2, to: today)!,
+            calendar.date(byAdding: .day, value: -13, to: today)!,
+            calendar.date(byAdding: .day, value: -8, to: today)!,
             calendar.date(byAdding: .day, value: 3, to: today)!
         ]
     }()
@@ -33,67 +35,65 @@ struct CalendarView: View {
 
     var body: some View {
         let dates = generateMonthDates(for: currentMonth)
-
-        VStack {
-            Text(monthYearFormatter.string(from: currentMonth))
-                .font(.title)
-                .padding()
-
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(daysOfWeek, id: \.self) { day in
-                    Text(day)
-                        .font(.subheadline)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.gray)
+        
+        ZStack {
+            Color.backgroundWhite
+            
+            VStack {
+                Text(monthYearFormatter.string(from: currentMonth))
+                    .fontBarLabel()
+                    .padding()
+                
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(daysOfWeek, id: \.self) { day in
+                        Text(day)
+                            .fontCustomDrinkViewSubtitle()
+                            .frame(maxWidth: .infinity)
+                    }
                 }
-            }
-
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(dates, id: \.self) { date in
-                    let isInCurrentMonth = calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
-                    let isSelected = calendar.isDate(date, inSameDayAs: selectedDate ?? Date())
-                    let hasEvent = sampleEventDates.contains { calendar.isDate($0, inSameDayAs: date) }
-
-                    Group {
-                        //TODO: Put a crown on date if 100% goal complete
-                        if isInCurrentMonth {
-                            Text(dayFormatter.string(from: date))
-                                .frame(width: 35, height: 35)
-                                .background(
-                                    isSelected ? Color.cyan :
-                                    hasEvent ? Color.blue :
-                                    Color.blue.opacity(0.2)
-                                )
-                                .cornerRadius(8)
-                                .foregroundColor(.white)
-                                .onTapGesture {
-                                    selectedDate = date
-                                }
-                            .onTapGesture {
-                                selectedDate = date
+                
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(dates, id: \.self) { date in
+                        let isInCurrentMonth = calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
+                        let isSelected = calendar.isDate(date, inSameDayAs: selectedDate ?? Date())
+                        let hasEvent = sampleEventDates.contains { calendar.isDate($0, inSameDayAs: date) }
+                        
+                        Group {
+                            //TODO: Put a crown on date if 100% goal complete
+                            if isInCurrentMonth {
+                                Text(dayFormatter.string(from: date))
+                                    .frame(width: 35, height: 35)
+                                    .background(
+                                        isSelected ? Color.cyan :
+                                            hasEvent ? Color.blue :
+                                            Color.blue.opacity(0.2)
+                                    )
+                                    .cornerRadius(8)
+                                    .foregroundColor(.white)
+                                    .onTapGesture {
+                                        selectedDate = date
+                                    }
+                            } else {
+                                Text("")
+                                    .frame(width: 35, height: 35)
                             }
-                        } else {
-                            Text("")
-                                .frame(width: 35, height: 35)
                         }
                     }
                 }
             }
-
-            Spacer()
-        }
-        .padding()
-        .gesture(
-            DragGesture()
-                .onEnded { value in
-                    if value.translation.width < -50 {
-                        changeMonth(by: 1)
-                    } else if value.translation.width > 50 {
-                        changeMonth(by: -1)
+            .padding()
+            .gesture(
+                DragGesture()
+                    .onEnded { value in
+                        if value.translation.width < -50 {
+                            changeMonth(by: 1)
+                        } else if value.translation.width > 50 {
+                            changeMonth(by: -1)
+                        }
                     }
-                }
-        )
-        .animation(.easeInOut, value: currentMonth)
+            )
+            .animation(.easeInOut, value: currentMonth)
+        }
     }
 
     private func changeMonth(by value: Int) {
@@ -136,6 +136,12 @@ struct CalendarView: View {
     }
 }
 
+//TODO: Toggle systemImage if on premium account or not
+
+//Button("Add Previous Drink", systemImage: "lock") {
+//                //            }
+//            .buttonCapsule()
+    
 #Preview {
     CalendarView()
         .environment(CalendarHomeVM())
@@ -158,10 +164,7 @@ struct CalendarView: View {
 //            )
 //            .datePickerStyle(.graphical)
 //            
-//            Button("Add Previous Drink", systemImage: "lock") {
-//                //TODO: Toggle systemImage if on premium account or not
-//            }
-//            .buttonCapsule()
+//
 //        }
 //        .padding(.horizontal)
 //        .background(Color.backgroundWhite.ignoresSafeArea())
