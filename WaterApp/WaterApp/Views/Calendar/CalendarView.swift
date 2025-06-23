@@ -30,7 +30,7 @@ struct CalendarView: View {
         .padding(.horizontal)
         .background(Color.backgroundWhite.ignoresSafeArea())
     }
-}
+} 
 
 #Preview {
     CalendarView()
