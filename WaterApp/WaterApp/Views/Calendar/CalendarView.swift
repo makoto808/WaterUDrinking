@@ -23,8 +23,6 @@ struct CalendarView: View {
 
     var body: some View {
         let dates = calendarHomeVM.monthDates
-
-
         VStack {
             Text(calendarHomeVM.monthYearFormatter.string(from: calendarHomeVM.currentMonth))
                 .fontBarLabel()

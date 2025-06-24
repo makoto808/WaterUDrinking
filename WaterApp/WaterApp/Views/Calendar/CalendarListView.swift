@@ -14,22 +14,19 @@ struct CalendarListView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Total: \(totalOunces, specifier: "%.0f") oz")
-                .font(.headline)
+                .fontBarLabel()
                 .padding(.top)
 
             ForEach(drinks, id: \.id) { drink in
                 HStack(spacing: 12) {
                     Image(drink.img)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(.blue)
+                        .CDVresize2()
 
                     VStack(alignment: .leading) {
                         Text(drink.name)
-                            .font(.subheadline)
+                            .fontCustomDrinkViewSubtitle()
                         Text("\(drink.volume, specifier: "%.0f") oz")
-                            .font(.caption)
+                            .fontCustomDrinkViewTitle()
                             .foregroundColor(.gray)
                     }
 

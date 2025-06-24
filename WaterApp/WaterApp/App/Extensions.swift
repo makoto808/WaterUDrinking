@@ -35,6 +35,13 @@ extension Image {
             .frame(height: 70)
             .cornerRadius(4)
     }
+    
+    func CDVresize2() -> some View {
+        self.resizable()
+            .scaledToFit()
+            .frame(width: 24, height: 24)
+            .foregroundColor(.blue)
+    }
 }
 
 extension View {
