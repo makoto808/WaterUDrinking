@@ -38,6 +38,27 @@ struct CupViewOverride: View {
     }
 }
 
+struct CupGoalSummaryView: View {
+    let oz: Double
+    let goal: Double
+
+    private var percentage: Int {
+        guard goal > 0 else { return 0 }
+        return Int(min((oz / goal) * 100, 999))
+    }
+
+    var body: some View {
+        VStack(spacing: 8) {
+            CupViewOverride(oz: oz, goal: goal)
+                .frame(width: 200, height: 200)
+
+            Text("\(percentage)% of goal")
+                .font(.caption)
+                .foregroundColor(.gray)
+        }
+    }
+}
+
 //#Preview {
 //    CupViewOverride()
 //}
