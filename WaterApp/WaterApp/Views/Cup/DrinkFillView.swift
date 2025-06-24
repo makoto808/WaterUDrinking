@@ -49,6 +49,11 @@ struct DrinkFillView: View {
                 Spacer()
 
                 Button("+ \(item.name) ") {
+                    if drinkListVM.value == 0 {
+                        drinkListVM.showAlert = true
+                        return
+                    }
+                    
                     if let newItem = drinkListVM.parseNewCachedItem(for: item) {
                         modelContext.insert(newItem)
                         do {
