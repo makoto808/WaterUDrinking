@@ -5,94 +5,104 @@
 //  Created by Gregg Abe on 3/26/25.
 //
 
+import SwiftData
 import SwiftUI
 
 struct CalendarView: View {
+    @Environment(\.modelContext) private var modelContext
+    @State private var drinkItems: [CachedDrinkItem] = []
     @State private var currentMonth = Date()
     @State private var selectedDate: Date? = nil
-
-    private let calendar: Calendar = {
-        var dayOfWeek = Calendar.current
-        dayOfWeek.firstWeekday = 1 // Sunday start
-        return dayOfWeek
-    }()
-
-    // Mock data event dates
-    private let sampleEventDates: [Date] = {
-        let today = Date()
-        let calendar = Calendar.current
-        return [
-            today,
-            calendar.date(byAdding: .day, value: -2, to: today)!,
-            calendar.date(byAdding: .day, value: -13, to: today)!,
-            calendar.date(byAdding: .day, value: -8, to: today)!,
-            calendar.date(byAdding: .day, value: 3, to: today)!
-        ]
-    }()
-
+    
+    // Create a Set of just the day components from drink entries
+    private var drinkDates: Set<Date> {
+        Set(drinkItems.map { calendar.startOfDay(for: $0.date) })
+    }
+    
     private let columns = Array(repeating: GridItem(.flexible()), count: 7)
     private let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    private let calendar: Calendar = {
+        var cal = Calendar.current
+        cal.firstWeekday = 1 // Sunday
+        return cal
+    }()
 
     var body: some View {
         let dates = generateMonthDates(for: currentMonth)
-        
-        ZStack {
-            Color.backgroundWhite
-            
-            VStack {
-                Text(monthYearFormatter.string(from: currentMonth))
-                    .fontBarLabel()
-                    .padding()
-                
-                LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(daysOfWeek, id: \.self) { day in
-                        Text(day)
-                            .fontCustomDrinkViewSubtitle()
-                            .frame(maxWidth: .infinity)
-                    }
+
+        VStack {
+            Text(monthYearFormatter.string(from: currentMonth))
+                .fontBarLabel()
+                .padding()
+
+            //NOTE: Weekday labels
+            LazyVGrid(columns: columns, spacing: 10) {
+                ForEach(daysOfWeek, id: \.self) { day in
+                    Text(day)
+                        .fontCustomDrinkViewTitle()
+                        .foregroundColor(.gray)
                 }
-                
-                LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(dates, id: \.self) { date in
-                        let isInCurrentMonth = calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
-                        let isSelected = calendar.isDate(date, inSameDayAs: selectedDate ?? Date())
-                        let hasEvent = sampleEventDates.contains { calendar.isDate($0, inSameDayAs: date) }
-                        
-                        Group {
-                            //TODO: Put a crown on date if 100% goal complete
-                            if isInCurrentMonth {
-                                Text(dayFormatter.string(from: date))
-                                    .frame(width: 35, height: 35)
-                                    .background(
-                                        isSelected ? Color.cyan :
-                                            hasEvent ? Color.blue :
-                                            Color.blue.opacity(0.2)
-                                    )
-                                    .cornerRadius(8)
-                                    .foregroundColor(.white)
-                                    .onTapGesture {
-                                        selectedDate = date
-                                    }
-                            } else {
-                                Text("")
-                                    .frame(width: 35, height: 35)
-                            }
+            }
+
+            //NOTE: Day grid
+            LazyVGrid(columns: columns, spacing: 10) {
+                ForEach(dates, id: \.self) { date in
+                    let isInMonth = calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
+                    let isSelected = calendar.isDate(date, inSameDayAs: selectedDate ?? Date())
+                    let hasEvent = drinkDates.contains(calendar.startOfDay(for: date))
+
+                    Group {
+                        if isInMonth {
+                            Text(dayFormatter.string(from: date))
+                                .frame(width: 35, height: 35)
+                                .background(
+                                    isSelected ? Color.cyan :
+                                    hasEvent ? Color.blue :
+                                    Color.blue.opacity(0.2)
+                                )
+                                .cornerRadius(20)
+                                .foregroundColor(.white)
+                                .onTapGesture {
+                                    selectedDate = date
+                                }
+                        } else {
+                            Text("")
+                                .frame(width: 35, height: 35)
                         }
                     }
                 }
             }
-            .padding()
-            .gesture(
-                DragGesture()
-                    .onEnded { value in
-                        if value.translation.width < -50 {
-                            changeMonth(by: 1)
-                        } else if value.translation.width > 50 {
-                            changeMonth(by: -1)
-                        }
+        }
+        .padding()
+        .gesture(
+            DragGesture()
+                .onEnded { value in
+                    if value.translation.width < -50 {
+                        changeMonth(by: 1)
+                    } else if value.translation.width > 50 {
+                        changeMonth(by: -1)
                     }
-            )
-            .animation(.easeInOut, value: currentMonth)
+                }
+        )
+        .animation(.easeInOut, value: currentMonth)
+        .onChange(of: currentMonth) {
+            updateDrinkQuery()
+        }
+        .onAppear {
+            updateDrinkQuery()
+        }
+    }
+
+    private func updateDrinkQuery() {
+        let start = calendar.date(from: calendar.dateComponents([.year, .month], from: currentMonth))!
+        let end = calendar.date(byAdding: .month, value: 1, to: start)!
+        let descriptor = FetchDescriptor<CachedDrinkItem>(
+            predicate: #Predicate { $0.date >= start && $0.date < end }
+        )
+        do {
+            drinkItems = try modelContext.fetch(descriptor)
+        } catch {
+            print("Failed to fetch drink items: \(error)")
         }
     }
 
@@ -120,18 +130,13 @@ struct CalendarView: View {
               let lastWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.end.addingTimeInterval(-1))
         else { return [] }
 
-        let start = firstWeek.start
-        let end = lastWeek.end
-
         var dates: [Date] = []
-        var current = start
+        var current = firstWeek.start
 
-        while current < end {
+        while current < lastWeek.end {
             dates.append(current)
-            guard let next = calendar.date(byAdding: .day, value: 1, to: current) else { break }
-            current = next
+            current = calendar.date(byAdding: .day, value: 1, to: current)!
         }
-
         return dates
     }
 }
