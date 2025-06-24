@@ -72,6 +72,39 @@ struct CalendarView: View {
                     }
                 }
             }
+            
+            // Drink list appears only if there's data for the selected date
+            if let selectedDate = selectedDate,
+               !drinksForSelectedDate.isEmpty {
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Total: \(totalOunces, specifier: "%.0f") oz")
+                        .font(.headline)
+                        .padding(.top)
+
+                    ForEach(drinksForSelectedDate, id: \.id) { drink in
+                        HStack(spacing: 12) {
+                            Image(drink.img)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.blue)
+
+                            VStack(alignment: .leading) {
+                                Text(drink.name)
+                                    .font(.subheadline)
+                                Text("\(drink.volume, specifier: "%.0f") oz")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
+
+                            Spacer()
+                        }
+                        .padding(.vertical, 4)
+                    }
+                }
+                .padding(.top)
+            }
         }
         .padding()
         .gesture(
@@ -138,6 +171,17 @@ struct CalendarView: View {
             current = calendar.date(byAdding: .day, value: 1, to: current)!
         }
         return dates
+    }
+    
+    private var drinksForSelectedDate: [CachedDrinkItem] {
+        guard let selectedDate else { return [] }
+        return drinkItems.filter {
+            calendar.isDate($0.date, inSameDayAs: selectedDate)
+        }.sorted { $0.arrayOrderValue < $1.arrayOrderValue }
+    }
+
+    private var totalOunces: Double {
+        drinksForSelectedDate.reduce(0) { $0 + $1.volume }
     }
 }
 
