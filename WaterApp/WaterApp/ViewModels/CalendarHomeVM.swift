@@ -79,6 +79,7 @@ import SwiftData
         drinksForSelectedDate.reduce(0) { $0 + $1.volume }
     }
     
+    // MARK: - Calendar
     var monthDates: [Date] {
         guard let monthInterval = calendar.dateInterval(of: .month, for: currentMonth),
               let firstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),

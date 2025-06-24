@@ -17,3 +17,11 @@ struct WaterAppApp: App {
         .modelContainer(for: [CachedDrinkItem.self, UserGoal.self])
     }
 }
+
+/*
+ //TODO:
+ - Add SwiftData too BarChart
+ - Add Button to add/delete data from CalendarView
+    - Allow tapping a drink to edit or delete?
+ - If user goal is met, show crown on calendar date
+ */

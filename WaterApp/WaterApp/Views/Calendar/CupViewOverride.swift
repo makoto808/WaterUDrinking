@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CupViewOverride: View {
+    @State private var waveOffset = Angle(degrees: 0)
+    
     var oz: Double
     var goal: Double
-
-    @State private var waveOffset = Angle(degrees: 0)
 
     var body: some View {
         GeometryReader { wave in

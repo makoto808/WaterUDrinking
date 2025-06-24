@@ -40,7 +40,6 @@ struct CalendarListView: View {
     }
 }
 
-
 //#Preview {
 //    CalendarListView()
 //}

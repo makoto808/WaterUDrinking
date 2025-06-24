@@ -11,9 +11,7 @@ import SwiftUI
 
 @Observable final class DrinkListVM {
     var navPath: [NavPath] = []
-
     var selectedItemIndex: Int?
-
     var settingsDetent = PresentationDetent.medium
     var showCustomOzView = false
     var showCustomDrinkView = false
@@ -21,7 +19,6 @@ import SwiftUI
     var value = 0.0
     var totalOz: Double = 0.0
     var percentTotal: Double = 0.0
-    
     var totalOzGoal: Double = 120 {
         didSet {
             percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
@@ -102,6 +99,7 @@ import SwiftUI
         }
     }
     
+    // MARK: - User Goal
     func fetchUserGoal(_ context: ModelContext) -> UserGoal? {
         var descriptor = FetchDescriptor<UserGoal>(
             predicate: #Predicate { $0.id == "uniqueUserGoal" }
@@ -134,6 +132,7 @@ import SwiftUI
         }
     }
 
+    // MARK: - Cache
     private func fetchTodaysCachedDrinks(_ modelContext: ModelContext) throws -> [CachedDrinkItem] {
         let today = Calendar.current.startOfDay(for: Date())
         let predicate = #Predicate<CachedDrinkItem> { $0.date >= today }
