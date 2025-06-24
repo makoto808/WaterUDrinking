@@ -10,10 +10,16 @@ import SwiftUI
 
 struct CalendarView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(DrinkListVM.self) private var drinkListVM
     @State private var drinkItems: [CachedDrinkItem] = []
     @State private var currentMonth = Date()
     @State private var selectedDate: Date? = nil
     
+    private var percentageOfGoal: Double {
+        guard drinkListVM.totalOzGoal > 0 else { return 0 }
+        return min((totalOunces / drinkListVM.totalOzGoal) * 100, 999)
+    }
+
     // Create a Set of just the day components from drink entries
     private var drinkDates: Set<Date> {
         Set(drinkItems.map { calendar.startOfDay(for: $0.date) })
@@ -63,7 +69,13 @@ struct CalendarView: View {
                                 .cornerRadius(20)
                                 .foregroundColor(.white)
                                 .onTapGesture {
-                                    selectedDate = date
+                                    withAnimation(.easeInOut) {
+                                        if let selected = selectedDate, calendar.isDate(selected, inSameDayAs: date) {
+                                            selectedDate = nil
+                                        } else {
+                                            selectedDate = date
+                                        }
+                                    }
                                 }
                         } else {
                             Text("")
@@ -73,10 +85,19 @@ struct CalendarView: View {
                 }
             }
             
-            // Drink list appears only if there's data for the selected date
-            if let selectedDate = selectedDate,
-               !drinksForSelectedDate.isEmpty {
+            if selectedDate != nil && !drinksForSelectedDate.isEmpty {
+                VStack(spacing: 8) {
+                    CupViewOverride(oz: totalOunces, goal: drinkListVM.totalOzGoal)
+                        .frame(width: 200, height: 200)
 
+                    Text("\(Int(percentageOfGoal))% of goal")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+            }
+
+            // Drink list appears only if there's data for the selected date
+            if selectedDate != nil && !drinksForSelectedDate.isEmpty {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Total: \(totalOunces, specifier: "%.0f") oz")
                         .font(.headline)
@@ -103,6 +124,7 @@ struct CalendarView: View {
                         .padding(.vertical, 4)
                     }
                 }
+                .transition(.move(edge: .top).combined(with: .opacity))
                 .padding(.top)
             }
         }
@@ -182,6 +204,37 @@ struct CalendarView: View {
 
     private var totalOunces: Double {
         drinksForSelectedDate.reduce(0) { $0 + $1.volume }
+    }
+}
+
+struct CupViewOverride: View {
+    var oz: Double
+    var goal: Double
+
+    @State private var waveOffset = Angle(degrees: 0)
+
+    var body: some View {
+        GeometryReader { wave in
+            ZStack {
+                Circle()
+                    .stroke(Color.gray, lineWidth: 0.03 * min(wave.size.width, wave.size.height))
+                    .overlay(
+                        WaveMotion(
+                            offset: waveOffset,
+                            percent: goal == 0 ? 0 : oz / goal
+                        )
+                        .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
+                        .clipShape(Circle().scale(0.92))
+                    )
+            }
+            .padding(.horizontal)
+        }
+        .aspectRatio(1, contentMode: .fit)
+        .onAppear {
+            withAnimation(Animation.linear(duration: 2).repeatForever(autoreverses: false)) {
+                waveOffset = Angle(degrees: 360)
+            }
+        }
     }
 }
 

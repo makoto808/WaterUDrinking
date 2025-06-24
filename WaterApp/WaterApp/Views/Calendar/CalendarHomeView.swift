@@ -15,18 +15,20 @@ struct CalendarHomeView: View {
         ZStack {
             Color.backgroundWhite.ignoresSafeArea()
             
-            VStack {
-                Spacer()
-                
-                BarChart()
-                
-                Spacer()
-                
-                CalendarView()
-                
-                Spacer()
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack {
+                    Spacer(minLength: 20)  // Optional small spacing
+                    
+                    BarChart()
+                    
+                    Spacer(minLength: 20)
+                    
+                    CalendarView()
+                    
+                    Spacer(minLength: 20)
+                }
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
         }
     }
 }
