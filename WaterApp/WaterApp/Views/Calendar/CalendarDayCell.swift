@@ -24,6 +24,7 @@ struct CalendarDayCell: View {
         Group {
             if isInMonth {
                 Text("\(Calendar.current.component(.day, from: date))")
+                    .font(.custom("ArialRoundedMTBold", size: 15))
                     .frame(width: 35, height: 35)
                     .background(backgroundColor)
                     .cornerRadius(20)

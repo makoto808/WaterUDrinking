@@ -23,11 +23,13 @@ struct CalendarDrinkList: View {
     
     var body: some View {
         VStack(spacing: 8) {
+            Spacer(minLength: 20)
+            
             CupViewOverride(oz: oz, goal: drinkListVM.totalOzGoal)
                 .frame(width: 200, height: 200)
             
             Text("\(percentage)% of goal")
-                .font(.caption)
+                .fontCustomDrinkViewSubtitle()
             
             VStack(alignment: .leading, spacing: 8) {
                 Text("Total: \(oz, specifier: "%.0f") oz")

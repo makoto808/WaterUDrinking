@@ -19,7 +19,7 @@ struct CalendarView: View {
 
     private let calendar: Calendar = {
         var cal = Calendar.current
-        cal.firstWeekday = 1 // Sunday
+        cal.firstWeekday = 1
         return cal
     }()
 
@@ -40,14 +40,14 @@ struct CalendarView: View {
 
         VStack {
             Text(monthYearFormatter.string(from: currentMonth))
-                .font(.title)
+                .fontBarLabel()
                 .padding()
 
             // Weekday labels
             LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(daysOfWeek, id: \.self) { day in
                     Text(day)
-                        .font(.subheadline)
+                        .fontCustomDrinkViewSubtitle()
                         .frame(maxWidth: .infinity)
                         .foregroundColor(.gray)
                 }
