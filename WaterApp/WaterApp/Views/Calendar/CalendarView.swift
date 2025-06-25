@@ -10,72 +10,56 @@ import SwiftData
 
 struct CalendarView: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(CalendarHomeVM.self) private var calendarHomeVM
     @Environment(DrinkListVM.self) private var drinkListVM
+    @Binding var isShowingDrinkDetails: Bool
 
-    private let columns = Array(repeating: GridItem(.flexible()), count: 7)
-    private let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    @State private var drinkItems: [CachedDrinkItem] = []
+    @State private var currentMonth = Date()
+    @State private var selectedDate: Date? = nil
+
     private let calendar: Calendar = {
         var cal = Calendar.current
-        cal.firstWeekday = 1
+        cal.firstWeekday = 1 // Sunday
         return cal
     }()
 
+    private let columns = Array(repeating: GridItem(.flexible()), count: 7)
+    private let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
+    private var drinkDates: Set<Date> {
+        Set(drinkItems.map { calendar.startOfDay(for: $0.date) })
+    }
+
+    private var drinksForSelectedDate: [CachedDrinkItem] {
+        guard let selected = selectedDate else { return [] }
+        return drinkItems.filter { calendar.isDate($0.date, inSameDayAs: selected) }
+    }
+
     var body: some View {
-        let dates = calendarHomeVM.monthDates
+        let dates = generateMonthDates(for: currentMonth)
+
         VStack {
-            Text(calendarHomeVM.monthYearFormatter.string(from: calendarHomeVM.currentMonth))
-                .fontBarLabel()
+            Text(monthYearFormatter.string(from: currentMonth))
+                .font(.title)
                 .padding()
 
+            // Weekday labels
             LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(daysOfWeek, id: \.self) { day in
                     Text(day)
-                        .fontCustomDrinkViewTitle()
+                        .font(.subheadline)
+                        .frame(maxWidth: .infinity)
                         .foregroundColor(.gray)
                 }
             }
 
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(dates, id: \.self) { date in
-                    let isInMonth = calendar.isDate(date, equalTo: calendarHomeVM.currentMonth, toGranularity: .month)
-                    let isSelected = calendar.isDate(date, inSameDayAs: calendarHomeVM.selectedDate ?? Date())
-                    let hasEvent = calendarHomeVM.drinkDates.contains(calendar.startOfDay(for: date))
+            // Day cells
+            calendarGridView(for: dates)
 
-                    Group {
-                        if isInMonth {
-                            Text(calendarHomeVM.dayFormatter.string(from: date))
-                                .frame(width: 35, height: 35)
-                                .background(
-                                    isSelected ? Color.cyan :
-                                    hasEvent ? Color.blue :
-                                    Color.blue.opacity(0.2)
-                                )
-                                .cornerRadius(20)
-                                .foregroundColor(.white)
-                                .onTapGesture {
-                                    withAnimation(.easeInOut) {
-                                        if let selected = calendarHomeVM.selectedDate,
-                                           calendar.isDate(selected, inSameDayAs: date) {
-                                            calendarHomeVM.selectedDate = nil
-                                        } else {
-                                            calendarHomeVM.selectedDate = date
-                                        }
-                                    }
-                                }
-                        } else {
-                            Text("").frame(width: 35, height: 35)
-                        }
-                    }
-                }
-            }
-
-            if calendarHomeVM.selectedDate != nil && !calendarHomeVM.drinksForSelectedDate.isEmpty {
-                CupGoalSummaryView(oz: calendarHomeVM.totalOunces, goal: drinkListVM.totalOzGoal)
-            }
-
-            if calendarHomeVM.selectedDate != nil && !calendarHomeVM.drinksForSelectedDate.isEmpty {
-                CalendarListView(drinks: calendarHomeVM.drinksForSelectedDate, totalOunces: calendarHomeVM.totalOunces)
+            // Drink list
+            if selectedDate != nil && !drinksForSelectedDate.isEmpty {
+                CalendarDrinkList(drinks: drinksForSelectedDate)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
         .padding()
@@ -83,17 +67,94 @@ struct CalendarView: View {
             DragGesture()
                 .onEnded { value in
                     if value.translation.width < -50 {
-                        calendarHomeVM.changeMonth(by: 1)
+                        changeMonth(by: 1)
                     } else if value.translation.width > 50 {
-                        calendarHomeVM.changeMonth(by: -1)
+                        changeMonth(by: -1)
                     }
                 }
         )
-        .animation(.easeInOut, value: calendarHomeVM.currentMonth)
+        .animation(.easeInOut, value: currentMonth)
         .onAppear {
-            calendarHomeVM.setModelContext(modelContext)
-            calendarHomeVM.fetchDrinkItemsForMonth()
+            updateDrinkQuery()
         }
+        .onChange(of: drinkItems) {
+            isShowingDrinkDetails = selectedDate != nil && !drinksForSelectedDate.isEmpty
+        }
+    }
+
+    private func calendarGridView(for dates: [Date]) -> some View {
+        LazyVGrid(columns: columns, spacing: 10) {
+            ForEach(dates, id: \.self) { date in
+                let isInMonth = calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
+                let isSelected = calendar.isDate(date, inSameDayAs: selectedDate ?? Date())
+                let hasEvent = drinkDates.contains(calendar.startOfDay(for: date))
+
+                CalendarDayCell(
+                    date: date,
+                    isInMonth: isInMonth,
+                    isSelected: isSelected,
+                    hasEvent: hasEvent
+                ) {
+                    withAnimation(.easeInOut) {
+                        if let selected = selectedDate, calendar.isDate(selected, inSameDayAs: date) {
+                            selectedDate = nil
+                        } else {
+                            selectedDate = date
+                        }
+                        isShowingDrinkDetails = selectedDate != nil && !drinksForSelectedDate.isEmpty
+                    }
+                }
+            }
+        }
+    }
+
+    private func updateDrinkQuery() {
+        let start = calendar.date(from: calendar.dateComponents([.year, .month], from: currentMonth))!
+        let end = calendar.date(byAdding: .month, value: 1, to: start)!
+        let descriptor = FetchDescriptor<CachedDrinkItem>(
+            predicate: #Predicate { $0.date >= start && $0.date < end }
+        )
+
+        do {
+            drinkItems = try modelContext.fetch(descriptor)
+        } catch {
+            print("Fetch failed: \(error)")
+        }
+    }
+
+    private func changeMonth(by value: Int) {
+        if let newMonth = calendar.date(byAdding: .month, value: value, to: currentMonth) {
+            currentMonth = newMonth
+        }
+    }
+
+    private func generateMonthDates(for month: Date) -> [Date] {
+        guard let monthInterval = calendar.dateInterval(of: .month, for: month),
+              let firstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
+              let lastWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.end.addingTimeInterval(-1))
+        else { return [] }
+
+        var dates: [Date] = []
+        var current = firstWeek.start
+
+        while current < lastWeek.end {
+            dates.append(current)
+            current = calendar.date(byAdding: .day, value: 1, to: current)!
+        }
+
+        return dates
+    }
+
+    private var monthYearFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM yyyy"
+        return formatter
+    }
+
+    private var dayFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
+        return formatter
     }
 }
 
@@ -103,6 +164,14 @@ struct CalendarView: View {
 //            .buttonCapsule()
     
 #Preview {
-    CalendarView()
-        .environment(CalendarHomeVM())
+    struct PreviewWrapper: View {
+        @State private var showingDetails = false
+
+        var body: some View {
+            CalendarView(isShowingDrinkDetails: $showingDetails)
+                .environment(CalendarHomeVM())
+        }
+    }
+
+    return PreviewWrapper()
 }

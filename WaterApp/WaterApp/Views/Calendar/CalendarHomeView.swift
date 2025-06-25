@@ -11,23 +11,33 @@ struct CalendarHomeView: View {
     @Environment(CalendarHomeVM.self) private var calendarHomeVM
     @Environment(DrinkListVM.self) private var drinkListVM
     
+    @State private var isShowingDrinkDetails = false
+    
     var body: some View {
         ZStack {
             Color.backgroundWhite.ignoresSafeArea()
             
             ScrollView(.vertical, showsIndicators: true) {
                 VStack {
-                    Spacer(minLength: 20)  // Optional small spacing
-                    
-                    BarChart()
-                    
+                    if !isShowingDrinkDetails {
+                        Spacer(minLength: 20)
+                        
+                        BarChart()
+                            .transition(.opacity)
+                        
+                        Spacer(minLength: 20)
+                    } else {
+                        Spacer(minLength: -40)
+                    }
+
                     Spacer(minLength: 20)
                     
-                    CalendarView()
+                    CalendarView(isShowingDrinkDetails: $isShowingDrinkDetails)
                     
                     Spacer(minLength: 20)
                 }
                 .padding(.horizontal)
+                .animation(.easeInOut, value: isShowingDrinkDetails)
             }
         }
     }

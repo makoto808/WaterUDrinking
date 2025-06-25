@@ -24,4 +24,6 @@ struct WaterAppApp: App {
  - Add Button to add/delete data from CalendarView
     - Allow tapping a drink to edit or delete?
  - If user goal is met, show crown on calendar date
+ - Add haptic touch
+ - Add sound effects?
  */
