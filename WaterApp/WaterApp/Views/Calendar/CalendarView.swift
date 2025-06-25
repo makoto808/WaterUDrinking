@@ -42,37 +42,37 @@ struct CalendarView: View {
             Text(monthYearFormatter.string(from: currentMonth))
                 .fontBarLabel()
                 .padding()
-
-            // Weekday labels
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(daysOfWeek, id: \.self) { day in
-                    Text(day)
-                        .fontCustomDrinkViewSubtitle()
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.gray)
-                }
-            }
-
-            // Day cells
-            calendarGridView(for: dates)
-
-            // Drink list
-            if selectedDate != nil && !drinksForSelectedDate.isEmpty {
-                CalendarDrinkList(drinks: drinksForSelectedDate)
-                    .transition(.opacity)
-            }
-        }
-        .padding()
-        .gesture(
-            DragGesture()
-                .onEnded { value in
-                    if value.translation.width < -50 {
-                        changeMonth(by: 1)
-                    } else if value.translation.width > 50 {
-                        changeMonth(by: -1)
+            
+            // Weekdays and Grid
+            VStack {
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(daysOfWeek, id: \.self) { day in
+                        Text(day)
+                            .fontCustomDrinkViewSubtitle()
+                            .frame(maxWidth: .infinity)
+                            .foregroundColor(.gray)
                     }
                 }
-        )
+                
+                calendarGridView(for: dates)
+                    .gesture(
+                        DragGesture()
+                            .onEnded { value in
+                                if value.translation.width < -50 {
+                                    changeMonth(by: 1)
+                                } else if value.translation.width > 50 {
+                                    changeMonth(by: -1)
+                                }
+                            }
+                    )
+            }
+            
+            // Drink list (allowing swipe)
+                if selectedDate != nil && !drinksForSelectedDate.isEmpty {
+                    CalendarDrinkList(drinks: drinksForSelectedDate)
+                        .transition(.opacity)
+                }
+        }
         .animation(.easeInOut, value: currentMonth)
         .onAppear {
             updateDrinkQuery()
