@@ -9,7 +9,7 @@ import Charts
 import SwiftUI
 
 struct BarChart: View {
-    //TODO: Make BarChart hold data for previous 7 days (weekly view Sun - Sat)
+    //TODO: Make BarChart hold data for previous 7 days (weekly view Sun - Sat) 
     @Environment(DrinkListVM.self) private var drinkListVM
     
     let dayOfWeek: [DayOfWeek] = [
