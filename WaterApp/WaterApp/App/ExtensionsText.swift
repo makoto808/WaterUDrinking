@@ -66,6 +66,7 @@ extension Text {
         self.font(.custom("ArialRoundedMTBold", size: 23))
             .foregroundColor(.primary)
     }
+    
     func fontGoalLine() -> some View {
         self.font(.caption)
             .foregroundColor(.secondary)
