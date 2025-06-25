@@ -59,7 +59,7 @@ struct CalendarView: View {
             // Drink list
             if selectedDate != nil && !drinksForSelectedDate.isEmpty {
                 CalendarDrinkList(drinks: drinksForSelectedDate)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                    .transition(.opacity)
             }
         }
         .padding()

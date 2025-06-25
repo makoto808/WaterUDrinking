@@ -54,7 +54,8 @@ struct CalendarDrinkList: View {
                     .padding(.vertical, 4)
                 }
             }
-            .transition(.move(edge: .bottom).combined(with: .opacity))
+//            .transition(.move(edge: .bottom).combined(with: .opacity))
+            .transition(.opacity)
             .padding(.top)
         }
     }

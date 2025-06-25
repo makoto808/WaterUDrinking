@@ -105,13 +105,12 @@ struct BarChart: View {
                     AxisValueLabel() {
                         if let y = value.as(Double.self) {
                             Text("\(Int(y))")
-                                .fontXAxis()             // Your custom font
-                                .foregroundColor(.gray) // Your custom color
+                                .fontXAxis()
+                                .foregroundColor(.gray)
                         }
                     }
                 }
             }
-
             .frame(height: 220)
         }
         .padding(.horizontal)
