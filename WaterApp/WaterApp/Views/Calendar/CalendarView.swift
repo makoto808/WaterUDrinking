@@ -12,67 +12,66 @@ struct CalendarView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(DrinkListVM.self) private var drinkListVM
     @Binding var isShowingDrinkDetails: Bool
-
+    
     @State private var drinkItems: [CachedDrinkItem] = []
     @State private var currentMonth = Date()
     @State private var selectedDate: Date? = nil
-
+    
     private let calendar: Calendar = {
         var cal = Calendar.current
         cal.firstWeekday = 1
         return cal
     }()
-
+    
     private let columns = Array(repeating: GridItem(.flexible()), count: 7)
     private let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-
+    
     private var drinkDates: Set<Date> {
         Set(drinkItems.map { calendar.startOfDay(for: $0.date) })
     }
-
+    
     private var drinksForSelectedDate: [CachedDrinkItem] {
         guard let selected = selectedDate else { return [] }
         return drinkItems.filter { calendar.isDate($0.date, inSameDayAs: selected) }
     }
-
+    
     var body: some View {
         let dates = generateMonthDates(for: currentMonth)
-
+        
         VStack {
             Text(monthYearFormatter.string(from: currentMonth))
                 .fontBarLabel()
                 .padding()
-
-            // Weekday labels
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(daysOfWeek, id: \.self) { day in
-                    Text(day)
-                        .fontCustomDrinkViewSubtitle()
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.gray)
-                }
-            }
-
-            // Day cells
-            calendarGridView(for: dates)
-
-            // Drink list
-            if selectedDate != nil && !drinksForSelectedDate.isEmpty {
-                CalendarDrinkList(drinks: drinksForSelectedDate)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-            }
-        }
-        .padding()
-        .gesture(
-            DragGesture()
-                .onEnded { value in
-                    if value.translation.width < -50 {
-                        changeMonth(by: 1)
-                    } else if value.translation.width > 50 {
-                        changeMonth(by: -1)
+            
+            // Weekdays and Grid
+            VStack {
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(daysOfWeek, id: \.self) { day in
+                        Text(day)
+                            .fontCustomDrinkViewSubtitle()
+                            .frame(maxWidth: .infinity)
+                            .foregroundColor(.gray)
                     }
                 }
-        )
+                
+                calendarGridView(for: dates)
+                    .gesture(
+                        DragGesture()
+                            .onEnded { value in
+                                if value.translation.width < -50 {
+                                    changeMonth(by: 1)
+                                } else if value.translation.width > 50 {
+                                    changeMonth(by: -1)
+                                }
+                            }
+                    )}
+            
+            if let selected = selectedDate {
+                CalendarDrinkList(drinks: drinksForSelectedDate, selectedDate: selected)
+                    .transition(.opacity)
+            }
+            
+        }
         .animation(.easeInOut, value: currentMonth)
         .onAppear {
             updateDrinkQuery()
@@ -81,14 +80,14 @@ struct CalendarView: View {
             isShowingDrinkDetails = selectedDate != nil && !drinksForSelectedDate.isEmpty
         }
     }
-
+    
     private func calendarGridView(for dates: [Date]) -> some View {
         LazyVGrid(columns: columns, spacing: 10) {
             ForEach(dates, id: \.self) { date in
                 let isInMonth = calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
                 let isSelected = calendar.isDate(date, inSameDayAs: selectedDate ?? Date())
                 let hasEvent = drinkDates.contains(calendar.startOfDay(for: date))
-
+                
                 CalendarDayCell(
                     date: date,
                     isInMonth: isInMonth,
@@ -107,50 +106,50 @@ struct CalendarView: View {
             }
         }
     }
-
+    
     private func updateDrinkQuery() {
         let start = calendar.date(from: calendar.dateComponents([.year, .month], from: currentMonth))!
         let end = calendar.date(byAdding: .month, value: 1, to: start)!
         let descriptor = FetchDescriptor<CachedDrinkItem>(
             predicate: #Predicate { $0.date >= start && $0.date < end }
         )
-
+        
         do {
             drinkItems = try modelContext.fetch(descriptor)
         } catch {
             print("Fetch failed: \(error)")
         }
     }
-
+    
     private func changeMonth(by value: Int) {
         if let newMonth = calendar.date(byAdding: .month, value: value, to: currentMonth) {
             currentMonth = newMonth
         }
     }
-
+    
     private func generateMonthDates(for month: Date) -> [Date] {
         guard let monthInterval = calendar.dateInterval(of: .month, for: month),
               let firstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
               let lastWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.end.addingTimeInterval(-1))
         else { return [] }
-
+        
         var dates: [Date] = []
         var current = firstWeek.start
-
+        
         while current < lastWeek.end {
             dates.append(current)
             current = calendar.date(byAdding: .day, value: 1, to: current)!
         }
-
+        
         return dates
     }
-
+    
     private var monthYearFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy"
         return formatter
     }
-
+    
     private var dayFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "d"
@@ -162,16 +161,16 @@ struct CalendarView: View {
 //Button("Add Previous Drink", systemImage: "lock") {
 //                //            }
 //            .buttonCapsule()
-    
+
 #Preview {
     struct PreviewWrapper: View {
         @State private var showingDetails = false
-
+        
         var body: some View {
             CalendarView(isShowingDrinkDetails: $showingDetails)
                 .environment(CalendarHomeVM())
         }
     }
-
+    
     return PreviewWrapper()
 }

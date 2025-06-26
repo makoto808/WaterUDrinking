@@ -71,6 +71,11 @@ extension Text {
         self.font(.caption)
             .foregroundColor(.secondary)
     }
+    
+    func fontXAxis() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 12))
+            .foregroundColor(.gray)
+    }
 }
 
 extension TextField {
