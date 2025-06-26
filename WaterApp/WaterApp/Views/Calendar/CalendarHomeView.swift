@@ -19,7 +19,7 @@ struct CalendarHomeView: View {
             
             ScrollView(.vertical, showsIndicators: true) {
                 VStack {
-                    Spacer(minLength: -40)
+                    Spacer(minLength: -1)
                     
                     CalendarView(isShowingDrinkDetails: $isShowingDrinkDetails)
                     
