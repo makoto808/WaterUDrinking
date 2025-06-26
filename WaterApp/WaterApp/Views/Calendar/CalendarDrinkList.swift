@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalendarDrinkList: View {
     @Environment(DrinkListVM.self) private var drinkListVM
-
+    
     let drinks: [CachedDrinkItem]
     
     private var oz: Double {
@@ -53,8 +53,17 @@ struct CalendarDrinkList: View {
                     }
                     .padding(.vertical, 4)
                 }
-            }
-//            .transition(.move(edge: .bottom).combined(with: .opacity))
+                
+                HStack {
+                       Spacer()
+                       Button("Add / Delete") {
+                           // Action here
+                       }
+                       .button3()
+                       Spacer()
+                   }
+               }
+            //            .transition(.move(edge: .bottom).combined(with: .opacity))
             .transition(.opacity)
             .padding(.top)
         }

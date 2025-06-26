@@ -74,6 +74,13 @@ extension View {
             .font(.custom("ArialRoundedMTBold", size: 25))
             .textCase(.uppercase)
     }
+    
+    func button3(maxWidth: CGFloat = .infinity) -> some View {
+        self.buttonBorderShape(.capsule)
+            .buttonStyle(.borderedProminent)
+            .font(.custom("ArialRoundedMTBold", size: 10))
+            .textCase(.uppercase)
+    }
 }
 
 extension View {
