@@ -17,7 +17,7 @@ struct CalendarListUpdate: View {
             
             Text(selectedDate.formatted(date: .long, time: .omitted))
                 .fontSmall()
-            
+             
             // Add / Delete controls here
         }
         .padding()
