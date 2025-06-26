@@ -11,6 +11,9 @@ struct CalendarDrinkList: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
     let drinks: [CachedDrinkItem]
+    let selectedDate: Date
+    
+    @State private var isShowingSheet = false
     
     private var oz: Double {
         drinks.reduce(0) { $0 + $1.volume }
@@ -55,13 +58,17 @@ struct CalendarDrinkList: View {
                 }
                 
                 HStack {
-                       Spacer()
-                       Button("Add / Delete") {
-                           // Action here
-                       }
-                       .button3()
-                       Spacer()
-                   }
+                    Spacer()
+                    Button("Add / Delete") {
+                        isShowingSheet = true
+                    }
+                    .button3()
+                    Spacer()
+                }
+                .sheet(isPresented: $isShowingSheet) {
+                    CalendarListUpdate(selectedDate: selectedDate)
+                }
+
                }
             //            .transition(.move(edge: .bottom).combined(with: .opacity))
             .transition(.opacity)
