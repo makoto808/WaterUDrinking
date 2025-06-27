@@ -67,6 +67,11 @@ extension Text {
             .foregroundColor(.primary)
     }
     
+    func fontBarLabel2() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 23))
+            .foregroundColor(.secondary)
+    }
+    
     func fontGoalLine() -> some View {
         self.font(.caption)
             .foregroundColor(.secondary)
@@ -75,6 +80,15 @@ extension Text {
     func fontXAxis() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 12))
             .foregroundColor(.gray)
+    }
+    
+    func fontUpdateDate() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 35))
+            .foregroundStyle(.primary)
+            .lineLimit(1)
+            .allowsTightening(true)
+            .minimumScaleFactor(0.30)
+            .padding(.horizontal, 20)
     }
 }
 
