@@ -19,29 +19,7 @@ struct CalendarListUpdate: View {
         VStack {
             // TODO: Fix the constraints on the .isEmpty
             if drinks.isEmpty {
-                ScrollView {
-                    VStack(spacing: 24) {
-                        Spacer(minLength: 40)
-                        
-                        Text(selectedDate.formatted(date: .long, time: .omitted))
-                            .fontUpdateDate()
-                            .padding(.top)
-
-                        Text("You are dehydrated!")
-                            .fontUpdateDate()
-                            .multilineTextAlignment(.center)
-
-                        Button("+ Add") {
-                            // Action here
-                        }
-                        .button1()
-
-                        Spacer(minLength: 20) // breathing room at bottom
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.horizontal)
-                    .padding(.bottom, 40) // gives room on short detents
-                }
+                EmptyCalendarDrinkListView(selectedDate: selectedDate)
             } else {
                 Spacer(minLength: 40)
                 
@@ -76,6 +54,14 @@ struct CalendarListUpdate: View {
                                 }
                                 
                                 Spacer()
+                                
+                                Button {
+                                    deleteDrink(drink)
+                                } label: {
+                                    Image(systemName: "trash")
+                                        .foregroundColor(.red)
+                                }
+                                .buttonStyle(.plain)
                             }
                         }
                     }
@@ -88,6 +74,16 @@ struct CalendarListUpdate: View {
         }
     }
     
+    private func deleteDrink(_ drink: CachedDrinkItem) {
+        modelContext.delete(drink)
+
+        do {
+            try modelContext.save()
+            drinks.removeAll { $0.id == drink.id }
+        } catch {
+            print("Failed to delete drink: \(error.localizedDescription)")
+        }
+    }
     
     private func fetchDrinksForSelectedDate() {
         let calendar = Calendar.current
@@ -110,88 +106,88 @@ struct CalendarListUpdate: View {
 }
 
 // MARK: - SAMPLE MOCK PREVIEW
-struct CalendarListUpdatePreviewMock: View {
-    let mockDrinks = [
-        CachedDrinkItem(date: .now, name: "Water", img: "waterBottle", volume: 12.0, arrayOrderValue: 0),
-        CachedDrinkItem(date: .now, name: "Tea", img: "tea", volume: 8.0, arrayOrderValue: 1),
-        CachedDrinkItem(date: .now, name: "Water", img: "beer", volume: 12.0, arrayOrderValue: 0),
-        CachedDrinkItem(date: .now, name: "Tea", img: "soda", volume: 8.0, arrayOrderValue: 1),
-        CachedDrinkItem(date: .now, name: "Water", img: "energyDrink", volume: 12.0, arrayOrderValue: 0),
-        CachedDrinkItem(date: .now, name: "Tea", img: "soda", volume: 8.0, arrayOrderValue: 1)
-    ]
-    
-    var body: some View {
-        VStack {
-            if !mockDrinks.isEmpty {
-                Spacer(minLength: 20)
-                
-                Text(Date().formatted(date: .long, time: .omitted))
-                    .fontUpdateDate()
-                    .padding(.top)
-            
-                Text("")
-                Text("You are dehydrated!")
-                    .fontUpdateDate()
-                
-                Button("+ Add") {
-                    
-                }
-                .button1()
-                
-            } else {
-                Spacer(minLength: 30)
-                
-                Text(Date().formatted(date: .long, time: .omitted))
-                    .fontUpdateDate()
-                    .padding(.top)
-                
-                Spacer(minLength: 30)
-                
-                Button("+ Add") {
-                    
-                }
-                .button1()
-                
-                ScrollView {
-                    Spacer(minLength: 30)
-                    VStack(spacing: 24) {
-                        
-                        ForEach(mockDrinks, id: \.id) { drink in
-                            HStack(alignment: .center, spacing: 12) {
-                                Image(drink.img)
-                                    .resizable()
-                                    .frame(width: 60, height: 60)
-                                
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(drink.name)
-                                        .fontBarLabel()
-                                    
-                                    Text("\(drink.volume, specifier: "%.1f") oz")
-                                        .fontBarLabel2()
-                                        .foregroundColor(.gray)
-                                }
-                                
-                                Spacer()
-                            }
-                        }
-                    }
-                    .padding(.horizontal)
-                    //                .background(Color.red.opacity(0.05)) // Debug: remove later
-                }
-            }
-        }
-    }
-}
-
-
-#Preview {
-    struct PreviewWrapper: View {
-        var body: some View {
-            CalendarListUpdatePreviewMock()
-        }
-    }
-    
-    return PreviewWrapper()
-}
-
-
+//struct CalendarListUpdatePreviewMock: View {
+//    let mockDrinks = [
+//        CachedDrinkItem(date: .now, name: "Water", img: "waterBottle", volume: 12.0, arrayOrderValue: 0),
+//        CachedDrinkItem(date: .now, name: "Tea", img: "tea", volume: 8.0, arrayOrderValue: 1),
+//        CachedDrinkItem(date: .now, name: "Water", img: "beer", volume: 12.0, arrayOrderValue: 0),
+//        CachedDrinkItem(date: .now, name: "Tea", img: "soda", volume: 8.0, arrayOrderValue: 1),
+//        CachedDrinkItem(date: .now, name: "Water", img: "energyDrink", volume: 12.0, arrayOrderValue: 0),
+//        CachedDrinkItem(date: .now, name: "Tea", img: "soda", volume: 8.0, arrayOrderValue: 1)
+//    ]
+//
+//    var body: some View {
+//        VStack {
+//            if !mockDrinks.isEmpty {
+//                Spacer(minLength: 20)
+//
+//                Text(Date().formatted(date: .long, time: .omitted))
+//                    .fontUpdateDate()
+//                    .padding(.top)
+//
+//                Text("")
+//                Text("You are dehydrated!")
+//                    .fontUpdateDate()
+//
+//                Button("+ Add") {
+//
+//                }
+//                .button1()
+//
+//            } else {
+//                Spacer(minLength: 30)
+//
+//                Text(Date().formatted(date: .long, time: .omitted))
+//                    .fontUpdateDate()
+//                    .padding(.top)
+//
+//                Spacer(minLength: 30)
+//
+//                Button("+ Add") {
+//
+//                }
+//                .button1()
+//
+//                ScrollView {
+//                    Spacer(minLength: 30)
+//                    VStack(spacing: 24) {
+//
+//                        ForEach(mockDrinks, id: \.id) { drink in
+//                            HStack(alignment: .center, spacing: 12) {
+//                                Image(drink.img)
+//                                    .resizable()
+//                                    .frame(width: 60, height: 60)
+//
+//                                VStack(alignment: .leading, spacing: 4) {
+//                                    Text(drink.name)
+//                                        .fontBarLabel()
+//
+//                                    Text("\(drink.volume, specifier: "%.1f") oz")
+//                                        .fontBarLabel2()
+//                                        .foregroundColor(.gray)
+//                                }
+//
+//                                Spacer()
+//                            }
+//                        }
+//                    }
+//                    .padding(.horizontal)
+//                    //                .background(Color.red.opacity(0.05)) // Debug: remove later
+//                }
+//            }
+//        }
+//    }
+//}
+//
+//
+//#Preview {
+//    struct PreviewWrapper: View {
+//        var body: some View {
+//            CalendarListUpdatePreviewMock()
+//        }
+//    }
+//
+//    return PreviewWrapper()
+//}
+//
+//
