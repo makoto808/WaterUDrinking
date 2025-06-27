@@ -67,9 +67,10 @@ struct CalendarDrinkList: View {
                 }
                 .sheet(isPresented: $isShowingSheet) {
                     CalendarListUpdate(selectedDate: selectedDate)
+                        .presentationDetents([.medium, .large])
                 }
-
-               }
+                
+            }
             //            .transition(.move(edge: .bottom).combined(with: .opacity))
             .transition(.opacity)
             .padding(.top)

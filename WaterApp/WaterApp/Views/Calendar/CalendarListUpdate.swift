@@ -16,45 +16,50 @@ struct CalendarListUpdate: View {
     let selectedDate: Date
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack {
+            Spacer(minLength: 20)
             Text(selectedDate.formatted(date: .long, time: .omitted))
                 .fontUpdateDate()
+                .padding(.top)
+            
+            Spacer(minLength: 35)
+            Button("+ Add") {
+                
+            }
+            .button1()
             
             if drinks.isEmpty {
-                Spacer()
-                
                 Text("You are dehydrated!")
                     .fontSmall()
-                
-                Spacer()
             } else {
+                Spacer(minLength: 20)
                 ScrollView {
-                    VStack(spacing: 12) {
+                    Spacer(minLength: 20)
+                    VStack(spacing: 24) {
+                        
                         ForEach(drinks, id: \.id) { drink in
-                            HStack {
+                            HStack(alignment: .center, spacing: 12) {
                                 Image(drink.img)
                                     .resizable()
                                     .frame(width: 60, height: 60)
-
-                                VStack(alignment: .leading) {
+                                
+                                VStack(alignment: .leading, spacing: 4) {
                                     Text(drink.name)
                                         .fontBarLabel()
-
+                                    
                                     Text("\(drink.volume, specifier: "%.1f") oz")
-                                        .fontSmall()
+                                        .fontBarLabel2()
                                         .foregroundColor(.gray)
                                 }
-
+                                
                                 Spacer()
                             }
                         }
                     }
-                    .padding(.vertical)
+                    .padding(.horizontal)
                 }
-                .frame(maxHeight: 300) // optional: limit scroll height
             }
         }
-        .padding()
         .onAppear {
             fetchDrinksForSelectedDate()
         }
@@ -90,38 +95,48 @@ struct CalendarListUpdatePreviewMock: View {
         CachedDrinkItem(date: .now, name: "Water", img: "energyDrink", volume: 12.0, arrayOrderValue: 0),
         CachedDrinkItem(date: .now, name: "Tea", img: "soda", volume: 8.0, arrayOrderValue: 1)
     ]
-
+    
     var body: some View {
-        VStack(spacing: 16) {
-            Spacer()
-
+        VStack {
+            Spacer(minLength: 20)
             Text(Date().formatted(date: .long, time: .omitted))
                 .fontUpdateDate()
-
-            Spacer()
-
-            ForEach(mockDrinks, id: \.id) { drink in
-                HStack {
-                    Image(drink.img)
-                        .resizable()
-                        .frame(width: 60, height: 60)
-
-                    VStack(alignment: .leading) {
-                        Text(drink.name)
-                            .fontBarLabel()
-
-                        Text("\(drink.volume, specifier: "%.1f") oz")
-                            .fontBarLabel2()
-                            .foregroundColor(.gray)
-                    }
-
-                    Spacer()
-                }
+                .padding(.top)
+            
+            Spacer(minLength: 35)
+            Button("+ Add") {
+                
             }
-
-            Spacer()
+            .button1()
+            
+            Spacer(minLength: 20)
+            ScrollView {
+                Spacer(minLength: 20)
+                VStack(spacing: 24) {
+                    
+                    ForEach(mockDrinks, id: \.id) { drink in
+                        HStack(alignment: .center, spacing: 12) {
+                            Image(drink.img)
+                                .resizable()
+                                .frame(width: 60, height: 60)
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(drink.name)
+                                    .fontBarLabel()
+                                
+                                Text("\(drink.volume, specifier: "%.1f") oz")
+                                    .fontBarLabel2()
+                                    .foregroundColor(.gray)
+                            }
+                            
+                            Spacer()
+                        }
+                    }
+                }
+                .padding(.horizontal)
+//                .background(Color.red.opacity(0.05)) // Debug: remove later
+            }
         }
-        .padding()
     }
 }
 
