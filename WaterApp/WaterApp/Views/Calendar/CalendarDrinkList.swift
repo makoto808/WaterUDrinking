@@ -62,7 +62,7 @@ struct CalendarDrinkList: View {
                     Button("Add / Delete") {
                         isShowingSheet = true
                     }
-                    .button3()
+                    .button1()
                     Spacer()
                 }
                 .sheet(isPresented: $isShowingSheet) {
@@ -78,6 +78,4 @@ struct CalendarDrinkList: View {
     }
 }
 
-//#Preview {
-//    CalendarDrinkList()
-//}
+

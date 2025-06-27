@@ -19,26 +19,31 @@ struct CalendarListUpdate: View {
         VStack {
             // TODO: Fix the constraints on the .isEmpty
             if drinks.isEmpty {
-                Spacer(minLength: 20)
-                
-                Text(selectedDate.formatted(date: .long, time: .omitted))
-                    .fontUpdateDate()
-                    .padding(.top)
-                
-                Spacer(minLength: 20)
-                
-                Text("")
-                Text("You are dehydrated!")
-                    .fontUpdateDate()
-                
-                Button("+ Add") {
-                    
+                ScrollView {
+                    VStack(spacing: 24) {
+                        Spacer(minLength: 40)
+                        
+                        Text(selectedDate.formatted(date: .long, time: .omitted))
+                            .fontUpdateDate()
+                            .padding(.top)
+
+                        Text("You are dehydrated!")
+                            .fontUpdateDate()
+                            .multilineTextAlignment(.center)
+
+                        Button("+ Add") {
+                            // Action here
+                        }
+                        .button1()
+
+                        Spacer(minLength: 20) // breathing room at bottom
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal)
+                    .padding(.bottom, 40) // gives room on short detents
                 }
-                .button1()
-                
-                Spacer(minLength: 590)
             } else {
-                Spacer(minLength: 30)
+                Spacer(minLength: 40)
                 
                 Text(selectedDate.formatted(date: .long, time: .omitted))
                     .fontUpdateDate()
