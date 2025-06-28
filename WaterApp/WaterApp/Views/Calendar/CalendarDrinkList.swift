@@ -62,14 +62,15 @@ struct CalendarDrinkList: View {
                     Button("Add / Delete") {
                         isShowingSheet = true
                     }
-                    .button3()
+                    .button1()
                     Spacer()
                 }
                 .sheet(isPresented: $isShowingSheet) {
                     CalendarListUpdate(selectedDate: selectedDate)
+                        .presentationDetents([.medium, .large])
                 }
-
-               }
+                
+            }
             //            .transition(.move(edge: .bottom).combined(with: .opacity))
             .transition(.opacity)
             .padding(.top)
@@ -77,6 +78,4 @@ struct CalendarDrinkList: View {
     }
 }
 
-//#Preview {
-//    CalendarDrinkList()
-//}
+
