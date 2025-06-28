@@ -26,4 +26,9 @@ struct WaterAppApp: App {
  - If user goal is met, show crown on calendar date
  - Add haptic touch
  - Add sound effects?
+ 
+ Refactor branch
+ - clean up extensions
+ - break down code into smaller sizes
+ - move to CalendarVM
  */
