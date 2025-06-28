@@ -5,10 +5,6 @@
 //  Created by Ryan Kanno on 4/19/25.
 //
 
-//
-//  CalendarHomeVM.swift
-//  WaterApp
-//
 
 import Foundation
 import Observation
