@@ -60,7 +60,7 @@ struct CustomOzView: View {
                         modelContext.insert(newItem)
                         do {
                             try modelContext.save()
-                            drinkListVM.loadFromCache(modelContext)
+                            drinkListVM.refreshFromCache(modelContext)
                         } catch {
                             print("Failed to save: \(error.localizedDescription)")
                         }
