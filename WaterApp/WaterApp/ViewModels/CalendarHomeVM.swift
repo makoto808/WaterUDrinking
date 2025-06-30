@@ -114,8 +114,50 @@ import SwiftUI
         }
     }
 
+    func totalOunces(for date: Date) -> Double {
+        cachedItems
+            .filter { calendar.isDate($0.date, inSameDayAs: date) }
+            .reduce(0) { $0 + $1.volume }
+    }
+
+    func percentageOfGoal(for date: Date, goal: Double) -> Int {
+        let oz = totalOunces(for: date)
+        guard goal > 0 else { return 0 }
+        return Int(min((oz / goal) * 100, 999))
+    }
+
     
-    
+    func fetchDrinks(for date: Date) -> [CachedDrinkItem] {
+        guard let context = modelContext else { return [] }
+        
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: date)
+        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+        
+        let descriptor = FetchDescriptor<CachedDrinkItem>(
+            predicate: #Predicate { $0.date >= startOfDay && $0.date < endOfDay },
+            sortBy: [.init(\.date, order: .forward)]
+        )
+        
+        do {
+            return try context.fetch(descriptor)
+        } catch {
+            print("Fetch failed: \(error)")
+            return []
+        }
+    }
+
+    func deleteDrink(_ drink: CachedDrinkItem) {
+        guard let context = modelContext else { return }
+        context.delete(drink)
+        do {
+            try context.save()
+            cachedItems.removeAll { $0.id == drink.id }
+        } catch {
+            print("Failed to delete drink: \(error.localizedDescription)")
+        }
+    }
+
     
 }
 

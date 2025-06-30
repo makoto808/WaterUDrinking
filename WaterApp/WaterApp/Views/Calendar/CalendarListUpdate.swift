@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CalendarListUpdate: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(CalendarHomeVM.self) private var calendarVM
     
     @State private var drinks: [CachedDrinkItem] = []
     
@@ -17,7 +18,6 @@ struct CalendarListUpdate: View {
     
     var body: some View {
         VStack {
-            // TODO: Fix the constraints on the .isEmpty
             if drinks.isEmpty {
                 EmptyCalendarDrinkListView(selectedDate: selectedDate)
             } else {
@@ -70,38 +70,13 @@ struct CalendarListUpdate: View {
             }
         }
         .onAppear {
-            fetchDrinksForSelectedDate()
+            drinks = calendarVM.fetchDrinks(for: selectedDate)
         }
     }
     
     private func deleteDrink(_ drink: CachedDrinkItem) {
-        modelContext.delete(drink)
-
-        do {
-            try modelContext.save()
-            drinks.removeAll { $0.id == drink.id }
-        } catch {
-            print("Failed to delete drink: \(error.localizedDescription)")
-        }
-    }
-    
-    private func fetchDrinksForSelectedDate() {
-        let calendar = Calendar.current
-        let startOfDay = calendar.startOfDay(for: selectedDate)
-        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
-        
-        let descriptor = FetchDescriptor<CachedDrinkItem>(
-            predicate: #Predicate {
-                $0.date >= startOfDay && $0.date < endOfDay
-            },
-            sortBy: [.init(\.date, order: .forward)]
-        )
-        
-        do {
-            drinks = try modelContext.fetch(descriptor)
-        } catch {
-            print("Fetch failed: \(error)")
-        }
+        calendarVM.deleteDrink(drink)
+        drinks = calendarVM.fetchDrinks(for: selectedDate)
     }
 }
 

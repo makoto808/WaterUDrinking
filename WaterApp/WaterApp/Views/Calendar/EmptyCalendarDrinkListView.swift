@@ -10,8 +10,6 @@ import SwiftUI
 struct EmptyCalendarDrinkListView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @State private var drinks: [CachedDrinkItem] = []
-    
     let selectedDate: Date
     
     var body: some View {

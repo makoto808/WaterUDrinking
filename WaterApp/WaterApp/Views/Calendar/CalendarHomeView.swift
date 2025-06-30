@@ -14,28 +14,25 @@ struct CalendarHomeView: View {
     @State private var isShowingDrinkDetails = false
     
     var body: some View {
-        ZStack {
-            Color.backgroundWhite.ignoresSafeArea()
-            
-            ScrollView(.vertical, showsIndicators: true) {
-                VStack {
-                    Spacer(minLength: -1)
-                    
-                    CalendarView(isShowingDrinkDetails: $isShowingDrinkDetails)
-                    
-                    Spacer(minLength: 20)
-                }
-                .padding(.horizontal)
-                .animation(.easeInOut, value: isShowingDrinkDetails)
+        ScrollView(.vertical, showsIndicators: true) {
+            VStack {
+                Spacer(minLength: -1)
+                
+                CalendarView(isShowingDrinkDetails: $isShowingDrinkDetails)
+                
+                Spacer(minLength: 20)
             }
+            .padding(.horizontal)
+            .animation(.easeInOut, value: isShowingDrinkDetails)
         }
+        .background(Color.backgroundWhite)
     }
 }
 
 #Preview {
     let mockDrinkListVM = DrinkListVM()
     let mockCalendarHomeVM = CalendarHomeVM()
-
+    
     return CalendarHomeView()
         .environment(mockDrinkListVM)
         .environment(mockCalendarHomeVM)
@@ -54,4 +51,4 @@ struct CalendarHomeView: View {
 //                    }
 //
 //                    Spacer(minLength: 20)
- 
+
