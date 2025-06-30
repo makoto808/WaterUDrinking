@@ -47,8 +47,7 @@ struct GoalView: View {
                     
                     if !dailyWaterGoal.isEmpty {
                         Text("oz")
-                            .font(.custom("ArialRoundedMTBold", size: 40))
-                            .foregroundStyle(.primary)
+                            .fontOzLabel()
                     }
                 }
                 .padding(8)
@@ -69,8 +68,8 @@ struct GoalView: View {
             }
             .frame(maxWidth: .infinity)
             .padding()
+        }
     }
-}
 }
 
 #Preview {
