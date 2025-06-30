@@ -38,7 +38,7 @@ struct CalendarListUpdate: View {
                     Spacer(minLength: 20)
                     VStack(spacing: 24) {
                         
-                        ForEach(drinks, id: \.id) { drink in
+                        ForEach(drinks.sorted(by: { $0.date > $1.date }), id: \.id) { drink in
                             HStack(alignment: .center, spacing: 12) {
                                 Image(drink.img)
                                     .resizable()
