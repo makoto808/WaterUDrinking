@@ -92,7 +92,7 @@ struct CalendarListUpdate: View {
 //    ]
 //
 //    var body: some View {
-//        VStack {
+//        VStack { 
 //            if !mockDrinks.isEmpty {
 //                Spacer(minLength: 20)
 //
