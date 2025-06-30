@@ -15,9 +15,7 @@ struct CalendarHomeView: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
-            VStack {
-                Spacer(minLength: -1)
-                
+            VStack {                
                 CalendarView(isShowingDrinkDetails: $isShowingDrinkDetails)
                 
                 Spacer(minLength: 20)
@@ -37,18 +35,3 @@ struct CalendarHomeView: View {
         .environment(mockDrinkListVM)
         .environment(mockCalendarHomeVM)
 }
-
-
-//                    if !isShowingDrinkDetails {
-//                        Spacer(minLength: 20)
-//
-//                        BarChart()
-//                            .transition(.opacity)
-//
-//                        Spacer(minLength: 20)
-//                    } else {
-//                        Spacer(minLength: -40)
-//                    }
-//
-//                    Spacer(minLength: 20)
-

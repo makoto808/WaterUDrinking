@@ -16,6 +16,7 @@ import SwiftUI
     var currentMonth: Date = Date()
     var selectedDate: Date? = nil
     var cachedItems: [CachedDrinkItem] = []
+    var userGoalModel: UserGoal?
     
     private let calendar: Calendar = {
         var cal = Calendar.current
@@ -27,6 +28,14 @@ import SwiftUI
     func setModelContext(_ modelContext: ModelContext) {
         self.modelContext = modelContext
         self.modelContext?.autosaveEnabled = true
+        
+        let descriptor = FetchDescriptor<UserGoal>()
+        do {
+            let goals = try modelContext.fetch(descriptor)
+            self.userGoalModel = goals.first
+        } catch {
+            print("Failed to fetch UserGoal: \(error)")
+        }
     }
     
     // MARK: - Computed Properties
@@ -149,6 +158,11 @@ import SwiftUI
     
     var totalOunces: Double {
         drinksForSelectedDate.reduce(0) { $0 + $1.volume }
+    }
+    
+    //NOTE: Might delete later, must ask user for a starting goal
+    var userGoal: Double {
+        userGoalModel?.goal ?? 64
     }
 }
 

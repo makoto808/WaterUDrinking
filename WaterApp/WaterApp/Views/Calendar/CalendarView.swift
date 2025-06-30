@@ -76,12 +76,14 @@ struct CalendarView: View {
                 let isInMonth = calendar.isDate(date, equalTo: calendarVM.currentMonth, toGranularity: .month)
                 let isSelected = calendar.isDate(date, inSameDayAs: calendarVM.selectedDate ?? Date())
                 let hasEvent = calendarVM.drinkDates.contains(calendar.startOfDay(for: date))
+                let goalMet = calendarVM.percentageOfGoal(for: date, goal: calendarVM.userGoal) >= 100
                 
                 CalendarDayCell(
                     date: date,
                     isInMonth: isInMonth,
                     isSelected: isSelected,
-                    hasEvent: hasEvent
+                    hasEvent: hasEvent,
+                    goalMet: goalMet
                 ) {
                     withAnimation(.easeInOut) {
                         calendarVM.toggleSelectedDate(date)
