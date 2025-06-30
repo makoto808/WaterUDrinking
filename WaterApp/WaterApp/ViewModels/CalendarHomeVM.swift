@@ -9,6 +9,7 @@
 import Foundation
 import Observation
 import SwiftData
+import SwiftUI
 
 @Observable final class CalendarHomeVM {
     private var modelContext: ModelContext?
@@ -91,6 +92,7 @@ import SwiftData
         return dates
     }
 
+    
     var dayFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "d"
@@ -102,5 +104,18 @@ import SwiftData
         formatter.dateFormat = "MMMM yyyy"
         return formatter
     }
+    
+    
+    func toggleSelectedDate(_ date: Date) {
+        if let selected = selectedDate, calendar.isDate(selected, inSameDayAs: date) {
+            selectedDate = nil
+        } else {
+            selectedDate = date
+        }
+    }
+
+    
+    
+    
 }
 

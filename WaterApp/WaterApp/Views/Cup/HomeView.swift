@@ -9,8 +9,8 @@ import SwiftData
 import SwiftUI
 
 struct HomeView: View {
-    @Environment(DrinkListVM.self) private var drinkListVM
     @Environment(\.modelContext) private var modelContext
+    @Environment(DrinkListVM.self) private var drinkListVM
 
     var body: some View {
         ZStack {

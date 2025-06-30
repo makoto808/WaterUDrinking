@@ -11,11 +11,13 @@ import SwiftData
 struct CalendarView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(DrinkListVM.self) private var drinkListVM
+    @Environment(CalendarHomeVM.self) private var calendarVM
+    
     @Binding var isShowingDrinkDetails: Bool
     
-    @State private var drinkItems: [CachedDrinkItem] = []
-    @State private var currentMonth = Date()
-    @State private var selectedDate: Date? = nil
+    //    @State private var drinkItems: [CachedDrinkItem] = []
+    //    @State private var currentMonth = Date()
+    //    @State private var selectedDate: Date? = nil
     
     private let calendar: Calendar = {
         var cal = Calendar.current
@@ -26,20 +28,21 @@ struct CalendarView: View {
     private let columns = Array(repeating: GridItem(.flexible()), count: 7)
     private let daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     
-    private var drinkDates: Set<Date> {
-        Set(drinkItems.map { calendar.startOfDay(for: $0.date) })
-    }
+    //    private var drinkDates: Set<Date> {
+    //        Set(drinkItems.map { calendar.startOfDay(for: $0.date) })
+    //    }
     
-    private var drinksForSelectedDate: [CachedDrinkItem] {
-        guard let selected = selectedDate else { return [] }
-        return drinkItems.filter { calendar.isDate($0.date, inSameDayAs: selected) }
-    }
+    //    private var drinksForSelectedDate: [CachedDrinkItem] {
+    //        guard let selected = calendarVM.selectedDate
+    // else { return [] }
+    //        return drinkItems.filter { calendar.isDate($0.date, inSameDayAs: selected) }
+    //    }
     
     var body: some View {
-        let dates = generateMonthDates(for: currentMonth)
+        let dates = calendarVM.monthDates
         
         VStack {
-            Text(monthYearFormatter.string(from: currentMonth))
+            Text(calendarVM.monthYearFormatter.string(from: calendarVM.currentMonth))
                 .fontBarLabel()
                 .padding()
             
@@ -59,34 +62,37 @@ struct CalendarView: View {
                         DragGesture()
                             .onEnded { value in
                                 if value.translation.width < -50 {
-                                    changeMonth(by: 1)
+                                    calendarVM.changeMonth(by: 1)
                                 } else if value.translation.width > 50 {
-                                    changeMonth(by: -1)
+                                    calendarVM.changeMonth(by: -1)
                                 }
                             }
                     )}
             
-            if let selected = selectedDate {
-                CalendarDrinkList(drinks: drinksForSelectedDate, selectedDate: selected)
+            if let selected = calendarVM.selectedDate
+            {
+                CalendarDrinkList(drinks: calendarVM.drinksForSelectedDate, selectedDate: selected)
                     .transition(.opacity)
             }
             
         }
-        .animation(.easeInOut, value: currentMonth)
+        .animation(.easeInOut, value: calendarVM.currentMonth)
         .onAppear {
-            updateDrinkQuery()
+            calendarVM.setModelContext(modelContext)
+            calendarVM.fetchDrinkItemsForMonth()
         }
-        .onChange(of: drinkItems) {
-            isShowingDrinkDetails = selectedDate != nil && !drinksForSelectedDate.isEmpty
+        .onChange(of: calendarVM.cachedItems) {
+            isShowingDrinkDetails = calendarVM.selectedDate != nil && !calendarVM.drinksForSelectedDate.isEmpty
         }
     }
     
     private func calendarGridView(for dates: [Date]) -> some View {
         LazyVGrid(columns: columns, spacing: 10) {
             ForEach(dates, id: \.self) { date in
-                let isInMonth = calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
-                let isSelected = calendar.isDate(date, inSameDayAs: selectedDate ?? Date())
-                let hasEvent = drinkDates.contains(calendar.startOfDay(for: date))
+                let isInMonth = calendar.isDate(date, equalTo: calendarVM.currentMonth, toGranularity: .month)
+                let isSelected = calendar.isDate(date, inSameDayAs: calendarVM.selectedDate
+                                                 ?? Date())
+                let hasEvent = calendarVM.drinkDates.contains(calendar.startOfDay(for: date))
                 
                 CalendarDayCell(
                     date: date,
@@ -95,66 +101,63 @@ struct CalendarView: View {
                     hasEvent: hasEvent
                 ) {
                     withAnimation(.easeInOut) {
-                        if let selected = selectedDate, calendar.isDate(selected, inSameDayAs: date) {
-                            selectedDate = nil
-                        } else {
-                            selectedDate = date
-                        }
-                        isShowingDrinkDetails = selectedDate != nil && !drinksForSelectedDate.isEmpty
+                        calendarVM.toggleSelectedDate(date)
+                        isShowingDrinkDetails = calendarVM.selectedDate != nil &&
+                                                !calendarVM.drinksForSelectedDate.isEmpty
                     }
                 }
             }
         }
     }
     
-    private func updateDrinkQuery() {
-        let start = calendar.date(from: calendar.dateComponents([.year, .month], from: currentMonth))!
-        let end = calendar.date(byAdding: .month, value: 1, to: start)!
-        let descriptor = FetchDescriptor<CachedDrinkItem>(
-            predicate: #Predicate { $0.date >= start && $0.date < end }
-        )
-        
-        do {
-            drinkItems = try modelContext.fetch(descriptor)
-        } catch {
-            print("Fetch failed: \(error)")
-        }
-    }
+    //    private func updateDrinkQuery() {
+    //        let start = calendar.date(from: calendar.dateComponents([.year, .month], from: calendarVM.currentMonth))!
+    //        let end = calendar.date(byAdding: .month, value: 1, to: start)!
+    //        let descriptor = FetchDescriptor<CachedDrinkItem>(
+    //            predicate: #Predicate { $0.date >= start && $0.date < end }
+    //        )
+    //
+    //        do {
+    //            drinkItems = try modelContext.fetch(descriptor)
+    //        } catch {
+    //            print("Fetch failed: \(error)")
+    //        }
+    //    }
     
-    private func changeMonth(by value: Int) {
-        if let newMonth = calendar.date(byAdding: .month, value: value, to: currentMonth) {
-            currentMonth = newMonth
-        }
-    }
+    //    private func changeMonth(by value: Int) {
+    //        if let newMonth = calendar.date(byAdding: .month, value: value, to: calendarVM.currentMonth) {
+    //            calendarVM.currentMonth = newMonth
+    //        }
+    //    }
     
-    private func generateMonthDates(for month: Date) -> [Date] {
-        guard let monthInterval = calendar.dateInterval(of: .month, for: month),
-              let firstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
-              let lastWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.end.addingTimeInterval(-1))
-        else { return [] }
-        
-        var dates: [Date] = []
-        var current = firstWeek.start
-        
-        while current < lastWeek.end {
-            dates.append(current)
-            current = calendar.date(byAdding: .day, value: 1, to: current)!
-        }
-        
-        return dates
-    }
+    //    private func generateMonthDates(for month: Date) -> [Date] {
+    //        guard let monthInterval = calendar.dateInterval(of: .month, for: month),
+    //              let firstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
+    //              let lastWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.end.addingTimeInterval(-1))
+    //        else { return [] }
+    //
+    //        var dates: [Date] = []
+    //        var current = firstWeek.start
+    //
+    //        while current < lastWeek.end {
+    //            dates.append(current)
+    //            current = calendar.date(byAdding: .day, value: 1, to: current)!
+    //        }
+    //
+    //        return dates
+    //    }
     
-    private var monthYearFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM yyyy"
-        return formatter
-    }
-    
-    private var dayFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d"
-        return formatter
-    }
+    //    private var monthYearFormatter: DateFormatter {
+    //        let formatter = DateFormatter()
+    //        formatter.dateFormat = "MMMM yyyy"
+    //        return formatter
+    //    }
+    //
+    //    private var dayFormatter: DateFormatter {
+    //        let formatter = DateFormatter()
+    //        formatter.dateFormat = "d"
+    //        return formatter
+    //    }
 }
 
 //TODO: Toggle systemImage if on premium account or not
