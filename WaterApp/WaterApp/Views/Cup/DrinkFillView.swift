@@ -58,6 +58,7 @@ struct DrinkFillView: View {
                         modelContext.insert(newItem)
                         do {
                             try modelContext.save()
+                            drinkListVM.refreshFromCache(modelContext)
                         } catch {
                             print("Failed to save: \(error.localizedDescription)")
                         }
