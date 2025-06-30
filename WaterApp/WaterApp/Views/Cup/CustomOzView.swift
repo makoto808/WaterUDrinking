@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct CustomOzView: View {
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) var dismiss
+    
+    @Environment(DrinkListVM.self) private var drinkListVM
     
     @State private var text: String = ""
     
     @FocusState private var focus: Bool
     @FocusState private var keyboardFocused: Bool
+    
+    let item: DrinkItem
     
     var body: some View {
         VStack {
@@ -46,6 +51,24 @@ struct CustomOzView: View {
                 Spacer()
                 
                 Button("+ Custom Amount ", systemImage: "lock") {
+                    guard let customAmount = Double(text), customAmount > 0 else {
+                        drinkListVM.showAlert = true
+                        return
+                    }
+
+                    if let newItem = drinkListVM.parseNewCachedItem(for: item, volume: customAmount) {
+                        modelContext.insert(newItem)
+                        do {
+                            try modelContext.save()
+                            drinkListVM.loadFromCache(modelContext)
+                        } catch {
+                            print("Failed to save: \(error.localizedDescription)")
+                        }
+                    } else {
+                        drinkListVM.showAlert = true
+                    }
+                    text = ""
+                    drinkListVM.navPath.removeLast()
                 }
                 .button1()
             }
@@ -57,6 +80,6 @@ struct CustomOzView: View {
     }
 }
 
-#Preview {
-    CustomOzView()
-}
+//#Preview {
+//    CustomOzView()
+//}

@@ -46,23 +46,26 @@ import SwiftUI
         selectedItemIndex = items.firstIndex { $0.name == drink.name }
     }
 
-    func parseNewCachedItem(for item: DrinkItem) -> CachedDrinkItem? {
-        guard let i = selectedItemIndex else { return nil }
-        if value == 0 {
-            showAlert = true
-        } else {
-            items[i].volume += value
+    func parseNewCachedItem(for item: DrinkItem, volume customVolume: Double? = nil) -> CachedDrinkItem? {
+        guard selectedItemIndex != nil else { return nil }
+        let volumeToUse = customVolume ?? value
+        
+        guard volumeToUse > 0 else {
+            return nil
         }
+        
         guard let index = items.firstIndex(where: { $0.name == item.name }) else {
             return nil
         }
+        
         let newItem = CachedDrinkItem(
             date: Date(),
             name: item.name,
             img: item.img,
-            volume: value,
+            volume: volumeToUse,
             arrayOrderValue: index
         )
+        
         return newItem
     }
 

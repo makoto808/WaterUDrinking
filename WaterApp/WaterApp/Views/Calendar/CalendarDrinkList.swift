@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct CalendarDrinkList: View {
+    @Environment(CalendarHomeVM.self) private var calendarVM
     @Environment(DrinkListVM.self) private var drinkListVM
+    
+    @State private var isShowingSheet = false
     
     let drinks: [CachedDrinkItem]
     let selectedDate: Date
     
-    @State private var isShowingSheet = false
-    
     private var oz: Double {
-        drinks.reduce(0) { $0 + $1.volume }
+        calendarVM.totalOunces(for: selectedDate)
     }
     
     private var percentage: Int {
-        guard drinkListVM.totalOzGoal > 0 else { return 0 }
-        return Int(min((oz / drinkListVM.totalOzGoal) * 100, 999))
+        calendarVM.percentageOfGoal(for: selectedDate, goal: drinkListVM.totalOzGoal)
     }
     
     var body: some View {
@@ -39,7 +39,7 @@ struct CalendarDrinkList: View {
                     .fontBarLabel()
                     .padding(.top)
                 
-                ForEach(drinks, id: \.id) { drink in
+                ForEach(drinks.sorted(by: { $0.date > $1.date }), id: \.id) { drink in
                     HStack(spacing: 12) {
                         Image(drink.img)
                             .CDVresize2()

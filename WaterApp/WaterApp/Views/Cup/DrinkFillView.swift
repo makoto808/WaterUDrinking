@@ -81,7 +81,7 @@ struct DrinkFillView: View {
                         .frame(width: 40, height: 40)
                 }
                 .sheet(isPresented: $drinkListVM.showCustomOzView) {
-                    CustomOzView()
+                    CustomOzView(item: item)
                         .presentationDetents([.fraction(2/6)], selection: $drinkListVM.settingsDetent)
                 }
             }
