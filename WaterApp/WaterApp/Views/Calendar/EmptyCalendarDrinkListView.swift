@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EmptyCalendarDrinkListView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(DrinkListVM.self) private var drinkListVM
     
     let selectedDate: Date
     
@@ -26,7 +27,7 @@ struct EmptyCalendarDrinkListView: View {
                     .multilineTextAlignment(.center)
                 
                 Button("+ Add") {
-                    // Action here
+                    drinkListVM.navPath.removeAll()
                 }
                 .button1()
                 

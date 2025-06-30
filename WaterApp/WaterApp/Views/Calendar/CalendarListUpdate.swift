@@ -11,6 +11,7 @@ import SwiftUI
 struct CalendarListUpdate: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(CalendarHomeVM.self) private var calendarVM
+    @Environment(DrinkListVM.self) private var drinkListVM
     
     @State private var drinks: [CachedDrinkItem] = []
     
@@ -30,7 +31,7 @@ struct CalendarListUpdate: View {
                 Spacer(minLength: 30)
                 
                 Button("+ Add") {
-                    
+                    drinkListVM.navPath.removeAll()
                 }
                 .button1()
                 
