@@ -143,4 +143,24 @@ import SwiftUI
         let cached = try modelContext.fetch(fetchDescriptor)
         return cached
     }
+    
+    func refreshFromCache(_ modelContext: ModelContext) {
+        for i in 0..<items.count {
+            items[i].volume = 0
+        }
+        
+        do {
+            let cached = try fetchTodaysCachedDrinks(modelContext)
+            let cachedDrinks = cached.map { DrinkItem($0) }
+            for i in 0..<items.count {
+                for cachedDrink in cachedDrinks {
+                    if cachedDrink.name == items[i].name {
+                        items[i].volume += cachedDrink.volume
+                    }
+                }
+            }
+        } catch {
+            print("Failed to refresh drinks: \(error)")
+        }
+    }
 }

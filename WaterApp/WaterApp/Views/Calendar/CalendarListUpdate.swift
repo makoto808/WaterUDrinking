@@ -76,7 +76,7 @@ struct CalendarListUpdate: View {
     }
     
     private func deleteDrink(_ drink: CachedDrinkItem) {
-        calendarVM.deleteDrink(drink)
+        calendarVM.deleteDrink(drink, drinkListVM: drinkListVM)
         drinks = calendarVM.fetchDrinks(for: selectedDate)
     }
 }
