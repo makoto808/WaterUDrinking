@@ -111,3 +111,16 @@ extension TextField {
             .multilineTextAlignment(.center)
     }
 }
+
+extension View {
+    func fontGoalViewTextField() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 40))
+            .foregroundStyle(.primary)
+            .frame(width: 250)
+            .lineLimit(1)
+            .allowsTightening(true)
+            .minimumScaleFactor(0.30)
+            .keyboardType(.decimalPad)
+            .multilineTextAlignment(.center)
+    }
+}
