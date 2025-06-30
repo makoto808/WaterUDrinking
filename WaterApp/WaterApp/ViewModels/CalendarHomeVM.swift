@@ -17,6 +17,8 @@ import SwiftUI
     var selectedDate: Date? = nil
     var cachedItems: [CachedDrinkItem] = []
     var userGoalModel: UserGoal?
+    var showAlert = false
+    var drinkToDelete: CachedDrinkItem? = nil
     
     private let calendar: Calendar = {
         var cal = Calendar.current
