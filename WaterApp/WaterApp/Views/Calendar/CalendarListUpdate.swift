@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CalendarListUpdate: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     @Environment(CalendarHomeVM.self) private var calendarVM
     @Environment(DrinkListVM.self) private var drinkListVM
     
@@ -31,7 +32,10 @@ struct CalendarListUpdate: View {
                 Spacer(minLength: 30)
                 
                 Button("+ Add") {
-                    drinkListVM.navPath.removeAll()
+                    dismiss()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                        drinkListVM.navPath.removeLast()
+                    }
                 }
                 .button1()
                 

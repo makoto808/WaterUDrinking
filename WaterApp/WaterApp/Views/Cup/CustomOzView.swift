@@ -68,7 +68,10 @@ struct CustomOzView: View {
                         drinkListVM.showAlert = true
                     }
                     text = ""
-                    drinkListVM.navPath.removeLast()
+                    dismiss()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                        drinkListVM.navPath.removeLast()
+                    }
                 }
                 .button1()
             }
