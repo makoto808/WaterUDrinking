@@ -10,7 +10,6 @@ import SwiftUI
 struct CustomOzView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) var dismiss
-    
     @Environment(DrinkListVM.self) private var drinkListVM
     
     @State private var text: String = ""
@@ -24,7 +23,7 @@ struct CustomOzView: View {
         VStack {
             Spacer()
             
-            HStack(spacing: 4) {
+            HStack {
                 TextField("", text: self.$text.max(4))
                     .fontCustomOzViewTextField()
                     .focused($keyboardFocused)
@@ -33,8 +32,8 @@ struct CustomOzView: View {
                             keyboardFocused = true
                         }
                     }
-                
-                Text("oz")
+
+                Text(" oz")
                     .fontOzLabel()
             }
             .padding(8)
@@ -45,35 +44,13 @@ struct CustomOzView: View {
                 } label: {
                     Image(systemName: "x.circle")
                         .resizable()
-                        .frame(width: 40, height: 40)
+                        .frame(width: 38, height: 38)
                 }
-                
-                Spacer()
-                
-                Button("+ Custom Amount ", systemImage: "lock") {
-                    guard let customAmount = Double(text), customAmount > 0 else {
-                        drinkListVM.showAlert = true
-                        return
-                    }
 
-                    if let newItem = drinkListVM.parseNewCachedItem(for: item, volume: customAmount) {
-                        modelContext.insert(newItem)
-                        do {
-                            try modelContext.save()
-                            drinkListVM.refreshFromCache(modelContext)
-                        } catch {
-                            print("Failed to save: \(error.localizedDescription)")
-                        }
-                    } else {
-                        drinkListVM.showAlert = true
-                    }
-                    text = ""
-                    dismiss()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                        drinkListVM.navPath.removeLast()
-                    }
-                }
-                .button1()
+                Spacer()
+
+                CustomOzButton(text: $text, item: item)
+                    .button1()
             }
             .padding(50)
             .onAppear {
@@ -83,6 +60,8 @@ struct CustomOzView: View {
     }
 }
 
-//#Preview {
-//    CustomOzView()
-//}
+#Preview {
+    CustomOzView(item: DrinkItem(name: "Water", img: "waterBottle", volume: 8))
+        .environment(DrinkListVM())
+}
+
