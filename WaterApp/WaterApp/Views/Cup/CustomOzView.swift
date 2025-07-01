@@ -43,8 +43,7 @@ struct CustomOzView: View {
                     dismiss()
                 } label: {
                     Image(systemName: "x.circle")
-                        .resizable()
-                        .frame(width: 38, height: 38)
+                        .customOzButton()
                 }
 
                 Spacer()

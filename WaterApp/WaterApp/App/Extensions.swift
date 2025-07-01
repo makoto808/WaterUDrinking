@@ -42,6 +42,16 @@ extension Image {
             .frame(width: 24, height: 24)
             .foregroundColor(.blue)
     }
+    
+    func customOzButton() -> some View {
+        self.resizable()
+            .frame(width: 38, height: 38)
+    }
+    
+    func customDrinkButton() -> some View {
+        self.resizable()
+            .frame(width: 40, height: 40)
+    }
 }
 
 extension View {
