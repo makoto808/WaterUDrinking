@@ -64,4 +64,3 @@ struct CustomOzView: View {
     CustomOzView(item: DrinkItem(name: "Water", img: "waterBottle", volume: 8))
         .environment(DrinkListVM())
 }
-
