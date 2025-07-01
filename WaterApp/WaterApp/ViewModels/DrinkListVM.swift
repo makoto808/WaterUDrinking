@@ -98,7 +98,7 @@ import SwiftUI
             }
             try modelContext.save()
         } catch {
-            print("Error fetching [CachedDrinkItem]")
+            print("Error deleting cached drinks: \(error)")
         }
     }
     
@@ -142,5 +142,29 @@ import SwiftUI
         let fetchDescriptor = FetchDescriptor<CachedDrinkItem>(predicate: predicate)
         let cached = try modelContext.fetch(fetchDescriptor)
         return cached
+    }
+    
+    func refreshFromCache(_ modelContext: ModelContext) {
+        do {
+            let cached = try fetchTodaysCachedDrinks(modelContext)
+            let cachedDrinks = cached.map { DrinkItem($0) }
+            let updatedItems = items.map { originalItem -> DrinkItem in
+                let volumeFromCache = cachedDrinks
+                    .filter { $0.name == originalItem.name }
+                    .reduce(0.0) { $0 + $1.volume }
+                return DrinkItem(
+                    name: originalItem.name,
+                    img: originalItem.img,
+                    volume: volumeFromCache
+                )
+            }
+            self.items = updatedItems
+        } catch {
+            print("Failed to refresh drinks: \(error)")
+            let resetItems = items.map { item in
+                DrinkItem(name: item.name, img: item.img, volume: 0.0)
+            }
+            self.items = resetItems
+        }
     }
 }

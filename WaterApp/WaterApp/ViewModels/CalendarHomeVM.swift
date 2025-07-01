@@ -17,6 +17,8 @@ import SwiftUI
     var selectedDate: Date? = nil
     var cachedItems: [CachedDrinkItem] = []
     var userGoalModel: UserGoal?
+    var showAlert = false
+    var drinkToDelete: CachedDrinkItem? = nil
     
     private let calendar: Calendar = {
         var cal = Calendar.current
@@ -133,12 +135,13 @@ import SwiftUI
     }
     
     // MARK: - Actions
-    func deleteDrink(_ drink: CachedDrinkItem) {
+    func deleteDrink(_ drink: CachedDrinkItem, drinkListVM: DrinkListVM) {
         guard let context = modelContext else { return }
         context.delete(drink)
         do {
             try context.save()
             cachedItems.removeAll { $0.id == drink.id }
+            drinkListVM.refreshFromCache(context)
         } catch {
             print("Failed to delete drink: \(error.localizedDescription)")
         }

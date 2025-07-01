@@ -10,7 +10,11 @@ import SwiftUI
 
 struct CalendarListUpdate: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     @Environment(CalendarHomeVM.self) private var calendarVM
+    @Environment(DrinkListVM.self) private var drinkListVM
+    
+    @Bindable var calendarVMBindable: CalendarHomeVM
     
     @State private var drinks: [CachedDrinkItem] = []
     
@@ -30,7 +34,10 @@ struct CalendarListUpdate: View {
                 Spacer(minLength: 30)
                 
                 Button("+ Add") {
-                    
+                    dismiss()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                        drinkListVM.navPath.removeLast()
+                    }
                 }
                 .button1()
                 
@@ -39,29 +46,18 @@ struct CalendarListUpdate: View {
                     VStack(spacing: 24) {
                         
                         ForEach(drinks.sorted(by: { $0.date > $1.date }), id: \.id) { drink in
-                            HStack(alignment: .center, spacing: 12) {
-                                Image(drink.img)
-                                    .resizable()
-                                    .frame(width: 60, height: 60)
-                                
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(drink.name)
-                                        .fontBarLabel()
-                                    
-                                    Text("\(drink.volume, specifier: "%.1f") oz")
-                                        .fontBarLabel2()
-                                        .foregroundColor(.gray)
-                                }
-                                
-                                Spacer()
-                                
-                                Button {
-                                    deleteDrink(drink)
-                                } label: {
-                                    Image(systemName: "trash")
-                                        .foregroundColor(.red)
-                                }
-                                .buttonStyle(.plain)
+                            CalendarDrinkRow(drink: drink) {
+                                calendarVM.drinkToDelete = drink
+                                calendarVM.showAlert = true
+                            }
+                        }
+                    }
+                    .alert("Delete this drink?", isPresented: $calendarVMBindable.showAlert) {
+                        Button("Cancel", role: .cancel) { }
+                        Button("Delete", role: .destructive) {
+                            if let drink = calendarVM.drinkToDelete {
+                                deleteDrink(drink)
+                                calendarVM.drinkToDelete = nil
                             }
                         }
                     }
@@ -75,7 +71,7 @@ struct CalendarListUpdate: View {
     }
     
     private func deleteDrink(_ drink: CachedDrinkItem) {
-        calendarVM.deleteDrink(drink)
+        calendarVM.deleteDrink(drink, drinkListVM: drinkListVM)
         drinks = calendarVM.fetchDrinks(for: selectedDate)
     }
 }

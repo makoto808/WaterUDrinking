@@ -39,13 +39,11 @@ struct ResetView: View {
                 .alert("Are You Sure?", isPresented: $showAlert, actions: {
                     Button("Cancel", role: .cancel) {}
                     Button("OK", role: .destructive) {
-                        drinkListVM.items = drinkListVM.items.map { item in
-                            var newItem = item
-                            newItem.volume = 0.0
-                            return newItem
+                        Task {
+                            drinkListVM.deleteTodaysItems(modelContext)
+                            drinkListVM.refreshFromCache(modelContext)
+                            drinkListVM.navPath = []
                         }
-                        drinkListVM.navPath = []
-                        drinkListVM.deleteTodaysItems(modelContext)
                     }
                 }, message: {
                     Text("This will reset today's total.")
