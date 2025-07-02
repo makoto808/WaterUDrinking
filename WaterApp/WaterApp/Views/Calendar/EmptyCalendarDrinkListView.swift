@@ -28,6 +28,7 @@ struct EmptyCalendarDrinkListView: View {
                     .multilineTextAlignment(.center)
                 
                 Button("+ Add") {
+                    drinkListVM.selectedCalendarDate = selectedDate // ✅ set it before navigating back
                     dismiss()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                         drinkListVM.navPath.removeLast()

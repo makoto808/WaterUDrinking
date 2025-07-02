@@ -34,6 +34,7 @@ struct CustomOzButton: View {
             } else {
                 drinkListVM.showAlert = true
             }
+            drinkListVM.selectedCalendarDate = nil
             
             text = ""
             dismiss()

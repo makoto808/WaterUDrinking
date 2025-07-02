@@ -12,6 +12,7 @@ import SwiftUI
 @Observable final class DrinkListVM {
     var navPath: [NavPath] = []
     var selectedItemIndex: Int?
+    var selectedCalendarDate: Date? = nil
     var settingsDetent = PresentationDetent.medium
     var showCustomOzView = false
     var showCustomDrinkView = false
@@ -49,23 +50,21 @@ import SwiftUI
     func parseNewCachedItem(for item: DrinkItem, volume customVolume: Double? = nil) -> CachedDrinkItem? {
         guard selectedItemIndex != nil else { return nil }
         let volumeToUse = customVolume ?? value
-        
-        guard volumeToUse > 0 else {
-            return nil
-        }
-        
+
+        guard volumeToUse > 0 else { return nil }
+
         guard let index = items.firstIndex(where: { $0.name == item.name }) else {
             return nil
         }
-        
+
         let newItem = CachedDrinkItem(
-            date: Date(),
+            date: selectedCalendarDate ?? Date(),
             name: item.name,
             img: item.img,
             volume: volumeToUse,
             arrayOrderValue: index
         )
-        
+
         return newItem
     }
 

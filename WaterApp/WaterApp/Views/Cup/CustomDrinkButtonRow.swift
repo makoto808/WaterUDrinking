@@ -40,6 +40,7 @@ struct CustomDrinkButtonRow: View {
                         print("Failed to save: \(error.localizedDescription)")
                     }
                 }
+                drinkListVM.selectedCalendarDate = nil
                 drinkListVM.value = 0
                 drinkListVM.navPath.removeLast()
             }
