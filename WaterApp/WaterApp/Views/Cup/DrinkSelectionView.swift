@@ -28,7 +28,7 @@ struct DrinkSelectionView: View {
                             }
 
                             Text(drink.name)
-                                .fontCustomDrinkViewSubtitle()
+                                .fontSmallTitle2()
                         }
                     }
                     .scrollTransition { content, phase in

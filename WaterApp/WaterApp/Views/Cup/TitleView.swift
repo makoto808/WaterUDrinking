@@ -29,15 +29,15 @@ struct TitleView: View {
         
         if drinkListVM.totalOz == 0.0 {
             Text("You are dehydrated!")
-                .fontSmall()
+                .fontSubtitle()
         } else if drinkListVM.totalOz >= drinkListVM.totalOzGoal {
             Text("You are fully hydrated!")
-                .fontSmall()
+                .fontSubtitle()
             Text("You drank \(drinkListVM.totalOz.formatted()) oz today!")
-                .fontSmall()
+                .fontSubtitle()
         } else {
             Text("You drank \(drinkListVM.totalOz.formatted()) oz today! \(drinkListVM.percentTotal.rounded(.up).clean)% of your goal!")
-                .fontSmall()
+                .fontSubtitle()
         }
     }
 }

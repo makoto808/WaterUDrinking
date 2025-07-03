@@ -36,7 +36,7 @@ struct GoalView: View {
                 Spacer()
                 
                 Text("Daily Water Goal")
-                    .fontGoalViewTitle()
+                    .fontTitle()
                 
                 HStack(spacing: 4) {
                     TextField("Enter Here", text: self.$dailyWaterGoal.max(3))

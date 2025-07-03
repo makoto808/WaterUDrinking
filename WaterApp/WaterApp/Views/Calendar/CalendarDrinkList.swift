@@ -32,7 +32,7 @@ struct CalendarDrinkList: View {
                 .frame(width: 200, height: 200)
             
             Text("\(percentage)% of goal")
-                .fontCustomDrinkViewSubtitle()
+                .fontSmallTitle2()
             
             VStack(alignment: .leading, spacing: 8) {
                 Text("Total: \(oz, specifier: "%.0f") oz")
@@ -46,10 +46,9 @@ struct CalendarDrinkList: View {
                         
                         VStack(alignment: .leading) {
                             Text(drink.name)
-                                .fontCustomDrinkViewSubtitle()
+                                .fontSmallTitle2()
                             Text("\(drink.volume, specifier: "%.0f") oz")
-                                .fontCustomDrinkViewTitle()
-                                .foregroundColor(.gray)
+                                .fontSmallTitle2()
                         }
                         
                         Spacer()

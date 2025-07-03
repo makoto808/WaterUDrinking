@@ -23,7 +23,6 @@ struct CalendarDrinkRow: View {
 
                 Text("\(drink.volume, specifier: "%.1f") oz")
                     .fontBarLabel2()
-                    .foregroundColor(.gray)
             }
 
             Spacer()

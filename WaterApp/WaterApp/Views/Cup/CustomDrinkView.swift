@@ -17,9 +17,9 @@ struct CustomDrinkView: View {
                     
                     VStack(alignment: .leading, spacing: 5) {
                         
-                        Text("Organic Water").fontCustomDrinkViewTitle()
+                        Text("Organic Water").fontSmallTitle()
                         
-                        Text("100% Rate of Hydration").fontCustomDrinkViewSubtitle()
+                        Text("100% Rate of Hydration").fontSmallTitle2()
                     }
                 }
             }
@@ -30,9 +30,9 @@ struct CustomDrinkView: View {
                     
                     VStack(alignment: .leading, spacing: 5) {
                         
-                        Text("Mineral Water").fontCustomDrinkViewTitle()
+                        Text("Mineral Water").fontSmallTitle()
                         
-                        Text("100% Rate of Hydration").fontCustomDrinkViewSubtitle()
+                        Text("100% Rate of Hydration").fontSmallTitle2()
                     }
                 }
             }
@@ -43,9 +43,9 @@ struct CustomDrinkView: View {
                     
                     VStack(alignment: .leading, spacing: 5) {
                         
-                        Text("Sparkling Water").fontCustomDrinkViewTitle()
+                        Text("Sparkling Water").fontSmallTitle()
                         
-                        Text("100% Rate of Hydration").fontCustomDrinkViewSubtitle()
+                        Text("100% Rate of Hydration").fontSmallTitle2()
                     }
                 }
             }
@@ -56,9 +56,9 @@ struct CustomDrinkView: View {
                     
                     VStack(alignment: .leading, spacing: 5) {
                         
-                        Text("Coconut Water").fontCustomDrinkViewTitle()
+                        Text("Coconut Water").fontSmallTitle()
                         
-                        Text("90% Rate of Hydration").fontCustomDrinkViewSubtitle()
+                        Text("90% Rate of Hydration").fontSmallTitle2()
                     }
                 }
             }
@@ -69,9 +69,9 @@ struct CustomDrinkView: View {
                     
                     VStack(alignment: .leading, spacing: 5) {
                         
-                        Text("Electrolyte Water").fontCustomDrinkViewTitle()
+                        Text("Electrolyte Water").fontSmallTitle()
                         
-                        Text("100% Rate of Hydration").fontCustomDrinkViewSubtitle()
+                        Text("100% Rate of Hydration").fontSmallTitle2()
                     }
                 }
             }

@@ -28,7 +28,7 @@ struct CalendarListUpdate: View {
                 Spacer(minLength: 40)
                 
                 Text(selectedDate.formatted(date: .long, time: .omitted))
-                    .fontUpdateDate()
+                    .fontMediumTitle()
                     .padding(.top)
                 
                 Spacer(minLength: 30)
