@@ -21,14 +21,6 @@ struct WaterAppApp: App {
 /*
  //TODO:
  - Add SwiftData too BarChart
- - Add Button to add/delete data from CalendarView
-    - Allow tapping a drink to edit or delete?
- - If user goal is met, show crown on calendar date
- - Add haptic touch
+ - Add haptic touch?
  - Add sound effects?
- 
- Refactor branch
- - clean up extensions
- - break down code into smaller sizes
- - move to CalendarVM
  */

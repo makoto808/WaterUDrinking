@@ -64,6 +64,5 @@ struct HomeView: View {
         .environment(mockVM)
 }
 
-// TODO: Lock portrait mode throughout entire app
 // TODO: Transition HomeView from left to right to access CalendarView
 

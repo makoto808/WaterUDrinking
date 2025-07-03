@@ -96,9 +96,6 @@ struct CalendarView: View {
 }
 
 //TODO: Toggle systemImage if on premium account or not
-//Button("Add Previous Drink", systemImage: "lock") {
-//}
-//.buttonCapsule()
 
 #Preview {
     struct PreviewWrapper: View {
@@ -109,6 +106,5 @@ struct CalendarView: View {
                 .environment(CalendarHomeVM())
         }
     }
-    
     return PreviewWrapper()
 }

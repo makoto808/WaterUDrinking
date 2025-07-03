@@ -22,14 +22,18 @@ struct ResetView: View {
             Color.backgroundWhite
                 .ignoresSafeArea()
             
-            WaveMotion(offset: Angle(degrees: self.waveOffset.degrees), percent: Double(3.9/8.0))
-                .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
-                .ignoresSafeArea()
-                .onAppear {
-                    withAnimation(Animation.linear(duration: 3.5).repeatForever(autoreverses: false)) {
-                        self.waveOffset = Angle(degrees: 360)
+            GeometryReader { geo in
+                WaveMotion(offset: waveOffset, percent: 3.9 / 8.0)
+                    .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
+                    .frame(width: geo.size.width + 100)
+                    .offset(x: -50)
+                    .ignoresSafeArea()
+                    .onAppear {
+                        withAnimation(.linear(duration: 3.5).repeatForever(autoreverses: false)) {
+                            waveOffset = Angle(degrees: 360)
+                        }
                     }
-                }
+            }
             
             VStack {
                 Button("Reset?") {
