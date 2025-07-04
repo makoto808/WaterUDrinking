@@ -38,8 +38,9 @@ struct CalendarDrinkList: View {
                 Text("Total: \(oz, specifier: "%.0f") oz")
                     .fontBarLabel()
                     .padding(.top)
+                    .padding(10)
                 
-                ForEach(drinks, id: \.id) { drink in
+                ForEach(drinks.sorted(by: { $0.date > $1.date }), id: \.id) { drink in
                     HStack(spacing: 12) {
                         Image(drink.img)
                             .CDVresize2()
@@ -54,6 +55,7 @@ struct CalendarDrinkList: View {
                         Spacer()
                     }
                     .padding(.vertical, 4)
+                    .padding(.horizontal, 10)
                 }
                 
                 HStack {
