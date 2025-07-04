@@ -27,13 +27,7 @@ struct CalendarDayCell: View {
                 Color.clear.frame(width: 35, height: 35)
             } else if goalMet {
                 Image("waterBottle")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 20, height: 20)
-                    .frame(width: 35, height: 35)
-                    .background(backgroundColor)
-                    .cornerRadius(20)
-                    .foregroundColor(.white)
+                    .calendarGoalMetImage(backgroundColor: backgroundColor)
             } else {
                 Text("\(Calendar.current.component(.day, from: date))")
                     .font(.custom("ArialRoundedMTBold", size: 15))

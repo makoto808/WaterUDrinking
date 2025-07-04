@@ -26,9 +26,7 @@ struct DrinkFillView: View {
             
             // TODO: Adds an overly layer for fill effect with Slider()
             Image(item.img)
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: 500, alignment: .center)
+                .drinkFillResize()
                 .sheet(isPresented: $drinkListVM.showCustomDrinkView) {
                     CustomDrinkView()
                 }

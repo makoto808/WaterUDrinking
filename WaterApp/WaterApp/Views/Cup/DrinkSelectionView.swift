@@ -22,9 +22,7 @@ struct DrinkSelectionView: View {
                                 drinkListVM.navPath.append(.drinkFillView(drink))
                             } label: {
                                 Image(drink.img)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 150, height: 110)
+                                    .drinkFillSelectionResize()
                             }
 
                             Text(drink.name)

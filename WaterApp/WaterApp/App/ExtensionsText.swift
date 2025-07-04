@@ -44,7 +44,7 @@ extension Text {
     }
     
     // MARK: - Small Titles
-
+    
     func fontSmallTitle() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 16))
             .foregroundStyle(.primary)

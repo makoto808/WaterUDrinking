@@ -39,7 +39,7 @@ struct CalendarDrinkList: View {
                     .fontBarLabel()
                     .padding(.top)
                 
-                ForEach(drinks.reversed(), id: \.id) { drink in
+                ForEach(drinks, id: \.id) { drink in
                     HStack(spacing: 12) {
                         Image(drink.img)
                             .CDVresize2()

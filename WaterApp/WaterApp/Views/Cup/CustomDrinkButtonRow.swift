@@ -55,8 +55,7 @@ struct CustomDrinkButtonRow: View {
                 drinkListVM.showCustomOzView.toggle()
             } label: {
                 Image(systemName: "ellipsis.circle")
-                    .resizable()
-                    .frame(width: 40, height: 40)
+                    .customDrinkButton()
             }
             .sheet(isPresented: $drinkListVM.showCustomOzView) {
                 CustomOzView(item: item)

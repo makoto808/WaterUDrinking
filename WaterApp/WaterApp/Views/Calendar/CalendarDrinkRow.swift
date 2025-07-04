@@ -14,8 +14,7 @@ struct CalendarDrinkRow: View {
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
             Image(drink.img)
-                .resizable()
-                .frame(width: 60, height: 60)
+                .calendarDrinkRowImage()
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(drink.name)
@@ -31,9 +30,8 @@ struct CalendarDrinkRow: View {
                 onDelete()
             } label: {
                 Image(systemName: "trash")
-                    .foregroundColor(.red)
+                    .buttonTrash()
             }
-            .buttonStyle(.plain)
         }
     }
 }
