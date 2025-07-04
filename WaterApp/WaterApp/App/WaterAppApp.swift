@@ -19,7 +19,7 @@ struct WaterAppApp: App {
 }
 
 /*
- //TODO:
+ // TODO:
  - Add SwiftData too BarChart
  - Add haptic touch?
  - Add sound effects?

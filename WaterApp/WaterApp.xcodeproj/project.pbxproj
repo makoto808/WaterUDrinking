@@ -138,10 +138,10 @@
 		072787252D94C06300D56B96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				07CED0342D96A02600498D17 /* SettingsModel.swift */,
-				07B3A0032D9DF79100000BF2 /* DrinkItem.swift */,
 				07FBA8B52DAA53A000133F70 /* NavPath.swift */,
+				07B3A0032D9DF79100000BF2 /* DrinkItem.swift */,
 				077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */,
+				07CED0342D96A02600498D17 /* SettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
