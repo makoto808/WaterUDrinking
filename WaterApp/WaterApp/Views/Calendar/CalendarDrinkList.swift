@@ -32,24 +32,23 @@ struct CalendarDrinkList: View {
                 .frame(width: 200, height: 200)
             
             Text("\(percentage)% of goal")
-                .fontCustomDrinkViewSubtitle()
+                .fontSmallTitle2()
             
             VStack(alignment: .leading, spacing: 8) {
                 Text("Total: \(oz, specifier: "%.0f") oz")
                     .fontBarLabel()
                     .padding(.top)
                 
-                ForEach(drinks.sorted(by: { $0.date > $1.date }), id: \.id) { drink in
+                ForEach(drinks, id: \.id) { drink in
                     HStack(spacing: 12) {
                         Image(drink.img)
                             .CDVresize2()
                         
                         VStack(alignment: .leading) {
                             Text(drink.name)
-                                .fontCustomDrinkViewSubtitle()
+                                .fontSmallTitle2()
                             Text("\(drink.volume, specifier: "%.0f") oz")
-                                .fontCustomDrinkViewTitle()
-                                .foregroundColor(.gray)
+                                .fontSmallTitle2()
                         }
                         
                         Spacer()
@@ -73,7 +72,6 @@ struct CalendarDrinkList: View {
                     .presentationDetents([.medium, .large])
                 }
             }
-            //            .transition(.move(edge: .bottom).combined(with: .opacity))
             .transition(.opacity)
             .padding(.top)
         }

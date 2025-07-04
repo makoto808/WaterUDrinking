@@ -33,60 +33,15 @@ struct SettingsListView: View {
                     }
                 }
                 
+                Section {
+                    Button {
+                        
+                    } label: {
+                        Text("Become a hydrated member")
+                    }
+                }
+                
                 //TODO: Future Settings Tabs below
-                
-                //Button("Set a reminder") {
-                //
-                //                        }
-                //                    }
-                //
-                //                    Section {
-                //                        Button("Cocktail Menu") {
-                //
-                //                        }
-                //                        Button("Widgets") {
-                //
-                //                        }
-                //                        Button("App Icons") {
-                //
-                //                        }
-                //                    }
-                //
-                //                    Section {
-                //                        Button("Measurements") {
-                //
-                //                        }
-                //                        Button("Apple Health Sync") {
-                //
-                //                        }
-                //                        Button("Apple WatchOS") {
-                //
-                //                        }
-                //                        Button("iCloud Backup") {
-                //
-                //                        }
-                //                    }
-                //
-                //                    Section {
-                //                        Button("Language") {
-                //
-                //                        }
-                //                        Button("Help & Support") {
-                //
-                //                        }
-                //                        Button("Have an App Idea?") {
-                //
-                //                        }
-                //                    }
-                //
-                //                    Section {
-                //                        Button("Hydrate your friends!") {
-                //
-                //                        }
-                //                        .buttonBorderShape(.capsule)
-                //                        .buttonStyle(.borderedProminent)
-                //                    }
-                
             }
             .listStyle(.automatic)
             .scrollContentBackground(.hidden)
@@ -97,4 +52,5 @@ struct SettingsListView: View {
 
 #Preview {
     SettingsListView()
+        .environment(DrinkListVM())
 }

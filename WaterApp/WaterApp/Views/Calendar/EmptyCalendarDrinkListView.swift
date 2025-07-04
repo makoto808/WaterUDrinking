@@ -20,14 +20,15 @@ struct EmptyCalendarDrinkListView: View {
                 Spacer(minLength: 40)
                 
                 Text(selectedDate.formatted(date: .long, time: .omitted))
-                    .fontUpdateDate()
+                    .fontMediumTitle()
                     .padding(.top)
                 
                 Text("You are dehydrated!")
-                    .fontUpdateDate()
+                    .fontMediumTitle()
                     .multilineTextAlignment(.center)
                 
                 Button("+ Add") {
+                    drinkListVM.selectedCalendarDate = selectedDate
                     dismiss()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                         drinkListVM.navPath.removeLast()
@@ -35,11 +36,11 @@ struct EmptyCalendarDrinkListView: View {
                 }
                 .button1()
                 
-                Spacer(minLength: 20) // breathing room at bottom
+                Spacer(minLength: 20)
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal)
-            .padding(.bottom, 40) // gives room on short detents
+            .padding(.bottom, 40)
         }
     }
 }

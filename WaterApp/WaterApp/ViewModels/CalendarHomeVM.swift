@@ -105,20 +105,19 @@ import SwiftUI
     }
     
     var monthDates: [Date] {
-        guard let monthInterval = calendar.dateInterval(of: .month, for: currentMonth),
-              let firstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
-              let lastWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.end.addingTimeInterval(-1))
-        else { return [] }
-        
-        var dates: [Date] = []
-        var current = firstWeek.start
-        while current < lastWeek.end {
-            dates.append(current)
-            current = calendar.date(byAdding: .day, value: 1, to: current)!
+        let calendar = Calendar(identifier: .gregorian)
+        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentMonth))!
+        let firstWeekdayOfMonth = calendar.component(.weekday, from: startOfMonth)
+        let paddingDays = (firstWeekdayOfMonth - calendar.firstWeekday + 7) % 7
+        let totalDays = calendar.range(of: .day, in: .month, for: currentMonth)!.count
+        let gridStartDate = calendar.date(byAdding: .day, value: -paddingDays, to: startOfMonth)!
+        let numberOfDays = ((paddingDays + totalDays) <= 35) ? 35 : 42
+        let dates = (0..<numberOfDays).compactMap { offset in
+            calendar.date(byAdding: .day, value: offset, to: gridStartDate)
         }
         return dates
     }
-    
+
     func toggleSelectedDate(_ date: Date) {
         if let selected = selectedDate, calendar.isDate(selected, inSameDayAs: date) {
             selectedDate = nil

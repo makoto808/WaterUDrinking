@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-//NOTE: Use this to display in DrinkSelectionView.
+// NOTE: Used this to display in DrinkSelectionView.
 struct DrinkItem: Identifiable, Hashable {
     var id: String
     var name: String
@@ -30,6 +30,7 @@ struct DrinkItem: Identifiable, Hashable {
     }
 }
 
+// NOTE: Used to cache the drink data
 @Model class CachedDrinkItem: Identifiable, Hashable {
     var id: String
     var date: Date

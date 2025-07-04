@@ -53,8 +53,7 @@ struct CupGoalSummaryView: View {
                 .frame(width: 200, height: 200)
 
             Text("\(percentage)% of goal")
-                .fontCustomDrinkViewTitle()
-                .foregroundColor(.gray)
+                .fontSmallTitle2()
         }
     }
 }

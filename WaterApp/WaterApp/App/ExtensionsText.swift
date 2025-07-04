@@ -13,6 +13,8 @@ extension Double {
     }
 }
 
+// MARK: - HomeView and TitleView
+
 extension Text {
     func fontTitle() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 45))
@@ -23,7 +25,7 @@ extension Text {
             .padding(.horizontal, 20)
     }
     
-    func fontSmall() -> some View {
+    func fontSubtitle() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 20))
             .foregroundStyle(.primary)
             .lineLimit(1)
@@ -32,31 +34,34 @@ extension Text {
             .padding(.horizontal, 20)
     }
     
-    func fontGoalViewTitle() -> some View {
-        self.font(.custom("ArialRoundedMTBold", size: 45))
+    func fontMediumTitle() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 35))
             .foregroundStyle(.primary)
             .lineLimit(1)
             .allowsTightening(true)
             .minimumScaleFactor(0.30)
-            .padding(.horizontal, 5)
+            .padding(.horizontal, 20)
     }
     
-    //Fonts for CustomDrinkView
-    func fontCustomDrinkViewTitle() -> some View {
+    // MARK: - Small Titles
+    
+    func fontSmallTitle() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 16))
+            .foregroundStyle(.primary)
             .fontWeight(.semibold)
             .lineLimit(1)
             .minimumScaleFactor(0.5)
     }
     
-    func fontCustomDrinkViewSubtitle() -> some View {
+    func fontSmallTitle2() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 16))
-            .font(.subheadline)
-            .foregroundColor(.secondary)
+            .foregroundStyle(.secondary)
+            .fontWeight(.semibold)
             .lineLimit(1)
             .minimumScaleFactor(0.5)
     }
     
+    // MARK: - Custom Labels
     func fontOzLabel() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 40))
             .foregroundColor(.primary)
@@ -72,6 +77,7 @@ extension Text {
             .foregroundColor(.secondary)
     }
     
+    // MARK: - Goal and BarCharts
     func fontGoalLine() -> some View {
         self.font(.caption)
             .foregroundColor(.secondary)
@@ -81,16 +87,9 @@ extension Text {
         self.font(.custom("ArialRoundedMTBold", size: 12))
             .foregroundColor(.gray)
     }
-    
-    func fontUpdateDate() -> some View {
-        self.font(.custom("ArialRoundedMTBold", size: 35))
-            .foregroundStyle(.primary)
-            .lineLimit(1)
-            .allowsTightening(true)
-            .minimumScaleFactor(0.30)
-            .padding(.horizontal, 20)
-    }
 }
+
+// MARK: - TextField
 
 extension TextField {
     func fontCustomOzViewTextField() -> some View {

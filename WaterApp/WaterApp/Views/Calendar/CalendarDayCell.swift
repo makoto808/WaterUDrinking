@@ -23,23 +23,25 @@ struct CalendarDayCell: View {
     
     var body: some View {
         Group {
-            if goalMet {
+            if !isInMonth {
+                Color.clear.frame(width: 35, height: 35)
+            } else if goalMet {
                 Image("waterBottle")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 20, height: 20)
+                    .calendarGoalMetImage(backgroundColor: backgroundColor)
             } else {
                 Text("\(Calendar.current.component(.day, from: date))")
                     .font(.custom("ArialRoundedMTBold", size: 15))
+                    .frame(width: 35, height: 35)
+                    .background(backgroundColor)
+                    .cornerRadius(20)
+                    .foregroundColor(.white)
             }
         }
-        .frame(width: 35, height: 35)
-        .background(backgroundColor)
-        .cornerRadius(20)
-        .foregroundColor(.white)
+        .contentShape(Rectangle())
         .onTapGesture {
-            onSelect()
+            if isInMonth {
+                onSelect()
+            }
         }
     }
 }
- 

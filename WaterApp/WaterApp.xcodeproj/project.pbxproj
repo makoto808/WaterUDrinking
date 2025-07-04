@@ -22,6 +22,8 @@
 		077ED5BD2E0E882700CBCC33 /* EmptyCalendarDrinkListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5BC2E0E882700CBCC33 /* EmptyCalendarDrinkListView.swift */; };
 		077ED5C32E127B9400CBCC33 /* CalendarDrinkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5C22E127B9400CBCC33 /* CalendarDrinkRow.swift */; };
 		077ED5C52E1372C700CBCC33 /* CustomOzButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5C42E1372C700CBCC33 /* CustomOzButton.swift */; };
+		077ED5C72E1375FB00CBCC33 /* CustomDrinkButtonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5C62E1375FB00CBCC33 /* CustomDrinkButtonRow.swift */; };
+		077ED5C92E178CC100CBCC33 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077ED5C82E178CC000CBCC33 /* Launch Screen.storyboard */; };
 		07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */; };
 		07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0032D9DF79100000BF2 /* DrinkItem.swift */; };
 		07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */; };
@@ -79,6 +81,8 @@
 		077ED5BC2E0E882700CBCC33 /* EmptyCalendarDrinkListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCalendarDrinkListView.swift; sourceTree = "<group>"; };
 		077ED5C22E127B9400CBCC33 /* CalendarDrinkRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDrinkRow.swift; sourceTree = "<group>"; };
 		077ED5C42E1372C700CBCC33 /* CustomOzButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOzButton.swift; sourceTree = "<group>"; };
+		077ED5C62E1375FB00CBCC33 /* CustomDrinkButtonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDrinkButtonRow.swift; sourceTree = "<group>"; };
+		077ED5C82E178CC000CBCC33 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkFillView.swift; sourceTree = "<group>"; };
 		07B3A0032D9DF79100000BF2 /* DrinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkItem.swift; sourceTree = "<group>"; };
 		07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkListVM.swift; sourceTree = "<group>"; };
@@ -134,10 +138,10 @@
 		072787252D94C06300D56B96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				07CED0342D96A02600498D17 /* SettingsModel.swift */,
-				07B3A0032D9DF79100000BF2 /* DrinkItem.swift */,
 				07FBA8B52DAA53A000133F70 /* NavPath.swift */,
+				07B3A0032D9DF79100000BF2 /* DrinkItem.swift */,
 				077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */,
+				07CED0342D96A02600498D17 /* SettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -165,6 +169,7 @@
 				07F3C7532D8EF8DF00427A9A /* CupView.swift */,
 				07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */,
 				07381C262D9B78E6003216FA /* CustomDrinkView.swift */,
+				077ED5C62E1375FB00CBCC33 /* CustomDrinkButtonRow.swift */,
 				07381C232D998381003216FA /* CustomOzView.swift */,
 				077ED5C42E1372C700CBCC33 /* CustomOzButton.swift */,
 				07F3C7552D90CA1700427A9A /* DrinkSelectionView.swift */,
@@ -244,6 +249,7 @@
 			children = (
 				07F3C73E2D8EEDFE00427A9A /* Preview Content */,
 				07F3C73F2D8EEDFE00427A9A /* Assets.xcassets */,
+				077ED5C82E178CC000CBCC33 /* Launch Screen.storyboard */,
 				07F3C74A2D8EEE2A00427A9A /* App */,
 				072787252D94C06300D56B96 /* Models */,
 				07F3C7482D8EEE1700427A9A /* Views */,
@@ -384,6 +390,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				077ED5C92E178CC100CBCC33 /* Launch Screen.storyboard in Resources */,
 				07F3C7452D8EEDFE00427A9A /* Preview Assets.xcassets in Resources */,
 				07F3C7462D8EEDFE00427A9A /* Assets.xcassets in Resources */,
 			);
@@ -427,6 +434,7 @@
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
 				077ED5C52E1372C700CBCC33 /* CustomOzButton.swift in Sources */,
 				07B3A0082D9E0FBB00000BF2 /* SettingsReviewView.swift in Sources */,
+				077ED5C72E1375FB00CBCC33 /* CustomDrinkButtonRow.swift in Sources */,
 				077ED5B92E0D4C5F00CBCC33 /* CalendarListUpdate.swift in Sources */,
 				07F3C7562D90CA1700427A9A /* DrinkSelectionView.swift in Sources */,
 				07EA0BE02DBCC4E8001033AB /* ExtensionsText.swift in Sources */,
@@ -612,8 +620,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -641,8 +650,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

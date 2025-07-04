@@ -43,8 +43,7 @@ struct CustomOzView: View {
                     dismiss()
                 } label: {
                     Image(systemName: "x.circle")
-                        .resizable()
-                        .frame(width: 38, height: 38)
+                        .customOzButton()
                 }
 
                 Spacer()
@@ -64,4 +63,3 @@ struct CustomOzView: View {
     CustomOzView(item: DrinkItem(name: "Water", img: "waterBottle", volume: 8))
         .environment(DrinkListVM())
 }
-

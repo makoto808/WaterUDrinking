@@ -37,9 +37,8 @@ struct CalendarView: View {
                 LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(daysOfWeek, id: \.self) { day in
                         Text(day)
-                            .fontCustomDrinkViewSubtitle()
+                            .fontSmallTitle2()
                             .frame(maxWidth: .infinity)
-                            .foregroundColor(.gray)
                     }
                 }
                 
@@ -77,7 +76,7 @@ struct CalendarView: View {
                 let isSelected = calendar.isDate(date, inSameDayAs: calendarVM.selectedDate ?? Date())
                 let hasEvent = calendarVM.drinkDates.contains(calendar.startOfDay(for: date))
                 let goalMet = calendarVM.percentageOfGoal(for: date, goal: calendarVM.userGoal) >= 100
-                
+
                 CalendarDayCell(
                     date: date,
                     isInMonth: isInMonth,
@@ -97,9 +96,6 @@ struct CalendarView: View {
 }
 
 //TODO: Toggle systemImage if on premium account or not
-//Button("Add Previous Drink", systemImage: "lock") {
-//}
-//.buttonCapsule()
 
 #Preview {
     struct PreviewWrapper: View {
@@ -110,6 +106,5 @@ struct CalendarView: View {
                 .environment(CalendarHomeVM())
         }
     }
-    
     return PreviewWrapper()
 }

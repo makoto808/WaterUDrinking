@@ -18,5 +18,3 @@ class UserGoal {
         self.id = id
     }
 }
-
-

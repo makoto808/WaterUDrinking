@@ -22,8 +22,8 @@ struct GoalView: View {
             GeometryReader { geo in
                 WaveMotion(offset: waveOffset, percent: 3.9 / 8.0)
                     .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
-                    .frame(width: geo.size.width + 100) // extend width
-                    .offset(x: -50) // shift to center the overflow
+                    .frame(width: geo.size.width + 100)
+                    .offset(x: -50)
                     .ignoresSafeArea()
                     .onAppear {
                         withAnimation(.linear(duration: 3.5).repeatForever(autoreverses: false)) {
@@ -36,12 +36,12 @@ struct GoalView: View {
                 Spacer()
                 
                 Text("Daily Water Goal")
-                    .fontGoalViewTitle()
+                    .fontTitle()
                 
-                HStack(spacing: 4) {
+                HStack(spacing: -2) {
                     TextField("Enter Here", text: self.$dailyWaterGoal.max(3))
-                        .keyboardType(.numberPad)
                         .fontGoalViewTextField()
+                        .keyboardType(.numberPad)
                         .focused($keyboardFocused)
                         .frame(width: 80)
                     
