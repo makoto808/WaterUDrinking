@@ -72,7 +72,6 @@ struct CalendarDrinkList: View {
                     .presentationDetents([.medium, .large])
                 }
             }
-            //            .transition(.move(edge: .bottom).combined(with: .opacity))
             .transition(.opacity)
             .padding(.top)
         }
