@@ -35,9 +35,9 @@ struct SettingsListView: View {
                 
                 Section {
                     Button {
-                        
+                        drinkListVM.navPath.append(.subscribeView)
                     } label: {
-                        Text("Become a hydrated member")
+                        Text("Become A Hydrated Member")
                     }
                 }
                 

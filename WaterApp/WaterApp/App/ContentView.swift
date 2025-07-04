@@ -30,6 +30,8 @@ struct ContentView: View {
                     GoalView()
                 case .resetView:
                     ResetView()
+                case .subscribeView:
+                    SubscribeView()
                 }
             }
         }
