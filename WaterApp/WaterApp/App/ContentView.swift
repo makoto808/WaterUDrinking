@@ -33,9 +33,11 @@ struct ContentView: View {
                 case .subscribeView:
                     SubscribeView()
                 case .notificationView:
-                    AlarmSetView()
-                case .notificationAlarm:
-                    AlarmSetView()
+                    NotificationView()
+//                case .notificationAlarm:
+//                    AlarmSetView()
+                default:
+                    EmptyView()
                 }
             }
         }

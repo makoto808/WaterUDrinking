@@ -17,6 +17,7 @@
 		077A39F62E17BFE800D086BA /* SubscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39F52E17BFE800D086BA /* SubscribeView.swift */; };
 		077A39FC2E1A97DA00D086BA /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39FB2E1A97DA00D086BA /* NotificationView.swift */; };
 		077A39FE2E1A9A6B00D086BA /* AlarmSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39FD2E1A9A6B00D086BA /* AlarmSetView.swift */; };
+		077A3A002E1AA01200D086BA /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39FF2E1AA01200D086BA /* NotificationModel.swift */; };
 		077ED5A92E06C8DD00CBCC33 /* UserGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */; };
 		077ED5AB2E0A9B9E00CBCC33 /* CupViewOverride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5AA2E0A9B9E00CBCC33 /* CupViewOverride.swift */; };
 		077ED5B12E0BE5E800CBCC33 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5B02E0BE5E800CBCC33 /* CalendarDayCell.swift */; };
@@ -79,6 +80,7 @@
 		077A39F52E17BFE800D086BA /* SubscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeView.swift; sourceTree = "<group>"; };
 		077A39FB2E1A97DA00D086BA /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		077A39FD2E1A9A6B00D086BA /* AlarmSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSetView.swift; sourceTree = "<group>"; };
+		077A39FF2E1AA01200D086BA /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGoal.swift; sourceTree = "<group>"; };
 		077ED5AA2E0A9B9E00CBCC33 /* CupViewOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupViewOverride.swift; sourceTree = "<group>"; };
 		077ED5B02E0BE5E800CBCC33 /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				07B3A0032D9DF79100000BF2 /* DrinkItem.swift */,
 				077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */,
 				07CED0342D96A02600498D17 /* SettingsModel.swift */,
+				077A39FF2E1AA01200D086BA /* NotificationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */,
 				077ED5C32E127B9400CBCC33 /* CalendarDrinkRow.swift in Sources */,
 				072787282D94C14700D56B96 /* CalendarView.swift in Sources */,
+				077A3A002E1AA01200D086BA /* NotificationModel.swift in Sources */,
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
 				077ED5C52E1372C700CBCC33 /* CustomOzButton.swift in Sources */,
 				07B3A0082D9E0FBB00000BF2 /* SettingsReviewView.swift in Sources */,

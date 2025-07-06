@@ -1,5 +1,5 @@
 //
-//  NotificationView.swift
+//  AlarmSetView.swift
 //  WaterApp
 //
 //  Created by Gregg Abe on 7/6/25.
@@ -13,12 +13,13 @@ struct AlarmSetView: View {
 
     @State private var reminderTime = Date()
     @State private var labelText = "Alarm"
-    @State private var showConfirmation = false
+
+    var onSave: (NotificationModel) -> Void
 
     var body: some View {
         ZStack {
             Color.backgroundWhite.ignoresSafeArea()
-            
+
             VStack(spacing: 0) {
                 DatePicker("", selection: $reminderTime, displayedComponents: [.hourAndMinute])
                     .datePickerStyle(.wheel)
@@ -31,8 +32,7 @@ struct AlarmSetView: View {
 
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Label")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .fontSmallTitle2()
 
                     TextField("Alarm Label", text: $labelText)
                         .textFieldStyle(.plain)
@@ -55,7 +55,9 @@ struct AlarmSetView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        requestPermissionAndSchedule()
+                        let newAlarm = NotificationModel(time: reminderTime, label: labelText)
+                        requestPermissionAndSchedule(for: newAlarm)
+                        onSave(newAlarm)
                         dismiss()
                     }
                 }
@@ -63,41 +65,41 @@ struct AlarmSetView: View {
         }
     }
 
-    // MARK: - Notification Handling
+    // MARK: - Notification Scheduling
 
-    func requestPermissionAndSchedule() {
+    func requestPermissionAndSchedule(for model: NotificationModel) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             if settings.authorizationStatus == .authorized {
-                scheduleNotification()
+                scheduleNotification(for: model)
             } else {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, _ in
                     if granted {
-                        scheduleNotification()
+                        scheduleNotification(for: model)
                     }
                 }
             }
         }
     }
 
-    func scheduleNotification() {
-        // Clear previous one (if editing single-alarm logic)
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["alarmReminder"])
-
+    func scheduleNotification(for model: NotificationModel) {
         let content = UNMutableNotificationContent()
-        content.title = labelText.isEmpty ? "Alarm" : labelText
+        content.title = model.label.isEmpty ? "Alarm" : model.label
         content.body = "Your alarm is going off!"
         content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 1.0)
 
-        let calendar = Calendar.current
-        let dateComponents = calendar.dateComponents([.hour, .minute], from: reminderTime)
+        let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: model.time)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
 
-        let request = UNNotificationRequest(identifier: "alarmReminder", content: content, trigger: trigger)
-
+        let request = UNNotificationRequest(identifier: model.id.uuidString, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
     }
 }
 
 #Preview {
-    AlarmSetView()
+    NavigationStack {
+        AlarmSetView { newAlarm in
+            // Preview handler — do nothing
+            print("Saved alarm: \(newAlarm.label) at \(newAlarm.time)")
+        }
+    }
 }
