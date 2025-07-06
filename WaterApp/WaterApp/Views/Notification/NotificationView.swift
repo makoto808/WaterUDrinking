@@ -12,7 +12,23 @@ struct NotificationView: View {
     @State private var showingAlarmSetViewSheet = false
 
     var body: some View {
-        NavigationStack {
+        VStack(spacing: 0) {
+            HStack {
+                Text("Alarms")
+                    .font(.largeTitle)
+                    .bold()
+                Spacer()
+                Button {
+                    showingAlarmSetViewSheet = true
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.title)
+                        .padding(8)
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            .padding([.horizontal, .top])
+
             List {
                 if alarms.isEmpty {
                     Text("No alarms yet")
@@ -31,22 +47,15 @@ struct NotificationView: View {
                     .onDelete(perform: deleteAlarms)
                 }
             }
-            .navigationTitle("Alarms")
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        showingAlarmSetViewSheet = true
-                    } label: {
-                        Label("Add Alarm", systemImage: "plus")
-                    }
-                }
-            }
-            .sheet(isPresented: $showingAlarmSetViewSheet) {
-                AlarmSetView { newAlarm in
-                    alarms.append(newAlarm)
-                }
-            }
         }
+        .sheet(isPresented: $showingAlarmSetViewSheet) {
+            AlarmSetView { newAlarm in
+                alarms.append(newAlarm)
+                showingAlarmSetViewSheet = false
+            }
+            .presentationDetents([.fraction(0.75)])
+        }
+        .background(Color.backgroundWhite)
     }
 
     func deleteAlarms(at offsets: IndexSet) {
