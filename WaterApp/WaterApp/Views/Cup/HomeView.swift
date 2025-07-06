@@ -21,6 +21,7 @@ struct HomeView: View {
             
             Spacer()
             Spacer()
+            Spacer()
             
             CupView()
             
@@ -38,7 +39,10 @@ struct HomeView: View {
                 Button {
                     drinkListVM.navPath.append(.calendar)
                 } label: {
-                    Image(systemName: "calendar")
+                    Image("calendarIcon")
+                        .customOzButton()
+                        .padding(.horizontal, 8)
+                        .padding(.top, 20)
                 }
             }
             
@@ -46,7 +50,10 @@ struct HomeView: View {
                 Button {
                     drinkListVM.navPath.append(.settings)
                 } label: {
-                    Image(systemName: "gearshape.fill")
+                    Image("gearIcon")
+                        .customDrinkButton()
+                        .padding(.horizontal, 6)
+                        .padding(.top, 20)
                 }
             }
             
@@ -59,9 +66,12 @@ struct HomeView: View {
     let mockVM = DrinkListVM()
     mockVM.totalOz = 60
     mockVM.totalOzGoal = 100
-    
-    return HomeView()
-        .environment(mockVM)
+
+    return NavigationStack {
+        HomeView()
+            .environment(mockVM)
+    }
+    .modelContainer(for: [UserGoal.self]) // Replace with your actual SwiftData model(s)
 }
 
 // TODO: Transition HomeView from left to right to access CalendarView
