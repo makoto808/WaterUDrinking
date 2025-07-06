@@ -8,7 +8,7 @@
 import SwiftUI
 import UserNotifications
 
-struct NotificationView: View {
+struct AlarmSetView: View {
     @State private var reminderTime = Date()
     @State private var isAlarmOn = false
     @State private var permissionGranted = false
@@ -47,7 +47,7 @@ struct NotificationView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(isAlarmOn ? Color.blue : Color.red)
+                        .background(isAlarmOn ? Color.waterBlue : Color.red)
                         .cornerRadius(10)
                         .padding(.horizontal, 40)
                 }
@@ -84,7 +84,6 @@ struct NotificationView: View {
     }
 
     func scheduleNotification() {
-        // Cancel existing notifications to avoid duplicates
         cancelAllNotifications()
 
         let content = UNMutableNotificationContent()
@@ -92,13 +91,9 @@ struct NotificationView: View {
         content.body = "Your alarm is going off!"
         content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 1.0)
 
-        // Extract hour & minute from reminderTime
         let calendar = Calendar.current
-        var dateComponents = calendar.dateComponents([.hour, .minute], from: reminderTime)
-
-        // Schedule to repeat daily at the selected time (like the Clock app)
+        let dateComponents = calendar.dateComponents([.hour, .minute], from: reminderTime)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-
         let request = UNNotificationRequest(identifier: "alarmReminder", content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request) { error in
@@ -116,12 +111,12 @@ struct NotificationView: View {
     }
 }
 
-struct NotificationView_Previews: PreviewProvider {
+struct AlarmSetView_Previews: PreviewProvider {
     static var previews: some View {
         NotificationView()
     }
 }
 
 #Preview {
-    NotificationView()
+    AlarmSetView()
 }
