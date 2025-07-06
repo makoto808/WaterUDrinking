@@ -78,6 +78,22 @@ extension Image {
         self.resizable()
             .frame(width: 60, height: 60)
     }
+    
+    func gearIconResize() -> some View {
+        self.resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 38, height: 38)
+            .padding(.horizontal, 8)
+            .padding(.top, 20)
+    }
+    
+    func calendarIconResize() -> some View {
+        self.resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 33, height: 33)
+            .padding(.horizontal, 8)
+            .padding(.top, 20)
+    }
 }
 
 extension View {

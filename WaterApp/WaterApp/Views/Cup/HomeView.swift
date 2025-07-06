@@ -13,26 +13,22 @@ struct HomeView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
     var body: some View {
-        VStack {
-            Spacer()
-            Spacer()
+        VStack(spacing: 0) {
+            Spacer(minLength: 30)
             
             TitleView()
             
-            Spacer()
-            Spacer()
-            Spacer()
+            Spacer(minLength: 40)
             
             CupView()
             
-            Spacer()
-            Spacer()
+            Spacer(minLength: 20)
             
             DrinkSelectionView()
             
-            Spacer()
-            Spacer()
+            Spacer(minLength: 40)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.backgroundWhite)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -40,23 +36,26 @@ struct HomeView: View {
                     drinkListVM.navPath.append(.calendar)
                 } label: {
                     Image("calendarIcon")
-                        .customOzButton()
-                        .padding(.horizontal, 8)
-                        .padding(.top, 20)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 28, height: 28)
+                        .padding(.horizontal, 6)
+                        .padding(.top, 6)
                 }
             }
-            
+
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     drinkListVM.navPath.append(.settings)
                 } label: {
                     Image("gearIcon")
-                        .customDrinkButton()
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
                         .padding(.horizontal, 6)
-                        .padding(.top, 20)
+                        .padding(.top, 6)
                 }
             }
-            
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -66,7 +65,7 @@ struct HomeView: View {
     let mockVM = DrinkListVM()
     mockVM.totalOz = 60
     mockVM.totalOzGoal = 100
-
+    
     return NavigationStack {
         HomeView()
             .environment(mockVM)
