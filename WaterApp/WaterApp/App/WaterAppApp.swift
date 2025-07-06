@@ -23,4 +23,6 @@ struct WaterAppApp: App {
  - Add SwiftData too BarChart
  - Add haptic touch?
  - Add sound effects?
+ 
+ - Change toolbar back button. remove BACK and just keep back arrow
  */

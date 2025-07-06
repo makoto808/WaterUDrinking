@@ -14,6 +14,7 @@
 		073BC1752DAF2FB000863F93 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BC1742DAF2FB000863F93 /* TitleView.swift */; };
 		07645B8E2DFA93840020BF31 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07645B8D2DFA93840020BF31 /* GoalView.swift */; };
 		07680FF82E01302E0030108F /* ResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07680FF72E01302E0030108F /* ResetView.swift */; };
+		077A39F62E17BFE800D086BA /* SubscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39F52E17BFE800D086BA /* SubscribeView.swift */; };
 		077ED5A92E06C8DD00CBCC33 /* UserGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */; };
 		077ED5AB2E0A9B9E00CBCC33 /* CupViewOverride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5AA2E0A9B9E00CBCC33 /* CupViewOverride.swift */; };
 		077ED5B12E0BE5E800CBCC33 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5B02E0BE5E800CBCC33 /* CalendarDayCell.swift */; };
@@ -73,6 +74,7 @@
 		073BC1742DAF2FB000863F93 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		07645B8D2DFA93840020BF31 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		07680FF72E01302E0030108F /* ResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetView.swift; sourceTree = "<group>"; };
+		077A39F52E17BFE800D086BA /* SubscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeView.swift; sourceTree = "<group>"; };
 		077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGoal.swift; sourceTree = "<group>"; };
 		077ED5AA2E0A9B9E00CBCC33 /* CupViewOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupViewOverride.swift; sourceTree = "<group>"; };
 		077ED5B02E0BE5E800CBCC33 /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				07B3A0072D9E0FBB00000BF2 /* SettingsReviewView.swift */,
 				07645B8D2DFA93840020BF31 /* GoalView.swift */,
 				07680FF72E01302E0030108F /* ResetView.swift */,
+				077A39F52E17BFE800D086BA /* SubscribeView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				077ED5AB2E0A9B9E00CBCC33 /* CupViewOverride.swift in Sources */,
 				07CED0292D953BF300498D17 /* Extensions.swift in Sources */,
 				116283D02DB38FBF000ADC31 /* CalendarHomeVM.swift in Sources */,
+				077A39F62E17BFE800D086BA /* SubscribeView.swift in Sources */,
 				07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */,
 				077ED5C32E127B9400CBCC33 /* CalendarDrinkRow.swift in Sources */,
 				072787282D94C14700D56B96 /* CalendarView.swift in Sources */,

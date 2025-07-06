@@ -15,7 +15,7 @@ struct CalendarHomeView: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
-            VStack {                
+            VStack {
                 CalendarView(isShowingDrinkDetails: $isShowingDrinkDetails)
                 
                 Spacer(minLength: 20)
@@ -24,6 +24,18 @@ struct CalendarHomeView: View {
             .animation(.easeInOut, value: isShowingDrinkDetails)
         }
         .background(Color.backgroundWhite)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    drinkListVM.navPath.removeLast()
+                } label: {
+                    Image(systemName: "chevron.backward")
+                        .backButton1()
+                        
+                }
+            }
+        }
     }
 }
 
@@ -31,7 +43,9 @@ struct CalendarHomeView: View {
     let mockDrinkListVM = DrinkListVM()
     let mockCalendarHomeVM = CalendarHomeVM()
     
-    return CalendarHomeView()
-        .environment(mockDrinkListVM)
-        .environment(mockCalendarHomeVM)
+    return NavigationStack {
+        CalendarHomeView()
+            .environment(mockDrinkListVM)
+            .environment(mockCalendarHomeVM)
+    }
 }

@@ -13,43 +13,49 @@ struct HomeView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
     var body: some View {
-        VStack {
-            Spacer()
-            Spacer()
+        VStack(spacing: 0) {
+            Spacer(minLength: 30)
             
             TitleView()
             
-            Spacer()
-            Spacer()
+            Spacer(minLength: 40)
             
             CupView()
             
-            Spacer()
-            Spacer()
+            Spacer(minLength: 20)
             
             DrinkSelectionView()
             
-            Spacer()
-            Spacer()
+            Spacer(minLength: 40)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.backgroundWhite)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
                     drinkListVM.navPath.append(.calendar)
                 } label: {
-                    Image(systemName: "calendar")
+                    Image("calendarIcon")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 28, height: 28)
+                        .padding(.horizontal, 6)
+                        .padding(.top, 6)
                 }
             }
-            
+
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     drinkListVM.navPath.append(.settings)
                 } label: {
-                    Image(systemName: "gearshape.fill")
+                    Image("gearIcon")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
+                        .padding(.horizontal, 6)
+                        .padding(.top, 6)
                 }
             }
-            
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -60,8 +66,11 @@ struct HomeView: View {
     mockVM.totalOz = 60
     mockVM.totalOzGoal = 100
     
-    return HomeView()
-        .environment(mockVM)
+    return NavigationStack {
+        HomeView()
+            .environment(mockVM)
+    }
+    .modelContainer(for: [UserGoal.self]) // Replace with your actual SwiftData model(s)
 }
 
 // TODO: Transition HomeView from left to right to access CalendarView
