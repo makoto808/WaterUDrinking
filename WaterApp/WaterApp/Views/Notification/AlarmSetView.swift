@@ -9,65 +9,61 @@ import SwiftUI
 import UserNotifications
 
 struct AlarmSetView: View {
+    @Environment(\.dismiss) private var dismiss
+
     @State private var reminderTime = Date()
-    @State private var isAlarmOn = false
-    @State private var permissionGranted = false
+    @State private var labelText = "Alarm"
     @State private var showConfirmation = false
 
     var body: some View {
         ZStack {
             Color.backgroundWhite.ignoresSafeArea()
             
-            VStack(spacing: 40) {
-                Text("Hydration Alarm")
-                    .fontMediumTitle()
-                    .padding(.top, 40)
-
+            VStack(spacing: 0) {
                 DatePicker("", selection: $reminderTime, displayedComponents: [.hourAndMinute])
-                    .datePickerStyle(WheelDatePickerStyle())
+                    .datePickerStyle(.wheel)
                     .labelsHidden()
                     .frame(maxHeight: 200)
+                    .clipped()
+                    .padding(.top, 20)
 
-                Toggle(isOn: $isAlarmOn) {
-                    Text("Enable Alarm")
-                        .fontBarLabel()
-                }
-                .padding(.horizontal, 40)
+                Divider()
 
-                Button(action: {
-                    if isAlarmOn {
-                        requestPermissionAndSchedule()
-                    } else {
-                        cancelAllNotifications()
-                        showConfirmation = false
-                    }
-                }) {
-                    Text(isAlarmOn ? "Save Alarm" : "Cancel Alarm")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(isAlarmOn ? Color.waterBlue : Color.red)
-                        .cornerRadius(10)
-                        .padding(.horizontal, 40)
-                }
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Label")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
 
-                if showConfirmation {
-                    Text("Alarm scheduled for \(formattedTime(reminderTime))")
-                        .foregroundColor(.green)
+                    TextField("Alarm Label", text: $labelText)
+                        .textFieldStyle(.plain)
+                        .font(.body)
+                        .padding(.vertical, 8)
+
+                    Divider()
                 }
+                .padding(.horizontal)
+                .padding(.top, 30)
 
                 Spacer()
             }
-            .navigationBarHidden(true)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        requestPermissionAndSchedule()
+                        dismiss()
+                    }
+                }
+            }
         }
     }
 
-    func formattedTime(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
-    }
+    // MARK: - Notification Handling
 
     func requestPermissionAndSchedule() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
@@ -84,36 +80,21 @@ struct AlarmSetView: View {
     }
 
     func scheduleNotification() {
-        cancelAllNotifications()
+        // Clear previous one (if editing single-alarm logic)
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["alarmReminder"])
 
         let content = UNMutableNotificationContent()
-        content.title = "Alarm"
+        content.title = labelText.isEmpty ? "Alarm" : labelText
         content.body = "Your alarm is going off!"
         content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 1.0)
 
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.hour, .minute], from: reminderTime)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+
         let request = UNNotificationRequest(identifier: "alarmReminder", content: content, trigger: trigger)
 
-        UNUserNotificationCenter.current().add(request) { error in
-            DispatchQueue.main.async {
-                if error == nil {
-                    showConfirmation = true
-                }
-            }
-        }
-    }
-
-    func cancelAllNotifications() {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["alarmReminder"])
-        showConfirmation = false
-    }
-}
-
-struct AlarmSetView_Previews: PreviewProvider {
-    static var previews: some View {
-        NotificationView()
+        UNUserNotificationCenter.current().add(request)
     }
 }
 
