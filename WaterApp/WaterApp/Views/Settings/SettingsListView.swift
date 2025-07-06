@@ -46,11 +46,22 @@ struct SettingsListView: View {
             .listStyle(.automatic)
             .scrollContentBackground(.hidden)
             .background(Color.backgroundWhite)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        drinkListVM.navPath.removeLast()
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .backButton1()
+                    }
+                }
+            }
         }
     }
 }
-
-#Preview {
-    SettingsListView()
-        .environment(DrinkListVM())
-}
+    
+    #Preview {
+        SettingsListView()
+            .environment(DrinkListVM())
+    }

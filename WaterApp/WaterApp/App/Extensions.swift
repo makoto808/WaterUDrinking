@@ -94,6 +94,14 @@ extension Image {
             .padding(.horizontal, 8)
             .padding(.top, 20)
     }
+    
+    func backButton1() -> some View {
+        self.font(.system(size: 20, weight: .heavy))
+            .symbolRenderingMode(.hierarchical)
+            .foregroundColor(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
+            .padding(.horizontal, 6)
+            .padding(.top, 6)
+    }
 }
 
 extension View {
