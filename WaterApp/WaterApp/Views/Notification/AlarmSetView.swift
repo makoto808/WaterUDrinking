@@ -5,11 +5,6 @@
 //  Created by Gregg Abe on 7/6/25.
 //
 
-//
-//  AlarmSetView.swift
-//  WaterApp
-//
-
 import SwiftUI
 import UserNotifications
 import SwiftData
@@ -88,7 +83,7 @@ struct AlarmSetView: View {
 
         let newReminder = NotificationModel(time: reminderTime, label: trimmed)
 
-        notificationVM.insertReminder(newReminder)  // Insert + save + reload reminders
+        notificationVM.insertReminder(newReminder)
 
         if newReminder.isEnabled {
             notificationVM.requestPermissionAndSchedule(for: newReminder)

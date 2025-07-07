@@ -42,6 +42,7 @@ struct NotificationView: View {
                         }
                         .padding(.vertical, 4)
                         .opacity(reminder.isEnabled ? 1.0 : 0.3)
+                        .animation(.easeInOut(duration: 0.3), value: reminder.isEnabled)
                         .listRowBackground(Color.clear)
                     }
                     .onDelete(perform: notificationVM.deleteReminders)
