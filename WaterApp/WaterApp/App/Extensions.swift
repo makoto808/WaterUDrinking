@@ -101,15 +101,15 @@ extension Image {
         self.font(.system(size: 20, weight: .heavy))
             .symbolRenderingMode(.hierarchical)
             .foregroundColor(Color.waterBlue)
-            .padding(.horizontal, 6)
+            .padding(.horizontal, 8)
             .padding(.top, 6)
     }
     
     func plusButton1() -> some View {
-        self.font(.system(size: 35, weight: .heavy))
+        self.font(.system(size: 25, weight: .heavy))
             .symbolRenderingMode(.hierarchical)
             .foregroundColor(Color.waterBlue)
-            .padding(.horizontal, 15)
+            .padding(.horizontal, 8)
             .padding(.top, 6)
     }
 }

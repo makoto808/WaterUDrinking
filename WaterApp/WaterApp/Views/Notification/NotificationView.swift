@@ -8,26 +8,13 @@
 import SwiftUI
 
 struct NotificationView: View {
+    @Environment(DrinkListVM.self) private var drinkListVM
+    
     @State private var reminder: [NotificationModel] = []
     @State private var showingAlarmSetViewSheet = false
 
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Text("Reminders")
-                    .fontMediumTitle()
-
-                Spacer()
-                
-                Button {
-                    showingAlarmSetViewSheet = true
-                } label: {
-                    Image(systemName: "plus")
-                        .plusButton1()
-                }
-            }
-            .padding([.horizontal, .top])
-            
             List {
                 if reminder.isEmpty {
                     Text("No reminders yet")
@@ -52,6 +39,31 @@ struct NotificationView: View {
             .background(Color.backgroundWhite)
         }
         .background(Color.backgroundWhite)
+        .navigationBarBackButtonHidden(true)
+             .toolbar {
+                 ToolbarItem(placement: .topBarLeading) {
+                     Button {
+                         drinkListVM.navPath.removeLast()
+                     } label: {
+                         Image(systemName: "chevron.backward")
+                             .backButton1()
+                     }
+                 }
+                 
+                 ToolbarItem(placement: .principal) {
+                     Text("Reminders")
+                         .fontBarLabel()
+                 }
+                 
+                 ToolbarItem(placement: .topBarTrailing) {
+                     Button {
+                         showingAlarmSetViewSheet = true
+                     } label: {
+                         Image(systemName: "plus")
+                             .plusButton1()
+                     }
+                 }
+             }
         .sheet(isPresented: $showingAlarmSetViewSheet) {
             AlarmSetView { newAlarm in
                 reminder.append(newAlarm)
@@ -67,5 +79,8 @@ struct NotificationView: View {
 }
 
 #Preview {
-    NotificationView()
+    NavigationStack {
+        NotificationView()
+            .environment(DrinkListVM())
+    }
 }
