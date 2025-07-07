@@ -58,7 +58,6 @@ extension Text {
             .foregroundStyle(.secondary)
             .fontWeight(.semibold)
             .lineLimit(1)
-            .minimumScaleFactor(0.5)
     }
     
     // MARK: - Custom Labels
