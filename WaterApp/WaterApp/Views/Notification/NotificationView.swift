@@ -11,19 +11,19 @@ import SwiftUI
 struct NotificationView: View {
     @Environment(\.modelContext) private var context
     @Environment(DrinkListVM.self) private var drinkListVM
-
-    @State private var reminders: [NotificationModel] = []
+    @Environment(NotificationVM.self) private var notificationVM
+    
     @State private var showingAlarmSetViewSheet = false
-
+    
     var body: some View {
         VStack(spacing: 0) {
             List {
-                if reminders.isEmpty {
+                if notificationVM.reminders.isEmpty {
                     Text("No reminders yet")
                         .fontSmallTitle2()
                         .listRowBackground(Color.clear)
                 } else {
-                    ForEach(reminders) { reminder in
+                    ForEach(notificationVM.reminders) { reminder in
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(reminder.time, style: .time)
@@ -35,31 +35,25 @@ struct NotificationView: View {
                             Spacer()
                             Toggle("", isOn: Binding(
                                 get: { reminder.isEnabled },
-                                set: { newValue in
-                                    reminder.isEnabled = newValue
-                                    saveContext()
-
-                                    if newValue {
-                                        scheduleNotification(for: reminder)
-                                    } else {
-                                        cancelNotification(for: reminder)
-                                    }
-                                }
+                                set: { notificationVM.toggleReminder(reminder, isOn: $0) }
                             ))
                             .labelsHidden()
                             .tint(Color.cyan)
                         }
                         .padding(.vertical, 4)
-                        .opacity(reminder.isEnabled ? 1.0 : 0.3) 
+                        .opacity(reminder.isEnabled ? 1.0 : 0.3)
                         .listRowBackground(Color.clear)
                     }
-                    .onDelete(perform: deleteAlarms)
+                    .onDelete(perform: notificationVM.deleteReminders)
                 }
             }
             .scrollContentBackground(.hidden)
             .background(Color.backgroundWhite)
         }
         .background(Color.backgroundWhite)
+        .onAppear {
+            notificationVM.loadReminders()
+        }
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -86,77 +80,19 @@ struct NotificationView: View {
         .sheet(isPresented: $showingAlarmSetViewSheet) {
             NavigationStack {
                 AlarmSetView { _ in
-                    loadReminders()
+                    notificationVM.loadReminders()
                     showingAlarmSetViewSheet = false
                 }
-                .environment(\.modelContext, context)
+                .environment(notificationVM)
             }
             .presentationDetents([.fraction(0.75)])
         }
-        .onAppear {
-            loadReminders()
-        }
-    }
-
-    func loadReminders() {
-        do {
-            let fetchDescriptor = FetchDescriptor<NotificationModel>(sortBy: [SortDescriptor(\.time)])
-            let fetched = try context.fetch(fetchDescriptor)
-            DispatchQueue.main.async {
-                reminders = fetched
-                print("Loaded \(reminders.count) reminders")
-            }
-        } catch {
-            print("Failed to fetch reminders: \(error)")
-            DispatchQueue.main.async {
-                reminders = []
-            }
-        }
-    }
-
-    func deleteAlarms(at offsets: IndexSet) {
-        for index in offsets {
-            context.delete(reminders[index])
-        }
-        saveContext()
-        loadReminders()
-    }
-
-    func saveContext() {
-        do {
-            try context.save()
-            loadReminders()
-        } catch {
-            print("Failed to save context: \(error)")
-        }
-    }
-    
-    func scheduleNotification(for model: NotificationModel) {
-        let content = UNMutableNotificationContent()
-        content.title = model.label.isEmpty ? "Alarm" : model.label
-        content.body = "💧 Time to Hydrate!"
-        content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 1.0)
-
-        let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: model.time)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-
-        let request = UNNotificationRequest(identifier: model.id.uuidString, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Failed to schedule: \(error)")
-            }
-        }
-    }
-
-    func cancelNotification(for model: NotificationModel) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [model.id.uuidString])
-    }
-
-}
-
-#Preview {
-    NavigationStack {
-        NotificationView()
-            .environment(DrinkListVM())
     }
 }
+
+//#Preview {
+//    NavigationStack {
+//        NotificationView()
+//            .environment(DrinkListVM())
+//    }
+//}

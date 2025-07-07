@@ -5,16 +5,21 @@
 //  Created by Gregg Abe on 7/6/25.
 //
 
+//
+//  AlarmSetView.swift
+//  WaterApp
+//
+
 import SwiftUI
 import UserNotifications
+import SwiftData
 
 struct AlarmSetView: View {
-    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    @Environment(NotificationVM.self) private var notificationVM
 
     @State private var reminderTime = Date()
     @State private var labelText = ""
-
     @State private var showAlert = false
 
     var onSave: (NotificationModel) -> Void
@@ -37,7 +42,12 @@ struct AlarmSetView: View {
                     Text("Label")
                         .fontSmallTitle2()
 
-                    TextField("Drink Reminder", text: self.$labelText.max(32))
+                    TextField("Drink Reminder", text: $labelText)
+                        .onChange(of: labelText) {
+                            if labelText.count > 32 {
+                                labelText = String(labelText.prefix(32))
+                            }
+                        }
                         .alarmSetLabel()
 
                     Divider()
@@ -50,30 +60,13 @@ struct AlarmSetView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(action: {
+                    Button("Cancel") {
                         dismiss()
-                    }) {
-                        Text("Cancel")
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        if labelText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                            showAlert = true
-                        } else {
-                            let newAlarm = NotificationModel(time: reminderTime, label: labelText)
-                            do {
-                                context.insert(newAlarm)
-                                try context.save()
-                                if newAlarm.isEnabled {
-                                    requestPermissionAndSchedule(for: newAlarm)
-                                }
-                                onSave(newAlarm)
-                                dismiss()
-                            } catch {
-                                print("Failed to save notification: \(error)")
-                            }
-                        }
+                        saveReminder()
                     }
                 }
             }
@@ -85,41 +78,33 @@ struct AlarmSetView: View {
         }
     }
 
-    // MARK: - Notification Scheduling
+    private func saveReminder() {
+        let trimmed = labelText.trimmingCharacters(in: .whitespacesAndNewlines)
 
-    func requestPermissionAndSchedule(for model: NotificationModel) {
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            if settings.authorizationStatus == .authorized {
-                scheduleNotification(for: model)
-            } else {
-                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, _ in
-                    if granted {
-                        scheduleNotification(for: model)
-                    }
-                }
-            }
+        guard !trimmed.isEmpty else {
+            showAlert = true
+            return
         }
-    }
 
-    func scheduleNotification(for model: NotificationModel) {
-        let content = UNMutableNotificationContent()
-        content.title = "💧 Time to Hydrate!"
-        content.body = model.label.isEmpty ? "Alarm" : model.label
-        content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 1.0)
+        let newReminder = NotificationModel(time: reminderTime, label: trimmed)
 
-        let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: model.time)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        notificationVM.insertReminder(newReminder)  // Insert + save + reload reminders
 
-        let request = UNNotificationRequest(identifier: model.id.uuidString, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request)
+        if newReminder.isEnabled {
+            notificationVM.requestPermissionAndSchedule(for: newReminder)
+        }
+
+        onSave(newReminder)
+        dismiss()
     }
 }
 
-#Preview {
-    NavigationStack {
-        AlarmSetView { newAlarm in
-            // Preview handler — do nothing
-            print("Saved alarm: \(newAlarm.label) at \(newAlarm.time)")
-        }
-    }
-}
+//
+//#Preview {
+//    NavigationStack {
+//        AlarmSetView { newAlarm in
+//            // Preview handler — do nothing
+//            print("Saved alarm: \(newAlarm.label) at \(newAlarm.time)")
+//        }
+//    }
+//}

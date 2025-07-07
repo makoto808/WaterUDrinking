@@ -10,10 +10,25 @@ import SwiftUI
 
 @main
 struct WaterAppApp: App {
+    @State private var notificationVM: NotificationVM
+
+    init() {
+        do {
+            let container = try ModelContainer(for: CachedDrinkItem.self, UserGoal.self, NotificationModel.self)
+            _notificationVM = State(wrappedValue: NotificationVM(context: container.mainContext))
+            self.modelContainer = container
+        } catch {
+            fatalError("Failed to create model container: \(error)")
+        }
+    }
+
+    let modelContainer: ModelContainer
+
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: [CachedDrinkItem.self, UserGoal.self, NotificationModel.self])
+                .modelContainer(modelContainer)
+                .environment(notificationVM) // inject your VM here
         }
     }
 }
