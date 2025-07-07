@@ -35,16 +35,19 @@ struct SettingsListView: View {
                 
                 Section {
                     Button {
+                        drinkListVM.navPath.append(.notificationView)
+                    } label: {
+                        Text("Set A Reminder")
+                    }
+                }
+                
+                Section {
+                    Button {
                         drinkListVM.navPath.append(.subscribeView)
                     } label: {
                         Text("Become A Hydrated Member")
                     }
                     
-                    Button {
-                        drinkListVM.navPath.append(.notificationView)
-                    } label: {
-                        Text("Set A Reminder")
-                    }
                 }
                 
                 //TODO: Future Settings Tabs below
@@ -66,8 +69,8 @@ struct SettingsListView: View {
         }
     }
 }
-    
-    #Preview {
-        SettingsListView()
-            .environment(DrinkListVM())
-    }
+
+#Preview {
+    SettingsListView()
+        .environment(DrinkListVM())
+}

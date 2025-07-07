@@ -21,7 +21,7 @@ struct NotificationView: View {
                         .fontSmallTitle2()
                         .listRowBackground(Color.clear)
                 } else {
-                    ForEach(reminder) { reminder in
+                    ForEach(reminder.sorted(by: { $0.time < $1.time })) { reminder in
                         VStack(alignment: .leading) {
                             Text(reminder.label)
                                 .font(.headline)
@@ -47,12 +47,14 @@ struct NotificationView: View {
                      } label: {
                          Image(systemName: "chevron.backward")
                              .backButton1()
+                             .padding(.top, 40)
                      }
                  }
                  
                  ToolbarItem(placement: .principal) {
                      Text("Reminders")
                          .fontBarLabel()
+                         .padding(.top, 40)
                  }
                  
                  ToolbarItem(placement: .topBarTrailing) {
@@ -61,13 +63,16 @@ struct NotificationView: View {
                      } label: {
                          Image(systemName: "plus")
                              .plusButton1()
+                             .padding(.top, 40)
                      }
                  }
              }
         .sheet(isPresented: $showingAlarmSetViewSheet) {
-            AlarmSetView { newAlarm in
-                reminder.append(newAlarm)
-                showingAlarmSetViewSheet = false
+            NavigationStack {
+                AlarmSetView { newAlarm in
+                    reminder.append(newAlarm)
+                    showingAlarmSetViewSheet = false
+                }
             }
             .presentationDetents([.fraction(0.75)])
         }
