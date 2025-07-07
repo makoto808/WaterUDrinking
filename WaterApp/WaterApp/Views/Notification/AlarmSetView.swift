@@ -101,8 +101,8 @@ struct AlarmSetView: View {
 
     func scheduleNotification(for model: NotificationModel) {
         let content = UNMutableNotificationContent()
-        content.title = model.label.isEmpty ? "Alarm" : model.label
-        content.body = "💧 Time to Hydrate!"
+        content.title = "💧 Time to Hydrate!"
+        content.body = model.label.isEmpty ? "Alarm" : model.label
         content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 1.0)
 
         let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: model.time)
