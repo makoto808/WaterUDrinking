@@ -13,11 +13,13 @@ class NotificationModel: Identifiable, Equatable {
     @Attribute(.unique) var id: UUID
     var time: Date
     var label: String
+    var isEnabled: Bool = true
 
-    init(id: UUID = UUID(), time: Date, label: String) {
+    init(id: UUID = UUID(), time: Date, label: String, isEnabled: Bool = true) {
         self.id = id
         self.time = time
         self.label = label
+        self.isEnabled = isEnabled
     }
 
     static func == (lhs: NotificationModel, rhs: NotificationModel) -> Bool {

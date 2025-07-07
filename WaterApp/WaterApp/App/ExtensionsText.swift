@@ -130,4 +130,14 @@ extension View {
             .minimumScaleFactor(0.5)
             .padding(.vertical, 8)
     }
+    
+    func reminderTitle() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 18))
+            .foregroundStyle(.primary)
+    }
+    
+    func reminderTime() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 16))
+            .foregroundStyle(.secondary)
+    }
 }

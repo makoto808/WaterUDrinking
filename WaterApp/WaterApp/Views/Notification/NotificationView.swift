@@ -24,14 +24,26 @@ struct NotificationView: View {
                         .listRowBackground(Color.clear)
                 } else {
                     ForEach(reminders) { reminder in
-                        VStack(alignment: .leading) {
-                            Text(reminder.label)
-                                .font(.headline)
-                            Text(reminder.time, style: .time)
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(reminder.time, style: .time)
+                                    .fontOzLabel()
+                                
+                                Text(reminder.label)
+                                    .fontSmallTitle2()
+                            }
+                            Spacer()
+                            Toggle("", isOn: Binding(
+                                get: { reminder.isEnabled },
+                                set: { newValue in
+                                    reminder.isEnabled = newValue
+                                    saveContext()
+                                }
+                            ))
+                            .labelsHidden()
                         }
                         .padding(.vertical, 4)
+                        .opacity(reminder.isEnabled ? 1.0 : 0.3) 
                         .listRowBackground(Color.clear)
                     }
                     .onDelete(perform: deleteAlarms)
@@ -67,7 +79,6 @@ struct NotificationView: View {
         .sheet(isPresented: $showingAlarmSetViewSheet) {
             NavigationStack {
                 AlarmSetView { _ in
-                    // Reload reminders when new alarm saved
                     loadReminders()
                     showingAlarmSetViewSheet = false
                 }
@@ -83,10 +94,16 @@ struct NotificationView: View {
     func loadReminders() {
         do {
             let fetchDescriptor = FetchDescriptor<NotificationModel>(sortBy: [SortDescriptor(\.time)])
-            reminders = try context.fetch(fetchDescriptor)
+            let fetched = try context.fetch(fetchDescriptor)
+            DispatchQueue.main.async {
+                reminders = fetched
+                print("Loaded \(reminders.count) reminders")
+            }
         } catch {
             print("Failed to fetch reminders: \(error)")
-            reminders = []
+            DispatchQueue.main.async {
+                reminders = []
+            }
         }
     }
 
@@ -94,11 +111,16 @@ struct NotificationView: View {
         for index in offsets {
             context.delete(reminders[index])
         }
+        saveContext()
+        loadReminders()
+    }
+
+    func saveContext() {
         do {
             try context.save()
-            loadReminders()  // Refresh after delete
+            loadReminders()
         } catch {
-            print("Failed to delete reminders: \(error)")
+            print("Failed to save context: \(error)")
         }
     }
 }
