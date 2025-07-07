@@ -37,7 +37,7 @@ struct AlarmSetView: View {
                     Text("Label")
                         .fontSmallTitle2()
 
-                    TextField("Drink Reminder", text: $labelText)
+                    TextField("Drink Reminder", text: self.$labelText.max(32))
                         .alarmSetLabel()
 
                     Divider()

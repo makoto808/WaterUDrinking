@@ -41,6 +41,7 @@ struct NotificationView: View {
                                 }
                             ))
                             .labelsHidden()
+                            .tint(Color.cyan)
                         }
                         .padding(.vertical, 4)
                         .opacity(reminder.isEnabled ? 1.0 : 0.3) 
