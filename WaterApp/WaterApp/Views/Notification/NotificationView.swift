@@ -8,38 +8,37 @@
 import SwiftUI
 
 struct NotificationView: View {
-    @State private var alarms: [NotificationModel] = []
+    @State private var reminder: [NotificationModel] = []
     @State private var showingAlarmSetViewSheet = false
 
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Alarms")
-                    .font(.largeTitle)
-                    .bold()
+                Text("Reminders")
+                    .fontMediumTitle()
+
                 Spacer()
+                
                 Button {
                     showingAlarmSetViewSheet = true
                 } label: {
                     Image(systemName: "plus")
-                        .font(.title)
-                        .padding(8)
+                        .plusButton1()
                 }
-                .buttonStyle(.borderedProminent)
             }
             .padding([.horizontal, .top])
             
             List {
-                if alarms.isEmpty {
-                    Text("No alarms yet")
-                        .foregroundStyle(.gray)
+                if reminder.isEmpty {
+                    Text("No reminders yet")
+                        .fontSmallTitle2()
                         .listRowBackground(Color.clear)
                 } else {
-                    ForEach(alarms) { alarm in
+                    ForEach(reminder) { reminder in
                         VStack(alignment: .leading) {
-                            Text(alarm.label)
+                            Text(reminder.label)
                                 .font(.headline)
-                            Text(alarm.time, style: .time)
+                            Text(reminder.time, style: .time)
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
                         }
@@ -55,7 +54,7 @@ struct NotificationView: View {
         .background(Color.backgroundWhite)
         .sheet(isPresented: $showingAlarmSetViewSheet) {
             AlarmSetView { newAlarm in
-                alarms.append(newAlarm)
+                reminder.append(newAlarm)
                 showingAlarmSetViewSheet = false
             }
             .presentationDetents([.fraction(0.75)])
@@ -63,7 +62,7 @@ struct NotificationView: View {
     }
 
     func deleteAlarms(at offsets: IndexSet) {
-        alarms.remove(atOffsets: offsets)
+        reminder.remove(atOffsets: offsets)
     }
 }
 

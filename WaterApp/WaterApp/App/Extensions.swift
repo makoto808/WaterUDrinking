@@ -104,6 +104,14 @@ extension Image {
             .padding(.horizontal, 6)
             .padding(.top, 6)
     }
+    
+    func plusButton1() -> some View {
+        self.font(.system(size: 35, weight: .heavy))
+            .symbolRenderingMode(.hierarchical)
+            .foregroundColor(Color.waterBlue)
+            .padding(.horizontal, 15)
+            .padding(.top, 6)
+    }
 }
 
 extension View {
