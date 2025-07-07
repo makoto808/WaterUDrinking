@@ -38,6 +38,12 @@ struct NotificationView: View {
                                 set: { newValue in
                                     reminder.isEnabled = newValue
                                     saveContext()
+
+                                    if newValue {
+                                        scheduleNotification(for: reminder)
+                                    } else {
+                                        cancelNotification(for: reminder)
+                                    }
                                 }
                             ))
                             .labelsHidden()
@@ -124,6 +130,28 @@ struct NotificationView: View {
             print("Failed to save context: \(error)")
         }
     }
+    
+    func scheduleNotification(for model: NotificationModel) {
+        let content = UNMutableNotificationContent()
+        content.title = model.label.isEmpty ? "Alarm" : model.label
+        content.body = "💧 Time to Hydrate!"
+        content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 1.0)
+
+        let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: model.time)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+
+        let request = UNNotificationRequest(identifier: model.id.uuidString, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Failed to schedule: \(error)")
+            }
+        }
+    }
+
+    func cancelNotification(for model: NotificationModel) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [model.id.uuidString])
+    }
+
 }
 
 #Preview {

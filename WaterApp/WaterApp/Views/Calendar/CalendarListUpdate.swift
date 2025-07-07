@@ -53,7 +53,7 @@ struct CalendarListUpdate: View {
                             }
                         }
                     }
-                    .alert("Delete this drink?", isPresented: $calendarVMBindable.showAlert) {
+                    .alert("Delete This Drink?", isPresented: $calendarVMBindable.showAlert) {
                         Button("Cancel", role: .cancel) { }
                         Button("Delete", role: .destructive) {
                             if let drink = calendarVM.drinkToDelete {

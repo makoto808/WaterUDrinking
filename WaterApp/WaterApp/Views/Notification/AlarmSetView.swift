@@ -65,7 +65,9 @@ struct AlarmSetView: View {
                             do {
                                 context.insert(newAlarm)
                                 try context.save()
-                                requestPermissionAndSchedule(for: newAlarm)
+                                if newAlarm.isEnabled {
+                                    requestPermissionAndSchedule(for: newAlarm)
+                                }
                                 onSave(newAlarm)
                                 dismiss()
                             } catch {
@@ -75,7 +77,7 @@ struct AlarmSetView: View {
                     }
                 }
             }
-            .alert("Label is missing!", isPresented: $showAlert) {
+            .alert("Label Is Missing!", isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }
             } message: {
                 Text("Please enter a label for the reminder before saving.")
