@@ -13,8 +13,8 @@ struct WaterAppApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .modelContainer(for: [CachedDrinkItem.self, UserGoal.self, NotificationModel.self])
         }
-        .modelContainer(for: [CachedDrinkItem.self, UserGoal.self])
     }
 }
 

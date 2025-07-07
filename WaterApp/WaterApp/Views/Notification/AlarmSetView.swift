@@ -9,10 +9,13 @@ import SwiftUI
 import UserNotifications
 
 struct AlarmSetView: View {
+    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
 
     @State private var reminderTime = Date()
-    @State private var labelText = "Drink Reminder"
+    @State private var labelText = ""
+
+    @State private var showAlert = false
 
     var onSave: (NotificationModel) -> Void
 
@@ -34,7 +37,7 @@ struct AlarmSetView: View {
                     Text("Label")
                         .fontSmallTitle2()
 
-                    TextField("", text: $labelText)
+                    TextField("Drink Reminder", text: $labelText)
                         .alarmSetLabel()
 
                     Divider()
@@ -55,12 +58,27 @@ struct AlarmSetView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        let newAlarm = NotificationModel(time: reminderTime, label: labelText)
-                        requestPermissionAndSchedule(for: newAlarm)
-                        onSave(newAlarm)
-                        dismiss()
+                        if labelText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                            showAlert = true
+                        } else {
+                            let newAlarm = NotificationModel(time: reminderTime, label: labelText)
+                            do {
+                                context.insert(newAlarm)
+                                try context.save()
+                                requestPermissionAndSchedule(for: newAlarm)
+                                onSave(newAlarm)
+                                dismiss()
+                            } catch {
+                                print("Failed to save notification: \(error)")
+                            }
+                        }
                     }
                 }
+            }
+            .alert("Label is missing!", isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text("Please enter a label for the reminder before saving.")
             }
         }
     }
@@ -84,7 +102,7 @@ struct AlarmSetView: View {
     func scheduleNotification(for model: NotificationModel) {
         let content = UNMutableNotificationContent()
         content.title = model.label.isEmpty ? "Alarm" : model.label
-        content.body = "Your alarm is going off!"
+        content.body = "💧 Time to Hydrate!"
         content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 1.0)
 
         let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: model.time)

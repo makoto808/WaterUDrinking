@@ -6,10 +6,21 @@
 //
 
 import Foundation
-import SwiftUI
+import SwiftData
 
-struct NotificationModel: Identifiable, Equatable {
-    let id = UUID()
-    let time: Date
-    let label: String
+@Model
+class NotificationModel: Identifiable, Equatable {
+    @Attribute(.unique) var id: UUID
+    var time: Date
+    var label: String
+
+    init(id: UUID = UUID(), time: Date, label: String) {
+        self.id = id
+        self.time = time
+        self.label = label
+    }
+
+    static func == (lhs: NotificationModel, rhs: NotificationModel) -> Bool {
+        lhs.id == rhs.id
+    }
 }
