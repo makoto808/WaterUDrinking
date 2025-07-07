@@ -28,11 +28,12 @@ struct NotificationView: View {
                 .buttonStyle(.borderedProminent)
             }
             .padding([.horizontal, .top])
-
+            
             List {
                 if alarms.isEmpty {
                     Text("No alarms yet")
                         .foregroundStyle(.gray)
+                        .listRowBackground(Color.clear)
                 } else {
                     ForEach(alarms) { alarm in
                         VStack(alignment: .leading) {
@@ -43,11 +44,15 @@ struct NotificationView: View {
                                 .foregroundStyle(.secondary)
                         }
                         .padding(.vertical, 4)
+                        .listRowBackground(Color.clear)
                     }
                     .onDelete(perform: deleteAlarms)
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.backgroundWhite)
         }
+        .background(Color.backgroundWhite)
         .sheet(isPresented: $showingAlarmSetViewSheet) {
             AlarmSetView { newAlarm in
                 alarms.append(newAlarm)
@@ -55,7 +60,6 @@ struct NotificationView: View {
             }
             .presentationDetents([.fraction(0.75)])
         }
-        .background(Color.backgroundWhite)
     }
 
     func deleteAlarms(at offsets: IndexSet) {

@@ -12,7 +12,7 @@ struct AlarmSetView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var reminderTime = Date()
-    @State private var labelText = "Alarm"
+    @State private var labelText = "Drink Reminder"
 
     var onSave: (NotificationModel) -> Void
 
@@ -34,10 +34,8 @@ struct AlarmSetView: View {
                     Text("Label")
                         .fontSmallTitle2()
 
-                    TextField("Alarm Label", text: $labelText)
-                        .textFieldStyle(.plain)
-                        .font(.body)
-                        .padding(.vertical, 8)
+                    TextField("", text: $labelText)
+                        .alarmSetLabel()
 
                     Divider()
                 }
@@ -49,8 +47,10 @@ struct AlarmSetView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button(action: {
                         dismiss()
+                    }) {
+                        Text("Cancel")
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {

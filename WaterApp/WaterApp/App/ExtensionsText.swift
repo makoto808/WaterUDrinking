@@ -122,4 +122,13 @@ extension View {
             .keyboardType(.decimalPad)
             .multilineTextAlignment(.center)
     }
+    
+    func alarmSetLabel() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 16))
+            .foregroundStyle(.primary)
+            .fontWeight(.semibold)
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+            .padding(.vertical, 8)
+    }
 }
