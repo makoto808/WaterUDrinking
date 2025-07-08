@@ -20,6 +20,8 @@ extension Binding where Value == String {
 
 extension Color {
     static let backgroundWhite = Color(red: 0.9373, green: 0.9607, blue: 0.9607)
+    
+    static let waterBlue = Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5)
 }
 
 extension Date {
@@ -98,8 +100,16 @@ extension Image {
     func backButton1() -> some View {
         self.font(.system(size: 20, weight: .heavy))
             .symbolRenderingMode(.hierarchical)
-            .foregroundColor(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
-            .padding(.horizontal, 6)
+            .foregroundColor(Color.waterBlue)
+            .padding(.horizontal, 8)
+            .padding(.top, 6)
+    }
+    
+    func plusButton1() -> some View {
+        self.font(.system(size: 25, weight: .heavy))
+            .symbolRenderingMode(.hierarchical)
+            .foregroundColor(Color.waterBlue)
+            .padding(.horizontal, 8)
             .padding(.top, 6)
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-
+    @Environment(NotificationVM.self) private var notificationVM
     @State private var drinkListVM = DrinkListVM()
     @State private var calendarHomeVM = CalendarHomeVM()
 
@@ -32,6 +32,10 @@ struct ContentView: View {
                     ResetView()
                 case .subscribeView:
                     SubscribeView()
+                case .notificationView:
+                    NotificationView()
+                default:
+                    EmptyView()
                 }
             }
         }
@@ -42,6 +46,7 @@ struct ContentView: View {
         }
     }
 }
+
 
 #Preview {
     ContentView()

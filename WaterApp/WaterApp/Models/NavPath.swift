@@ -14,4 +14,6 @@ enum NavPath: Hashable {
     case dailyWaterGoal
     case resetView
     case subscribeView
+    case notificationView
+    case notificationAlarm
 }

@@ -45,7 +45,7 @@ struct CustomDrinkButtonRow: View {
                 drinkListVM.navPath.removeLast()
             }
             .drinkFilllViewButtonStyle()
-            .alert("You didn't drink anything!", isPresented: $drinkListVM.showAlert) {
+            .alert("You Didn't Drink Anything!", isPresented: $drinkListVM.showAlert) {
                 Button("Dismiss") {}
             }
 

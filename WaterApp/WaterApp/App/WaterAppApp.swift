@@ -10,11 +10,35 @@ import SwiftUI
 
 @main
 struct WaterAppApp: App {
+    @State private var notificationVM: NotificationVM
+    @AppStorage("isProUnlocked") private var isProUnlocked = false
+
+    init() {
+        do {
+            let container = try ModelContainer(for: CachedDrinkItem.self, UserGoal.self, NotificationModel.self)
+            _notificationVM = State(wrappedValue: NotificationVM(context: container.mainContext))
+            self.modelContainer = container
+        } catch {
+            fatalError("Failed to create model container: \(error)")
+        }
+    }
+
+    let modelContainer: ModelContainer
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isProUnlocked {
+                ContentView()
+                    .modelContainer(modelContainer)
+                    .environment(notificationVM)
+            } else {
+                OneTimePurchaseView {
+                    isProUnlocked = true
+                }
+                .modelContainer(modelContainer)
+                .environment(notificationVM)
+            }
         }
-        .modelContainer(for: [CachedDrinkItem.self, UserGoal.self])
     }
 }
 

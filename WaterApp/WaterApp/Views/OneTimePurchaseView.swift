@@ -1,15 +1,16 @@
 //
-//  SubscribeView.swift
+//  OneTimePurchaseView.swift
 //  WaterApp
 //
-//  Created by Gregg Abe on 7/3/25.
+//  Created by Gregg Abe on 7/7/25.
 //
 
 import SwiftUI
 
-struct SubscribeView: View {
-    @StateObject private var store = ProductStore()
-    
+struct OneTimePurchaseView: View {
+    @StateObject private var store = OneTimePurchaseStore()
+    var onPurchaseSuccess: () -> Void
+
     var body: some View {
         VStack(spacing: 20) {
             if let product = store.product {
@@ -19,10 +20,13 @@ struct SubscribeView: View {
                     .font(.body)
                 Text(product.displayPrice)
                     .font(.headline)
-                
+
                 if store.purchased {
-                    Text("Thank you for your purchase! ✅")
+                    Text("Thank you! Purchased ✅")
                         .foregroundColor(.green)
+                        .onAppear {
+                            onPurchaseSuccess()
+                        }
                 } else {
                     Button("Buy Now") {
                         Task {
@@ -32,10 +36,10 @@ struct SubscribeView: View {
                     .buttonStyle(.borderedProminent)
                 }
             } else {
-                ProgressView("Loading product...")
+                Text("Loading product...")
             }
         }
         .padding()
-        .navigationTitle("Unlock Pro Features")
     }
 }
+
