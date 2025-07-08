@@ -224,10 +224,18 @@
 				07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */,
 				116283CF2DB38FBF000ADC31 /* CalendarHomeVM.swift */,
 				077A3A012E1BA69100D086BA /* NotificationVM.swift */,
+				07F127142E1D08D400DFDAB1 /* StoreKit */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		07F127142E1D08D400DFDAB1 /* StoreKit */ = {
+			isa = PBXGroup;
+			children = (
 				077A3A052E1D04A300D086BA /* OneTimePurchaseStore.swift */,
 				077A3A092E1D063200D086BA /* ProductStoreVM.swift */,
 			);
-			path = ViewModels;
+			path = StoreKit;
 			sourceTree = "<group>";
 		};
 		07F3C6FF2D8EEDE800427A9A = {
