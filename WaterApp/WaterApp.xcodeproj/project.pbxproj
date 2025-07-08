@@ -19,6 +19,9 @@
 		077A39FE2E1A9A6B00D086BA /* AlarmSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39FD2E1A9A6B00D086BA /* AlarmSetView.swift */; };
 		077A3A002E1AA01200D086BA /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39FF2E1AA01200D086BA /* NotificationModel.swift */; };
 		077A3A022E1BA69100D086BA /* NotificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A3A012E1BA69100D086BA /* NotificationVM.swift */; };
+		077A3A062E1D04A300D086BA /* OneTimePurchaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A3A052E1D04A300D086BA /* OneTimePurchaseStore.swift */; };
+		077A3A082E1D04D900D086BA /* OneTimePurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A3A072E1D04D900D086BA /* OneTimePurchaseView.swift */; };
+		077A3A0A2E1D063200D086BA /* ProductStoreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A3A092E1D063200D086BA /* ProductStoreVM.swift */; };
 		077ED5A92E06C8DD00CBCC33 /* UserGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */; };
 		077ED5AB2E0A9B9E00CBCC33 /* CupViewOverride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5AA2E0A9B9E00CBCC33 /* CupViewOverride.swift */; };
 		077ED5B12E0BE5E800CBCC33 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5B02E0BE5E800CBCC33 /* CalendarDayCell.swift */; };
@@ -84,6 +87,9 @@
 		077A39FF2E1AA01200D086BA /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		077A3A012E1BA69100D086BA /* NotificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVM.swift; sourceTree = "<group>"; };
 		077A3A042E1D026B00D086BA /* StoreKit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKit.storekit; sourceTree = "<group>"; };
+		077A3A052E1D04A300D086BA /* OneTimePurchaseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimePurchaseStore.swift; sourceTree = "<group>"; };
+		077A3A072E1D04D900D086BA /* OneTimePurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimePurchaseView.swift; sourceTree = "<group>"; };
+		077A3A092E1D063200D086BA /* ProductStoreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStoreVM.swift; sourceTree = "<group>"; };
 		077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGoal.swift; sourceTree = "<group>"; };
 		077ED5AA2E0A9B9E00CBCC33 /* CupViewOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupViewOverride.swift; sourceTree = "<group>"; };
 		077ED5B02E0BE5E800CBCC33 /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
@@ -218,6 +224,8 @@
 				07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */,
 				116283CF2DB38FBF000ADC31 /* CalendarHomeVM.swift */,
 				077A3A012E1BA69100D086BA /* NotificationVM.swift */,
+				077A3A052E1D04A300D086BA /* OneTimePurchaseStore.swift */,
+				077A3A092E1D063200D086BA /* ProductStoreVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -289,6 +297,7 @@
 				07CED0252D94C32700498D17 /* Settings */,
 				072787292D94C15C00D56B96 /* Cup */,
 				072787262D94C12700D56B96 /* Calendar */,
+				077A3A072E1D04D900D086BA /* OneTimePurchaseView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -469,11 +478,14 @@
 				07F3C7562D90CA1700427A9A /* DrinkSelectionView.swift in Sources */,
 				07EA0BE02DBCC4E8001033AB /* ExtensionsText.swift in Sources */,
 				07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */,
+				077A3A082E1D04D900D086BA /* OneTimePurchaseView.swift in Sources */,
 				07F3C7432D8EEDFE00427A9A /* ContentView.swift in Sources */,
 				07381C242D998381003216FA /* CustomOzView.swift in Sources */,
 				073BC1752DAF2FB000863F93 /* TitleView.swift in Sources */,
+				077A3A062E1D04A300D086BA /* OneTimePurchaseStore.swift in Sources */,
 				072749672DB0CD20006E6C30 /* CalendarHomeView.swift in Sources */,
 				07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */,
+				077A3A0A2E1D063200D086BA /* ProductStoreVM.swift in Sources */,
 				077ED5BD2E0E882700CBCC33 /* EmptyCalendarDrinkListView.swift in Sources */,
 				07F3C7542D8EF8DF00427A9A /* CupView.swift in Sources */,
 				07381C272D9B78E6003216FA /* CustomDrinkView.swift in Sources */,

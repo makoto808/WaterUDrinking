@@ -75,7 +75,7 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <StoreKitConfigurationFileReference
-         identifier = "../../6748337035.storekit">
+         identifier = "../../StoreKit.storekit">
       </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction

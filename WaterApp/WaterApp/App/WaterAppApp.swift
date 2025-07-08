@@ -11,6 +11,7 @@ import SwiftUI
 @main
 struct WaterAppApp: App {
     @State private var notificationVM: NotificationVM
+    @AppStorage("isProUnlocked") private var isProUnlocked = false
 
     init() {
         do {
@@ -26,9 +27,17 @@ struct WaterAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if isProUnlocked {
+                ContentView()
+                    .modelContainer(modelContainer)
+                    .environment(notificationVM)
+            } else {
+                OneTimePurchaseView {
+                    isProUnlocked = true
+                }
                 .modelContainer(modelContainer)
-                .environment(notificationVM) // inject your VM here
+                .environment(notificationVM)
+            }
         }
     }
 }
