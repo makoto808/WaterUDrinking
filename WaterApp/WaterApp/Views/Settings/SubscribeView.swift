@@ -8,34 +8,70 @@
 import SwiftUI
 
 struct SubscribeView: View {
-    @StateObject private var store = ProductStore()
-    
+    @StateObject private var vm = SubscribeVM()
+    var onUnlock: () -> Void
+
     var body: some View {
-        VStack(spacing: 20) {
-            if let product = store.product {
-                Text(product.displayName)
-                    .font(.title)
-                Text(product.description)
-                    .font(.body)
-                Text(product.displayPrice)
-                    .font(.headline)
-                
-                if store.purchased {
-                    Text("Thank you for your purchase! ✅")
-                        .foregroundColor(.green)
-                } else {
-                    Button("Buy Now") {
-                        Task {
-                            await store.purchase()
+        VStack(spacing: 30) {
+            if let oneTime = vm.oneTimeProduct {
+                VStack(spacing: 8) {
+                    Text(oneTime.displayName)
+                        .font(.headline)
+                    Text(oneTime.description)
+                        .font(.subheadline)
+                    Text(oneTime.displayPrice)
+                        .font(.subheadline)
+                    if vm.oneTimePurchased {
+                        Text("Purchased ✅").foregroundColor(.green)
+                    } else {
+                        Button("Buy One-Time Unlock") {
+                            Task {
+                                await vm.purchase(oneTime)
+                                if vm.oneTimePurchased {
+                                    onUnlock()
+                                }
+                            }
                         }
+                        .buttonStyle(.borderedProminent)
                     }
-                    .buttonStyle(.borderedProminent)
                 }
-            } else {
-                ProgressView("Loading product...")
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(10)
+            }
+
+            if let subscription = vm.subscriptionProduct {
+                VStack(spacing: 8) {
+                    Text(subscription.displayName)
+                        .font(.headline)
+                    Text(subscription.description)
+                        .font(.subheadline)
+                    Text(subscription.displayPrice)
+                        .font(.subheadline)
+                    if vm.subscriptionPurchased {
+                        Text("Subscribed ✅").foregroundColor(.green)
+                    } else {
+                        Button("Subscribe") {
+                            Task {
+                                await vm.purchase(subscription)
+                                if vm.subscriptionPurchased {
+                                    onUnlock()
+                                }
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                }
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(10)
+            }
+
+            if vm.oneTimeProduct == nil && vm.subscriptionProduct == nil {
+                ProgressView("Loading products...")
             }
         }
         .padding()
-        .navigationTitle("Unlock Pro Features")
+        .navigationTitle("Subscribe or Unlock")
     }
 }
