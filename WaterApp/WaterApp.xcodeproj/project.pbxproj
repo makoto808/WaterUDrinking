@@ -83,6 +83,7 @@
 		077A39FD2E1A9A6B00D086BA /* AlarmSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSetView.swift; sourceTree = "<group>"; };
 		077A39FF2E1AA01200D086BA /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		077A3A012E1BA69100D086BA /* NotificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVM.swift; sourceTree = "<group>"; };
+		077A3A042E1D026B00D086BA /* StoreKit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKit.storekit; sourceTree = "<group>"; };
 		077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGoal.swift; sourceTree = "<group>"; };
 		077ED5AA2E0A9B9E00CBCC33 /* CupViewOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupViewOverride.swift; sourceTree = "<group>"; };
 		077ED5B02E0BE5E800CBCC33 /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
@@ -224,6 +225,7 @@
 		07F3C6FF2D8EEDE800427A9A = {
 			isa = PBXGroup;
 			children = (
+				077A3A042E1D026B00D086BA /* StoreKit.storekit */,
 				07F3C7422D8EEDFE00427A9A /* WaterApp */,
 				07F3C73B2D8EEDF900427A9A /* WaterAppTests */,
 				07F3C7372D8EEDF700427A9A /* WaterAppUITests */,
@@ -643,6 +645,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 5M79DDHHKU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -673,6 +676,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 5M79DDHHKU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
