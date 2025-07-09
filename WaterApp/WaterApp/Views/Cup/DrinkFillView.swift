@@ -12,6 +12,9 @@ struct DrinkFillView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(DrinkListVM.self) private var drinkListVM
     
+    @State private var lastHapticValue: Double = 0.0
+    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
+    
     let item: DrinkItem
     
     var body: some View {
@@ -33,6 +36,13 @@ struct DrinkFillView: View {
             
             Slider(value: $drinkListVM.value, in: 0...20, step: 0.1)
                 .padding(30)
+                .onChange(of: drinkListVM.value) { oldValue, newValue in
+                    let roundedValue = (newValue * 10).rounded() / 10.0
+                    if abs(roundedValue - lastHapticValue) >= 0.1 {
+                        feedbackGenerator.impactOccurred()
+                        lastHapticValue = roundedValue
+                    }
+                }
             
             CustomDrinkButtonRow(drinkListVM: drinkListVM, item: item)
             
@@ -52,6 +62,7 @@ struct DrinkFillView: View {
         }
         .onAppear {
             drinkListVM.setSelectedItemIndex(for: item)
+            feedbackGenerator.prepare()
         }
         .onDisappear {
             drinkListVM.selectedItemIndex = nil
