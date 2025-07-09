@@ -38,7 +38,7 @@ struct DrinkFillView: View {
             
             Spacer()
         }
-        .background(Color.backgroundWhite)
+        .background(Color("AppBackgroundColor"))
         .onAppear {
             drinkListVM.setSelectedItemIndex(for: item)
         }

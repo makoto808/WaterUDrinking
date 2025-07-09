@@ -37,7 +37,7 @@ struct DrinkSelectionView: View {
                 }
             }
         }
-        .background(Color.backgroundWhite)
+        .background(Color("AppBackgroundColor"))
     }
 }
 

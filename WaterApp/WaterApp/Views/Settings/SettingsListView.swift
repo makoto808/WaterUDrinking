@@ -54,7 +54,7 @@ struct SettingsListView: View {
             }
             .listStyle(.automatic)
             .scrollContentBackground(.hidden)
-            .background(Color.backgroundWhite)
+            .background(Color("AppBackgroundColor"))
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

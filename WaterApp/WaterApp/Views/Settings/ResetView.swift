@@ -19,7 +19,7 @@ struct ResetView: View {
     
     var body: some View {
         ZStack {
-            Color.backgroundWhite
+            Color("AppBackgroundColor")
                 .ignoresSafeArea()
             
             GeometryReader { geo in
