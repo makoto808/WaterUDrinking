@@ -39,6 +39,17 @@ struct DrinkFillView: View {
             Spacer()
         }
         .background(Color("AppBackgroundColor"))
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    drinkListVM.navPath.removeLast()
+                } label: {
+                    Image(systemName: "chevron.backward")
+                        .backButton1()
+                }
+            }
+        }
         .onAppear {
             drinkListVM.setSelectedItemIndex(for: item)
         }

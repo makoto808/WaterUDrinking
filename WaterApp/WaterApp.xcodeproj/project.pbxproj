@@ -235,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				077A3A052E1D04A300D086BA /* OneTimePurchaseStore.swift */,
+				077A3A072E1D04D900D086BA /* OneTimePurchaseView.swift */,
 				077A3A092E1D063200D086BA /* ProductStoreVM.swift */,
 				07F127172E1D0BFF00DFDAB1 /* SubscribeVM.swift */,
 			);
@@ -308,7 +309,6 @@
 				07CED0252D94C32700498D17 /* Settings */,
 				072787292D94C15C00D56B96 /* Cup */,
 				072787262D94C12700D56B96 /* Calendar */,
-				077A3A072E1D04D900D086BA /* OneTimePurchaseView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -56,6 +56,17 @@ struct ResetView: View {
                 .padding()
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    drinkListVM.navPath.removeLast()
+                } label: {
+                    Image(systemName: "chevron.backward")
+                        .backButton1()
+                }
+            }
+        }
     }
 }
 
