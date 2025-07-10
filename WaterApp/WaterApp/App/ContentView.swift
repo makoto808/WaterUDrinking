@@ -32,11 +32,8 @@ struct ContentView: View {
                         GoalView()
                     case .resetView:
                         ResetView()
-                    case .subscribeView:
-                        SubscribeView {
-                            isProUnlocked = true
-                            UserDefaults.standard.set(true, forKey: "isProUnlocked")
-                        }
+                    case .purchaseView:
+                        PurchaseView()
                     case .notificationView:
                         NotificationView()
                     default:
