@@ -65,15 +65,19 @@ struct PurchaseView: View {
         }
         .task {
             await loadOneTimeProduct()
-
+            
             do {
                 let subs = try await Product.products(for: [
                     "com.greggyphenom.waterudrinking.annual",
                     "com.greggyphenom.waterudrinking.monthly2"
                 ])
-                print("✅ Loaded subs: \(subs.map(\.id))")
+                if subs.isEmpty {
+                    print("⚠️ No subscriptions loaded — check product IDs and sandbox login.")
+                } else {
+                    print("✅ Loaded subs: \(subs.map(\.id))")
+                }
             } catch {
-                print("❌ Subscription loading failed: \(error)")
+                print("❌ Subscription loading failed: \(error.localizedDescription)")
             }
         }
         .sheet(isPresented: $showingSignIn) {

@@ -83,7 +83,6 @@
 		077A39FD2E1A9A6B00D086BA /* AlarmSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSetView.swift; sourceTree = "<group>"; };
 		077A39FF2E1AA01200D086BA /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		077A3A012E1BA69100D086BA /* NotificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVM.swift; sourceTree = "<group>"; };
-		077A3A042E1D026B00D086BA /* StoreKit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKit.storekit; sourceTree = "<group>"; };
 		077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGoal.swift; sourceTree = "<group>"; };
 		077ED5AA2E0A9B9E00CBCC33 /* CupViewOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupViewOverride.swift; sourceTree = "<group>"; };
 		077ED5B02E0BE5E800CBCC33 /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
@@ -105,6 +104,7 @@
 		07EA0BDF2DBCC4E8001033AB /* ExtensionsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsText.swift; sourceTree = "<group>"; };
 		07F1271B2E1F3C2E00DFDAB1 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		07F1271E2E1F3EBB00DFDAB1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		07F127202E1F9EFD00DFDAB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		07F3C7082D8EEDE800427A9A /* WaterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F3C7182D8EEDEB00427A9A /* WaterAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F3C7222D8EEDEB00427A9A /* WaterAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,7 +243,6 @@
 		07F3C6FF2D8EEDE800427A9A = {
 			isa = PBXGroup;
 			children = (
-				077A3A042E1D026B00D086BA /* StoreKit.storekit */,
 				07F3C7422D8EEDFE00427A9A /* WaterApp */,
 				07F3C73B2D8EEDF900427A9A /* WaterAppTests */,
 				07F3C7372D8EEDF700427A9A /* WaterAppUITests */,
@@ -290,6 +289,7 @@
 		07F3C7422D8EEDFE00427A9A /* WaterApp */ = {
 			isa = PBXGroup;
 			children = (
+				07F127202E1F9EFD00DFDAB1 /* Info.plist */,
 				07F3C73E2D8EEDFE00427A9A /* Preview Content */,
 				07F3C73F2D8EEDFE00427A9A /* Assets.xcassets */,
 				077ED5C82E178CC000CBCC33 /* Launch Screen.storyboard */,
@@ -668,6 +668,7 @@
 				DEVELOPMENT_TEAM = 5M79DDHHKU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WaterApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Water U Drinking?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -680,7 +681,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greggyphenom.WaterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -702,6 +703,7 @@
 				DEVELOPMENT_TEAM = 5M79DDHHKU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WaterApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Water U Drinking?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -714,7 +716,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greggyphenom.WaterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
