@@ -39,6 +39,7 @@
 		07EA0BE02DBCC4E8001033AB /* ExtensionsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EA0BDF2DBCC4E8001033AB /* ExtensionsText.swift */; };
 		07F1271C2E1F3C2E00DFDAB1 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1271B2E1F3C2E00DFDAB1 /* PurchaseView.swift */; };
 		07F1271F2E1F3EBB00DFDAB1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F1271E2E1F3EBB00DFDAB1 /* StoreKit.framework */; };
+		07F127222E20A48C00DFDAB1 /* SettingsNavRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F127212E20A48C00DFDAB1 /* SettingsNavRow.swift */; };
 		07F3C7382D8EEDF700427A9A /* WaterAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7352D8EEDF700427A9A /* WaterAppUITests.swift */; };
 		07F3C7392D8EEDF700427A9A /* WaterAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7362D8EEDF700427A9A /* WaterAppUITestsLaunchTests.swift */; };
 		07F3C73C2D8EEDF900427A9A /* WaterAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C73A2D8EEDF900427A9A /* WaterAppTests.swift */; };
@@ -105,6 +106,7 @@
 		07F1271B2E1F3C2E00DFDAB1 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		07F1271E2E1F3EBB00DFDAB1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		07F127202E1F9EFD00DFDAB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		07F127212E20A48C00DFDAB1 /* SettingsNavRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavRow.swift; sourceTree = "<group>"; };
 		07F3C7082D8EEDE800427A9A /* WaterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F3C7182D8EEDEB00427A9A /* WaterAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F3C7222D8EEDEB00427A9A /* WaterAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				07FBA8B52DAA53A000133F70 /* NavPath.swift */,
+				07F127212E20A48C00DFDAB1 /* SettingsNavRow.swift */,
 				07B3A0032D9DF79100000BF2 /* DrinkItem.swift */,
 				077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */,
 				07CED0342D96A02600498D17 /* SettingsModel.swift */,
@@ -463,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				077ED5B12E0BE5E800CBCC33 /* CalendarDayCell.swift in Sources */,
+				07F127222E20A48C00DFDAB1 /* SettingsNavRow.swift in Sources */,
 				07680FF82E01302E0030108F /* ResetView.swift in Sources */,
 				07CED0272D94CFF500498D17 /* BarChart.swift in Sources */,
 				077ED5A92E06C8DD00CBCC33 /* UserGoal.swift in Sources */,

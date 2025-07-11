@@ -14,40 +14,31 @@ struct SettingsListView: View {
         VStack {
             List {
                 Section {
-                    Button("Give Us A Review") {
+                    SettingsNavRow(title: "Give Us A Review") {
                         //TODO: Link to appstore review
                     }
                 }
                 
                 Section {
-                    Button {
+                    SettingsNavRow(title: "Edit Your Goal") {
                         drinkListVM.navPath.append(.dailyWaterGoal)
-                    } label: {
-                        Text("Edit Your Goal")
                     }
-                    
-                    Button {
+
+                    SettingsNavRow(title: "Reset Today's Total") {
                         drinkListVM.navPath.append(.resetView)
-                    } label: {
-                        Text("Reset Today's Total")
                     }
                 }
                 
                 Section {
-                    Button {
+                    SettingsNavRow(title: "Set A Reminder") {
                         drinkListVM.navPath.append(.notificationView)
-                    } label: {
-                        Text("Set A Reminder")
                     }
                 }
                 
                 Section {
-                    Button {
+                    SettingsNavRow(title: "Become A Hydrated Member") {
                         drinkListVM.navPath.append(.purchaseView)
-                    } label: {
-                        Text("Become A Hydrated Member")
                     }
-                    
                 }
                 
                 //TODO: Future Settings Tabs below

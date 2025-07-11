@@ -11,61 +11,65 @@ import SwiftUI
 struct PurchaseView: View {
     @State private var showingSignIn = false
     @State private var oneTimeProduct: Product?
+    @State private var monthlyProduct: Product?
+    @State private var annualProduct: Product?
     @State private var isPurchased = false
-    
+
     let productIDs = [
         "com.greggyphenom.waterudrinking.annual",        // 0
         "com.greggyphenom.waterudrinking.monthly2",      // 1
-        "com.greggyphenom.waterudrinking.prounlock"      // 2 ← needed for one-time
+        "com.greggyphenom.waterudrinking.prounlock"      // 2 ← one-time
     ]
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 32) {
-                // Native subscription picker
-                SubscriptionStoreView(productIDs: [productIDs[0], productIDs[1]])
-                    .storeButton(.visible, for: .restorePurchases, .redeemCode, .signIn, .policies)
-                    .subscriptionStorePolicyDestination(for: .privacyPolicy) {
-                        Text("Your Privacy Policy Here")
-                    }
-                    .subscriptionStorePolicyDestination(for: .termsOfService) {
-                        Text("Your Terms of Service Here")
-                    }
-                    .subscriptionStoreSignInAction {
-                        showingSignIn = true
-                    }
-                    .subscriptionStoreControlStyle(.prominentPicker)
-                    .frame(maxHeight: 500)
-                
-                Divider().padding(.horizontal)
-                
-                // One-time unlock
-                if let product = oneTimeProduct {
-                    VStack(spacing: 8) {
-                        Text(product.displayName)
-                            .font(.headline)
-                        Text(product.description)
-                            .font(.subheadline)
-                        
-                        Button("Unlock for \(product.displayPrice)") {
-                            Task {
-                                await purchase(product)
-                            }
+                Text("Upgrade to Pro")
+                    .font(.largeTitle.bold())
+
+                VStack(spacing: 16) {
+                    if let monthly = monthlyProduct {
+                        subscriptionRow(title: "Pro Monthly Plan", description: "$1.99 / month") {
+                            Task { await purchase(monthly) }
                         }
-                        .buttonStyle(.borderedProminent)
+                    }
+
+                    if let annual = annualProduct {
+                        subscriptionRow(title: "Pro Annual Plan", description: "$14.99 / year") {
+                            Task { await purchase(annual) }
+                        }
+                    }
+
+                    if let oneTime = oneTimeProduct {
+                        subscriptionRow(title: "Pro One-Time Unlock", description: oneTime.displayPrice) {
+                            Task { await purchase(oneTime) }
+                        }
                     }
                 }
-                
+
                 if isPurchased {
-                    Text("✅ One-time purchase successful!")
+                    Text("✅ Purchase successful!")
                         .foregroundColor(.green)
                 }
+
+                Divider()
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("• Subscriptions auto-renew unless canceled at least 24 hours before the end of the current period.")
+                    Text("• Payment will be charged to your Apple ID account at confirmation of purchase.")
+
+                    Link("Privacy Policy", destination: URL(string: "https://makoto808.github.io/waterudrinking-support/privacy")!)
+                    Link("Terms of Use (EULA)", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
+                        .padding(.top, 4)
+                }
+                .font(.footnote)
+                .foregroundColor(.secondary)
             }
             .padding()
         }
         .task {
-            await loadOneTimeProduct()
-            
+            await loadProducts()
+
             do {
                 let subs = try await Product.products(for: [
                     "com.greggyphenom.waterudrinking.annual",
@@ -83,18 +87,45 @@ struct PurchaseView: View {
         .sheet(isPresented: $showingSignIn) {
             Text("Custom sign-in view (optional)")
         }
-        .navigationTitle("Upgrade to Pro")
     }
-    
-    func loadOneTimeProduct() async {
+
+    func subscriptionRow(title: String, description: String, action: @escaping () -> Void) -> some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title).font(.headline)
+                Text(description).font(.subheadline)
+            }
+            Spacer()
+            Button("Purchase") {
+                action()
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .padding()
+        .background(.ultraThinMaterial)
+        .cornerRadius(12)
+    }
+
+    func loadProducts() async {
         do {
-            let products = try await Product.products(for: [productIDs[2]])
-            oneTimeProduct = products.first
+            let products = try await Product.products(for: productIDs)
+            for product in products {
+                switch product.id {
+                case productIDs[0]: annualProduct = product
+                case productIDs[1]: monthlyProduct = product
+                case productIDs[2]: oneTimeProduct = product
+                default: break
+                }
+            }
+
+            if annualProduct == nil && monthlyProduct == nil {
+                print("⚠️ No subscriptions loaded — check product IDs and sandbox account.")
+            }
         } catch {
-            print("Error loading one-time product: \(error)")
+            print("❌ Product loading failed: \(error.localizedDescription)")
         }
     }
-    
+
     func purchase(_ product: Product) async {
         do {
             let result = try await product.purchase()
