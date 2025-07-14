@@ -9,6 +9,8 @@ import StoreKit
 import SwiftUI
 
 struct PurchaseView: View {
+    @Environment(DrinkListVM.self) private var drinkListVM
+    
     @State private var showingSignIn = false
     @State private var oneTimeProduct: Product?
     @State private var monthlyProduct: Product?
@@ -66,6 +68,17 @@ struct PurchaseView: View {
                 .foregroundColor(.secondary)
             }
             .padding()
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        drinkListVM.navPath.removeLast()
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .backButton1()
+                    }
+                }
+            }
         }
         .task {
             await loadProducts()
@@ -84,6 +97,7 @@ struct PurchaseView: View {
                 print("❌ Subscription loading failed: \(error.localizedDescription)")
             }
         }
+        .background(Color.backgroundWhite)
         .sheet(isPresented: $showingSignIn) {
             Text("Custom sign-in view (optional)")
         }
@@ -92,9 +106,8 @@ struct PurchaseView: View {
     func subscriptionRow(title: String, description: String, action: @escaping () -> Void) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(title).font(.headline)
-                Text(description).font(.subheadline)
-            }
+                Text(title).fontSmallTitle()
+                Text(description).fontSmallTitle()            }
             Spacer()
             Button("Purchase") {
                 action()
@@ -102,7 +115,7 @@ struct PurchaseView: View {
             .buttonStyle(.borderedProminent)
         }
         .padding()
-        .background(.ultraThinMaterial)
+        .background(Color.waterBlue)
         .cornerRadius(12)
     }
 
@@ -151,4 +164,5 @@ struct PurchaseView: View {
 
 #Preview {
     PurchaseView()
+        .environment(DrinkListVM())
 }
