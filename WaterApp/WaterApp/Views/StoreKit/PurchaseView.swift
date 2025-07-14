@@ -25,7 +25,7 @@ struct PurchaseView: View {
         ScrollView {
             VStack(spacing: 32) {
                 Text("Upgrade to Pro")
-                    .font(.largeTitle.bold())
+                    .fontMediumTitle()
 
                 VStack(spacing: 16) {
                     if let monthly = monthlyProduct {
