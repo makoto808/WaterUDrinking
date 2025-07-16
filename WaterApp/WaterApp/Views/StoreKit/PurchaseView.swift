@@ -97,7 +97,7 @@ struct PurchaseView: View {
                 print("❌ Subscription loading failed: \(error.localizedDescription)")
             }
         }
-        .background(Color.backgroundWhite)
+        .background(Color("AppBackgroundColor"))
         .sheet(isPresented: $showingSignIn) {
             Text("Custom sign-in view (optional)")
         }
