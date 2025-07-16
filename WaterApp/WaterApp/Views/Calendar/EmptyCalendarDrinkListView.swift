@@ -27,6 +27,7 @@ struct EmptyCalendarDrinkListView: View {
                 
                 Button("+ Add") {
                     drinkListVM.selectedCalendarDate = selectedDate
+                    drinkListVM.refreshFromCache(for: selectedDate, modelContext: modelContext)  // << Add this line
                     dismiss()
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {

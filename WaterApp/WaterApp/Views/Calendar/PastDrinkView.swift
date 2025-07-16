@@ -25,7 +25,6 @@ struct PastDrinkView: View {
                         VStack(spacing: 10) {
                             Button {
                                 drinkListVM.navPath.append(.drinkFillView(drink))
-                                drinkListVM.selectedCalendarDate = nil
                                 dismiss()
                             } label: {
                                 Image(drink.img)

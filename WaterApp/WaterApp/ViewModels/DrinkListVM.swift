@@ -51,15 +51,17 @@ import SwiftUI
     func parseNewCachedItem(for item: DrinkItem, volume customVolume: Double? = nil) -> CachedDrinkItem? {
         guard selectedItemIndex != nil else { return nil }
         let volumeToUse = customVolume ?? value
-
         guard volumeToUse > 0 else { return nil }
 
         guard let index = items.firstIndex(where: { $0.name == item.name }) else {
             return nil
         }
 
+        let usedDate = selectedCalendarDate ?? Date()
+        print("💧 Saving drink for date: \(usedDate)")
+
         let newItem = CachedDrinkItem(
-            date: selectedCalendarDate ?? Date(),
+            date: usedDate,
             name: item.name,
             img: item.img,
             volume: volumeToUse,
@@ -68,6 +70,7 @@ import SwiftUI
 
         return newItem
     }
+
 
     // MARK: - Load from Cache
     func loadFromCache(_ modelContext: ModelContext) {
@@ -167,4 +170,37 @@ import SwiftUI
             self.items = resetItems
         }
     }
+    
+    func refreshFromCache(for date: Date, modelContext: ModelContext) {
+        do {
+            let cached = try fetchCachedDrinks(for: date, modelContext)
+            let cachedDrinks = cached.map { DrinkItem($0) }
+            let updatedItems = items.map { originalItem -> DrinkItem in
+                let volumeFromCache = cachedDrinks
+                    .filter { $0.name == originalItem.name }
+                    .reduce(0.0) { $0 + $1.volume }
+                return DrinkItem(
+                    name: originalItem.name,
+                    img: originalItem.img,
+                    volume: volumeFromCache
+                )
+            }
+            self.items = updatedItems
+        } catch {
+            print("Failed to refresh drinks for date: \(error)")
+            let resetItems = items.map { item in
+                DrinkItem(name: item.name, img: item.img, volume: 0.0)
+            }
+            self.items = resetItems
+        }
+    }
+
+    private func fetchCachedDrinks(for date: Date, _ modelContext: ModelContext) throws -> [CachedDrinkItem] {
+        let startOfDay = Calendar.current.startOfDay(for: date)
+        let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay)!
+        let predicate = #Predicate<CachedDrinkItem> { $0.date >= startOfDay && $0.date < endOfDay }
+        let fetchDescriptor = FetchDescriptor<CachedDrinkItem>(predicate: predicate)
+        return try modelContext.fetch(fetchDescriptor)
+    }
+
 }

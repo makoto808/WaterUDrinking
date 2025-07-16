@@ -10,7 +10,11 @@ import SwiftUI
 struct DrinkSelectionView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
-    var isFromHome: Bool = false
+    var isFromHome: Bool
+    
+    init(isFromHome: Bool = false) {
+        self.isFromHome = isFromHome
+    }
 
     var body: some View {
         @Bindable var drinkListVM = drinkListVM
@@ -38,10 +42,14 @@ struct DrinkSelectionView: View {
                     }
                 }
             }
-        }
-        .onAppear {
-            if isFromHome {
-                drinkListVM.selectedCalendarDate = nil
+            .onAppear {
+                if isFromHome {
+                    print("🏠 Coming from Home — resetting selectedCalendarDate")
+                    drinkListVM.selectedCalendarDate = nil
+
+                } else {
+                    print("📅 Coming from Calendar — keeping selectedCalendarDate: \(String(describing: drinkListVM.selectedCalendarDate))")
+                }
             }
         }
     }

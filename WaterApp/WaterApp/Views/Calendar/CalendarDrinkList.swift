@@ -86,7 +86,6 @@ struct CalendarDrinkList: View {
             }
         }
         .sheet(isPresented: $isShowingPastDrinkSheet, onDismiss: {
-            drinkListVM.selectedCalendarDate = nil
         }) {
             PastDrinkView()
                 .presentationDetents([.fraction(0.40)])

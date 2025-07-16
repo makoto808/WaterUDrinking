@@ -140,7 +140,7 @@ import SwiftUI
         do {
             try context.save()
             cachedItems.removeAll { $0.id == drink.id }
-            drinkListVM.refreshFromCache(context)
+            drinkListVM.refreshFromCache(for: Date(), modelContext: context)
         } catch {
             print("Failed to delete drink: \(error.localizedDescription)")
         }

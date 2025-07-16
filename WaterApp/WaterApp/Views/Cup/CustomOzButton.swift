@@ -27,19 +27,19 @@ struct CustomOzButton: View {
                 modelContext.insert(newItem)
                 do {
                     try modelContext.save()
-                    drinkListVM.refreshFromCache(modelContext)
+                    drinkListVM.refreshFromCache(for: newItem.date, modelContext: modelContext)
                 } catch {
                     print("Failed to save: \(error.localizedDescription)")
                 }
+
+                text = ""
+                dismiss()
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    drinkListVM.navPath.removeLast()
+                }
             } else {
                 drinkListVM.showAlert = true
-            }
-            drinkListVM.selectedCalendarDate = nil
-            
-            text = ""
-            dismiss()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                drinkListVM.navPath.removeLast()
             }
         }
         .button1()
