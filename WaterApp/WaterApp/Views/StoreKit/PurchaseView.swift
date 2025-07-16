@@ -26,7 +26,7 @@ struct PurchaseView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 32) {
-                Text("Upgrade to Pro")
+                Text("Upgrade To Pro")
                     .fontMediumTitle()
 
                 VStack(spacing: 16) {
