@@ -1,27 +1,32 @@
 //
-//  DrinkSelectionView.swift
+//  PastDrinkView.swift
 //  WaterApp
 //
-//  Created by Gregg Abe on 3/23/25.
+//  Created by Gregg Abe on 7/15/25.
 //
 
 import SwiftUI
 
-struct DrinkSelectionView: View {
+struct PastDrinkView: View {
+    @Environment(\.dismiss) private var dismiss
     @Environment(DrinkListVM.self) private var drinkListVM
-    
-    var isFromHome: Bool = false
 
     var body: some View {
         @Bindable var drinkListVM = drinkListVM
 
         VStack {
+            Text("Choose Your Drink")
+                .fontMediumTitle()
+                .padding(.bottom, 30)
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: -20) {
                     ForEach($drinkListVM.items) { $drink in
                         VStack(spacing: 10) {
                             Button {
                                 drinkListVM.navPath.append(.drinkFillView(drink))
+                                drinkListVM.selectedCalendarDate = nil
+                                dismiss()
                             } label: {
                                 Image(drink.img)
                                     .drinkFillSelectionResize()
@@ -39,18 +44,5 @@ struct DrinkSelectionView: View {
                 }
             }
         }
-        .onAppear {
-            if isFromHome {
-                drinkListVM.selectedCalendarDate = nil
-            }
-        }
     }
 }
-
-#Preview {
-    DrinkSelectionView()
-        .environment(DrinkListVM())
-}
-
-// TODO: Ability to reorder and add new drinks to DrinkSelectionView
-

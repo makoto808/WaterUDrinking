@@ -16,6 +16,7 @@ import SwiftUI
     var settingsDetent = PresentationDetent.medium
     var showCustomOzView = false
     var showCustomDrinkView = false
+    var showPastDrinkSheet = false
     var showAlert = false
     var value = 0.0
     var totalOz: Double = 0.0

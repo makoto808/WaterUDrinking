@@ -17,21 +17,20 @@ struct EmptyCalendarDrinkListView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                Spacer(minLength: 40)
-                
                 Text(selectedDate.formatted(date: .long, time: .omitted))
                     .fontMediumTitle()
-                    .padding(.top)
+                    .padding(.top, 55)
                 
-                Text("You are dehydrated!")
+                Text("You Are Dehydrated!")
                     .fontMediumTitle()
                     .multilineTextAlignment(.center)
                 
                 Button("+ Add") {
                     drinkListVM.selectedCalendarDate = selectedDate
                     dismiss()
+
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                        drinkListVM.navPath.removeLast()
+                        drinkListVM.showPastDrinkSheet = true
                     }
                 }
                 .button1()

@@ -12,6 +12,7 @@ struct CalendarDrinkList: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
     @State private var isShowingSheet = false
+    @State private var isShowingPastDrinkSheet = false  // Add this
     
     let drinks: [CachedDrinkItem]
     let selectedDate: Date
@@ -71,13 +72,25 @@ struct CalendarDrinkList: View {
                         calendarVMBindable: calendarVM,
                         selectedDate: selectedDate
                     )
-                    .presentationDetents([.medium, .large])
+                    .presentationDetents([.fraction(0.40), .fraction(0.75)])
+                    .presentationDragIndicator(.visible)
                 }
             }
             .transition(.opacity)
             .padding(.top)
         }
+        .onChange(of: drinkListVM.showPastDrinkSheet) {
+            if drinkListVM.showPastDrinkSheet {
+                isShowingPastDrinkSheet = true
+                drinkListVM.showPastDrinkSheet = false
+            }
+        }
+        .sheet(isPresented: $isShowingPastDrinkSheet, onDismiss: {
+            drinkListVM.selectedCalendarDate = nil
+        }) {
+            PastDrinkView()
+                .presentationDetents([.fraction(0.40)])
+                .presentationDragIndicator(.visible)
+        }
     }
 }
-
-

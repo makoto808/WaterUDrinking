@@ -30,7 +30,7 @@ struct SettingsListView: View {
                     }
                     
                     SettingsNavRow(title: " App Appearance") {
-                        drinkListVM.navPath.append(.resetView)
+                        
                     }
                 }
                 .textCase(nil)

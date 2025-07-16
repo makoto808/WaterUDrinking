@@ -26,7 +26,7 @@ struct PurchaseView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 32) {
-                Text("Upgrade to Pro")
+                Text("Upgrade To Pro")
                     .fontMediumTitle()
 
                 VStack(spacing: 16) {
@@ -97,7 +97,7 @@ struct PurchaseView: View {
                 print("❌ Subscription loading failed: \(error.localizedDescription)")
             }
         }
-        .background(Color.backgroundWhite)
+        .background(Color("AppBackgroundColor"))
         .sheet(isPresented: $showingSignIn) {
             Text("Custom sign-in view (optional)")
         }
