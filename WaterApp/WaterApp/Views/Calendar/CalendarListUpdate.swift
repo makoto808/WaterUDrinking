@@ -36,8 +36,9 @@ struct CalendarListUpdate: View {
                 Button("+ Add") {
                     drinkListVM.selectedCalendarDate = selectedDate
                     dismiss()
+
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                        drinkListVM.navPath.removeLast()
+                        drinkListVM.showPastDrinkSheet = true
                     }
                 }
                 .button1()

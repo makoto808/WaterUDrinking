@@ -72,7 +72,8 @@ struct CalendarDrinkList: View {
                         calendarVMBindable: calendarVM,
                         selectedDate: selectedDate
                     )
-                    .presentationDetents([.medium, .large])
+                    .presentationDetents([.fraction(0.40), .fraction(0.75)])
+                    .presentationDragIndicator(.visible)
                 }
             }
             .transition(.opacity)

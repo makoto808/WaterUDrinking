@@ -17,11 +17,9 @@ struct EmptyCalendarDrinkListView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                Spacer(minLength: 40)
-                
                 Text(selectedDate.formatted(date: .long, time: .omitted))
                     .fontMediumTitle()
-                    .padding(.top)
+                    .padding(.top, 55)
                 
                 Text("You Are Dehydrated!")
                     .fontMediumTitle()

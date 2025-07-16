@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PastDrinkView: View {
+    @Environment(\.dismiss) private var dismiss
     @Environment(DrinkListVM.self) private var drinkListVM
 
     var body: some View {
@@ -24,6 +25,7 @@ struct PastDrinkView: View {
                         VStack(spacing: 10) {
                             Button {
                                 drinkListVM.navPath.append(.drinkFillView(drink))
+                                dismiss()
                             } label: {
                                 Image(drink.img)
                                     .drinkFillSelectionResize()
