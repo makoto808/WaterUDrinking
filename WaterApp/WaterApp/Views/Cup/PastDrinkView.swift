@@ -8,11 +8,38 @@
 import SwiftUI
 
 struct PastDrinkView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    @Environment(DrinkListVM.self) private var drinkListVM
 
-#Preview {
-    PastDrinkView()
+    var body: some View {
+        @Bindable var drinkListVM = drinkListVM
+
+        VStack {
+            Text("Choose Your Drink")
+                .fontMediumTitle()
+                .padding(.bottom, 30)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: -20) {
+                    ForEach($drinkListVM.items) { $drink in
+                        VStack(spacing: 10) {
+                            Button {
+                                drinkListVM.navPath.append(.drinkFillView(drink))
+                            } label: {
+                                Image(drink.img)
+                                    .drinkFillSelectionResize()
+                            }
+
+                            Text(drink.name)
+                                .fontSmallTitle2()
+                        }
+                    }
+                    .scrollTransition { content, phase in
+                        content
+                            .opacity(phase.isIdentity ? 1.0 : 0.0)
+                            .offset(y: phase.isIdentity ? 0 : 50)
+                    }
+                }
+            }
+        }
+    }
 }

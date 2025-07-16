@@ -23,15 +23,16 @@ struct EmptyCalendarDrinkListView: View {
                     .fontMediumTitle()
                     .padding(.top)
                 
-                Text("You are dehydrated!")
+                Text("You Are Dehydrated!")
                     .fontMediumTitle()
                     .multilineTextAlignment(.center)
                 
                 Button("+ Add") {
                     drinkListVM.selectedCalendarDate = selectedDate
                     dismiss()
+
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                        drinkListVM.navPath.removeLast()
+                        drinkListVM.showPastDrinkSheet = true
                     }
                 }
                 .button1()
