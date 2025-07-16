@@ -177,6 +177,7 @@
 				077ED5C22E127B9400CBCC33 /* CalendarDrinkRow.swift */,
 				077ED5B82E0D4C5F00CBCC33 /* CalendarListUpdate.swift */,
 				077ED5BC2E0E882700CBCC33 /* EmptyCalendarDrinkListView.swift */,
+				079F4CAC2E2780A6001884FA /* PastDrinkView.swift */,
 				07CED0262D94CFF500498D17 /* BarChart.swift */,
 			);
 			path = Calendar;
@@ -195,7 +196,6 @@
 				07F3C7552D90CA1700427A9A /* DrinkSelectionView.swift */,
 				073BC1742DAF2FB000863F93 /* TitleView.swift */,
 				07F3C7512D8EF69500427A9A /* WaveMotion.swift */,
-				079F4CAC2E2780A6001884FA /* PastDrinkView.swift */,
 			);
 			path = Cup;
 			sourceTree = "<group>";

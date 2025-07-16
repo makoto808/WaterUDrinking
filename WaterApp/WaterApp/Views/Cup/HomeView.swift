@@ -24,7 +24,7 @@ struct HomeView: View {
             
             Spacer(minLength: 20)
             
-            DrinkSelectionView()
+            DrinkSelectionView(isFromHome: true)
             
             Spacer(minLength: 40)
         }

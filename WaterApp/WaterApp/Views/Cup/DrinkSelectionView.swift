@@ -9,6 +9,8 @@ import SwiftUI
 
 struct DrinkSelectionView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
+    
+    var isFromHome: Bool = false
 
     var body: some View {
         @Bindable var drinkListVM = drinkListVM
@@ -35,6 +37,11 @@ struct DrinkSelectionView: View {
                             .offset(y: phase.isIdentity ? 0 : 50)
                     }
                 }
+            }
+        }
+        .onAppear {
+            if isFromHome {
+                drinkListVM.selectedCalendarDate = nil
             }
         }
     }

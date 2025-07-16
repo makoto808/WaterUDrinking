@@ -79,14 +79,15 @@ struct CalendarDrinkList: View {
             .transition(.opacity)
             .padding(.top)
         }
-        // NEW: listen to drinkListVM.showPastDrinkSheet and show PastDrinkView
         .onChange(of: drinkListVM.showPastDrinkSheet) {
             if drinkListVM.showPastDrinkSheet {
                 isShowingPastDrinkSheet = true
                 drinkListVM.showPastDrinkSheet = false
             }
         }
-        .sheet(isPresented: $isShowingPastDrinkSheet) {
+        .sheet(isPresented: $isShowingPastDrinkSheet, onDismiss: {
+            drinkListVM.selectedCalendarDate = nil
+        }) {
             PastDrinkView()
                 .presentationDetents([.fraction(0.40)])
                 .presentationDragIndicator(.visible)
