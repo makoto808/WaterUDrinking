@@ -25,17 +25,7 @@ struct CalendarHomeView: View {
         }
         .background(Color("AppBackgroundColor"))
         .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    drinkListVM.navPath.removeLast()
-                } label: {
-                    Image(systemName: "chevron.backward")
-                        .backButton1()
-                        
-                }
-            }
-        }
+        .backChevronButton(using: drinkListVM)
     }
 }
 

@@ -69,17 +69,7 @@ struct GoalView: View {
             .frame(maxWidth: .infinity)
             .padding()
         }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    drinkListVM.navPath.removeLast()
-                } label: {
-                    Image(systemName: "chevron.backward")
-                        .backButton1()
-                }
-            }
-        }
+        .backChevronButton(using: drinkListVM)
     }
 }
 

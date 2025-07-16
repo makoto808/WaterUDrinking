@@ -170,3 +170,33 @@ extension View {
             }
     }
 }
+
+extension View {
+    func backChevronButton(using drinkListVM: DrinkListVM) -> some View {
+        self
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        drinkListVM.navPath.removeLast()
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .backButton1()
+                    }
+                }
+            }
+    }
+    
+    func plusButton(action: @escaping () -> Void) -> some View {
+            self.toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        action()
+                    } label: {
+                        Image(systemName: "plus")
+                            .plusButton1()
+                    }
+                }
+            }
+        }
+}

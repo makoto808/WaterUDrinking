@@ -76,15 +76,8 @@ struct SettingsListView: View {
             .scrollContentBackground(.hidden)
             .background(Color("AppBackgroundColor"))
             .navigationBarBackButtonHidden(true)
+            .backChevronButton(using: drinkListVM)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        drinkListVM.navPath.removeLast()
-                    } label: {
-                        Image(systemName: "chevron.backward")
-                            .backButton1()
-                    }
-                }
                 ToolbarItem(placement: .principal) {
                     Text("Settings")
                         .fontBarLabel()
@@ -93,6 +86,7 @@ struct SettingsListView: View {
         }
     }
 }
+
 
 #Preview {
     SettingsListView()

@@ -11,7 +11,7 @@ import SwiftUI
 struct ResetView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(DrinkListVM.self) private var drinkListVM
-
+    
     @State private var showAlert = false
     @State private var waveOffset = Angle(degrees: 0)
     
@@ -56,17 +56,7 @@ struct ResetView: View {
                 .padding()
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    drinkListVM.navPath.removeLast()
-                } label: {
-                    Image(systemName: "chevron.backward")
-                        .backButton1()
-                }
-            }
-        }
+        .backChevronButton(using: drinkListVM)
     }
 }
 
