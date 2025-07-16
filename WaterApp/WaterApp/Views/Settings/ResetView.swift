@@ -19,7 +19,7 @@ struct ResetView: View {
     
     var body: some View {
         ZStack {
-            Color.backgroundWhite
+            Color("AppBackgroundColor")
                 .ignoresSafeArea()
             
             GeometryReader { geo in
@@ -54,6 +54,17 @@ struct ResetView: View {
                 })
                 .frame(maxWidth: .infinity)
                 .padding()
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    drinkListVM.navPath.removeLast()
+                } label: {
+                    Image(systemName: "chevron.backward")
+                        .backButton1()
+                }
             }
         }
     }

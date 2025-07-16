@@ -23,7 +23,7 @@ struct CalendarHomeView: View {
             .padding(.horizontal)
             .animation(.easeInOut, value: isShowingDrinkDetails)
         }
-        .background(Color.backgroundWhite)
+        .background(Color("AppBackgroundColor"))
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

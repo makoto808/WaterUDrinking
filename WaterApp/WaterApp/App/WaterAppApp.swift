@@ -27,20 +27,13 @@ struct WaterAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if isProUnlocked {
-                ContentView()
-                    .modelContainer(modelContainer)
-                    .environment(notificationVM)
-            } else {
-                OneTimePurchaseView {
-                    isProUnlocked = true
-                }
+            ContentView()
                 .modelContainer(modelContainer)
                 .environment(notificationVM)
-            }
         }
     }
 }
+
 
 /*
  // TODO:

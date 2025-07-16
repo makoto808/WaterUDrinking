@@ -18,7 +18,7 @@ struct GoalView: View {
     
     var body: some View {
         ZStack {
-            Color.backgroundWhite.ignoresSafeArea()
+            Color("AppBackgroundColor").ignoresSafeArea()
             GeometryReader { geo in
                 WaveMotion(offset: waveOffset, percent: 3.9 / 8.0)
                     .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
@@ -68,6 +68,17 @@ struct GoalView: View {
             }
             .frame(maxWidth: .infinity)
             .padding()
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    drinkListVM.navPath.removeLast()
+                } label: {
+                    Image(systemName: "chevron.backward")
+                        .backButton1()
+                }
+            }
         }
     }
 }

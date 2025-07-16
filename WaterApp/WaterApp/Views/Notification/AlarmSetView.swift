@@ -21,7 +21,7 @@ struct AlarmSetView: View {
 
     var body: some View {
         ZStack {
-            Color.backgroundWhite.ignoresSafeArea()
+            Color("AppBackgroundColor")
 
             VStack(spacing: 0) {
                 DatePicker("", selection: $reminderTime, displayedComponents: [.hourAndMinute])

@@ -29,7 +29,7 @@ struct HomeView: View {
             Spacer(minLength: 40)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.backgroundWhite)
+        .background(Color("AppBackgroundColor"))
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {

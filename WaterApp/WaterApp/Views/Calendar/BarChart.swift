@@ -127,7 +127,7 @@ struct BarChart: View {
                     }
                 }
         )
-        .background(Color.backgroundWhite.ignoresSafeArea())
+        .background(Color("AppBackgroundColor")).ignoresSafeArea()
     }
 }
 

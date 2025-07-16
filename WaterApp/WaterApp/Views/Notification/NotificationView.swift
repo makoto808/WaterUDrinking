@@ -49,9 +49,9 @@ struct NotificationView: View {
                 }
             }
             .scrollContentBackground(.hidden)
-            .background(Color.backgroundWhite)
+            .background(Color("AppBackgroundColor"))
         }
-        .background(Color.backgroundWhite)
+        .background(Color("AppBackgroundColor"))
         .onAppear {
             notificationVM.loadReminders()
         }

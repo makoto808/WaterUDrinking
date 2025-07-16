@@ -14,14 +14,10 @@
 		073BC1752DAF2FB000863F93 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BC1742DAF2FB000863F93 /* TitleView.swift */; };
 		07645B8E2DFA93840020BF31 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07645B8D2DFA93840020BF31 /* GoalView.swift */; };
 		07680FF82E01302E0030108F /* ResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07680FF72E01302E0030108F /* ResetView.swift */; };
-		077A39F62E17BFE800D086BA /* SubscribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39F52E17BFE800D086BA /* SubscribeView.swift */; };
 		077A39FC2E1A97DA00D086BA /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39FB2E1A97DA00D086BA /* NotificationView.swift */; };
 		077A39FE2E1A9A6B00D086BA /* AlarmSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39FD2E1A9A6B00D086BA /* AlarmSetView.swift */; };
 		077A3A002E1AA01200D086BA /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39FF2E1AA01200D086BA /* NotificationModel.swift */; };
 		077A3A022E1BA69100D086BA /* NotificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A3A012E1BA69100D086BA /* NotificationVM.swift */; };
-		077A3A062E1D04A300D086BA /* OneTimePurchaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A3A052E1D04A300D086BA /* OneTimePurchaseStore.swift */; };
-		077A3A082E1D04D900D086BA /* OneTimePurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A3A072E1D04D900D086BA /* OneTimePurchaseView.swift */; };
-		077A3A0A2E1D063200D086BA /* ProductStoreVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A3A092E1D063200D086BA /* ProductStoreVM.swift */; };
 		077ED5A92E06C8DD00CBCC33 /* UserGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */; };
 		077ED5AB2E0A9B9E00CBCC33 /* CupViewOverride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5AA2E0A9B9E00CBCC33 /* CupViewOverride.swift */; };
 		077ED5B12E0BE5E800CBCC33 /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5B02E0BE5E800CBCC33 /* CalendarDayCell.swift */; };
@@ -41,6 +37,9 @@
 		07CED0332D96925C00498D17 /* SettingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0322D96925C00498D17 /* SettingsListView.swift */; };
 		07CED0352D96A02600498D17 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0342D96A02600498D17 /* SettingsModel.swift */; };
 		07EA0BE02DBCC4E8001033AB /* ExtensionsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EA0BDF2DBCC4E8001033AB /* ExtensionsText.swift */; };
+		07F1271C2E1F3C2E00DFDAB1 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1271B2E1F3C2E00DFDAB1 /* PurchaseView.swift */; };
+		07F1271F2E1F3EBB00DFDAB1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F1271E2E1F3EBB00DFDAB1 /* StoreKit.framework */; };
+		07F127222E20A48C00DFDAB1 /* SettingsNavRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F127212E20A48C00DFDAB1 /* SettingsNavRow.swift */; };
 		07F3C7382D8EEDF700427A9A /* WaterAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7352D8EEDF700427A9A /* WaterAppUITests.swift */; };
 		07F3C7392D8EEDF700427A9A /* WaterAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C7362D8EEDF700427A9A /* WaterAppUITestsLaunchTests.swift */; };
 		07F3C73C2D8EEDF900427A9A /* WaterAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F3C73A2D8EEDF900427A9A /* WaterAppTests.swift */; };
@@ -81,15 +80,10 @@
 		073BC1742DAF2FB000863F93 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		07645B8D2DFA93840020BF31 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		07680FF72E01302E0030108F /* ResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetView.swift; sourceTree = "<group>"; };
-		077A39F52E17BFE800D086BA /* SubscribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeView.swift; sourceTree = "<group>"; };
 		077A39FB2E1A97DA00D086BA /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		077A39FD2E1A9A6B00D086BA /* AlarmSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSetView.swift; sourceTree = "<group>"; };
 		077A39FF2E1AA01200D086BA /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		077A3A012E1BA69100D086BA /* NotificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVM.swift; sourceTree = "<group>"; };
-		077A3A042E1D026B00D086BA /* StoreKit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKit.storekit; sourceTree = "<group>"; };
-		077A3A052E1D04A300D086BA /* OneTimePurchaseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimePurchaseStore.swift; sourceTree = "<group>"; };
-		077A3A072E1D04D900D086BA /* OneTimePurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimePurchaseView.swift; sourceTree = "<group>"; };
-		077A3A092E1D063200D086BA /* ProductStoreVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStoreVM.swift; sourceTree = "<group>"; };
 		077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGoal.swift; sourceTree = "<group>"; };
 		077ED5AA2E0A9B9E00CBCC33 /* CupViewOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupViewOverride.swift; sourceTree = "<group>"; };
 		077ED5B02E0BE5E800CBCC33 /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
@@ -109,6 +103,10 @@
 		07CED0322D96925C00498D17 /* SettingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListView.swift; sourceTree = "<group>"; };
 		07CED0342D96A02600498D17 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		07EA0BDF2DBCC4E8001033AB /* ExtensionsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsText.swift; sourceTree = "<group>"; };
+		07F1271B2E1F3C2E00DFDAB1 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
+		07F1271E2E1F3EBB00DFDAB1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		07F127202E1F9EFD00DFDAB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		07F127212E20A48C00DFDAB1 /* SettingsNavRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavRow.swift; sourceTree = "<group>"; };
 		07F3C7082D8EEDE800427A9A /* WaterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F3C7182D8EEDEB00427A9A /* WaterAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F3C7222D8EEDEB00427A9A /* WaterAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaterAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07F1271F2E1F3EBB00DFDAB1 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				07FBA8B52DAA53A000133F70 /* NavPath.swift */,
+				07F127212E20A48C00DFDAB1 /* SettingsNavRow.swift */,
 				07B3A0032D9DF79100000BF2 /* DrinkItem.swift */,
 				077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */,
 				07CED0342D96A02600498D17 /* SettingsModel.swift */,
@@ -213,7 +213,6 @@
 				07B3A0072D9E0FBB00000BF2 /* SettingsReviewView.swift */,
 				07645B8D2DFA93840020BF31 /* GoalView.swift */,
 				07680FF72E01302E0030108F /* ResetView.swift */,
-				077A39F52E17BFE800D086BA /* SubscribeView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -224,19 +223,33 @@
 				07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */,
 				116283CF2DB38FBF000ADC31 /* CalendarHomeVM.swift */,
 				077A3A012E1BA69100D086BA /* NotificationVM.swift */,
-				077A3A052E1D04A300D086BA /* OneTimePurchaseStore.swift */,
-				077A3A092E1D063200D086BA /* ProductStoreVM.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		07F127142E1D08D400DFDAB1 /* StoreKit */ = {
+			isa = PBXGroup;
+			children = (
+				07F1271B2E1F3C2E00DFDAB1 /* PurchaseView.swift */,
+			);
+			path = StoreKit;
+			sourceTree = "<group>";
+		};
+		07F1271D2E1F3EBB00DFDAB1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				07F1271E2E1F3EBB00DFDAB1 /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		07F3C6FF2D8EEDE800427A9A = {
 			isa = PBXGroup;
 			children = (
-				077A3A042E1D026B00D086BA /* StoreKit.storekit */,
 				07F3C7422D8EEDFE00427A9A /* WaterApp */,
 				07F3C73B2D8EEDF900427A9A /* WaterAppTests */,
 				07F3C7372D8EEDF700427A9A /* WaterAppUITests */,
+				07F1271D2E1F3EBB00DFDAB1 /* Frameworks */,
 				07F3C7092D8EEDE800427A9A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -279,6 +292,7 @@
 		07F3C7422D8EEDFE00427A9A /* WaterApp */ = {
 			isa = PBXGroup;
 			children = (
+				07F127202E1F9EFD00DFDAB1 /* Info.plist */,
 				07F3C73E2D8EEDFE00427A9A /* Preview Content */,
 				07F3C73F2D8EEDFE00427A9A /* Assets.xcassets */,
 				077ED5C82E178CC000CBCC33 /* Launch Screen.storyboard */,
@@ -297,7 +311,7 @@
 				07CED0252D94C32700498D17 /* Settings */,
 				072787292D94C15C00D56B96 /* Cup */,
 				072787262D94C12700D56B96 /* Calendar */,
-				077A3A072E1D04D900D086BA /* OneTimePurchaseView.swift */,
+				07F127142E1D08D400DFDAB1 /* StoreKit */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -452,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				077ED5B12E0BE5E800CBCC33 /* CalendarDayCell.swift in Sources */,
+				07F127222E20A48C00DFDAB1 /* SettingsNavRow.swift in Sources */,
 				07680FF82E01302E0030108F /* ResetView.swift in Sources */,
 				07CED0272D94CFF500498D17 /* BarChart.swift in Sources */,
 				077ED5A92E06C8DD00CBCC33 /* UserGoal.swift in Sources */,
@@ -465,10 +480,10 @@
 				077A3A022E1BA69100D086BA /* NotificationVM.swift in Sources */,
 				07CED0292D953BF300498D17 /* Extensions.swift in Sources */,
 				116283D02DB38FBF000ADC31 /* CalendarHomeVM.swift in Sources */,
-				077A39F62E17BFE800D086BA /* SubscribeView.swift in Sources */,
 				07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */,
 				077ED5C32E127B9400CBCC33 /* CalendarDrinkRow.swift in Sources */,
 				072787282D94C14700D56B96 /* CalendarView.swift in Sources */,
+				07F1271C2E1F3C2E00DFDAB1 /* PurchaseView.swift in Sources */,
 				077A3A002E1AA01200D086BA /* NotificationModel.swift in Sources */,
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
 				077ED5C52E1372C700CBCC33 /* CustomOzButton.swift in Sources */,
@@ -478,14 +493,11 @@
 				07F3C7562D90CA1700427A9A /* DrinkSelectionView.swift in Sources */,
 				07EA0BE02DBCC4E8001033AB /* ExtensionsText.swift in Sources */,
 				07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */,
-				077A3A082E1D04D900D086BA /* OneTimePurchaseView.swift in Sources */,
 				07F3C7432D8EEDFE00427A9A /* ContentView.swift in Sources */,
 				07381C242D998381003216FA /* CustomOzView.swift in Sources */,
 				073BC1752DAF2FB000863F93 /* TitleView.swift in Sources */,
-				077A3A062E1D04A300D086BA /* OneTimePurchaseStore.swift in Sources */,
 				072749672DB0CD20006E6C30 /* CalendarHomeView.swift in Sources */,
 				07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */,
-				077A3A0A2E1D063200D086BA /* ProductStoreVM.swift in Sources */,
 				077ED5BD2E0E882700CBCC33 /* EmptyCalendarDrinkListView.swift in Sources */,
 				07F3C7542D8EF8DF00427A9A /* CupView.swift in Sources */,
 				07381C272D9B78E6003216FA /* CustomDrinkView.swift in Sources */,
@@ -655,11 +667,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 5M79DDHHKU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WaterApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Water U Drinking?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -671,12 +685,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greggyphenom.WaterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -686,11 +702,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 5M79DDHHKU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WaterApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Water U Drinking?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -702,12 +720,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greggyphenom.WaterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

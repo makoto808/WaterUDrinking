@@ -13,48 +13,68 @@ struct SettingsListView: View {
     var body: some View {
         VStack {
             List {
-                Section {
-                    Button("Give Us A Review") {
-                        //TODO: Link to appstore review
+                Section(header: Text("Membership").fontSmallTitle()) {
+                    SettingsNavRow(title: " Become A Hydrated Member") {
+                        drinkListVM.navPath.append(.purchaseView)
                     }
                 }
+                .textCase(nil)
                 
-                Section {
-                    Button {
+                Section(header: Text("App Settings").fontSmallTitle()) {
+                    SettingsNavRow(title: " Edit Your Goal") {
                         drinkListVM.navPath.append(.dailyWaterGoal)
-                    } label: {
-                        Text("Edit Your Goal")
                     }
                     
-                    Button {
+                    SettingsNavRow(title: " Reset Today's Total") {
                         drinkListVM.navPath.append(.resetView)
-                    } label: {
-                        Text("Reset Today's Total")
-                    }
-                }
-                
-                Section {
-                    Button {
-                        drinkListVM.navPath.append(.notificationView)
-                    } label: {
-                        Text("Set A Reminder")
-                    }
-                }
-                
-                Section {
-                    Button {
-                        drinkListVM.navPath.append(.subscribeView)
-                    } label: {
-                        Text("Become A Hydrated Member")
                     }
                     
+                    SettingsNavRow(title: " App Appearance") {
+                        drinkListVM.navPath.append(.resetView)
+                    }
                 }
+                .textCase(nil)
+                
+                Section(header: Text("Notifications").fontSmallTitle()) {
+                    SettingsNavRow(title: " Push Notifications") {
+                        
+                    }
+                    
+                    SettingsNavRow(title: " Set A Reminder") {
+                        drinkListVM.navPath.append(.notificationView)
+                    }
+                }
+                .textCase(nil)
+                
+                
+                
+                Section(header: Text("Customer Support").fontSmallTitle()) {
+                    SettingsNavRow(title: " Help & Support") {
+                        
+                    }
+                    
+                    SettingsNavRow(title: " Give Us A Review") {
+                        
+                    }
+                }
+                .textCase(nil)
+                
+                Section(header: Text("Legal").fontSmallTitle()) {
+                    SettingsNavRow(title: " Privacy Notice") {
+                        
+                    }
+                    
+                    SettingsNavRow(title: " Terms Of Service") {
+                        
+                    }
+                }
+                .textCase(nil)
                 
                 //TODO: Future Settings Tabs below
             }
             .listStyle(.automatic)
             .scrollContentBackground(.hidden)
-            .background(Color.backgroundWhite)
+            .background(Color("AppBackgroundColor"))
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -64,6 +84,10 @@ struct SettingsListView: View {
                         Image(systemName: "chevron.backward")
                             .backButton1()
                     }
+                }
+                ToolbarItem(placement: .principal) {
+                    Text("Settings")
+                        .fontBarLabel()
                 }
             }
         }
