@@ -10,17 +10,18 @@ import StoreKit
 import SwiftUI
 
 @MainActor
-@Observable
-final class PurchaseViewVM {
+@Observable final class PurchaseViewVM {
     var oneTimeProduct: Product?
     var monthlyProduct: Product?
     var annualProduct: Product?
+    var currentSubscription: Product?
     
     var showingSignIn = false
     var isLoading = false
     var isPurchased = false
     var showNoPurchasesFoundAlert = false
     var showRestoreErrorAlert = false
+    var ownsLifetimeUnlock = false
     
     let productIDs = [
         "com.greggyphenom.waterudrinking.annual",
@@ -67,6 +68,29 @@ final class PurchaseViewVM {
         }
     }
     
+    func checkCurrentSubscription() async {
+        for await verificationResult in Transaction.currentEntitlements {
+            switch verificationResult {
+            case .unverified(_, let error):
+                print("Unverified entitlement: \(error.localizedDescription)")
+                continue
+            case .verified(let entitlement):
+                guard entitlement.revocationDate == nil,
+                      entitlement.expirationDate ?? .distantFuture > Date()
+                else { continue }
+
+                let productID = entitlement.productID
+                let allProducts = [oneTimeProduct, monthlyProduct, annualProduct].compactMap { $0 }
+
+                if let matchedProduct = allProducts.first(where: { $0.id == productID }) {
+                    currentSubscription = matchedProduct
+                    print("✅ Subscribed to: \(matchedProduct.displayName)")
+                    return
+                }
+            }
+        }
+    }
+    
     func purchase(_ product: Product) async {
         do {
             let result = try await product.purchase()
@@ -99,9 +123,23 @@ final class PurchaseViewVM {
             }
 
             var hasEntitlements = false
-            for await _ in Transaction.currentEntitlements {
-                hasEntitlements = true
-                break
+            for await verificationResult in Transaction.currentEntitlements {
+                switch verificationResult {
+                case .unverified(_, let error):
+                    print("Unverified entitlement during restore: \(error.localizedDescription)")
+                    continue
+                case .verified(let entitlement):
+                    hasEntitlements = true
+                    let productID = entitlement.productID
+                    let allProducts = [oneTimeProduct, monthlyProduct, annualProduct].compactMap { $0 }
+
+                    if let matchedProduct = allProducts.first(where: { $0.id == productID }) {
+                        currentSubscription = matchedProduct
+                        print("✅ Restored subscription: \(matchedProduct.displayName)")
+                    }
+
+                    break
+                }
             }
 
             if !hasEntitlements {
@@ -116,4 +154,15 @@ final class PurchaseViewVM {
         }
         return false
     }
+    
+    func checkOwnedProducts() async {
+           for await result in Transaction.currentEntitlements {
+               guard case .verified(let transaction) = result else { continue }
+
+               if transaction.productID == oneTimeProduct?.id {
+                   ownsLifetimeUnlock = true
+                   print("✅ Owns lifetime unlock")
+               }
+           }
+       }
 }
