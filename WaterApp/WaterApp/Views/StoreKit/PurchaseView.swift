@@ -13,7 +13,6 @@ struct PurchaseView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     @State private var purchaseViewVM = PurchaseViewVM()
     @State private var confettiCounter = 0
-    @State private var didShowConfetti = false
     
     var body: some View {
         ZStack {
@@ -26,13 +25,7 @@ struct PurchaseView: View {
                     
                     PurchaseOptionsSection(viewModel: purchaseViewVM)
                     
-                    if purchaseViewVM.isPurchased || purchaseViewVM.ownsLifetimeUnlock {
-                        PurchasedView(
-                            ownsLifetimeUnlock: purchaseViewVM.ownsLifetimeUnlock,
-                            currentSubscription: purchaseViewVM.currentSubscription,
-                            confettiCounter: $confettiCounter
-                        )
-                    }
+                    // Removed PurchasedView here
                     
                     Button("Restore Purchase") {
                         Task {
@@ -51,29 +44,18 @@ struct PurchaseView: View {
                 .opacity(purchaseViewVM.isLoading ? 0.5 : 1)
                 .padding()
                 .backChevronButton(using: drinkListVM)
-                .onAppear {
-                 
+                .task {
+                    await purchaseViewVM.loadProducts()
+                    await purchaseViewVM.refreshSubscriptions()
                 }
-                .onDisappear {
-                    didShowConfetti = false
+                .sheet(isPresented: $purchaseViewVM.showingSignIn) {
+                    Text("Custom sign-in view (optional)")
                 }
-                .onChange(of: purchaseViewVM.isPurchased) { _ in
-                 
-                }
-                .onChange(of: purchaseViewVM.ownsLifetimeUnlock) { _ in
-                    
-                }
-            }
-            .task {
-                await purchaseViewVM.loadProducts()
-                await purchaseViewVM.refreshSubscriptions()
-            }
-            .sheet(isPresented: $purchaseViewVM.showingSignIn) {
-                Text("Custom sign-in view (optional)")
             }
         }
     }
 }
+
 #Preview {
     PurchaseView()
         .environment(DrinkListVM())
