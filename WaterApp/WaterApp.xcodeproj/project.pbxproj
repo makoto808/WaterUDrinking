@@ -33,6 +33,7 @@
 		079F4CBB2E27DD14001884FA /* PurchaseLegalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */; };
 		079F4CBD2E27DD29001884FA /* PurchaseOptionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CBC2E27DD29001884FA /* PurchaseOptionsSection.swift */; };
 		079F4CBF2E27DD48001884FA /* PurchaseViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CBE2E27DD48001884FA /* PurchaseViewVM.swift */; };
+		079F4CC22E289039001884FA /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 079F4CC12E289039001884FA /* ConfettiSwiftUI */; };
 		07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */; };
 		07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0032D9DF79100000BF2 /* DrinkItem.swift */; };
 		07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */; };
@@ -140,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				079F4CC22E289039001884FA /* ConfettiSwiftUI in Frameworks */,
 				07F1271F2E1F3EBB00DFDAB1 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,6 +361,7 @@
 			);
 			name = WaterApp;
 			packageProductDependencies = (
+				079F4CC12E289039001884FA /* ConfettiSwiftUI */,
 			);
 			productName = WaterApp;
 			productReference = 07F3C7082D8EEDE800427A9A /* WaterApp.app */;
@@ -436,6 +439,9 @@
 			);
 			mainGroup = 07F3C6FF2D8EEDE800427A9A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				079F4CC02E289039001884FA /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 07F3C7092D8EEDE800427A9A /* Products */;
 			projectDirPath = "";
@@ -859,6 +865,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		079F4CC02E289039001884FA /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		079F4CC12E289039001884FA /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079F4CC02E289039001884FA /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 07F3C7002D8EEDE800427A9A /* Project object */;
 }

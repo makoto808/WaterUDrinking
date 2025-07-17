@@ -28,21 +28,17 @@ struct PurchaseView: View {
                             .foregroundColor(.green)
                     }
                     
-                    // ✅ Remove this if already shown in PurchaseOptionsSection
-                    /*
-                    if let sub = purchaseViewVM.currentSubscription {
-                        Text("You are subscribed: \(sub.displayName)")
-                    }
-                    */
-
                     Button("Restore Purchase") {
-                        purchaseViewVM.restorePurchases()
+                        Task {
+                            await purchaseViewVM.restorePurchases()
+                            await purchaseViewVM.refreshSubscriptions()
+                        }
                     }
                     .alert("No purchases found", isPresented: $purchaseViewVM.showNoPurchasesFoundAlert) {
                         Button("OK", role: .cancel) { }
                     }
                     .padding(.top, -16)
-
+                    
                     PurchaseLegalSection()
                 }
                 .disabled(purchaseViewVM.isLoading)
@@ -52,8 +48,7 @@ struct PurchaseView: View {
             }
             .task {
                 await purchaseViewVM.loadProducts()
-                await purchaseViewVM.checkCurrentSubscription()
-                await purchaseViewVM.checkOwnedProducts()
+                await purchaseViewVM.refreshSubscriptions()
             }
             .sheet(isPresented: $purchaseViewVM.showingSignIn) {
                 Text("Custom sign-in view (optional)")
@@ -61,6 +56,7 @@ struct PurchaseView: View {
         }
     }
 }
+
 
 #Preview {
     PurchaseView()

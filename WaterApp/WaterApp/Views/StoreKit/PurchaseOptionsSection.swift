@@ -7,12 +7,13 @@
 
 import SwiftUI
 import StoreKit
+import ConfettiSwiftUI
 
 struct PurchaseOptionsSection: View {
     @Bindable var viewModel: PurchaseViewVM
     
+    @State private var confettiCounter = 0
     @State private var showFAQ = false
-    @State private var showConfetti = false
     
     var body: some View {
         if viewModel.isLoading {
@@ -20,29 +21,39 @@ struct PurchaseOptionsSection: View {
                 .progressViewStyle(CircularProgressViewStyle())
                 .padding()
         } else if viewModel.isPurchased {
-            // 🎉 Success message with simple confetti animation
             VStack(spacing: 16) {
                 if viewModel.ownsLifetimeUnlock {
                     Text("🎉 Congratulations! You’ve unlocked lifetime access.")
                         .font(.headline)
                         .multilineTextAlignment(.center)
+                        .padding()
+                        .onAppear {
+                            confettiCounter += 1
+                        }
                 } else if let sub = viewModel.currentSubscription {
                     Text("🎉 Thanks for subscribing! Enjoy your premium features.")
                         .font(.headline)
                         .multilineTextAlignment(.center)
+                        .padding(.bottom, 4)
+                    
                     Text("Subscribed to: \(sub.displayName)")
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundColor(.accentColor)
+                        .padding()
+                        .onAppear {
+                            confettiCounter += 1
+                        }
                 }
             }
-            .padding()
-            .onAppear {
-                withAnimation {
-                    showConfetti = true
-                }
-            }
-            // TODO: Add actual confetti animation here if you want
+            .confettiCannon(
+                trigger: $confettiCounter,
+                num: 50,
+                rainHeight: 400,
+                openingAngle: Angle(degrees: 45),
+                closingAngle: Angle(degrees: 135),
+                radius: 300
+            )
         } else if let current = viewModel.currentSubscription {
             VStack(spacing: 16) {
                 // Personalized message for subscribers
@@ -72,7 +83,6 @@ struct PurchaseOptionsSection: View {
                         .font(.subheadline)
                         .padding(.top, 8)
                         
-                        // Upgrade to lifetime unlock option
                         if let oneTime = viewModel.oneTimeProduct, !viewModel.ownsLifetimeUnlock {
                             Divider().padding(.vertical)
                             
@@ -90,7 +100,6 @@ struct PurchaseOptionsSection: View {
                             }
                         }
                     } else {
-                        // Lifetime unlock message
                         Text("You've unlocked Pro for life 🎉")
                             .font(.headline)
                             .multilineTextAlignment(.center)
@@ -112,13 +121,11 @@ struct PurchaseOptionsSection: View {
             }
         } else {
             VStack(spacing: 16) {
-                // Personalized message for non-subscribers
                 Text("Choose the best plan for you and enjoy premium features to help you stay hydrated!")
                     .font(.headline)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 8)
                 
-                // Info button for FAQ
                 HStack {
                     Spacer()
                     Button {

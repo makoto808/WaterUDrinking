@@ -70,6 +70,9 @@ import SwiftUI
     }
     
     func checkCurrentSubscription() async {
+        currentSubscription = nil
+        isPurchased = false
+
         for await verificationResult in Transaction.currentEntitlements {
             switch verificationResult {
             case .unverified(_, let error):
@@ -85,6 +88,7 @@ import SwiftUI
 
                 if let matchedProduct = allProducts.first(where: { $0.id == productID }) {
                     currentSubscription = matchedProduct
+                    isPurchased = true
                     print("✅ Subscribed to: \(matchedProduct.displayName)")
                     return
                 }
@@ -123,40 +127,51 @@ import SwiftUI
         }
     }
     
-    func restorePurchases() {
-        Task {
-            do {
-                try await AppStore.sync()
-            } catch {
-                showRestoreErrorAlert = true
-                return
-            }
+    func refreshSubscriptions() async {
+        isLoading = true
+        defer { isLoading = false }
 
-            var hasEntitlements = false
-            for await verificationResult in Transaction.currentEntitlements {
-                switch verificationResult {
-                case .unverified(_, let error):
-                    print("Unverified entitlement during restore: \(error.localizedDescription)")
-                    continue
-                case .verified(let entitlement):
-                    hasEntitlements = true
-                    let productID = entitlement.productID
-                    let allProducts = [oneTimeProduct, monthlyProduct, annualProduct].compactMap { $0 }
+        do {
+            try await AppStore.sync()
+        } catch {
+            print("Receipt refresh failed: \(error.localizedDescription)")
+        }
 
-                    if let matchedProduct = allProducts.first(where: { $0.id == productID }) {
-                        currentSubscription = matchedProduct
-                        print("✅ Restored subscription: \(matchedProduct.displayName)")
-                    }
+        await checkCurrentSubscription()
+        await checkOwnedProducts()
+    }
+    
+    func restorePurchases() async {
+        do {
+            try await AppStore.sync()
+        } catch {
+            showRestoreErrorAlert = true
+            return
+        }
 
-                    break
+        var hasEntitlements = false
+        for await verificationResult in Transaction.currentEntitlements {
+            switch verificationResult {
+            case .unverified(_, let error):
+                print("Unverified entitlement during restore: \(error.localizedDescription)")
+                continue
+            case .verified(let entitlement):
+                hasEntitlements = true
+                let productID = entitlement.productID
+                let allProducts = [oneTimeProduct, monthlyProduct, annualProduct].compactMap { $0 }
+
+                if let matchedProduct = allProducts.first(where: { $0.id == productID }) {
+                    currentSubscription = matchedProduct
+                    print("✅ Restored subscription: \(matchedProduct.displayName)")
                 }
             }
+        }
 
-            if !hasEntitlements {
-                showNoPurchasesFoundAlert = true
-            }
+        if !hasEntitlements {
+            showNoPurchasesFoundAlert = true
         }
     }
+
 
     private func checkIfPurchasesExist() async -> Bool {
         for await _ in Transaction.currentEntitlements {
@@ -166,13 +181,15 @@ import SwiftUI
     }
     
     func checkOwnedProducts() async {
-           for await result in Transaction.currentEntitlements {
-               guard case .verified(let transaction) = result else { continue }
+        ownsLifetimeUnlock = false
 
-               if transaction.productID == oneTimeProduct?.id {
-                   ownsLifetimeUnlock = true
-                   print("✅ Owns lifetime unlock")
-               }
-           }
-       }
+        for await result in Transaction.currentEntitlements {
+            guard case .verified(let transaction) = result else { continue }
+
+            if transaction.productID == oneTimeProduct?.id {
+                ownsLifetimeUnlock = true
+                print("✅ Owns lifetime unlock")
+            }
+        }
+    }
 }
