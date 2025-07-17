@@ -13,20 +13,12 @@ struct PurchaseOptionsSection: View {
     @Bindable var viewModel: PurchaseViewVM
     
     @State private var confettiCounter = 0
-    @State private var showFAQ = false
     
     var body: some View {
-        Group {
-            // Debug view to show current VM states
-//            Text("DEBUG: ownsLifetimeUnlock = \(viewModel.ownsLifetimeUnlock), isPurchased = \(viewModel.isPurchased)")
-//                .foregroundColor(.red)
-//                .font(.caption)
-//                .padding(.bottom, 8)
-
+        VStack {
             if viewModel.isLoading {
                 LoadingView()
             } else if viewModel.isPurchased || viewModel.ownsLifetimeUnlock {
-                // Show PurchasedView if user owns lifetime unlock OR has purchased
                 PurchasedView(
                     ownsLifetimeUnlock: viewModel.ownsLifetimeUnlock,
                     currentSubscription: viewModel.currentSubscription,
@@ -42,24 +34,16 @@ struct PurchaseOptionsSection: View {
                     oneTimeProduct: viewModel.oneTimeProduct,
                     isPurchasing: viewModel.isPurchasing,
                     purchaseAction: viewModel.purchase,
-                    checkOwnedProductsAction: viewModel.checkOwnedProducts,
-                    showFAQ: $showFAQ
+                    checkOwnedProductsAction: viewModel.checkOwnedProducts
                 )
             }
         }
         .background(Color("AppBackgroundColor"))
-        .alert("Subscription & Lifetime Unlock FAQ", isPresented: $showFAQ) {
-            Button("Close", role: .cancel) { }
-        } message: {
-            Text("""
-                • Subscription gives you access while active; billed monthly or annually.
-
-                • Lifetime Unlock is a one-time purchase with permanent access.
-
-                • You can manage or cancel your subscription anytime in your Apple ID settings.
-                """)
-        }
     }
+}
+
+#Preview {
+    PurchaseOptionsSection(viewModel: PurchaseViewVM())
 }
 
 #Preview {

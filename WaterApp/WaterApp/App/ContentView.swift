@@ -11,14 +11,14 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(NotificationVM.self) private var notificationVM
+    @EnvironmentObject private var purchaseManager: PurchaseManager
+
     @State private var drinkListVM = DrinkListVM()
     @State private var calendarHomeVM = CalendarHomeVM()
-    @AppStorage("isProUnlocked") private var isProUnlocked = false
 
-    
     var body: some View {
         NavigationStack(path: $drinkListVM.navPath) {
-            HomeView()  // no isProUnlocked param here
+            HomeView()
                 .navigationDestination(for: NavPath.self) { navPath in
                     switch navPath {
                     case .calendar:
@@ -48,8 +48,3 @@ struct ContentView: View {
         }
     }
 }
-
-
-//#Preview {
-//    ContentView()
-//}

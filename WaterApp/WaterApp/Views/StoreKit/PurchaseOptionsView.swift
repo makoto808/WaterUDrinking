@@ -16,7 +16,6 @@ struct PurchaseOptionsView: View {
     let isPurchasing: Bool
     let purchaseAction: (Product) async -> Void
     let checkOwnedProductsAction: () async -> Void
-    @Binding var showFAQ: Bool
     
     var body: some View {
         VStack(spacing: 16) {
@@ -24,17 +23,6 @@ struct PurchaseOptionsView: View {
                 .font(.headline)
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 8)
-            
-            HStack {
-                Spacer()
-                Button {
-                    showFAQ = true
-                } label: {
-                    Image(systemName: "info.circle")
-                        .font(.title3)
-                }
-                .padding(.bottom, 4)
-            }
             
             if !ownsLifetimeUnlock {
                 if let monthly = monthlyProduct {
@@ -89,5 +77,13 @@ struct PurchaseOptionsView: View {
 }
 
 //#Preview {
-//    PurchaseOptionsView()
+//    PurchaseOptionsView(
+//        ownsLifetimeUnlock: false,
+//        monthlyProduct: nil,
+//        annualProduct: nil,
+//        oneTimeProduct: nil,
+//        isPurchasing: false,
+//        purchaseAction: { _ in },
+//        checkOwnedProductsAction: {}
+//    )
 //}
