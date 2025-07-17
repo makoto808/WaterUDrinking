@@ -17,9 +17,16 @@ struct PurchaseOptionsSection: View {
     
     var body: some View {
         Group {
+            // Debug view to show current VM states
+//            Text("DEBUG: ownsLifetimeUnlock = \(viewModel.ownsLifetimeUnlock), isPurchased = \(viewModel.isPurchased)")
+//                .foregroundColor(.red)
+//                .font(.caption)
+//                .padding(.bottom, 8)
+
             if viewModel.isLoading {
                 LoadingView()
-            } else if viewModel.isPurchased {
+            } else if viewModel.isPurchased || viewModel.ownsLifetimeUnlock {
+                // Show PurchasedView if user owns lifetime unlock OR has purchased
                 PurchasedView(
                     ownsLifetimeUnlock: viewModel.ownsLifetimeUnlock,
                     currentSubscription: viewModel.currentSubscription,

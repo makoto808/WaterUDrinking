@@ -17,12 +17,20 @@ import SwiftUI
     var currentSubscription: Product?
     
     var showingSignIn = false
-    var isLoading = false
-    var isPurchased = false
-    var isPurchasing = false
+    var isLoading = false {
+        didSet { print("isLoading: \(isLoading)") }
+    }
+    var isPurchased = false {
+        didSet { print("isPurchased: \(isPurchased)") }
+    }
+    var isPurchasing = false {
+        didSet { print("isPurchasing: \(isPurchasing)") }
+    }
     var showNoPurchasesFoundAlert = false
     var showRestoreErrorAlert = false
-    var ownsLifetimeUnlock = false
+    var ownsLifetimeUnlock = false {
+        didSet { print("ownsLifetimeUnlock: \(ownsLifetimeUnlock)") }
+    }
     
     let productIDs = [
         "com.greggyphenom.waterudrinking.annual",
@@ -53,7 +61,6 @@ import SwiftUI
             await transaction.finish()
         }
     }
-
     
     func loadProducts() async {
         isLoading = true
@@ -69,6 +76,7 @@ import SwiftUI
                 default: break
                 }
             }
+            print("Loaded products: annual=\(annualProduct?.id ?? "nil"), monthly=\(monthlyProduct?.id ?? "nil"), oneTime=\(oneTimeProduct?.id ?? "nil")")
         } catch {
             print("❌ Product loading failed: \(error.localizedDescription)")
         }
@@ -96,6 +104,7 @@ import SwiftUI
 
         // Explicitly clear if no subscription found
         currentSubscription = nil
+        print("No active subscription found")
     }
 
 
@@ -152,6 +161,7 @@ import SwiftUI
             try await AppStore.sync()
         } catch {
             showRestoreErrorAlert = true
+            print("Restore purchases failed: \(error.localizedDescription)")
             return
         }
 
@@ -188,9 +198,11 @@ import SwiftUI
 
         ownsLifetimeUnlock = foundLifetimeUnlock
         currentSubscription = foundSubscription
+        print("After restore - ownsLifetimeUnlock: \(ownsLifetimeUnlock), currentSubscription: \(currentSubscription?.id ?? "none")")
 
         if !hasEntitlements {
             showNoPurchasesFoundAlert = true
+            print("No purchases found during restore")
             return
         }
 
@@ -210,6 +222,7 @@ import SwiftUI
     
     func checkOwnedProducts() async {
         ownsLifetimeUnlock = false
+        isPurchased = false  // Reset before checking
 
         for await result in Transaction.currentEntitlements {
             switch result {
@@ -219,6 +232,7 @@ import SwiftUI
                     print("oneTimeProduct ID: \(product.id)")
                     if transaction.productID == product.id, product.type == .nonConsumable {
                         ownsLifetimeUnlock = true
+                        isPurchased = true  // Update isPurchased here as well
                         print("✅ Owns lifetime unlock")
                     }
                 } else {
@@ -230,6 +244,7 @@ import SwiftUI
         }
 
         print("ownsLifetimeUnlock final value: \(ownsLifetimeUnlock)")
+        print("isPurchased final value: \(isPurchased)")
     }
 
 }

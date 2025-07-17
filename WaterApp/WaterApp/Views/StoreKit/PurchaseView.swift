@@ -45,6 +45,16 @@ struct PurchaseView: View {
                 .opacity(purchaseViewVM.isLoading ? 0.5 : 1)
                 .padding()
                 .backChevronButton(using: drinkListVM)
+                // Print debug logs when key properties change:
+                .onChange(of: purchaseViewVM.isPurchased) { newValue in
+                    print("DEBUG: isPurchased changed to \(newValue)")
+                }
+                .onChange(of: purchaseViewVM.ownsLifetimeUnlock) { newValue in
+                    print("DEBUG: ownsLifetimeUnlock changed to \(newValue)")
+                }
+                .onChange(of: purchaseViewVM.currentSubscription?.id) { newValue in
+                    print("DEBUG: currentSubscription changed to \(newValue ?? "nil")")
+                }
             }
             .task {
                 await purchaseViewVM.loadProducts()
@@ -56,7 +66,6 @@ struct PurchaseView: View {
         }
     }
 }
-
 
 #Preview {
     PurchaseView()
