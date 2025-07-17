@@ -34,6 +34,10 @@
 		079F4CBD2E27DD29001884FA /* PurchaseOptionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CBC2E27DD29001884FA /* PurchaseOptionsSection.swift */; };
 		079F4CBF2E27DD48001884FA /* PurchaseViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CBE2E27DD48001884FA /* PurchaseViewVM.swift */; };
 		079F4CC22E289039001884FA /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 079F4CC12E289039001884FA /* ConfettiSwiftUI */; };
+		079F4CC42E28AACF001884FA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CC32E28AACF001884FA /* LoadingView.swift */; };
+		079F4CC62E28AAFD001884FA /* PurchasedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CC52E28AAFD001884FA /* PurchasedView.swift */; };
+		079F4CC82E28AB12001884FA /* SubscribedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CC72E28AB12001884FA /* SubscribedView.swift */; };
+		079F4CCA2E28AB41001884FA /* PurchaseOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */; };
 		07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */; };
 		07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0032D9DF79100000BF2 /* DrinkItem.swift */; };
 		07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */; };
@@ -105,6 +109,10 @@
 		079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLegalSection.swift; sourceTree = "<group>"; };
 		079F4CBC2E27DD29001884FA /* PurchaseOptionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOptionsSection.swift; sourceTree = "<group>"; };
 		079F4CBE2E27DD48001884FA /* PurchaseViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseViewVM.swift; sourceTree = "<group>"; };
+		079F4CC32E28AACF001884FA /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		079F4CC52E28AAFD001884FA /* PurchasedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasedView.swift; sourceTree = "<group>"; };
+		079F4CC72E28AB12001884FA /* SubscribedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribedView.swift; sourceTree = "<group>"; };
+		079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOptionsView.swift; sourceTree = "<group>"; };
 		07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkFillView.swift; sourceTree = "<group>"; };
 		07B3A0032D9DF79100000BF2 /* DrinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkItem.swift; sourceTree = "<group>"; };
 		07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkListVM.swift; sourceTree = "<group>"; };
@@ -248,6 +256,10 @@
 				079F4CB82E27DCFE001884FA /* PurchaseRow.swift */,
 				079F4CBC2E27DD29001884FA /* PurchaseOptionsSection.swift */,
 				079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */,
+				079F4CC32E28AACF001884FA /* LoadingView.swift */,
+				079F4CC52E28AAFD001884FA /* PurchasedView.swift */,
+				079F4CC72E28AB12001884FA /* SubscribedView.swift */,
+				079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */,
 			);
 			path = StoreKit;
 			sourceTree = "<group>";
@@ -494,6 +506,8 @@
 				07CED0332D96925C00498D17 /* SettingsListView.swift in Sources */,
 				07CED0352D96A02600498D17 /* SettingsModel.swift in Sources */,
 				07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */,
+				079F4CC42E28AACF001884FA /* LoadingView.swift in Sources */,
+				079F4CC82E28AB12001884FA /* SubscribedView.swift in Sources */,
 				07FBA8B62DAA53A000133F70 /* NavPath.swift in Sources */,
 				077ED5AB2E0A9B9E00CBCC33 /* CupViewOverride.swift in Sources */,
 				077A39FE2E1A9A6B00D086BA /* AlarmSetView.swift in Sources */,
@@ -506,6 +520,7 @@
 				077ED5C32E127B9400CBCC33 /* CalendarDrinkRow.swift in Sources */,
 				072787282D94C14700D56B96 /* CalendarView.swift in Sources */,
 				07F1271C2E1F3C2E00DFDAB1 /* PurchaseView.swift in Sources */,
+				079F4CCA2E28AB41001884FA /* PurchaseOptionsView.swift in Sources */,
 				077A3A002E1AA01200D086BA /* NotificationModel.swift in Sources */,
 				079F4CBD2E27DD29001884FA /* PurchaseOptionsSection.swift in Sources */,
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
@@ -513,6 +528,7 @@
 				07B3A0082D9E0FBB00000BF2 /* SettingsReviewView.swift in Sources */,
 				077ED5C72E1375FB00CBCC33 /* CustomDrinkButtonRow.swift in Sources */,
 				077ED5B92E0D4C5F00CBCC33 /* CalendarListUpdate.swift in Sources */,
+				079F4CC62E28AAFD001884FA /* PurchasedView.swift in Sources */,
 				07F3C7562D90CA1700427A9A /* DrinkSelectionView.swift in Sources */,
 				07EA0BE02DBCC4E8001033AB /* ExtensionsText.swift in Sources */,
 				07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */,
