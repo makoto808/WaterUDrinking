@@ -19,6 +19,7 @@ import SwiftUI
     var showingSignIn = false
     var isLoading = false
     var isPurchased = false
+    var isPurchasing = false
     var showNoPurchasesFoundAlert = false
     var showRestoreErrorAlert = false
     var ownsLifetimeUnlock = false
@@ -92,26 +93,30 @@ import SwiftUI
     }
     
     func purchase(_ product: Product) async {
-        do {
-            let result = try await product.purchase()
-            switch result {
-            case .success(.verified(let transaction)):
-                isPurchased = true
-                print("Purchased: \(transaction.productID)")
-                await transaction.finish()
-            case .success(.unverified(_, let error)):
-                print("Purchase failed verification: \(error.localizedDescription)")
-            case .userCancelled:
-                print("User cancelled purchase")
-            case .pending:
-                print("Purchase pending")
-            @unknown default:
-                break
-            }
-        } catch {
-            print("Purchase failed: \(error.localizedDescription)")
-        }
-    }
+           guard !isPurchasing else { return }  // Prevent multiple purchases
+           isPurchasing = true
+           defer { isPurchasing = false }
+           
+           do {
+               let result = try await product.purchase()
+               switch result {
+               case .success(.verified(let transaction)):
+                   isPurchased = true
+                   print("Purchased: \(transaction.productID)")
+                   await transaction.finish()
+               case .success(.unverified(_, let error)):
+                   print("Purchase failed verification: \(error.localizedDescription)")
+               case .userCancelled:
+                   print("User cancelled purchase")
+               case .pending:
+                   print("Purchase pending")
+               @unknown default:
+                   break
+               }
+           } catch {
+               print("Purchase failed: \(error.localizedDescription)")
+           }
+       }
     
     func restorePurchases() {
         Task {

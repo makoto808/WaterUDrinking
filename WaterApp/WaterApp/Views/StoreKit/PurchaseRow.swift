@@ -12,6 +12,7 @@ struct PurchaseRow: View {
     let title: String
     let description: String
     let action: () -> Void
+    var isLoading: Bool = false  // New param
 
     var body: some View {
         HStack {
@@ -22,10 +23,21 @@ struct PurchaseRow: View {
                     .fontSmallTitle()
             }
             Spacer()
-            Button("Purchase") {
-                action()
+            Button(action: {
+                if !isLoading {
+                    action()
+                }
+            }) {
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .frame(width: 24, height: 24)
+                } else {
+                    Text("Purchase")
+                }
             }
             .buttonStyle(.borderedProminent)
+            .disabled(isLoading)  // Disable when loading
         }
         .padding()
         .background(Color.waterBlue)

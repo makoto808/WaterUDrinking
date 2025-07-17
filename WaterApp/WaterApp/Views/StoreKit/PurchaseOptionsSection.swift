@@ -41,12 +41,17 @@ struct PurchaseOptionsSection: View {
                     // Offer upgrade to lifetime if not owned
                     if let oneTime = viewModel.oneTimeProduct, !viewModel.ownsLifetimeUnlock {
                         Divider().padding(.vertical)
-                        PurchaseRow(title: "Upgrade to Lifetime Access", description: oneTime.displayPrice) {
-                            Task {
-                                await viewModel.purchase(oneTime)
-                                await viewModel.checkOwnedProducts()
-                            }
-                        }
+                        PurchaseRow(
+                            title: "Upgrade to Lifetime Access",
+                            description: oneTime.displayPrice,
+                            action: {
+                                Task {
+                                    await viewModel.purchase(oneTime)
+                                    await viewModel.checkOwnedProducts()
+                                }
+                            },
+                            isLoading: viewModel.isPurchasing
+                        )
                     }
                 } else {
                     // Lifetime unlock message
@@ -73,26 +78,41 @@ struct PurchaseOptionsSection: View {
                 // Show subscriptions only if lifetime not unlocked
                 if !viewModel.ownsLifetimeUnlock {
                     if let monthly = viewModel.monthlyProduct {
-                        PurchaseRow(title: "Pro Monthly Plan", description: monthly.displayPrice) {
-                            Task { await viewModel.purchase(monthly) }
-                        }
+                        PurchaseRow(
+                            title: "Pro Monthly Plan",
+                            description: monthly.displayPrice,
+                            action: {
+                                Task { await viewModel.purchase(monthly) }
+                            },
+                            isLoading: viewModel.isPurchasing
+                        )
                     }
 
                     if let annual = viewModel.annualProduct {
-                        PurchaseRow(title: "Pro Annual Plan", description: annual.displayPrice) {
-                            Task { await viewModel.purchase(annual) }
-                        }
+                        PurchaseRow(
+                            title: "Pro Annual Plan",
+                            description: annual.displayPrice,
+                            action: {
+                                Task { await viewModel.purchase(annual) }
+                            },
+                            isLoading: viewModel.isPurchasing
+                        )
                     }
                 }
 
                 // Show lifetime unlock if not owned
                 if let oneTime = viewModel.oneTimeProduct, !viewModel.ownsLifetimeUnlock {
-                    PurchaseRow(title: "Pro One-Time Unlock", description: oneTime.displayPrice) {
-                        Task {
-                            await viewModel.purchase(oneTime)
-                            await viewModel.checkOwnedProducts()
-                        }
-                    }
+                    PurchaseRow(
+                        title: "Pro One-Time Unlock",
+                        description: oneTime.displayPrice,
+                        action: {
+                            Task {
+                                await viewModel.purchase(oneTime)
+                                await viewModel.checkOwnedProducts()
+                            }
+                        },
+                        isLoading: viewModel.isPurchasing
+                    )
                 }
             }
             .background(Color("AppBackgroundColor"))
