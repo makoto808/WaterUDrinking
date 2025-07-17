@@ -228,8 +228,12 @@ import SwiftUI
     
     func checkOwnedProducts() async {
         ownsLifetimeUnlock = false
+        currentSubscription = nil // Reset to avoid stale state
+        isPurchased = false
 
         let lifetimeProductID = oneTimeProduct?.id
+        let monthlyProductID = monthlyProduct?.id
+        let annualProductID = annualProduct?.id
 
         for await result in Transaction.currentEntitlements {
             guard case .verified(let transaction) = result else {
@@ -239,16 +243,30 @@ import SwiftUI
                 continue
             }
 
-            print("Checking transaction productID: \(transaction.productID)")
+            print("✅ Verified transaction for productID: \(transaction.productID)")
 
-            if transaction.productID == lifetimeProductID {
+            switch transaction.productID {
+            case lifetimeProductID:
                 ownsLifetimeUnlock = true
                 isPurchased = true
                 print("✅ Owns lifetime unlock")
+
+            case monthlyProductID:
+                currentSubscription = monthlyProduct
+                isPurchased = true
+                print("✅ Subscribed to Monthly")
+
+            case annualProductID:
+                currentSubscription = annualProduct
+                isPurchased = true
+                print("✅ Subscribed to Annual")
+
+            default:
+                break
             }
         }
 
-        print("ownsLifetimeUnlock final value: \(ownsLifetimeUnlock)")
+        print("Final: ownsLifetimeUnlock=\(ownsLifetimeUnlock), currentSubscription=\(currentSubscription?.displayName ?? "nil")")
     }
 
     
