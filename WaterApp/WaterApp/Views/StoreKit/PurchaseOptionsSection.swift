@@ -29,6 +29,7 @@ struct PurchaseOptionsSection: View {
             } else {
                 PurchaseOptionsView(
                     ownsLifetimeUnlock: viewModel.ownsLifetimeUnlock,
+                    currentSubscription: viewModel.currentSubscription,   // <-- Add this line
                     monthlyProduct: viewModel.monthlyProduct,
                     annualProduct: viewModel.annualProduct,
                     oneTimeProduct: viewModel.oneTimeProduct,
@@ -40,10 +41,6 @@ struct PurchaseOptionsSection: View {
         }
         .background(Color("AppBackgroundColor"))
     }
-}
-
-#Preview {
-    PurchaseOptionsSection(viewModel: PurchaseViewVM())
 }
 
 #Preview {

@@ -10,6 +10,7 @@ import StoreKit
 
 struct PurchaseOptionsView: View {
     let ownsLifetimeUnlock: Bool
+    let currentSubscription: Product?
     let monthlyProduct: Product?
     let annualProduct: Product?
     let oneTimeProduct: Product?
@@ -25,16 +26,9 @@ struct PurchaseOptionsView: View {
                 .padding(.bottom, 8)
             
             if !ownsLifetimeUnlock {
-                if let monthly = monthlyProduct {
-                    purchaseOption(
-                        title: "Pro Monthly Plan",
-                        description: "Track unlimited days and get personalized insights.",
-                        price: monthly.displayPrice,
-                        product: monthly
-                    )
-                }
-                
-                if let annual = annualProduct {
+                // Show Annual plan if not owned
+                if let annual = annualProduct,
+                   currentSubscription?.id != annual.id {
                     purchaseOption(
                         title: "Pro Annual Plan",
                         description: "Save 20% annually and never worry about monthly payments.",
@@ -42,8 +36,21 @@ struct PurchaseOptionsView: View {
                         product: annual
                     )
                 }
+                
+                // Show Monthly plan if not owned AND annual is not owned (monthly hidden if annual owned)
+                if let monthly = monthlyProduct,
+                   currentSubscription?.id != monthly.id,
+                   currentSubscription?.id != annualProduct?.id {
+                    purchaseOption(
+                        title: "Pro Monthly Plan",
+                        description: "Track unlimited days and get personalized insights.",
+                        price: monthly.displayPrice,
+                        product: monthly
+                    )
+                }
             }
             
+            // Show one-time lifetime unlock option if not owned
             if let oneTime = oneTimeProduct, !ownsLifetimeUnlock {
                 purchaseOption(
                     title: "Pro One-Time Unlock",

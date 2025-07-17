@@ -5,6 +5,13 @@
 //  Created by Gregg Abe on 7/15/25.
 //
 
+//
+//  PurchaseViewVM.swift
+//  WaterApp
+//
+//  Created by Gregg Abe on 7/15/25.
+//
+
 import Foundation
 import StoreKit
 import SwiftUI
@@ -14,6 +21,7 @@ import SwiftUI
     var oneTimeProduct: Product?
     var monthlyProduct: Product?
     var annualProduct: Product?
+    
     var currentSubscription: Product?
     
     var showingSignIn = false
@@ -57,6 +65,7 @@ import SwiftUI
             
             // Update ownership state after verification
             await checkOwnedProducts()
+            await checkCurrentSubscription()
             
             await transaction.finish()
         }
@@ -89,10 +98,11 @@ import SwiftUI
 
         for product in products {
             do {
-                let statuses = try await Product.SubscriptionInfo.status(for: product.id)
+                let statuses = try await product.subscription?.status ?? []
                 for status in statuses {
-                    if status.state == .subscribed && product.type == .autoRenewable {
+                    if status.state == .subscribed {
                         currentSubscription = product
+                        isPurchased = true
                         print("✅ Subscribed to: \(product.displayName)")
                         return
                     }
@@ -102,11 +112,10 @@ import SwiftUI
             }
         }
 
-        // Explicitly clear if no subscription found
         currentSubscription = nil
+        isPurchased = false
         print("No active subscription found")
     }
-
 
     func purchase(_ product: Product) async {
         guard !isPurchasing else { return }
@@ -119,17 +128,18 @@ import SwiftUI
             case .success(.verified(let transaction)):
                 await transaction.finish()
                 print("✅ Purchase verified for: \(product.displayName)")
-                try await Task.sleep(nanoseconds: 1_000_000_000) // 1 second delay
+                // Small delay to let StoreKit update receipts
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
                 await checkCurrentSubscription()
                 await checkOwnedProducts()
-
+                
             case .success(.unverified(let transaction, let error)):
                 print("⚠️ Purchase unverified: \(error.localizedDescription)")
                 await transaction.finish()
-
+                
             case .userCancelled:
                 print("❌ Purchase cancelled by user")
-
+                
             default:
                 break
             }
@@ -137,7 +147,6 @@ import SwiftUI
             print("❌ Error purchasing: \(error)")
         }
     }
-
     
     func refreshSubscriptions() async {
         isLoading = true
@@ -149,13 +158,12 @@ import SwiftUI
             print("Receipt refresh failed: \(error.localizedDescription)")
         }
 
-        // small delay to allow system to update
-        try? await Task.sleep(nanoseconds: 1_000_000_000)  // 1 second
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
 
         await checkCurrentSubscription()
         await checkOwnedProducts()
     }
-
+    
     func restorePurchases() async {
         do {
             try await AppStore.sync()
@@ -183,12 +191,9 @@ import SwiftUI
                 if let matchedProduct = allProducts.first(where: { $0.id == productID }) {
                     print("✅ Restored product: \(matchedProduct.displayName)")
 
-                    // Check if it's the lifetime unlock
                     if matchedProduct.type == .nonConsumable && matchedProduct.id == oneTimeProduct?.id {
                         foundLifetimeUnlock = true
                     }
-
-                    // Check if it's a subscription
                     if matchedProduct.type == .autoRenewable {
                         foundSubscription = matchedProduct
                     }
@@ -206,37 +211,23 @@ import SwiftUI
             return
         }
 
-        // Wait a moment to let StoreKit update before re-checking
-        try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
 
         await checkCurrentSubscription()
         await checkOwnedProducts()
     }
-
-    private func checkIfPurchasesExist() async -> Bool {
-        for await _ in Transaction.currentEntitlements {
-            return true
-        }
-        return false
-    }
     
     func checkOwnedProducts() async {
         ownsLifetimeUnlock = false
-        isPurchased = false  // Reset before checking
 
         for await result in Transaction.currentEntitlements {
             switch result {
             case .verified(let transaction):
                 print("Checking transaction productID: \(transaction.productID)")
-                if let product = oneTimeProduct {
-                    print("oneTimeProduct ID: \(product.id)")
-                    if transaction.productID == product.id, product.type == .nonConsumable {
-                        ownsLifetimeUnlock = true
-                        isPurchased = true  // Update isPurchased here as well
-                        print("✅ Owns lifetime unlock")
-                    }
-                } else {
-                    print("⚠️ oneTimeProduct is nil when checking ownership")
+                if let product = oneTimeProduct, transaction.productID == product.id, product.type == .nonConsumable {
+                    ownsLifetimeUnlock = true
+                    isPurchased = true
+                    print("✅ Owns lifetime unlock")
                 }
             case .unverified(_, let error):
                 print("⚠️ Unverified entitlement: \(error.localizedDescription)")
@@ -244,7 +235,6 @@ import SwiftUI
         }
 
         print("ownsLifetimeUnlock final value: \(ownsLifetimeUnlock)")
-        print("isPurchased final value: \(isPurchased)")
     }
 
 }

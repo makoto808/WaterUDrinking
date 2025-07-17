@@ -7,10 +7,13 @@
 
 import StoreKit
 import SwiftUI
+import ConfettiSwiftUI
 
 struct PurchaseView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     @State private var purchaseViewVM = PurchaseViewVM()
+    @State private var confettiCounter = 0
+    @State private var didShowConfetti = false
     
     var body: some View {
         ZStack {
@@ -23,9 +26,12 @@ struct PurchaseView: View {
                     
                     PurchaseOptionsSection(viewModel: purchaseViewVM)
                     
-                    if purchaseViewVM.isPurchased {
-                        Text("✅ Purchase successful!")
-                            .foregroundColor(.green)
+                    if purchaseViewVM.isPurchased || purchaseViewVM.ownsLifetimeUnlock {
+                        PurchasedView(
+                            ownsLifetimeUnlock: purchaseViewVM.ownsLifetimeUnlock,
+                            currentSubscription: purchaseViewVM.currentSubscription,
+                            confettiCounter: $confettiCounter
+                        )
                     }
                     
                     Button("Restore Purchase") {
@@ -45,15 +51,17 @@ struct PurchaseView: View {
                 .opacity(purchaseViewVM.isLoading ? 0.5 : 1)
                 .padding()
                 .backChevronButton(using: drinkListVM)
-                // Print debug logs when key properties change:
-                .onChange(of: purchaseViewVM.isPurchased) { newValue in
-                    print("DEBUG: isPurchased changed to \(newValue)")
+                .onAppear {
+                 
                 }
-                .onChange(of: purchaseViewVM.ownsLifetimeUnlock) { newValue in
-                    print("DEBUG: ownsLifetimeUnlock changed to \(newValue)")
+                .onDisappear {
+                    didShowConfetti = false
                 }
-                .onChange(of: purchaseViewVM.currentSubscription?.id) { newValue in
-                    print("DEBUG: currentSubscription changed to \(newValue ?? "nil")")
+                .onChange(of: purchaseViewVM.isPurchased) { _ in
+                 
+                }
+                .onChange(of: purchaseViewVM.ownsLifetimeUnlock) { _ in
+                    
                 }
             }
             .task {
@@ -66,7 +74,6 @@ struct PurchaseView: View {
         }
     }
 }
-
 #Preview {
     PurchaseView()
         .environment(DrinkListVM())

@@ -17,23 +17,10 @@ struct PurchasedView: View {
     var body: some View {
         VStack(spacing: 16) {
             if ownsLifetimeUnlock {
-                Text("🎉 Congratulations! You’ve unlocked lifetime access.")
-                    .font(.headline)
-                    .multilineTextAlignment(.center)
-                    .padding()
-                    .onAppear { confettiCounter += 1 }
-            } else if let sub = currentSubscription {
-                Text("🎉 Thanks for subscribing! Enjoy your premium features.")
-                    .font(.headline)
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 4)
-                
-                Text("Subscribed to: \(sub.displayName)")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.accentColor)
-                    .padding()
-                    .onAppear { confettiCounter += 1 }
+                // Only show this, even if sub exists
+                lifetimeView
+            } else if currentSubscription != nil {
+                subscriptionView
             }
         }
         .confettiCannon(
@@ -45,24 +32,63 @@ struct PurchasedView: View {
             radius: 300
         )
     }
-}
+    
+    private var lifetimeView: some View {
+        VStack {
+            Text("🎉 Congratulations! You’ve unlocked lifetime access.")
+                .font(.headline)
+                .multilineTextAlignment(.center)
+                .padding()
+        }
+        .frame(maxWidth: .infinity)
+        .background(Color.blue.opacity(0.15))
+        .cornerRadius(12)
+        .padding(.horizontal)
+        .onAppear {
+            confettiCounter += 1
+        }
+    }
 
-struct PurchasedView_Previews: PreviewProvider {
-    @State static var confettiCounter = 0
+    private var subscriptionView: some View {
+        VStack(spacing: 8) {
+            Text("🎉 Thanks for subscribing! Enjoy your premium features.")
+                .font(.headline)
+                .multilineTextAlignment(.center)
+            
+            if let sub = currentSubscription {
+                Text("Subscribed to: \(sub.displayName)")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.accentColor)
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(Color.blue.opacity(0.15))
+        .cornerRadius(12)
+        .padding(.horizontal)
+        .onAppear {
+            confettiCounter += 1
+        }
+    }
 
-    static var previews: some View {
-        PurchasedView(
-            ownsLifetimeUnlock: true,
-            currentSubscription: nil,
-            confettiCounter: $confettiCounter
-        )
-        .previewDisplayName("Owns Lifetime Unlock")
-
-        PurchasedView(
-            ownsLifetimeUnlock: false,
-            currentSubscription: nil, // or a mock Product if you create one
-            confettiCounter: $confettiCounter
-        )
-        .previewDisplayName("No Lifetime Unlock")
+    struct PurchasedView_Previews: PreviewProvider {
+        @State static var confettiCounter = 0
+        
+        static var previews: some View {
+            PurchasedView(
+                ownsLifetimeUnlock: true,
+                currentSubscription: nil,
+                confettiCounter: $confettiCounter
+            )
+            .previewDisplayName("Owns Lifetime Unlock")
+            
+            PurchasedView(
+                ownsLifetimeUnlock: false,
+                currentSubscription: nil, // or a mock Product if you create one
+                confettiCounter: $confettiCounter
+            )
+            .previewDisplayName("No Lifetime Unlock")
+        }
     }
 }
