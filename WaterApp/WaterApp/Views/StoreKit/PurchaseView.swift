@@ -23,9 +23,39 @@ struct PurchaseView: View {
                     Text("Upgrade To Pro")
                         .fontMediumTitle()
                     
-                    PurchaseOptionsSection(viewModel: purchaseViewVM)
-                    
-                    // Removed PurchasedView here
+                    // Show PurchasedView if user owns lifetime or subscription
+                    if purchaseViewVM.ownsLifetimeUnlock || purchaseViewVM.currentSubscription != nil {
+                        PurchasedView(
+                            ownsLifetimeUnlock: purchaseViewVM.ownsLifetimeUnlock,
+                            currentSubscription: purchaseViewVM.currentSubscription,
+                            confettiCounter: $confettiCounter
+                        )
+                        
+                        // Show lifetime unlock purchase option here
+                        if let oneTime = purchaseViewVM.oneTimeProduct, !purchaseViewVM.ownsLifetimeUnlock {
+                            VStack(spacing: 10) {
+                                PurchaseRow(
+                                    title: "Upgrade to Lifetime Access",
+                                    description: oneTime.displayPrice
+                                ) {
+                                    Task {
+                                        await purchaseViewVM.purchase(oneTime)
+                                        await purchaseViewVM.checkOwnedProducts()
+                                    }
+                                }
+                                Text("One-time unlock: Pay once, use forever — no recurring fees.")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding(.horizontal)
+                        }
+                    } else {
+                        // Otherwise show regular purchase options for monthly/annual/one-time
+                        PurchaseOptionsSection(
+                            viewModel: purchaseViewVM,
+                            confettiCounter: $confettiCounter
+                        )
+                    }
                     
                     Button("Restore Purchase") {
                         Task {

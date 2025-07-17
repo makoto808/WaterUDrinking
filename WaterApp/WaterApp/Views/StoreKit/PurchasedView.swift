@@ -13,8 +13,7 @@ struct PurchasedView: View {
     let ownsLifetimeUnlock: Bool
     let currentSubscription: Product?
     @Binding var confettiCounter: Int
-    @State private var hasShownConfetti = false
-
+    
     var body: some View {
         VStack(spacing: 16) {
             if ownsLifetimeUnlock || currentSubscription != nil {
@@ -28,6 +27,14 @@ struct PurchasedView: View {
                             .font(.title3)
                             .fontWeight(.semibold)
                             .foregroundColor(.accentColor)
+                        
+                        Button("Manage Subscription") {
+                            if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
+                                UIApplication.shared.open(url)
+                            }
+                        }
+                        .font(.subheadline)
+                        .padding(.top, 8)
                     } else {
                         Text("Lifetime Access")
                             .font(.title3)
@@ -41,10 +48,7 @@ struct PurchasedView: View {
                 .cornerRadius(12)
                 .padding(.horizontal)
                 .onAppear {
-                    if !hasShownConfetti {
-                        confettiCounter += 1
-                        hasShownConfetti = true
-                    }
+                    confettiCounter += 1
                 }
             }
         }
