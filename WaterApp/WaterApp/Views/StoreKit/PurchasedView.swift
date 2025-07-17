@@ -12,6 +12,9 @@ import ConfettiSwiftUI
 struct PurchasedView: View {
     let ownsLifetimeUnlock: Bool
     let currentSubscription: Product?
+    
+    @State private var hasFiredConfetti = false
+
     @Binding var confettiCounter: Int
     
     var body: some View {
@@ -48,14 +51,17 @@ struct PurchasedView: View {
                 .cornerRadius(12)
                 .padding(.horizontal)
                 .onAppear {
-                    confettiCounter += 1
+                    if !hasFiredConfetti {
+                        confettiCounter += 1
+                        hasFiredConfetti = true
+                    }
                 }
             }
         }
         .confettiCannon(
             trigger: $confettiCounter,
-            num: 50,
-            rainHeight: 400,
+            num: 100,
+            rainHeight: 500,
             openingAngle: Angle(degrees: 45),
             closingAngle: Angle(degrees: 135),
             radius: 300

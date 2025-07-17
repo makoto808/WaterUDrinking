@@ -65,6 +65,11 @@ struct PurchaseView: View {
                     .alert("No purchases found", isPresented: $purchaseViewVM.showNoPurchasesFoundAlert) {
                         Button("OK", role: .cancel) { }
                     }
+                    .alert("Restore Failed", isPresented: $purchaseViewVM.showRestoreErrorAlert) {
+                        Button("OK", role: .cancel) { }
+                    } message: {
+                        Text("We couldn’t restore your purchases. Please try again later.")
+                    }
                     .padding(.top, -16)
                     
                     PurchaseLegalSection()

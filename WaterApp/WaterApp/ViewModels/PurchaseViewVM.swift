@@ -177,7 +177,9 @@ import SwiftUI
         do {
             try await AppStore.sync()
         } catch {
-            showRestoreErrorAlert = true
+            await MainActor.run {
+                showRestoreErrorAlert = true
+            }
             print("Restore purchases failed: \(error.localizedDescription)")
             return
         }
@@ -210,12 +212,18 @@ import SwiftUI
             }
         }
 
-        ownsLifetimeUnlock = foundLifetimeUnlock
-        currentSubscription = foundSubscription
+        await MainActor.run {
+            self.ownsLifetimeUnlock = foundLifetimeUnlock
+            self.currentSubscription = foundSubscription
+            self.isPurchased = foundLifetimeUnlock || (foundSubscription != nil)
+        }
+
         print("After restore - ownsLifetimeUnlock: \(ownsLifetimeUnlock), currentSubscription: \(currentSubscription?.id ?? "none")")
 
         if !hasEntitlements {
-            showNoPurchasesFoundAlert = true
+            await MainActor.run {
+                showNoPurchasesFoundAlert = true
+            }
             print("No purchases found during restore")
             return
         }
@@ -225,7 +233,7 @@ import SwiftUI
         await checkCurrentSubscription()
         await checkOwnedProducts()
     }
-    
+
     func checkOwnedProducts() async {
         ownsLifetimeUnlock = false
         currentSubscription = nil // Reset to avoid stale state
