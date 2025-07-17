@@ -40,7 +40,6 @@ struct PurchaseView: View {
                                 ) {
                                     Task {
                                         await purchaseViewVM.purchase(oneTime)
-                                        await purchaseViewVM.checkOwnedProducts()
                                     }
                                 }
                                 Text("One-time unlock: Pay once, use forever — no recurring fees.")

@@ -63,7 +63,6 @@ struct PurchaseOptionsSection: View {
             Button {
                 Task {
                     await viewModel.purchase(oneTime)
-                    await viewModel.checkOwnedProducts()
                 }
             } label: {
                 HStack {

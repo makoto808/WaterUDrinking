@@ -18,12 +18,17 @@ struct PurchasedView: View {
         VStack(spacing: 16) {
             if ownsLifetimeUnlock || currentSubscription != nil {
                 VStack(spacing: 8) {
-                    Text("🎉 Thanks for subscribing! Enjoy your premium features.")
+                    Text("🎉 Thanks for unlocking premium features!")
                         .font(.headline)
                         .multilineTextAlignment(.center)
-
-                    if let sub = currentSubscription {
-                        Text("Subscribed to: \(sub.displayName)")
+                    
+                    if ownsLifetimeUnlock {
+                        Text("✅ Lifetime Access Unlocked")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.accentColor)
+                    } else if let sub = currentSubscription {
+                        Text("✅ Subscribed to: \(sub.displayName)")
                             .font(.title3)
                             .fontWeight(.semibold)
                             .foregroundColor(.accentColor)
@@ -35,11 +40,6 @@ struct PurchasedView: View {
                         }
                         .font(.subheadline)
                         .padding(.top, 8)
-                    } else {
-                        Text("Lifetime Access")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.accentColor)
                     }
                 }
                 .padding()
