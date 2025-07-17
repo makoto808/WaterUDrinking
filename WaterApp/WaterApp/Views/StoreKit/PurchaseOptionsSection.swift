@@ -49,41 +49,41 @@ struct PurchaseOptionsSection: View {
                     
                     if let oneTime = viewModel.oneTimeProduct {
                         Divider()
-                        lifetimeUnlockSection(oneTime)
+//                        lifetimeUnlockSection(oneTime)
                     }
                 }
             }
         }
         .background(Color("AppBackgroundColor"))
     }
-    
-    @ViewBuilder
-    private func lifetimeUnlockSection(_ oneTime: Product) -> some View {
-        VStack(spacing: 10) {
-            Button {
-                Task {
-                    await viewModel.purchase(oneTime)
-                }
-            } label: {
-                HStack {
-                    Text("Upgrade to Lifetime Access")
-                        .fontWeight(.semibold)
-                    Spacer()
-                    Text(oneTime.displayPrice)
-                }
-                .padding()
-                .background(Color.blue.opacity(0.15))
-                .cornerRadius(12)
-            }
-            
-            Text("One-time unlock: Pay once, use forever — no recurring fees.")
-                .font(.caption)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
-        }
-        .padding(.horizontal)
-    }
+//    
+//    @ViewBuilder
+//    private func lifetimeUnlockSection(_ oneTime: Product) -> some View {
+//        VStack(spacing: 10) {
+//            Button {
+//                Task {
+//                    await viewModel.purchase(oneTime)
+//                }
+//            } label: {
+//                HStack {
+//                    Text("Upgrade to Lifetime Access")
+//                        .fontWeight(.semibold)
+//                    Spacer()
+//                    Text(oneTime.displayPrice)
+//                }
+//                .padding()
+//                .background(Color.blue.opacity(0.15))
+//                .cornerRadius(12)
+//            }
+//            
+//            Text("One-time unlock: Pay once, use forever — no recurring fees.")
+//                .font(.caption)
+//                .foregroundColor(.secondary)
+//                .multilineTextAlignment(.center)
+//                .padding(.horizontal)
+//        }
+//        .padding(.horizontal)
+//    }
 }
 
 //#Preview {
