@@ -49,7 +49,7 @@ struct SettingsListView: View {
                 .textCase(nil)
                 
                 Section(header: Text("Customer Support").fontSmallTitle()) {
-                    SettingsNavRow(title: "Give Us A Review") {
+                    SettingsNavRow(title: " Give Us A Review") {
                         UIApplication.shared.open(appStoreReviewURL)
                         }
 
