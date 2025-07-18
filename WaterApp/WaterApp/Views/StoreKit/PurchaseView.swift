@@ -85,7 +85,7 @@ struct PurchaseView: View {
                 .sheet(isPresented: $purchaseViewVM.showingSignIn) {
                     Text("Custom sign-in view (optional)")
                 }
-            }
+            } 
         }
         .confettiCannon(
             trigger: $confettiCounter,
