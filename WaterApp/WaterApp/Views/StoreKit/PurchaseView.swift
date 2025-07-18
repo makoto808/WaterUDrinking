@@ -87,6 +87,14 @@ struct PurchaseView: View {
                 }
             }
         }
+        .confettiCannon(
+            trigger: $confettiCounter,
+            num: 400,
+            rainHeight: 500,
+            openingAngle: Angle(degrees: 45),
+            closingAngle: Angle(degrees: 135),
+            radius: 600
+        )
     }
 }
 
