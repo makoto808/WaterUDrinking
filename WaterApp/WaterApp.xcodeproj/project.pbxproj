@@ -29,6 +29,15 @@
 		077ED5C72E1375FB00CBCC33 /* CustomDrinkButtonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5C62E1375FB00CBCC33 /* CustomDrinkButtonRow.swift */; };
 		077ED5C92E178CC100CBCC33 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077ED5C82E178CC000CBCC33 /* Launch Screen.storyboard */; };
 		079F4CAD2E2780A6001884FA /* PastDrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CAC2E2780A6001884FA /* PastDrinkView.swift */; };
+		079F4CB92E27DCFE001884FA /* PurchaseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CB82E27DCFE001884FA /* PurchaseRow.swift */; };
+		079F4CBB2E27DD14001884FA /* PurchaseLegalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */; };
+		079F4CBD2E27DD29001884FA /* PurchaseOptionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CBC2E27DD29001884FA /* PurchaseOptionsSection.swift */; };
+		079F4CBF2E27DD48001884FA /* PurchaseViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CBE2E27DD48001884FA /* PurchaseViewVM.swift */; };
+		079F4CC22E289039001884FA /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 079F4CC12E289039001884FA /* ConfettiSwiftUI */; };
+		079F4CC42E28AACF001884FA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CC32E28AACF001884FA /* LoadingView.swift */; };
+		079F4CC62E28AAFD001884FA /* PurchasedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CC52E28AAFD001884FA /* PurchasedView.swift */; };
+		079F4CCA2E28AB41001884FA /* PurchaseOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */; };
+		079F4CCC2E28B948001884FA /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CCB2E28B948001884FA /* PurchaseManager.swift */; };
 		07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */; };
 		07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0032D9DF79100000BF2 /* DrinkItem.swift */; };
 		07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */; };
@@ -96,6 +105,14 @@
 		077ED5C62E1375FB00CBCC33 /* CustomDrinkButtonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDrinkButtonRow.swift; sourceTree = "<group>"; };
 		077ED5C82E178CC000CBCC33 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		079F4CAC2E2780A6001884FA /* PastDrinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastDrinkView.swift; sourceTree = "<group>"; };
+		079F4CB82E27DCFE001884FA /* PurchaseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRow.swift; sourceTree = "<group>"; };
+		079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLegalSection.swift; sourceTree = "<group>"; };
+		079F4CBC2E27DD29001884FA /* PurchaseOptionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOptionsSection.swift; sourceTree = "<group>"; };
+		079F4CBE2E27DD48001884FA /* PurchaseViewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseViewVM.swift; sourceTree = "<group>"; };
+		079F4CC32E28AACF001884FA /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		079F4CC52E28AAFD001884FA /* PurchasedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasedView.swift; sourceTree = "<group>"; };
+		079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOptionsView.swift; sourceTree = "<group>"; };
+		079F4CCB2E28B948001884FA /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkFillView.swift; sourceTree = "<group>"; };
 		07B3A0032D9DF79100000BF2 /* DrinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkItem.swift; sourceTree = "<group>"; };
 		07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkListVM.swift; sourceTree = "<group>"; };
@@ -132,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				079F4CC22E289039001884FA /* ConfettiSwiftUI in Frameworks */,
 				07F1271F2E1F3EBB00DFDAB1 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,6 +244,7 @@
 				07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */,
 				116283CF2DB38FBF000ADC31 /* CalendarHomeVM.swift */,
 				077A3A012E1BA69100D086BA /* NotificationVM.swift */,
+				079F4CBE2E27DD48001884FA /* PurchaseViewVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -234,6 +253,13 @@
 			isa = PBXGroup;
 			children = (
 				07F1271B2E1F3C2E00DFDAB1 /* PurchaseView.swift */,
+				079F4CB82E27DCFE001884FA /* PurchaseRow.swift */,
+				079F4CBC2E27DD29001884FA /* PurchaseOptionsSection.swift */,
+				079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */,
+				079F4CC32E28AACF001884FA /* LoadingView.swift */,
+				079F4CC52E28AAFD001884FA /* PurchasedView.swift */,
+				079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */,
+				079F4CCB2E28B948001884FA /* PurchaseManager.swift */,
 			);
 			path = StoreKit;
 			sourceTree = "<group>";
@@ -347,6 +373,7 @@
 			);
 			name = WaterApp;
 			packageProductDependencies = (
+				079F4CC12E289039001884FA /* ConfettiSwiftUI */,
 			);
 			productName = WaterApp;
 			productReference = 07F3C7082D8EEDE800427A9A /* WaterApp.app */;
@@ -424,6 +451,9 @@
 			);
 			mainGroup = 07F3C6FF2D8EEDE800427A9A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				079F4CC02E289039001884FA /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 07F3C7092D8EEDE800427A9A /* Products */;
 			projectDirPath = "";
@@ -476,9 +506,11 @@
 				07CED0332D96925C00498D17 /* SettingsListView.swift in Sources */,
 				07CED0352D96A02600498D17 /* SettingsModel.swift in Sources */,
 				07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */,
+				079F4CC42E28AACF001884FA /* LoadingView.swift in Sources */,
 				07FBA8B62DAA53A000133F70 /* NavPath.swift in Sources */,
 				077ED5AB2E0A9B9E00CBCC33 /* CupViewOverride.swift in Sources */,
 				077A39FE2E1A9A6B00D086BA /* AlarmSetView.swift in Sources */,
+				079F4CB92E27DCFE001884FA /* PurchaseRow.swift in Sources */,
 				077A39FC2E1A97DA00D086BA /* NotificationView.swift in Sources */,
 				077A3A022E1BA69100D086BA /* NotificationVM.swift in Sources */,
 				07CED0292D953BF300498D17 /* Extensions.swift in Sources */,
@@ -487,22 +519,28 @@
 				077ED5C32E127B9400CBCC33 /* CalendarDrinkRow.swift in Sources */,
 				072787282D94C14700D56B96 /* CalendarView.swift in Sources */,
 				07F1271C2E1F3C2E00DFDAB1 /* PurchaseView.swift in Sources */,
+				079F4CCC2E28B948001884FA /* PurchaseManager.swift in Sources */,
+				079F4CCA2E28AB41001884FA /* PurchaseOptionsView.swift in Sources */,
 				077A3A002E1AA01200D086BA /* NotificationModel.swift in Sources */,
+				079F4CBD2E27DD29001884FA /* PurchaseOptionsSection.swift in Sources */,
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
 				077ED5C52E1372C700CBCC33 /* CustomOzButton.swift in Sources */,
 				07B3A0082D9E0FBB00000BF2 /* SettingsReviewView.swift in Sources */,
 				077ED5C72E1375FB00CBCC33 /* CustomDrinkButtonRow.swift in Sources */,
 				077ED5B92E0D4C5F00CBCC33 /* CalendarListUpdate.swift in Sources */,
+				079F4CC62E28AAFD001884FA /* PurchasedView.swift in Sources */,
 				07F3C7562D90CA1700427A9A /* DrinkSelectionView.swift in Sources */,
 				07EA0BE02DBCC4E8001033AB /* ExtensionsText.swift in Sources */,
 				07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */,
 				07F3C7432D8EEDFE00427A9A /* ContentView.swift in Sources */,
 				07381C242D998381003216FA /* CustomOzView.swift in Sources */,
+				079F4CBF2E27DD48001884FA /* PurchaseViewVM.swift in Sources */,
 				073BC1752DAF2FB000863F93 /* TitleView.swift in Sources */,
 				072749672DB0CD20006E6C30 /* CalendarHomeView.swift in Sources */,
 				07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */,
 				079F4CAD2E2780A6001884FA /* PastDrinkView.swift in Sources */,
 				077ED5BD2E0E882700CBCC33 /* EmptyCalendarDrinkListView.swift in Sources */,
+				079F4CBB2E27DD14001884FA /* PurchaseLegalSection.swift in Sources */,
 				07F3C7542D8EF8DF00427A9A /* CupView.swift in Sources */,
 				07381C272D9B78E6003216FA /* CustomDrinkView.swift in Sources */,
 				077ED5B32E0BE60F00CBCC33 /* CalendarDrinkList.swift in Sources */,
@@ -843,6 +881,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		079F4CC02E289039001884FA /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		079F4CC12E289039001884FA /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079F4CC02E289039001884FA /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 07F3C7002D8EEDE800427A9A /* Project object */;
 }

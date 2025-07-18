@@ -61,30 +61,25 @@ struct SettingsListView: View {
                 
                 Section(header: Text("Legal").fontSmallTitle()) {
                     SettingsNavRow(title: " Privacy Notice") {
-                        
+                        if let url = URL(string: "https://makoto808.github.io/waterudrinking-support/privacy") {
+                            UIApplication.shared.open(url)
+                        }
                     }
                     
                     SettingsNavRow(title: " Terms Of Service") {
-                        
+                        if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
+                            UIApplication.shared.open(url)
+                        }
                     }
                 }
                 .textCase(nil)
-                
-                //TODO: Future Settings Tabs below
             }
             .listStyle(.automatic)
             .scrollContentBackground(.hidden)
             .background(Color("AppBackgroundColor"))
             .navigationBarBackButtonHidden(true)
+            .backChevronButton(using: drinkListVM)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        drinkListVM.navPath.removeLast()
-                    } label: {
-                        Image(systemName: "chevron.backward")
-                            .backButton1()
-                    }
-                }
                 ToolbarItem(placement: .principal) {
                     Text("Settings")
                         .fontBarLabel()
@@ -93,6 +88,7 @@ struct SettingsListView: View {
         }
     }
 }
+
 
 #Preview {
     SettingsListView()

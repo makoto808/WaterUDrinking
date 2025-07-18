@@ -56,26 +56,14 @@ struct NotificationView: View {
             notificationVM.loadReminders()
         }
         .navigationBarBackButtonHidden(true)
+        .backChevronButton(using: drinkListVM)
+        .plusButton {
+            showingAlarmSetViewSheet = true
+        }
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button {
-                    drinkListVM.navPath.removeLast()
-                } label: {
-                    Image(systemName: "chevron.backward")
-                        .backButton1()
-                }
-            }
             ToolbarItem(placement: .principal) {
                 Text("Reminders")
                     .fontBarLabel()
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    showingAlarmSetViewSheet = true
-                } label: {
-                    Image(systemName: "plus")
-                        .plusButton1()
-                }
             }
         }
         .sheet(isPresented: $showingAlarmSetViewSheet) {

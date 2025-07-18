@@ -11,7 +11,7 @@ import SwiftUI
 @main
 struct WaterAppApp: App {
     @State private var notificationVM: NotificationVM
-    @AppStorage("isProUnlocked") private var isProUnlocked = false
+    @StateObject private var purchaseManager = PurchaseManager.shared
 
     init() {
         do {
@@ -30,16 +30,11 @@ struct WaterAppApp: App {
             ContentView()
                 .modelContainer(modelContainer)
                 .environment(notificationVM)
+                .environmentObject(purchaseManager)
+                .task {
+                    await purchaseManager.updatePurchaseStatus()
+                    purchaseManager.listenForUpdates()
+                }
         }
     }
 }
-
-
-/*
- // TODO:
- - Add SwiftData too BarChart
- - Add haptic touch?
- - Add sound effects?
- 
- - Change toolbar back button. remove BACK and just keep back arrow
- */

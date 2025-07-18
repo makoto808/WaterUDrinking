@@ -44,11 +44,7 @@ struct DrinkSelectionView: View {
             }
             .onAppear {
                 if isFromHome {
-                    print("🏠 Coming from Home — resetting selectedCalendarDate")
                     drinkListVM.selectedCalendarDate = nil
-
-                } else {
-                    print("📅 Coming from Calendar — keeping selectedCalendarDate: \(String(describing: drinkListVM.selectedCalendarDate))")
                 }
             }
         }
