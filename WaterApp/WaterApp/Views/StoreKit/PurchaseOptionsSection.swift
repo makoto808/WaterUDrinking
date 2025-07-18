@@ -47,10 +47,10 @@ struct PurchaseOptionsSection: View {
                         checkOwnedProductsAction: viewModel.checkOwnedProducts
                     )
                     
-                    if let oneTime = viewModel.oneTimeProduct {
+//                    if let oneTime = viewModel.oneTimeProduct {
                         Divider()
 //                        lifetimeUnlockSection(oneTime)
-                    }
+//                    }
                 }
             }
         }

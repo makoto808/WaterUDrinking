@@ -68,6 +68,15 @@ extension Text {
             .minimumScaleFactor(0.5)
     }
     
+    func fontProTitle() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 18))
+            .foregroundStyle(.primary)
+            .fontWeight(.semibold)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
+            .minimumScaleFactor(0.80)
+    }
+    
     // MARK: - Custom Labels
     func fontOzLabel() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 40))

@@ -55,13 +55,14 @@ struct PurchaseView: View {
                             confettiCounter: $confettiCounter
                         )
                     }
-                    
+                        
                     Button("Restore Purchase") {
                         Task {
                             await purchaseViewVM.restorePurchases()
                             await purchaseViewVM.refreshSubscriptions()
                         }
                     }
+                    .font(.custom("ArialRoundedMTBold", size: 18))
                     .alert("No purchases found", isPresented: $purchaseViewVM.showNoPurchasesFoundAlert) {
                         Button("OK", role: .cancel) { }
                     }
