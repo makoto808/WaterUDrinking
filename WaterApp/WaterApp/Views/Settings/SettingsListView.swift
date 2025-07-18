@@ -10,6 +10,8 @@ import SwiftUI
 struct SettingsListView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
+    let appStoreReviewURL = URL(string: "https://apps.apple.com/app/id6748337137?action=write-review")!
+    
     var body: some View {
         VStack {
             List {
@@ -46,14 +48,12 @@ struct SettingsListView: View {
                 }
                 .textCase(nil)
                 
-                
-                
                 Section(header: Text("Customer Support").fontSmallTitle()) {
+                    SettingsNavRow(title: "Give Us A Review") {
+                        UIApplication.shared.open(appStoreReviewURL)
+                        }
+
                     SettingsNavRow(title: " Help & Support") {
-                        
-                    }
-                    
-                    SettingsNavRow(title: " Give Us A Review") {
                         
                     }
                 }
