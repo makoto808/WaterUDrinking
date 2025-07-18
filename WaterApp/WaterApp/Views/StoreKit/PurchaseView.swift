@@ -63,10 +63,10 @@ struct PurchaseView: View {
                     }
                     .font(.custom("ArialRoundedMTBold", size: 14))
                     .alert("No purchases found", isPresented: $purchaseViewVM.showNoPurchasesFoundAlert) {
-                        Button("OK", role: .cancel) { }
+                        Button("OK") { }
                     }
                     .alert("Restore Failed", isPresented: $purchaseViewVM.showRestoreErrorAlert) {
-                        Button("OK", role: .cancel) { }
+                        Button("OK") { }
                     } message: {
                         Text("We couldn’t restore your purchases. Please try again later.")
                     }
