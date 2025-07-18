@@ -77,7 +77,7 @@ struct PurchaseOptionsView: View {
                 isLoading: isPurchasing
             )
             Text(description)
-                .fontSmallTitle2()
+                .fontProDescription()
         }
     }
 }

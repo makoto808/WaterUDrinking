@@ -22,6 +22,8 @@ extension Color {
     static let backgroundWhite = Color(red: 0.9373, green: 0.9607, blue: 0.9607)
     
     static let waterBlue = Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5)
+    
+    static let lightBlue = Color(red: 0.4275, green: 0.8633, blue: 0.9980, opacity: 0.8)
 }
 
 extension Date {

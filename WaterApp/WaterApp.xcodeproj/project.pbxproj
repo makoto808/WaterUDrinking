@@ -253,12 +253,12 @@
 			isa = PBXGroup;
 			children = (
 				07F1271B2E1F3C2E00DFDAB1 /* PurchaseView.swift */,
-				079F4CB82E27DCFE001884FA /* PurchaseRow.swift */,
 				079F4CBC2E27DD29001884FA /* PurchaseOptionsSection.swift */,
 				079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */,
 				079F4CC32E28AACF001884FA /* LoadingView.swift */,
 				079F4CC52E28AAFD001884FA /* PurchasedView.swift */,
 				079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */,
+				079F4CB82E27DCFE001884FA /* PurchaseRow.swift */,
 				079F4CCB2E28B948001884FA /* PurchaseManager.swift */,
 			);
 			path = StoreKit;

@@ -34,13 +34,14 @@ struct PurchaseRow: View {
                         .frame(width: 24, height: 24)
                 } else {
                     Text("Purchase")
+                        .fontSmallTitle()
                 }
             }
             .buttonStyle(.borderedProminent)
             .disabled(isLoading)  // Disable when loading
         }
         .padding()
-        .background(Color.waterBlue)
+        .background(Color("PurchaseRowBackground"))
         .cornerRadius(12)
     }
 }
