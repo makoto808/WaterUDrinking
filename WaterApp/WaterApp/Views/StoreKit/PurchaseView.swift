@@ -20,7 +20,7 @@ struct PurchaseView: View {
             
             ScrollView {
                 VStack(spacing: 32) {
-                    Text("Upgrade To Pro")
+                    Text("🎊 Upgrade to Pro 🎊")
                         .fontMediumTitle()
                     
                     // Show PurchasedView if user owns lifetime or subscription
@@ -43,8 +43,7 @@ struct PurchaseView: View {
                                     }
                                 }
                                 Text("One-time unlock: Pay once, use forever — no recurring fees.")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
+                                    .fontProDescription2()
                             }
                             .padding(.horizontal)
                         }
@@ -62,7 +61,7 @@ struct PurchaseView: View {
                             await purchaseViewVM.refreshSubscriptions()
                         }
                     }
-                    .font(.custom("ArialRoundedMTBold", size: 18))
+                    .font(.custom("ArialRoundedMTBold", size: 14))
                     .alert("No purchases found", isPresented: $purchaseViewVM.showNoPurchasesFoundAlert) {
                         Button("OK", role: .cancel) { }
                     }

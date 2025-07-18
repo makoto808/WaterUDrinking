@@ -21,33 +21,30 @@ struct PurchasedView: View {
         VStack(spacing: 16) {
             if ownsLifetimeUnlock || currentSubscription != nil {
                 VStack(spacing: 8) {
-                    Text("🎉 Thanks for unlocking premium features!")
-                        .font(.headline)
-                        .multilineTextAlignment(.center)
+                    Text("🎉 Cheers to More Hydration 🎉")
+                        .fontThankYouTitle()
+                    Text("Thanks For The Support!")
+                        .fontThankYouTitle()
                     
                     if ownsLifetimeUnlock {
-                        Text("✅ Lifetime Access Unlocked")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.accentColor)
+                        Text("Lifetime Access Unlocked")
+                            .fontThankYouTitle2()
                     } else if let sub = currentSubscription {
-                        Text("✅ Subscribed to: \(sub.displayName)")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.accentColor)
+                        Text("Subscribed to: \(sub.displayName)")
+                            .fontProTitle()
                         
                         Button("Manage Subscription") {
                             if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
                                 UIApplication.shared.open(url)
                             }
                         }
-                        .font(.subheadline)
+                        .font(.custom("ArialRoundedMTBold", size: 14))
                         .padding(.top, 8)
                     }
                 }
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(Color.blue.opacity(0.15))
+                .background(Color("PurchaseRowBackground"))
                 .cornerRadius(12)
                 .padding(.horizontal)
                 .onAppear {
