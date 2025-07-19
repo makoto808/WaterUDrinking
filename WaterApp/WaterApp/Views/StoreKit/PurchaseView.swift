@@ -61,7 +61,7 @@ struct PurchaseView: View {
                             await purchaseViewVM.refreshSubscriptions()
                         }
                     }
-                    .font(.custom("ArialRoundedMTBold", size: 14))
+                    .font(.custom("ArialRoundedMTBold", size: 18))
                     .alert("No purchases found", isPresented: $purchaseViewVM.showNoPurchasesFoundAlert) {
                         Button("OK") { }
                     }

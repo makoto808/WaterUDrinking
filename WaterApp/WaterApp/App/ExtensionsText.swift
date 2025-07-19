@@ -69,11 +69,11 @@ extension Text {
     }
     
     func fontProTitle() -> some View {
-        self.font(.custom("ArialRoundedMTBold", size: 18))
+        self.font(.custom("ArialRoundedMTBold", size: 22))
             .foregroundStyle(.primary)
-            .fontWeight(.semibold)
+            .fontWeight(.heavy)
             .multilineTextAlignment(.center)
-            .lineLimit(2)
+            .lineLimit(1)
             .minimumScaleFactor(0.80)
     }
     
@@ -91,7 +91,7 @@ extension Text {
     }
     
     func fontThankYouTitle() -> some View {
-        self.font(.custom("ArialRoundedMTBold", size: 16))
+        self.font(.custom("ArialRoundedMTBold", size: 18))
             .foregroundStyle(.primary)
             .fontWeight(.semibold)
             .lineLimit(1)
@@ -99,10 +99,10 @@ extension Text {
     }
     
     func fontThankYouTitle2() -> some View {
-        self.font(.custom("ArialRoundedMTBold", size: 16))
+        self.font(.custom("ArialRoundedMTBold", size: 22))
             .foregroundStyle(.primary)
-            .fontWeight(.heavy)
-            .lineLimit(2)
+            .fontWeight(.semibold)
+            .lineLimit(1)
             .multilineTextAlignment(.center)
             .minimumScaleFactor(0.8)
     }

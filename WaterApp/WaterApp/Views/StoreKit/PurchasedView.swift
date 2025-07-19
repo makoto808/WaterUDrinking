@@ -23,7 +23,7 @@ struct PurchasedView: View {
                 VStack(spacing: 8) {
                     Text("🎉 Cheers to More Hydration 🎉")
                         .fontThankYouTitle()
-                    Text("Thanks For The Support!")
+                    Text("Thanks for the Support!")
                         .fontThankYouTitle()
                     
                     if ownsLifetimeUnlock {
@@ -38,7 +38,8 @@ struct PurchasedView: View {
                                 UIApplication.shared.open(url)
                             }
                         }
-                        .font(.custom("ArialRoundedMTBold", size: 14))
+                        .font(.custom("ArialRoundedMTBold", size: 18))
+                        .fontWeight(.semibold)
                         .padding(.top, 8)
                     }
                 }
@@ -48,11 +49,25 @@ struct PurchasedView: View {
                 .cornerRadius(12)
                 .padding(.horizontal)
                 .onAppear {
-                    if !hasFiredConfetti {
-                        confettiCounter += 1
-                        hasFiredConfetti = true
+                    guard !hasFiredConfetti else { return }
+                    hasFiredConfetti = true
+
+                    if ownsLifetimeUnlock {
+                        fireConfetti(repeat: 15) // 🎉 15 bursts for lifetime
+                    } else {
+                        confettiCounter += 1    // 🎉 1 burst for subscription
                     }
                 }
+            }
+        }
+    }
+    
+    private func fireConfetti(repeat count: Int) {
+        Task {
+            for _ in 0..<count {
+                confettiCounter += 1
+                let randomDelay = Double.random(in: 1...5)
+                try? await Task.sleep(nanoseconds: UInt64(randomDelay * 1_000_000_000))
             }
         }
     }
