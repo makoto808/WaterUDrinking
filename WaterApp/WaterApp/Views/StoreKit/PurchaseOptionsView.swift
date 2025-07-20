@@ -21,7 +21,7 @@ struct PurchaseOptionsView: View {
     var body: some View {
         VStack(spacing: 16) {
             Text("Choose the best plan for you and enjoy premium features to help you stay hydrated!")
-                .fontProTitle()
+                .fontProTitle2()
                 .padding(.bottom, 8)
             
             if !ownsLifetimeUnlock {
