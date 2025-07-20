@@ -89,10 +89,10 @@ struct PurchaseView: View {
         }
         .confettiCannon(
             trigger: $confettiCounter,
-            num: 220,
-            rainHeight: 500,
-            openingAngle: Angle(degrees: 45),
-            closingAngle: Angle(degrees: 135),
+            num: purchaseViewVM.ownsLifetimeUnlock ? 50 : 220,
+            rainHeight: purchaseViewVM.ownsLifetimeUnlock ? 400 : 500,
+            openingAngle: .degrees(45),
+            closingAngle: .degrees(135),
             radius: 600
         )
     }
