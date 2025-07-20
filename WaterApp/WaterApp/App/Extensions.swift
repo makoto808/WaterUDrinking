@@ -202,3 +202,13 @@ extension View {
             }
         }
 }
+
+extension View {
+    func applyColorSchemeIfNeeded(_ scheme: ColorScheme?) -> some View {
+        if let scheme {
+            return AnyView(self.colorScheme(scheme))
+        } else {
+            return AnyView(self)
+        }
+    }
+}

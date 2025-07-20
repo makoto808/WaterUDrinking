@@ -36,6 +36,8 @@ struct ContentView: View {
                         PurchaseView()
                     case .notificationView:
                         NotificationView()
+                    case .lightDarkModeView:
+                        LightDarkModeView()
                     default:
                         EmptyView()
                     }

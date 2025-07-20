@@ -16,4 +16,5 @@ enum NavPath: Hashable {
     case purchaseView
     case notificationView
     case notificationAlarm
+    case lightDarkModeView
 }
