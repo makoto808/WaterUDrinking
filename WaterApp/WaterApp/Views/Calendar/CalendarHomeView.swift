@@ -11,16 +11,15 @@ struct CalendarHomeView: View {
     @Environment(CalendarHomeVM.self) private var calendarHomeVM
     @Environment(DrinkListVM.self) private var drinkListVM
 
+    @EnvironmentObject var purchaseManager: PurchaseManager
+
     @State private var isShowingDrinkDetails = false
-    
-    let purchaseManager: PurchaseManager
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
             VStack {
                 CalendarView(
-                    isShowingDrinkDetails: $isShowingDrinkDetails,
-                    purchaseManager: purchaseManager
+                    isShowingDrinkDetails: $isShowingDrinkDetails
                 )
 
                 Spacer(minLength: 20)
@@ -34,14 +33,14 @@ struct CalendarHomeView: View {
     }
 }
 
-#Preview {
-    let mockDrinkListVM = DrinkListVM()
-    let mockCalendarHomeVM = CalendarHomeVM()
-    let mockPurchaseManager = PurchaseManager.shared
-
-    return NavigationStack {
-        CalendarHomeView(purchaseManager: mockPurchaseManager)
-            .environment(mockDrinkListVM)
-            .environment(mockCalendarHomeVM)
-    }
-}
+//#Preview {
+//    let mockDrinkListVM = DrinkListVM()
+//    let mockCalendarHomeVM = CalendarHomeVM()
+//    let mockPurchaseManager = PurchaseManager.shared
+//
+//    NavigationStack {
+//        CalendarHomeView()
+//            .environment(mockDrinkListVM)
+//            .environment(mockCalendarHomeVM)
+//    }
+//}

@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var drinkListVM = DrinkListVM()
     @State private var calendarHomeVM = CalendarHomeVM()
     
-    let purchaseManager: PurchaseManager
+    @EnvironmentObject var purchaseManager: PurchaseManager
 
     var body: some View {
         NavigationStack(path: $drinkListVM.navPath) {
@@ -23,12 +23,12 @@ struct ContentView: View {
                 .navigationDestination(for: NavPath.self) { navPath in
                     switch navPath {
                     case .calendar:
-                        CalendarHomeView(purchaseManager: purchaseManager)
+                        CalendarHomeView()
                             .environment(calendarHomeVM)
                     case .settings:
                         SettingsListView()
                     case .drinkFillView(let drink):
-                        DrinkFillView(item: drink, purchaseManager: purchaseManager)
+                        DrinkFillView(item: drink)
                     case .dailyWaterGoal:
                         GoalView()
                     case .resetView:
@@ -49,9 +49,8 @@ struct ContentView: View {
             drinkListVM.loadFromCache(modelContext)
             drinkListVM.loadUserGoal(context: modelContext)
         }
-        // Add this to update the view when hasProAccess changes
-        .onChange(of: purchaseManager.hasProAccess) { newValue, oldValue in
-            // React to change, have both new and old values if needed
+        .onChange(of: purchaseManager.hasProAccess) { newValue, _ in
+            print("💡 hasProAccess changed to \(newValue)")
         }
     }
 }

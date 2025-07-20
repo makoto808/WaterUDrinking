@@ -11,11 +11,12 @@ struct CustomOzButton: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @Environment(DrinkListVM.self) private var drinkListVM
-
+    
+    @EnvironmentObject var purchaseManager: PurchaseManager
+    
     @Binding var text: String
     let item: DrinkItem
-    let purchaseManager: PurchaseManager
-
+    
     var body: some View {
         PremiumButtonToggle(
             action: {
@@ -23,7 +24,7 @@ struct CustomOzButton: View {
                     drinkListVM.showAlert = true
                     return
                 }
-
+                
                 if let newItem = drinkListVM.parseNewCachedItem(for: item, volume: customAmount) {
                     modelContext.insert(newItem)
                     do {
@@ -32,21 +33,28 @@ struct CustomOzButton: View {
                     } catch {
                         print("Failed to save: \(error.localizedDescription)")
                     }
-
+                    
                     text = ""
                     dismiss()
-
+                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                         drinkListVM.navPath.removeLast()
                     }
                 } else {
                     drinkListVM.showAlert = true
                 }
-            },
-            purchaseManager: purchaseManager
+            }
         ) {
-            Label("+ Custom Amount", systemImage: "lock")
-                .button1()
+            HStack(spacing: 4) {
+                if purchaseManager.hasProAccess {
+                    Text("+ Custom Amount")
+                } else {
+                    Image(systemName: "lock.fill")
+                        .foregroundColor(.red)
+                        .font(.caption2)
+                }
+            }
+            .button1()
         }
     }
 }

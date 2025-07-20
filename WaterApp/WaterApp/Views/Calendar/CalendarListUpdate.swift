@@ -14,17 +14,18 @@ struct CalendarListUpdate: View {
     @Environment(CalendarHomeVM.self) private var calendarVM
     @Environment(DrinkListVM.self) private var drinkListVM
     
+    @EnvironmentObject var purchaseManager: PurchaseManager
+
     @State private var drinks: [CachedDrinkItem] = []
     
     @Bindable var calendarVMBindable: CalendarHomeVM
     
     let selectedDate: Date
-    let purchaseManager: PurchaseManager
     
     var body: some View {
         VStack {
             if drinks.isEmpty {
-                EmptyCalendarDrinkListView(selectedDate: selectedDate, purchaseManager: purchaseManager)
+                EmptyCalendarDrinkListView(selectedDate: selectedDate)
             } else {
                 Spacer(minLength: 40)
                 
@@ -42,8 +43,7 @@ struct CalendarListUpdate: View {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                             drinkListVM.showPastDrinkSheet = true
                         }
-                    },
-                    purchaseManager: purchaseManager
+                    }
                 ) {
                     HStack(spacing: 4) {
                         Text("+ Add")
@@ -62,7 +62,6 @@ struct CalendarListUpdate: View {
                         
                         ForEach(drinks.sorted(by: { $0.date > $1.date }), id: \.id) { drink in
                             CalendarDrinkRow(
-                                purchaseManager: purchaseManager,
                                 drink: drink,
                                 onDelete: {
                                     calendarVM.drinkToDelete = drink

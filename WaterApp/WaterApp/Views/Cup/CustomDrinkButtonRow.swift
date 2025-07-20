@@ -10,10 +10,11 @@ import SwiftUI
 struct CustomDrinkButtonRow: View {
     @Environment(\.modelContext) private var modelContext
     
+    @EnvironmentObject var purchaseManager: PurchaseManager
+    
     @Bindable var drinkListVM: DrinkListVM
 
     let item: DrinkItem
-    let purchaseManager: PurchaseManager
     
     var body: some View {
         HStack {
@@ -58,7 +59,7 @@ struct CustomDrinkButtonRow: View {
                     .customDrinkButton()
             }
             .sheet(isPresented: $drinkListVM.showCustomOzView) {
-                CustomOzView(item: item, purchaseManager: purchaseManager)
+                CustomOzView(item: item)
                     .presentationDetents([.fraction(2/6)], selection: $drinkListVM.customOzDetent)
             }
         }

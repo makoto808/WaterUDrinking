@@ -12,11 +12,12 @@ struct DrinkFillView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(DrinkListVM.self) private var drinkListVM
     
+    @EnvironmentObject var purchaseManager: PurchaseManager
+    
     @State private var lastHapticValue: Double = 0.0
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
     
     let item: DrinkItem
-    let purchaseManager: PurchaseManager
     
     var body: some View {
         @Bindable var drinkListVM = drinkListVM
@@ -45,7 +46,7 @@ struct DrinkFillView: View {
                     }
                 }
             
-            CustomDrinkButtonRow(drinkListVM: drinkListVM, item: item, purchaseManager: purchaseManager)
+            CustomDrinkButtonRow(drinkListVM: drinkListVM, item: item)
 
             Spacer()
         }

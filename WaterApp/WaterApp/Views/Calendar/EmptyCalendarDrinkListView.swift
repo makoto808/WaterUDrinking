@@ -12,8 +12,9 @@ struct EmptyCalendarDrinkListView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(DrinkListVM.self) private var drinkListVM
     
+    @EnvironmentObject var purchaseManager: PurchaseManager
+    
     let selectedDate: Date
-    let purchaseManager: PurchaseManager
     
     var body: some View {
         ScrollView {
@@ -35,8 +36,7 @@ struct EmptyCalendarDrinkListView: View {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                             drinkListVM.showPastDrinkSheet = true
                         }
-                    },
-                    purchaseManager: purchaseManager
+                    }
                 ) {
                     HStack(spacing: 4) {
                         Text("+ Add")

@@ -11,19 +11,18 @@ struct PremiumButtonToggle<Label: View>: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     @Environment(\.dismiss) private var dismiss
 
+    @EnvironmentObject var purchaseManager: PurchaseManager
+
     let action: () -> Void
-    let purchaseManager: PurchaseManager
     let label: Label?
     let title: String?
 
     // Init for title-only usage
     init(
         action: @escaping () -> Void,
-        purchaseManager: PurchaseManager,
         title: String
     ) where Label == EmptyView {
         self.action = action
-        self.purchaseManager = purchaseManager
         self.title = title
         self.label = nil
     }
@@ -31,11 +30,9 @@ struct PremiumButtonToggle<Label: View>: View {
     // Init for custom label usage
     init(
         action: @escaping () -> Void,
-        purchaseManager: PurchaseManager,
         @ViewBuilder label: () -> Label
     ) {
         self.action = action
-        self.purchaseManager = purchaseManager
         self.label = label()
         self.title = nil
     }
@@ -56,14 +53,13 @@ struct PremiumButtonToggle<Label: View>: View {
             } else if let title = title {
                 if purchaseManager.hasProAccess {
                     Text(title)
-                        .button1()
                 } else {
                     SwiftUI.Label(title, systemImage: "lock.fill")
-                        .button1()
                 }
             } else {
                 EmptyView()
             }
         }
+        .button1()
     }
 }

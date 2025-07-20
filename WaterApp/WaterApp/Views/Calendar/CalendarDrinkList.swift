@@ -11,12 +11,13 @@ struct CalendarDrinkList: View {
     @Environment(CalendarHomeVM.self) private var calendarVM
     @Environment(DrinkListVM.self) private var drinkListVM
     
+    @EnvironmentObject var purchaseManager: PurchaseManager
+    
     @State private var isShowingSheet = false
     @State private var isShowingPastDrinkSheet = false
     
     let drinks: [CachedDrinkItem]
     let selectedDate: Date
-    let purchaseManager: PurchaseManager
     
     private var oz: Double {
         calendarVM.totalOunces(for: selectedDate)
@@ -71,9 +72,9 @@ struct CalendarDrinkList: View {
                 .sheet(isPresented: $isShowingSheet) {
                     CalendarListUpdate(
                         calendarVMBindable: calendarVM,
-                        selectedDate: selectedDate,
-                        purchaseManager: purchaseManager
+                        selectedDate: selectedDate
                     )
+                    .environmentObject(purchaseManager)
                     .presentationDetents([.fraction(0.40), .fraction(0.75)])
                     .presentationDragIndicator(.visible)
                 }

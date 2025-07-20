@@ -2,16 +2,13 @@
 //  PurchaseManager.swift
 //  WaterApp
 //
-//  Created by Gregg Abe on 7/16/25.
-//
 
 import StoreKit
-import SwiftData
+import Combine
 
-@Observable
 @MainActor
-final class PurchaseManager {
-    var hasProAccess = false
+final class PurchaseManager: ObservableObject {
+    @Published var hasProAccess = true
 
     static let shared = PurchaseManager()
     

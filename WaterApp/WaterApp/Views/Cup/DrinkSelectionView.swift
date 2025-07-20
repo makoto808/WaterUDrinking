@@ -11,10 +11,7 @@ struct DrinkSelectionView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
     var isFromHome: Bool
-    
-    init(isFromHome: Bool = false) {
-        self.isFromHome = isFromHome
-    }
+    @EnvironmentObject var purchaseManager: PurchaseManager
 
     var body: some View {
         @Bindable var drinkListVM = drinkListVM
@@ -50,11 +47,14 @@ struct DrinkSelectionView: View {
         }
     }
 }
-
-#Preview {
-    DrinkSelectionView()
-        .environment(DrinkListVM())
-}
+//
+//#Preview {
+//    let purchaseManager = PurchaseManager()
+//    let drinkListVM = DrinkListVM()
+//
+//    DrinkSelectionView(purchaseManager: purchaseManager)
+//        .environment(drinkListVM)
+//}
 
 // TODO: Ability to reorder and add new drinks to DrinkSelectionView
 

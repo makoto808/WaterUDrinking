@@ -13,9 +13,9 @@ struct CalendarView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     @Environment(CalendarHomeVM.self) private var calendarVM
     
+    @EnvironmentObject var purchaseManager: PurchaseManager
+
     @Binding var isShowingDrinkDetails: Bool
-    
-    let purchaseManager: PurchaseManager
     
     private let calendar: Calendar = {
         var cal = Calendar.current
@@ -59,8 +59,7 @@ struct CalendarView: View {
             if let selected = calendarVM.selectedDate {
                 CalendarDrinkList(
                     drinks: calendarVM.drinksForSelectedDate,
-                    selectedDate: selected,
-                    purchaseManager: purchaseManager  // pass it here
+                    selectedDate: selected
                 )
                 .transition(.opacity)
             }
@@ -101,15 +100,15 @@ struct CalendarView: View {
     }
 }
 
-#Preview {
-    struct PreviewWrapper: View {
-        @State private var showingDetails = false
-        let purchaseManager = PurchaseManager.shared
-
-        var body: some View {
-            CalendarView(isShowingDrinkDetails: $showingDetails, purchaseManager: purchaseManager)
-                .environment(CalendarHomeVM())
-        }
-    }
-    return PreviewWrapper()
-}
+//#Preview {
+//    struct PreviewWrapper: View {
+//        @State private var showingDetails = false
+//        let purchaseManager = PurchaseManager.shared
+//
+//        var body: some View {
+//            CalendarView(purchaseManager: purchaseManager, isShowingDrinkDetails: $showingDetails)
+//                .environment(CalendarHomeVM())
+//        }
+//    }
+//    return PreviewWrapper()
+//}

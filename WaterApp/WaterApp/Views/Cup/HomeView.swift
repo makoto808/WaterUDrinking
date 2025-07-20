@@ -12,6 +12,8 @@ struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(DrinkListVM.self) private var drinkListVM
     
+    @EnvironmentObject var purchaseManager: PurchaseManager
+    
     var body: some View {
         VStack(spacing: 0) {
             Spacer(minLength: 30)
@@ -61,14 +63,16 @@ struct HomeView: View {
     }
 }
 
-#Preview {
-    let mockVM = DrinkListVM()
-    mockVM.totalOz = 60
-    mockVM.totalOzGoal = 100
-    
-    return NavigationStack {
-        HomeView()
-            .environment(mockVM)
-    }
-    .modelContainer(for: [UserGoal.self]) // Replace with your actual SwiftData model(s)
-}
+//#Preview {
+//    let mockVM = DrinkListVM()
+//    mockVM.totalOz = 60
+//    mockVM.totalOzGoal = 100
+//
+//    let mockPurchaseManager = PurchaseManager.shared // or mock if needed
+//
+//    return NavigationStack {
+//        HomeView()
+//            .environment(mockVM)
+//    }
+//    .modelContainer(for: [UserGoal.self])
+//}

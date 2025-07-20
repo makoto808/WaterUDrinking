@@ -12,13 +12,14 @@ struct CustomOzView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(DrinkListVM.self) private var drinkListVM
     
+    @EnvironmentObject var purchaseManager: PurchaseManager
+    
     @State private var text: String = ""
     
     @FocusState private var focus: Bool
     @FocusState private var keyboardFocused: Bool
     
     let item: DrinkItem
-    let purchaseManager: PurchaseManager
     
     var body: some View {
         VStack {
@@ -49,7 +50,7 @@ struct CustomOzView: View {
 
                 Spacer()
 
-                CustomOzButton(text: $text, item: item, purchaseManager: purchaseManager)
+                CustomOzButton(text: $text, item: item)
                     .button1()
             }
             .padding(50)

@@ -9,11 +9,12 @@ import SwiftUI
 
 struct CalendarDrinkRow: View {
     @Environment(DrinkListVM.self) private var drinkListVM
-
-    let purchaseManager: PurchaseManager
+    
+    @EnvironmentObject var purchaseManager: PurchaseManager
+    
     let drink: CachedDrinkItem
     let onDelete: () -> Void
-
+    
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
             Image(drink.img)
@@ -29,22 +30,24 @@ struct CalendarDrinkRow: View {
             
             Spacer()
             
-            PremiumButtonToggle(
-                action: {
+            ZStack {
+                PremiumButtonToggle(action: {
                     onDelete()
-                },
-                purchaseManager: purchaseManager
-            ) {
-                HStack(spacing: 2) {
-                    if !purchaseManager.hasProAccess {
-                        Image(systemName: "lock.fill")
-                            .foregroundColor(.red)
-                            .font(.caption2)
+                }) {
+                    HStack(spacing: 2) {
+                        if !purchaseManager.hasProAccess {
+                            Image(systemName: "lock.fill")
+                                .foregroundColor(.red)
+                                .font(.caption2)
+                        }
+                        Image(systemName: "trash")
+                            .buttonTrash()
                     }
-                    Image(systemName: "trash")
-                        .buttonTrash()
                 }
             }
+            .clipShape(Rectangle())
+            .background(Color.clear)
+            .padding(0)
         }
     }
 }
