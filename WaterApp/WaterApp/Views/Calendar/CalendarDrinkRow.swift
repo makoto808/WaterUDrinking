@@ -34,13 +34,14 @@ struct CalendarDrinkRow: View {
                 onDelete()
             }, useButton1Style: false) {
                 HStack(spacing: 2) {
+                    Image(systemName: purchaseManager.hasProAccess ? "trash" : "trash.slash.fill")
+                        .buttonTrash()
+
                     if !purchaseManager.hasProAccess {
                         Image(systemName: "lock.fill")
                             .foregroundColor(.red)
                             .font(.caption2)
                     }
-                    Image(systemName: "trash")
-                        .buttonTrash()
                 }
             }
         }
