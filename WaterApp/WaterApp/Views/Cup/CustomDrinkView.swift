@@ -29,7 +29,7 @@ struct CustomDrinkView: View {
             VStack {
                 Spacer()
                 
-                Text("More Features Coming Soon!")
+                Text("💧 More Features Coming Soon!")
                     .fontProTitle()
                 
                 Spacer()

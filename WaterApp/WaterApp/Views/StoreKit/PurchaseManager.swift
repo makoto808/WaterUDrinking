@@ -13,9 +13,9 @@ final class PurchaseManager: ObservableObject {
     static let shared = PurchaseManager()
     
     private let proProductIDs: Set<String> = [
-        "com.greggyphenom.waterudrinking.prounlock",               // lifetime
-        "com.greggyphenom.waterudrinking.subscription.monthly",    // monthly
-        "com.greggyphenom.waterudrinking.subscription.yearly"      // yearly
+        "com.greggyphenom.waterudrinking.prounlock",   // lifetime
+        "com.greggyphenom.waterudrinking.monthly2",    // monthly
+        "com.greggyphenom.waterudrinking.annual"       // yearly
     ]
 
     private init() {}
@@ -23,25 +23,41 @@ final class PurchaseManager: ObservableObject {
     func updatePurchaseStatus() async {
         var hasActiveEntitlement = false
 
+        print("🔍 Checking current entitlements...")
+        print("Current device date: \(Date())")
+
         for await result in Transaction.currentEntitlements {
             switch result {
             case .verified(let transaction):
-                guard proProductIDs.contains(transaction.productID),
-                      transaction.revocationDate == nil,
-                      transaction.expirationDate == nil || transaction.expirationDate! > Date()
-                else {
-                    continue
+                print("✅ Verified transaction: \(transaction.productID), expires: \(transaction.expirationDate?.description ?? "never")")
+                
+                print("Checking conditions:")
+                print("- productID in proProductIDs: \(proProductIDs.contains(transaction.productID))")
+                print("- revocationDate == nil: \(transaction.revocationDate == nil)")
+                
+                if let expiration = transaction.expirationDate {
+                    print("- expirationDate == nil: false")
+                    print("- expirationDate > Date(): \(expiration > Date())")
+                } else {
+                    print("- expirationDate == nil: true")
+                }
+                
+                if proProductIDs.contains(transaction.productID),
+                   transaction.revocationDate == nil,
+                   (transaction.expirationDate == nil || transaction.expirationDate! > Date()) {
+                    hasActiveEntitlement = true
+                    print("🎉 Active pro entitlement found: \(transaction.productID)")
+                } else {
+                    print("❌ Transaction not valid or expired")
                 }
 
-                print("✅ Active Pro Entitlement: \(transaction.productID)")
-                hasActiveEntitlement = true
-
             case .unverified(_, let error):
-                print("❌ Unverified transaction: \(error.localizedDescription)")
+                print("❌ Unverified transaction error: \(error.localizedDescription)")
             }
         }
 
         hasProAccess = hasActiveEntitlement
+        print("🔑 hasProAccess set to: \(hasProAccess)")
     }
 
     func listenForUpdates() {
