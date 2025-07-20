@@ -28,6 +28,7 @@
 		077ED5C52E1372C700CBCC33 /* CustomOzButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5C42E1372C700CBCC33 /* CustomOzButton.swift */; };
 		077ED5C72E1375FB00CBCC33 /* CustomDrinkButtonRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077ED5C62E1375FB00CBCC33 /* CustomDrinkButtonRow.swift */; };
 		077ED5C92E178CC100CBCC33 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 077ED5C82E178CC000CBCC33 /* Launch Screen.storyboard */; };
+		0781EDC02E2C92630026500F /* AppColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781EDBF2E2C92620026500F /* AppColorScheme.swift */; };
 		079F4CAD2E2780A6001884FA /* PastDrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CAC2E2780A6001884FA /* PastDrinkView.swift */; };
 		079F4CB92E27DCFE001884FA /* PurchaseRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CB82E27DCFE001884FA /* PurchaseRow.swift */; };
 		079F4CBB2E27DD14001884FA /* PurchaseLegalSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */; };
@@ -103,6 +104,7 @@
 		077ED5C42E1372C700CBCC33 /* CustomOzButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOzButton.swift; sourceTree = "<group>"; };
 		077ED5C62E1375FB00CBCC33 /* CustomDrinkButtonRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDrinkButtonRow.swift; sourceTree = "<group>"; };
 		077ED5C82E178CC000CBCC33 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		0781EDBF2E2C92620026500F /* AppColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColorScheme.swift; sourceTree = "<group>"; };
 		079F4CAC2E2780A6001884FA /* PastDrinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastDrinkView.swift; sourceTree = "<group>"; };
 		079F4CB82E27DCFE001884FA /* PurchaseRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRow.swift; sourceTree = "<group>"; };
 		079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLegalSection.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				07CED0342D96A02600498D17 /* SettingsModel.swift */,
 				07F127212E20A48C00DFDAB1 /* SettingsNavRow.swift */,
 				077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */,
+				0781EDBF2E2C92620026500F /* AppColorScheme.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				07F127222E20A48C00DFDAB1 /* SettingsNavRow.swift in Sources */,
 				07680FF82E01302E0030108F /* ResetView.swift in Sources */,
 				07CED0272D94CFF500498D17 /* BarChart.swift in Sources */,
+				0781EDC02E2C92630026500F /* AppColorScheme.swift in Sources */,
 				077ED5A92E06C8DD00CBCC33 /* UserGoal.swift in Sources */,
 				07CED0332D96925C00498D17 /* SettingsListView.swift in Sources */,
 				07CED0352D96A02600498D17 /* SettingsModel.swift in Sources */,
