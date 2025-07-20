@@ -40,7 +40,7 @@ struct SettingsListView: View {
                     }
                     
                     SettingsNavRow(title: " App Appearance") {
-                        
+                        drinkListVM.navPath.append(.lightDarkModeView)
                     }
                 }
                 .textCase(nil)
