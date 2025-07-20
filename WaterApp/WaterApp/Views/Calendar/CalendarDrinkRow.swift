@@ -36,12 +36,6 @@ struct CalendarDrinkRow: View {
                 HStack(spacing: 2) {
                     Image(systemName: purchaseManager.hasProAccess ? "trash" : "trash.slash.fill")
                         .buttonTrash()
-
-                    if !purchaseManager.hasProAccess {
-                        Image(systemName: "lock.fill")
-                            .foregroundColor(.red)
-                            .font(.caption2)
-                    }
                 }
             }
         }
