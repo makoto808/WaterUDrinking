@@ -10,8 +10,9 @@ import SwiftUI
 struct DrinkSelectionView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
-    var isFromHome: Bool
     @EnvironmentObject var purchaseManager: PurchaseManager
+    
+    var isFromHome: Bool
 
     var body: some View {
         @Bindable var drinkListVM = drinkListVM

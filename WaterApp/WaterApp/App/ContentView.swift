@@ -14,11 +14,9 @@ struct ContentView: View {
     
     @EnvironmentObject var purchaseManager: PurchaseManager
 
-    @State private var drinkListVM = DrinkListVM()
     @State private var calendarHomeVM = CalendarHomeVM()
+    @State private var drinkListVM = DrinkListVM()
     
-    
-
     var body: some View {
         NavigationStack(path: $drinkListVM.navPath) {
             HomeView()
@@ -27,20 +25,20 @@ struct ContentView: View {
                     case .calendar:
                         CalendarHomeView()
                             .environment(calendarHomeVM)
-                    case .settings:
-                        SettingsListView()
-                    case .drinkFillView(let drink):
-                        DrinkFillView(item: drink)
                     case .dailyWaterGoal:
                         GoalView()
-                    case .resetView:
-                        ResetView()
-                    case .purchaseView:
-                        PurchaseView()
-                    case .notificationView:
-                        NotificationView()
+                    case .drinkFillView(let drink):
+                        DrinkFillView(item: drink)
                     case .lightDarkModeView:
                         LightDarkModeView()
+                    case .notificationView:
+                        NotificationView()
+                    case .purchaseView:
+                        PurchaseView()
+                    case .resetView:
+                        ResetView()
+                    case .settings:
+                        SettingsListView()
                     default:
                         EmptyView()
                     }

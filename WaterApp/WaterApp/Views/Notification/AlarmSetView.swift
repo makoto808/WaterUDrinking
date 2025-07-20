@@ -5,12 +5,13 @@
 //  Created by Gregg Abe on 7/6/25.
 //
 
+import SwiftData
 import SwiftUI
 import UserNotifications
-import SwiftData
 
 struct AlarmSetView: View {
     @Environment(\.dismiss) private var dismiss
+    
     @Environment(NotificationVM.self) private var notificationVM
 
     @State private var reminderTime = Date()
@@ -75,20 +76,17 @@ struct AlarmSetView: View {
 
     private func saveReminder() {
         let trimmed = labelText.trimmingCharacters(in: .whitespacesAndNewlines)
-
         guard !trimmed.isEmpty else {
             showAlert = true
             return
         }
 
         let newReminder = NotificationModel(time: reminderTime, label: trimmed)
-
         notificationVM.insertReminder(newReminder)
-
         if newReminder.isEnabled {
             notificationVM.requestPermissionAndSchedule(for: newReminder)
         }
-
+        
         onSave(newReminder)
         dismiss()
     }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - Character Formatter
 extension Double {
     var clean: String {
         return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
@@ -117,6 +118,7 @@ extension Text {
     }
     
     // MARK: - Custom Labels
+    
     func fontOzLabel() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 40))
             .foregroundColor(.primary)
@@ -133,6 +135,7 @@ extension Text {
     }
     
     // MARK: - Goal and BarCharts
+    
     func fontGoalLine() -> some View {
         self.font(.caption)
             .foregroundColor(.secondary)

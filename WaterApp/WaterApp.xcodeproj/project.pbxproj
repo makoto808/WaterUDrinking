@@ -47,7 +47,6 @@
 		07CED0272D94CFF500498D17 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0262D94CFF500498D17 /* BarChart.swift */; };
 		07CED0292D953BF300498D17 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0282D953BF300498D17 /* Extensions.swift */; };
 		07CED0332D96925C00498D17 /* SettingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0322D96925C00498D17 /* SettingsListView.swift */; };
-		07CED0352D96A02600498D17 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0342D96A02600498D17 /* SettingsModel.swift */; };
 		07EA0BE02DBCC4E8001033AB /* ExtensionsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EA0BDF2DBCC4E8001033AB /* ExtensionsText.swift */; };
 		07F1271C2E1F3C2E00DFDAB1 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F1271B2E1F3C2E00DFDAB1 /* PurchaseView.swift */; };
 		07F1271F2E1F3EBB00DFDAB1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F1271E2E1F3EBB00DFDAB1 /* StoreKit.framework */; };
@@ -124,7 +123,6 @@
 		07CED0262D94CFF500498D17 /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		07CED0282D953BF300498D17 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		07CED0322D96925C00498D17 /* SettingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListView.swift; sourceTree = "<group>"; };
-		07CED0342D96A02600498D17 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		07EA0BDF2DBCC4E8001033AB /* ExtensionsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsText.swift; sourceTree = "<group>"; };
 		07F1271B2E1F3C2E00DFDAB1 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		07F1271E2E1F3EBB00DFDAB1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -178,15 +176,14 @@
 		072787252D94C06300D56B96 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				07FBA8B52DAA53A000133F70 /* NavPath.swift */,
+				0781EDBF2E2C92620026500F /* AppColorScheme.swift */,
 				07B3A0032D9DF79100000BF2 /* DrinkItem.swift */,
+				07FBA8B52DAA53A000133F70 /* NavPath.swift */,
 				077A39FF2E1AA01200D086BA /* NotificationModel.swift */,
+				0781EDC32E2CADD10026500F /* PremiumButtonToggle.swift */,
 				079F4CB82E27DCFE001884FA /* PurchaseRow.swift */,
-				07CED0342D96A02600498D17 /* SettingsModel.swift */,
 				07F127212E20A48C00DFDAB1 /* SettingsNavRow.swift */,
 				077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */,
-				0781EDBF2E2C92620026500F /* AppColorScheme.swift */,
-				0781EDC32E2CADD10026500F /* PremiumButtonToggle.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -196,11 +193,11 @@
 			children = (
 				072749662DB0CD20006E6C30 /* CalendarHomeView.swift */,
 				072787272D94C14700D56B96 /* CalendarView.swift */,
-				077ED5AA2E0A9B9E00CBCC33 /* CupViewOverride.swift */,
 				077ED5B02E0BE5E800CBCC33 /* CalendarDayCell.swift */,
 				077ED5B22E0BE60F00CBCC33 /* CalendarDrinkList.swift */,
 				077ED5C22E127B9400CBCC33 /* CalendarDrinkRow.swift */,
 				077ED5B82E0D4C5F00CBCC33 /* CalendarListUpdate.swift */,
+				077ED5AA2E0A9B9E00CBCC33 /* CupViewOverride.swift */,
 				077ED5BC2E0E882700CBCC33 /* EmptyCalendarDrinkListView.swift */,
 				079F4CAC2E2780A6001884FA /* PastDrinkView.swift */,
 				07CED0262D94CFF500498D17 /* BarChart.swift */,
@@ -213,11 +210,11 @@
 			children = (
 				07F3C74B2D8EEF4600427A9A /* HomeView.swift */,
 				07F3C7532D8EF8DF00427A9A /* CupView.swift */,
-				07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */,
-				07381C262D9B78E6003216FA /* CustomDrinkView.swift */,
 				077ED5C62E1375FB00CBCC33 /* CustomDrinkButtonRow.swift */,
-				07381C232D998381003216FA /* CustomOzView.swift */,
+				07381C262D9B78E6003216FA /* CustomDrinkView.swift */,
 				077ED5C42E1372C700CBCC33 /* CustomOzButton.swift */,
+				07381C232D998381003216FA /* CustomOzView.swift */,
+				07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */,
 				07F3C7552D90CA1700427A9A /* DrinkSelectionView.swift */,
 				073BC1742DAF2FB000863F93 /* TitleView.swift */,
 				07F3C7512D8EF69500427A9A /* WaveMotion.swift */,
@@ -228,8 +225,8 @@
 		077A39FA2E1A97C800D086BA /* Notification */ = {
 			isa = PBXGroup;
 			children = (
-				077A39FB2E1A97DA00D086BA /* NotificationView.swift */,
 				077A39FD2E1A9A6B00D086BA /* AlarmSetView.swift */,
+				077A39FB2E1A97DA00D086BA /* NotificationView.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -237,10 +234,10 @@
 		07CED0252D94C32700498D17 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				07CED0322D96925C00498D17 /* SettingsListView.swift */,
 				07645B8D2DFA93840020BF31 /* GoalView.swift */,
-				07680FF72E01302E0030108F /* ResetView.swift */,
 				0781EDC12E2C93550026500F /* LightDarkModeView.swift */,
+				07680FF72E01302E0030108F /* ResetView.swift */,
+				07CED0322D96925C00498D17 /* SettingsListView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -259,13 +256,13 @@
 		07F127142E1D08D400DFDAB1 /* StoreKit */ = {
 			isa = PBXGroup;
 			children = (
+				079F4CCB2E28B948001884FA /* PurchaseManager.swift */,
+				079F4CC32E28AACF001884FA /* LoadingView.swift */,
 				07F1271B2E1F3C2E00DFDAB1 /* PurchaseView.swift */,
+				079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */,
 				079F4CBC2E27DD29001884FA /* PurchaseOptionsSection.swift */,
 				079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */,
 				079F4CC52E28AAFD001884FA /* PurchasedView.swift */,
-				079F4CC32E28AACF001884FA /* LoadingView.swift */,
-				079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */,
-				079F4CCB2E28B948001884FA /* PurchaseManager.swift */,
 			);
 			path = StoreKit;
 			sourceTree = "<group>";
@@ -511,7 +508,6 @@
 				0781EDC02E2C92630026500F /* AppColorScheme.swift in Sources */,
 				077ED5A92E06C8DD00CBCC33 /* UserGoal.swift in Sources */,
 				07CED0332D96925C00498D17 /* SettingsListView.swift in Sources */,
-				07CED0352D96A02600498D17 /* SettingsModel.swift in Sources */,
 				07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */,
 				079F4CC42E28AACF001884FA /* LoadingView.swift in Sources */,
 				07FBA8B62DAA53A000133F70 /* NavPath.swift in Sources */,

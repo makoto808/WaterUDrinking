@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct CustomOzButton: View {
-    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @Environment(DrinkListVM.self) private var drinkListVM
     
     @EnvironmentObject var purchaseManager: PurchaseManager
     
     @Binding var text: String
+    
     let item: DrinkItem
     
     var body: some View {

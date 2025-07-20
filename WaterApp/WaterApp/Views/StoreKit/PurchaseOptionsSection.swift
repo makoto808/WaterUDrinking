@@ -5,9 +5,9 @@
 //  Created by Gregg Abe on 7/15/25.
 //
 
-import SwiftUI
-import StoreKit
 import ConfettiSwiftUI
+import StoreKit
+import SwiftUI
 
 struct PurchaseOptionsSection: View {
     @Bindable var viewModel: PurchaseViewVM
@@ -24,7 +24,8 @@ struct PurchaseOptionsSection: View {
                     confettiCounter: $confettiCounter
                 )
             } else if let current = viewModel.currentSubscription {
-                // User has subscription but no lifetime unlock
+                
+                // NOTE: User has subscription but no lifetime unlock
                 VStack(spacing: 16) {
                     PurchasedView(
                         ownsLifetimeUnlock: false,
@@ -33,10 +34,11 @@ struct PurchaseOptionsSection: View {
                     )
                     
                     Divider()
-                    // No lifetimeUnlockSection here to avoid duplication
+                    
+                    // NOTE: No lifetimeUnlockSection here to avoid duplication
                 }
             } else {
-                // No subscription and no lifetime unlock: show all purchase options + lifetime unlock
+                // NOTE: No subscription and no lifetime unlock: show all purchase options + lifetime unlock
                 VStack(spacing: 16) {
                     PurchaseOptionsView(
                         ownsLifetimeUnlock: false,

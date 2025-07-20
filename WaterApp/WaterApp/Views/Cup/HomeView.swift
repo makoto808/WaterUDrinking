@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
+    
     @Environment(DrinkListVM.self) private var drinkListVM
     
     @EnvironmentObject var purchaseManager: PurchaseManager

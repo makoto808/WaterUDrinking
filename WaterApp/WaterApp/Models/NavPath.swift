@@ -9,12 +9,12 @@ import Foundation
 
 enum NavPath: Hashable {
     case calendar
-    case settings
-    case drinkFillView(DrinkItem)
     case dailyWaterGoal
-    case resetView
-    case purchaseView
-    case notificationView
-    case notificationAlarm
+    case drinkFillView(DrinkItem)
     case lightDarkModeView
+    case notificationAlarm
+    case notificationView
+    case purchaseView
+    case resetView
+    case settings
 }

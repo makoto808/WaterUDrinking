@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - Character Count Limit
+
 extension Binding where Value == String {
     func max(_ limit: Int) -> Self {
         if self.wrappedValue.count > limit {
@@ -18,6 +20,18 @@ extension Binding where Value == String {
     }
 }
 
+// MARK: - App Color Schemes
+
+extension View {
+    func applyColorSchemeIfNeeded(_ scheme: ColorScheme?) -> some View {
+        if let scheme {
+            return AnyView(self.colorScheme(scheme))
+        } else {
+            return AnyView(self)
+        }
+    }
+}
+
 extension Color {
     static let backgroundWhite = Color(red: 0.9373, green: 0.9607, blue: 0.9607)
     
@@ -26,11 +40,15 @@ extension Color {
     static let lightBlue = Color(red: 0.4275, green: 0.8633, blue: 0.9980, opacity: 0.8)
 }
 
+// MARK: - Calendar Number of Week
+
 extension Date {
     func dayNumberOfWeek() -> Int? {
         return Calendar.current.dateComponents([.weekday], from: self).weekday
     }
 }
+
+// MARK: - Image Resize
 
 extension Image {
     func drinkFillResize() -> some View {
@@ -83,6 +101,8 @@ extension Image {
             .frame(width: 60, height: 60)
     }
     
+    // MARK: - Navigation Resize Buttons
+    
     func gearIconResize() -> some View {
         self.resizable()
             .aspectRatio(contentMode: .fit)
@@ -115,6 +135,8 @@ extension Image {
             .padding(.top, 6)
     }
 }
+
+// MARK: - Button Styles
 
 extension View {
     func drinkFilllViewButtonStyle(maxWidth: CGFloat = .infinity) -> some View {
@@ -160,6 +182,8 @@ extension View {
     }
 }
 
+// MARK: - Wave Goal Animation
+
 extension View {
     func goalViewWave(offset: Binding<Angle>, percent: Double = 3.9 / 8.0) -> some View {
         WaveMotion(offset: offset.wrappedValue, percent: percent)
@@ -168,23 +192,6 @@ extension View {
             .onAppear {
                 withAnimation(.linear(duration: 3.5).repeatForever(autoreverses: false)) {
                     offset.wrappedValue = Angle(degrees: 360)
-                }
-            }
-    }
-}
-
-extension View {
-    func backChevronButton(using drinkListVM: DrinkListVM) -> some View {
-        self
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        drinkListVM.navPath.removeLast()
-                    } label: {
-                        Image(systemName: "chevron.backward")
-                            .backButton1()
-                    }
                 }
             }
     }
@@ -201,14 +208,19 @@ extension View {
                 }
             }
         }
-}
-
-extension View {
-    func applyColorSchemeIfNeeded(_ scheme: ColorScheme?) -> some View {
-        if let scheme {
-            return AnyView(self.colorScheme(scheme))
-        } else {
-            return AnyView(self)
-        }
+    
+    func backChevronButton(using drinkListVM: DrinkListVM) -> some View {
+        self
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        drinkListVM.navPath.removeLast()
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .backButton1()
+                    }
+                }
+            }
     }
 }

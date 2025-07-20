@@ -10,7 +10,6 @@ import SwiftUI
 struct WaveMotion: Shape {
     var offset: Angle
     var percent: Double
-    
     var animatableData: Double {
         get { offset.degrees }
         set { offset = Angle(degrees: newValue) }

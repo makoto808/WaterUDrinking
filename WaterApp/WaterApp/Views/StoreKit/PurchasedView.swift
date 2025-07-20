@@ -5,17 +5,17 @@
 //  Created by Gregg Abe on 7/16/25.
 //
 
-import SwiftUI
-import StoreKit
 import ConfettiSwiftUI
+import StoreKit
+import SwiftUI
 
 struct PurchasedView: View {
-    let ownsLifetimeUnlock: Bool
-    let currentSubscription: Product?
-    
     @State private var hasFiredConfetti = false
 
     @Binding var confettiCounter: Int
+    
+    let ownsLifetimeUnlock: Bool
+    let currentSubscription: Product?
     
     var body: some View {
         VStack(spacing: 16) {

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-// NOTE: Used this to display in DrinkSelectionView.
+// NOTE: Used to display in DrinkSelectionView.
 struct DrinkItem: Identifiable, Hashable {
     var id: String
     var name: String

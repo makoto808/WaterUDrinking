@@ -10,6 +10,7 @@ import SwiftUI
 
 struct NotificationView: View {
     @Environment(\.modelContext) private var context
+    
     @Environment(DrinkListVM.self) private var drinkListVM
     @Environment(NotificationVM.self) private var notificationVM
     
@@ -33,6 +34,7 @@ struct NotificationView: View {
                                     .fontSmallTitle2()
                             }
                             Spacer()
+                            
                             Toggle("", isOn: Binding(
                                 get: { reminder.isEnabled },
                                 set: { notificationVM.toggleReminder(reminder, isOn: $0) }

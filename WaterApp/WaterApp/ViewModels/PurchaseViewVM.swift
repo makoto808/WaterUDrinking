@@ -5,13 +5,6 @@
 //  Created by Gregg Abe on 7/15/25.
 //
 
-//
-//  PurchaseViewVM.swift
-//  WaterApp
-//
-//  Created by Gregg Abe on 7/15/25.
-//
-
 import Foundation
 import StoreKit
 import SwiftUI
@@ -323,6 +316,4 @@ import SwiftUI
             self.isPurchased = ownsLifetime || (foundSubscription != nil)
         }
     }
-
-    
 }

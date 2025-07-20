@@ -11,6 +11,7 @@ import ConfettiSwiftUI
 
 struct PurchaseView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
+    
     @State private var purchaseViewVM = PurchaseViewVM()
     @State private var confettiCounter = 0
     

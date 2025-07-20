@@ -10,13 +10,14 @@ import SwiftUI
 
 struct DrinkFillView: View {
     @Environment(\.modelContext) private var modelContext
+    
     @Environment(DrinkListVM.self) private var drinkListVM
     
     @EnvironmentObject var purchaseManager: PurchaseManager
     
     @State private var lastHapticValue: Double = 0.0
-    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
     
+    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
     let item: DrinkItem
     
     var body: some View {
@@ -29,7 +30,6 @@ struct DrinkFillView: View {
             Text("\(drinkListVM.value.formatted()) oz")
                 .fontTitle()
             
-            // TODO: Adds an overly layer for fill effect with Slider()
             Image(item.img)
                 .drinkFillResize()
                 .sheet(isPresented: $drinkListVM.showCustomDrinkView) {
