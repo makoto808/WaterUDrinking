@@ -33,11 +33,11 @@ struct WaterAppApp: App {
                 .preferredColorScheme(AppColorScheme(rawValue: selectedAppearance)?.colorScheme)
                 .modelContainer(modelContainer)
                 .environment(notificationVM)
-                .environmentObject(purchaseManager)  // <- inject here
-//                .task {
-//                    await purchaseManager.updatePurchaseStatus()
-//                    purchaseManager.listenForUpdates()
-//                }
+                .environmentObject(purchaseManager)
+                .task {
+                    await purchaseManager.updatePurchaseStatus()
+                    purchaseManager.listenForUpdates()
+                }
         }
     }
 }
