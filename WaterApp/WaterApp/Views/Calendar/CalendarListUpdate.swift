@@ -53,8 +53,8 @@ struct CalendarListUpdate: View {
                                 .font(.caption2)
                         }
                     }
-                    .button1()
                 }
+                .button1()
                 
                 ScrollView {
                     Spacer(minLength: 20)

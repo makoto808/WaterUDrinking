@@ -59,7 +59,7 @@ struct CustomDrinkButtonRow: View {
             }
             .sheet(isPresented: $drinkListVM.showCustomOzView) {
                 CustomOzView(item: item, purchaseManager: purchaseManager)
-                    .presentationDetents([.fraction(2/6)], selection: $drinkListVM.settingsDetent)
+                    .presentationDetents([.fraction(2/6)], selection: $drinkListVM.customOzDetent)
             }
         }
         .padding(20)

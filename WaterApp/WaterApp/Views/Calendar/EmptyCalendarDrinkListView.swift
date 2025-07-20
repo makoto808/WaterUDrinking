@@ -38,9 +38,16 @@ struct EmptyCalendarDrinkListView: View {
                     },
                     purchaseManager: purchaseManager
                 ) {
-                    Text("+ Add")
-                        .button1()
+                    HStack(spacing: 4) {
+                        Text("+ Add")
+                        if !purchaseManager.hasProAccess {
+                            Image(systemName: "lock.fill")
+                                .foregroundColor(.red)
+                                .font(.caption2)
+                        }
+                    }
                 }
+                .button1()
                 
                 Spacer(minLength: 20)
             }
