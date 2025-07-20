@@ -53,7 +53,7 @@ struct PurchasedView: View {
                     hasFiredConfetti = true
 
                     if ownsLifetimeUnlock {
-                        fireConfetti(repeat: 15) // 🎉 15 bursts for lifetime
+                        fireConfetti(repeat: 10) // 🎉 15 bursts for lifetime
                     } else {
                         confettiCounter += 1    // 🎉 1 burst for subscription
                     }
@@ -66,7 +66,7 @@ struct PurchasedView: View {
         Task {
             for _ in 0..<count {
                 confettiCounter += 1
-                let randomDelay = Double.random(in: 1...5)
+                let randomDelay = Double.random(in: 2...5)
                 try? await Task.sleep(nanoseconds: UInt64(randomDelay * 1_000_000_000))
             }
         }
