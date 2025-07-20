@@ -15,6 +15,8 @@ struct CalendarView: View {
     
     @Binding var isShowingDrinkDetails: Bool
     
+    let purchaseManager: PurchaseManager
+    
     private let calendar: Calendar = {
         var cal = Calendar.current
         cal.firstWeekday = 1
@@ -55,8 +57,12 @@ struct CalendarView: View {
                     )}
             
             if let selected = calendarVM.selectedDate {
-                CalendarDrinkList(drinks: calendarVM.drinksForSelectedDate, selectedDate: selected)
-                    .transition(.opacity)
+                CalendarDrinkList(
+                    drinks: calendarVM.drinksForSelectedDate,
+                    selectedDate: selected,
+                    purchaseManager: purchaseManager  // pass it here
+                )
+                .transition(.opacity)
             }
         }
         .animation(.easeInOut, value: calendarVM.currentMonth)
@@ -95,14 +101,13 @@ struct CalendarView: View {
     }
 }
 
-//TODO: Toggle systemImage if on premium account or not
-
 #Preview {
     struct PreviewWrapper: View {
         @State private var showingDetails = false
-        
+        let purchaseManager = PurchaseManager.shared
+
         var body: some View {
-            CalendarView(isShowingDrinkDetails: $showingDetails)
+            CalendarView(isShowingDrinkDetails: $showingDetails, purchaseManager: purchaseManager)
                 .environment(CalendarHomeVM())
         }
     }

@@ -14,11 +14,12 @@ struct CalendarListUpdate: View {
     @Environment(CalendarHomeVM.self) private var calendarVM
     @Environment(DrinkListVM.self) private var drinkListVM
     
-    @Bindable var calendarVMBindable: CalendarHomeVM
-    
     @State private var drinks: [CachedDrinkItem] = []
     
+    @Bindable var calendarVMBindable: CalendarHomeVM
+    
     let selectedDate: Date
+    let purchaseManager: PurchaseManager
     
     var body: some View {
         VStack {
@@ -48,10 +49,14 @@ struct CalendarListUpdate: View {
                     VStack(spacing: 24) {
                         
                         ForEach(drinks.sorted(by: { $0.date > $1.date }), id: \.id) { drink in
-                            CalendarDrinkRow(drink: drink) {
-                                calendarVM.drinkToDelete = drink
-                                calendarVM.showAlert = true
-                            }
+                            CalendarDrinkRow(
+                                purchaseManager: purchaseManager,
+                                drink: drink,
+                                onDelete: {
+                                    calendarVM.drinkToDelete = drink
+                                    calendarVM.showAlert = true
+                                }
+                            )
                         }
                     }
                     .alert("Delete This Drink?", isPresented: $calendarVMBindable.showAlert) {
@@ -77,90 +82,3 @@ struct CalendarListUpdate: View {
         drinks = calendarVM.fetchDrinks(for: selectedDate)
     }
 }
-
-// MARK: - SAMPLE MOCK PREVIEW
-//struct CalendarListUpdatePreviewMock: View {
-//    let mockDrinks = [
-//        CachedDrinkItem(date: .now, name: "Water", img: "waterBottle", volume: 12.0, arrayOrderValue: 0),
-//        CachedDrinkItem(date: .now, name: "Tea", img: "tea", volume: 8.0, arrayOrderValue: 1),
-//        CachedDrinkItem(date: .now, name: "Water", img: "beer", volume: 12.0, arrayOrderValue: 0),
-//        CachedDrinkItem(date: .now, name: "Tea", img: "soda", volume: 8.0, arrayOrderValue: 1),
-//        CachedDrinkItem(date: .now, name: "Water", img: "energyDrink", volume: 12.0, arrayOrderValue: 0),
-//        CachedDrinkItem(date: .now, name: "Tea", img: "soda", volume: 8.0, arrayOrderValue: 1)
-//    ]
-//
-//    var body: some View {
-//        VStack {
-//            if !mockDrinks.isEmpty {
-//                Spacer(minLength: 20)
-//
-//                Text(Date().formatted(date: .long, time: .omitted))
-//                    .fontUpdateDate()
-//                    .padding(.top)
-//
-//                Text("")
-//                Text("You are dehydrated!")
-//                    .fontUpdateDate()
-//
-//                Button("+ Add") {
-//
-//                }
-//                .button1()
-//
-//            } else {
-//                Spacer(minLength: 30)
-//
-//                Text(Date().formatted(date: .long, time: .omitted))
-//                    .fontUpdateDate()
-//                    .padding(.top)
-//
-//                Spacer(minLength: 30)
-//
-//                Button("+ Add") {
-//
-//                }
-//                .button1()
-//
-//                ScrollView {
-//                    Spacer(minLength: 30)
-//                    VStack(spacing: 24) {
-//
-//                        ForEach(mockDrinks, id: \.id) { drink in
-//                            HStack(alignment: .center, spacing: 12) {
-//                                Image(drink.img)
-//                                    .resizable()
-//                                    .frame(width: 60, height: 60)
-//
-//                                VStack(alignment: .leading, spacing: 4) {
-//                                    Text(drink.name)
-//                                        .fontBarLabel()
-//
-//                                    Text("\(drink.volume, specifier: "%.1f") oz")
-//                                        .fontBarLabel2()
-//                                        .foregroundColor(.gray)
-//                                }
-//
-//                                Spacer()
-//                            }
-//                        }
-//                    }
-//                    .padding(.horizontal)
-//                    //                .background(Color.red.opacity(0.05)) // Debug: remove later
-//                }
-//            }
-//        }
-//    }
-//}
-//
-//
-//#Preview {
-//    struct PreviewWrapper: View {
-//        var body: some View {
-//            CalendarListUpdatePreviewMock()
-//        }
-//    }
-//
-//    return PreviewWrapper()
-//}
-//
-//

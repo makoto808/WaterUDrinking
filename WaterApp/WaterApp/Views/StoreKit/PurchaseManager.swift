@@ -6,35 +6,45 @@
 //
 
 import StoreKit
+import SwiftData
 
+@Observable
 @MainActor
-final class PurchaseManager: ObservableObject {
-    @Published var isPurchased = false
+final class PurchaseManager {
+    var hasProAccess = false
 
-    static let shared = PurchaseManager() // for easy global access
+    static let shared = PurchaseManager()
+    
+    private let proProductIDs: Set<String> = [
+        "com.greggyphenom.waterudrinking.prounlock",               // lifetime
+        "com.greggyphenom.waterudrinking.subscription.monthly",    // monthly
+        "com.greggyphenom.waterudrinking.subscription.yearly"      // yearly
+    ]
 
     private init() {}
 
     func updatePurchaseStatus() async {
+        var hasActiveEntitlement = false
+
         for await result in Transaction.currentEntitlements {
             switch result {
             case .verified(let transaction):
-                print("✅ Verified Transaction: \(transaction.productID)")
-                print("Purchase date: \(transaction.purchaseDate)")
-                print("Revocation date: \(String(describing: transaction.revocationDate))")
-
-                if transaction.productID == "com.greggyphenom.waterudrinking.prounlock",
-                   transaction.revocationDate == nil,
-                   transaction.expirationDate == nil {
-                    isPurchased = true
-                    return
+                guard proProductIDs.contains(transaction.productID),
+                      transaction.revocationDate == nil,
+                      transaction.expirationDate == nil || transaction.expirationDate! > Date()
+                else {
+                    continue
                 }
 
+                print("✅ Active Pro Entitlement: \(transaction.productID)")
+                hasActiveEntitlement = true
+
             case .unverified(_, let error):
-                print("❌ Unverified: \(error)")
+                print("❌ Unverified transaction: \(error.localizedDescription)")
             }
         }
-        isPurchased = false
+
+        hasProAccess = hasActiveEntitlement
     }
 
     func listenForUpdates() {

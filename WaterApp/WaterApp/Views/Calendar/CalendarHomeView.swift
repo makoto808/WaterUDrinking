@@ -10,14 +10,19 @@ import SwiftUI
 struct CalendarHomeView: View {
     @Environment(CalendarHomeVM.self) private var calendarHomeVM
     @Environment(DrinkListVM.self) private var drinkListVM
-    
+
     @State private var isShowingDrinkDetails = false
     
+    let purchaseManager: PurchaseManager
+
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
             VStack {
-                CalendarView(isShowingDrinkDetails: $isShowingDrinkDetails)
-                
+                CalendarView(
+                    isShowingDrinkDetails: $isShowingDrinkDetails,
+                    purchaseManager: purchaseManager
+                )
+
                 Spacer(minLength: 20)
             }
             .padding(.horizontal)
@@ -32,9 +37,10 @@ struct CalendarHomeView: View {
 #Preview {
     let mockDrinkListVM = DrinkListVM()
     let mockCalendarHomeVM = CalendarHomeVM()
-    
+    let mockPurchaseManager = PurchaseManager.shared
+
     return NavigationStack {
-        CalendarHomeView()
+        CalendarHomeView(purchaseManager: mockPurchaseManager)
             .environment(mockDrinkListVM)
             .environment(mockCalendarHomeVM)
     }

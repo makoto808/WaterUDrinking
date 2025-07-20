@@ -7,12 +7,22 @@
 
 import SwiftUI
 
-struct PremiumButtonToggle: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+struct PremiumButtonToggle<Label: View>: View {
+    let action: () -> Void
+    let label: () -> Label
+    let purchaseManager: PurchaseManager
 
-#Preview {
-    PremiumButtonToggle()
+    @Environment(DrinkListVM.self) private var drinkListVM
+
+    var body: some View {
+        Button {
+            if purchaseManager.hasProAccess {
+                action()
+            } else {
+                drinkListVM.navPath.append(.purchaseView)
+            }
+        } label: {
+            label()
+        }
+    }
 }

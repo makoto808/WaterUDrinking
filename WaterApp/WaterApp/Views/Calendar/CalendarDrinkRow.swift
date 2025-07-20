@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CalendarDrinkRow: View {
+    @Environment(DrinkListVM.self) private var drinkListVM
+
+    let purchaseManager: PurchaseManager
     let drink: CachedDrinkItem
     let onDelete: () -> Void
 
@@ -26,12 +29,26 @@ struct CalendarDrinkRow: View {
 
             Spacer()
 
-            Button {
-                onDelete()
-            } label: {
-                Image(systemName: "trash")
-                    .buttonTrash()
-            }
+            PremiumButtonToggle(
+                action: {
+                    onDelete()
+                },
+                label: {
+                    ZStack(alignment: .topTrailing) {
+                        Image(systemName: "trash")
+                            .buttonTrash()
+
+                        if !purchaseManager.hasProAccess {
+                            Image(systemName: "lock.fill")
+                                .foregroundColor(.red)
+                                .font(.caption2)
+                                .background(Color.white.clipShape(Circle()))
+                                .offset(x: 6, y: -6)
+                        }
+                    }
+                },
+                purchaseManager: purchaseManager
+            )
         }
     }
 }
