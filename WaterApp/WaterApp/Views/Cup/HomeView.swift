@@ -72,6 +72,3 @@ struct HomeView: View {
     }
     .modelContainer(for: [UserGoal.self]) // Replace with your actual SwiftData model(s)
 }
-
-// TODO: Transition HomeView from left to right to access CalendarView
-

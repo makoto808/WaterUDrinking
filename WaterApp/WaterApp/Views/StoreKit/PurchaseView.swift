@@ -20,7 +20,7 @@ struct PurchaseView: View {
             
             ScrollView {
                 VStack(spacing: 32) {
-                    Text("Upgrade To Pro")
+                    Text("🎊 Upgrade to Pro 🎊")
                         .fontMediumTitle()
                     
                     // Show PurchasedView if user owns lifetime or subscription
@@ -43,8 +43,7 @@ struct PurchaseView: View {
                                     }
                                 }
                                 Text("One-time unlock: Pay once, use forever — no recurring fees.")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
+                                    .fontProDescription2()
                             }
                             .padding(.horizontal)
                         }
@@ -55,18 +54,19 @@ struct PurchaseView: View {
                             confettiCounter: $confettiCounter
                         )
                     }
-                    
+                        
                     Button("Restore Purchase") {
                         Task {
                             await purchaseViewVM.restorePurchases()
                             await purchaseViewVM.refreshSubscriptions()
                         }
                     }
+                    .font(.custom("ArialRoundedMTBold", size: 18))
                     .alert("No purchases found", isPresented: $purchaseViewVM.showNoPurchasesFoundAlert) {
-                        Button("OK", role: .cancel) { }
+                        Button("OK") { }
                     }
                     .alert("Restore Failed", isPresented: $purchaseViewVM.showRestoreErrorAlert) {
-                        Button("OK", role: .cancel) { }
+                        Button("OK") { }
                     } message: {
                         Text("We couldn’t restore your purchases. Please try again later.")
                     }
@@ -85,11 +85,11 @@ struct PurchaseView: View {
                 .sheet(isPresented: $purchaseViewVM.showingSignIn) {
                     Text("Custom sign-in view (optional)")
                 }
-            }
+            } 
         }
         .confettiCannon(
             trigger: $confettiCounter,
-            num: 400,
+            num: 220,
             rainHeight: 500,
             openingAngle: Angle(degrees: 45),
             closingAngle: Angle(degrees: 135),

@@ -41,7 +41,6 @@
 		07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */; };
 		07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0032D9DF79100000BF2 /* DrinkItem.swift */; };
 		07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */; };
-		07B3A0082D9E0FBB00000BF2 /* SettingsReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0072D9E0FBB00000BF2 /* SettingsReviewView.swift */; };
 		07CED0272D94CFF500498D17 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0262D94CFF500498D17 /* BarChart.swift */; };
 		07CED0292D953BF300498D17 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0282D953BF300498D17 /* Extensions.swift */; };
 		07CED0332D96925C00498D17 /* SettingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CED0322D96925C00498D17 /* SettingsListView.swift */; };
@@ -116,7 +115,6 @@
 		07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkFillView.swift; sourceTree = "<group>"; };
 		07B3A0032D9DF79100000BF2 /* DrinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkItem.swift; sourceTree = "<group>"; };
 		07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkListVM.swift; sourceTree = "<group>"; };
-		07B3A0072D9E0FBB00000BF2 /* SettingsReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReviewView.swift; sourceTree = "<group>"; };
 		07CED0262D94CFF500498D17 /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		07CED0282D953BF300498D17 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		07CED0322D96925C00498D17 /* SettingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListView.swift; sourceTree = "<group>"; };
@@ -175,11 +173,12 @@
 			isa = PBXGroup;
 			children = (
 				07FBA8B52DAA53A000133F70 /* NavPath.swift */,
-				07F127212E20A48C00DFDAB1 /* SettingsNavRow.swift */,
 				07B3A0032D9DF79100000BF2 /* DrinkItem.swift */,
-				077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */,
-				07CED0342D96A02600498D17 /* SettingsModel.swift */,
 				077A39FF2E1AA01200D086BA /* NotificationModel.swift */,
+				079F4CB82E27DCFE001884FA /* PurchaseRow.swift */,
+				07CED0342D96A02600498D17 /* SettingsModel.swift */,
+				07F127212E20A48C00DFDAB1 /* SettingsNavRow.swift */,
+				077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -231,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				07CED0322D96925C00498D17 /* SettingsListView.swift */,
-				07B3A0072D9E0FBB00000BF2 /* SettingsReviewView.swift */,
 				07645B8D2DFA93840020BF31 /* GoalView.swift */,
 				07680FF72E01302E0030108F /* ResetView.swift */,
 			);
@@ -253,12 +251,11 @@
 			isa = PBXGroup;
 			children = (
 				07F1271B2E1F3C2E00DFDAB1 /* PurchaseView.swift */,
-				079F4CB82E27DCFE001884FA /* PurchaseRow.swift */,
 				079F4CBC2E27DD29001884FA /* PurchaseOptionsSection.swift */,
-				079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */,
-				079F4CC32E28AACF001884FA /* LoadingView.swift */,
-				079F4CC52E28AAFD001884FA /* PurchasedView.swift */,
 				079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */,
+				079F4CC52E28AAFD001884FA /* PurchasedView.swift */,
+				079F4CC32E28AACF001884FA /* LoadingView.swift */,
+				079F4CBA2E27DD14001884FA /* PurchaseLegalSection.swift */,
 				079F4CCB2E28B948001884FA /* PurchaseManager.swift */,
 			);
 			path = StoreKit;
@@ -525,7 +522,6 @@
 				079F4CBD2E27DD29001884FA /* PurchaseOptionsSection.swift in Sources */,
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
 				077ED5C52E1372C700CBCC33 /* CustomOzButton.swift in Sources */,
-				07B3A0082D9E0FBB00000BF2 /* SettingsReviewView.swift in Sources */,
 				077ED5C72E1375FB00CBCC33 /* CustomDrinkButtonRow.swift in Sources */,
 				077ED5B92E0D4C5F00CBCC33 /* CalendarListUpdate.swift in Sources */,
 				079F4CC62E28AAFD001884FA /* PurchasedView.swift in Sources */,

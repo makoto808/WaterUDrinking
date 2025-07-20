@@ -21,8 +21,7 @@ struct PurchaseOptionsView: View {
     var body: some View {
         VStack(spacing: 16) {
             Text("Choose the best plan for you and enjoy premium features to help you stay hydrated!")
-                .font(.headline)
-                .multilineTextAlignment(.center)
+                .fontProTitle()
                 .padding(.bottom, 8)
             
             if !ownsLifetimeUnlock {
@@ -44,7 +43,7 @@ struct PurchaseOptionsView: View {
                    currentSubscription?.id != annual.id {
                     purchaseOption(
                         title: "Pro Annual Plan",
-                        description: "Save 20% annually and never worry about monthly payments.",
+                        description: "Save 40% annually and never worry about monthly payments.",
                         price: annual.displayPrice,
                         product: annual
                     )
@@ -78,20 +77,7 @@ struct PurchaseOptionsView: View {
                 isLoading: isPurchasing
             )
             Text(description)
-                .font(.caption)
-                .foregroundColor(.secondary)
+                .fontProDescription()
         }
     }
 }
-
-//#Preview {
-//    PurchaseOptionsView(
-//        ownsLifetimeUnlock: false,
-//        monthlyProduct: nil,
-//        annualProduct: nil,
-//        oneTimeProduct: nil,
-//        isPurchasing: false,
-//        purchaseAction: { _ in },
-//        checkOwnedProductsAction: {}
-//    )
-//}

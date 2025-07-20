@@ -10,6 +10,8 @@ import SwiftUI
 struct SettingsListView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
+    let appStoreReviewURL = URL(string: "https://apps.apple.com/app/id6748337137?action=write-review")!
+    
     var body: some View {
         VStack {
             List {
@@ -17,10 +19,18 @@ struct SettingsListView: View {
                     SettingsNavRow(title: " Become A Hydrated Member") {
                         drinkListVM.navPath.append(.purchaseView)
                     }
+                    
+                    SettingsNavRow(title: " Give Us A Review") {
+                        UIApplication.shared.open(appStoreReviewURL)
+                        }
                 }
                 .textCase(nil)
                 
                 Section(header: Text("App Settings").fontSmallTitle()) {
+                    SettingsNavRow(title: " Set A Reminder") {
+                        drinkListVM.navPath.append(.notificationView)
+                    }
+                    
                     SettingsNavRow(title: " Edit Your Goal") {
                         drinkListVM.navPath.append(.dailyWaterGoal)
                     }
@@ -35,29 +45,27 @@ struct SettingsListView: View {
                 }
                 .textCase(nil)
                 
-                Section(header: Text("Notifications").fontSmallTitle()) {
-                    SettingsNavRow(title: " Push Notifications") {
-                        
-                    }
-                    
-                    SettingsNavRow(title: " Set A Reminder") {
-                        drinkListVM.navPath.append(.notificationView)
-                    }
-                }
-                .textCase(nil)
+//                Section(header: Text("Notifications").fontSmallTitle()) {
+//                    SettingsNavRow(title: " Push Notifications") {
+//                        
+//                    }
+//                    
+//                    SettingsNavRow(title: " Set A Reminder") {
+//                        drinkListVM.navPath.append(.notificationView)
+//                    }
+//                }
+//                .textCase(nil)
                 
-                
-                
-                Section(header: Text("Customer Support").fontSmallTitle()) {
-                    SettingsNavRow(title: " Help & Support") {
-                        
-                    }
-                    
-                    SettingsNavRow(title: " Give Us A Review") {
-                        
-                    }
-                }
-                .textCase(nil)
+//                Section(header: Text("Customer Support").fontSmallTitle()) {
+//                    SettingsNavRow(title: " Give Us A Review") {
+//                        UIApplication.shared.open(appStoreReviewURL)
+//                        }
+
+//                    SettingsNavRow(title: " Help & Support") {
+//                        
+//                    }
+//                }
+//                .textCase(nil)
                 
                 Section(header: Text("Legal").fontSmallTitle()) {
                     SettingsNavRow(title: " Privacy Notice") {
