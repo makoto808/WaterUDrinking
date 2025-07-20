@@ -19,18 +19,16 @@ struct PurchaseOptionsSection: View {
                 LoadingView()
             } else if viewModel.ownsLifetimeUnlock {
                 PurchasedView(
-                    ownsLifetimeUnlock: true,
-                    currentSubscription: viewModel.currentSubscription,
-                    confettiCounter: $confettiCounter
+                    confettiCounter: $confettiCounter, ownsLifetimeUnlock: true,
+                    currentSubscription: viewModel.currentSubscription
                 )
             } else if let current = viewModel.currentSubscription {
                 
                 // NOTE: User has subscription but no lifetime unlock
                 VStack(spacing: 16) {
                     PurchasedView(
-                        ownsLifetimeUnlock: false,
-                        currentSubscription: current,
-                        confettiCounter: $confettiCounter
+                        confettiCounter: $confettiCounter, ownsLifetimeUnlock: false,
+                        currentSubscription: current
                     )
                     
                     Divider()

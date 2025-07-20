@@ -27,9 +27,8 @@ struct PurchaseView: View {
                     // Show PurchasedView if user owns lifetime or subscription
                     if purchaseViewVM.ownsLifetimeUnlock || purchaseViewVM.currentSubscription != nil {
                         PurchasedView(
-                            ownsLifetimeUnlock: purchaseViewVM.ownsLifetimeUnlock,
-                            currentSubscription: purchaseViewVM.currentSubscription,
-                            confettiCounter: $confettiCounter
+                            confettiCounter: $confettiCounter, ownsLifetimeUnlock: purchaseViewVM.ownsLifetimeUnlock,
+                            currentSubscription: purchaseViewVM.currentSubscription
                         )
                         
                         // Show lifetime unlock purchase option here
