@@ -18,6 +18,7 @@ struct CustomOzView: View {
     @FocusState private var keyboardFocused: Bool
     
     let item: DrinkItem
+    let purchaseManager: PurchaseManager
     
     var body: some View {
         VStack {
@@ -48,7 +49,7 @@ struct CustomOzView: View {
 
                 Spacer()
 
-                CustomOzButton(text: $text, item: item)
+                CustomOzButton(text: $text, item: item, purchaseManager: purchaseManager)
                     .button1()
             }
             .padding(50)
@@ -59,7 +60,7 @@ struct CustomOzView: View {
     }
 }
 
-#Preview {
-    CustomOzView(item: DrinkItem(name: "Water", img: "waterBottle", volume: 8))
-        .environment(DrinkListVM())
-}
+//#Preview {
+//    CustomOzView(item: DrinkItem(name: "Water", img: "waterBottle", volume: 8))
+//        .environment(DrinkListVM())
+//}

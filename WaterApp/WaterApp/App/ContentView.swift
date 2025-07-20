@@ -28,7 +28,7 @@ struct ContentView: View {
                     case .settings:
                         SettingsListView()
                     case .drinkFillView(let drink):
-                        DrinkFillView(item: drink)
+                        DrinkFillView(item: drink, purchaseManager: purchaseManager)
                     case .dailyWaterGoal:
                         GoalView()
                     case .resetView:

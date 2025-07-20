@@ -16,6 +16,7 @@ struct DrinkFillView: View {
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
     
     let item: DrinkItem
+    let purchaseManager: PurchaseManager
     
     var body: some View {
         @Bindable var drinkListVM = drinkListVM
@@ -44,8 +45,8 @@ struct DrinkFillView: View {
                     }
                 }
             
-            CustomDrinkButtonRow(drinkListVM: drinkListVM, item: item)
-            
+            CustomDrinkButtonRow(drinkListVM: drinkListVM, item: item, purchaseManager: purchaseManager)
+
             Spacer()
         }
         .background(Color("AppBackgroundColor"))
@@ -60,12 +61,12 @@ struct DrinkFillView: View {
     }
 }
 
-#Preview {
-    let mockItem = DrinkItem(name: "Water", img: "waterBottle", volume: 8.0)
-    
-    let mockVM = DrinkListVM()
-    mockVM.items = [mockItem]
-    
-    return DrinkFillView(item: mockItem)
-        .environment(mockVM)
-}
+//#Preview {
+//    let mockItem = DrinkItem(name: "Water", img: "waterBottle", volume: 8.0)
+//    
+//    let mockVM = DrinkListVM()
+//    mockVM.items = [mockItem]
+//    
+//    return DrinkFillView(item: mockItem)
+//        .environment(mockVM)
+//}
