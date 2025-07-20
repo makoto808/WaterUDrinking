@@ -34,17 +34,14 @@ struct CalendarDrinkRow: View {
                     onDelete()
                 },
                 label: {
-                    ZStack(alignment: .topTrailing) {
-                        Image(systemName: "trash")
-                            .buttonTrash()
-
+                    HStack(spacing: 2) {
                         if !purchaseManager.hasProAccess {
                             Image(systemName: "lock.fill")
                                 .foregroundColor(.red)
                                 .font(.caption2)
-                                .background(Color.white.clipShape(Circle()))
-                                .offset(x: 6, y: -6)
                         }
+                        Image(systemName: "trash")
+                            .buttonTrash()
                     }
                 },
                 purchaseManager: purchaseManager

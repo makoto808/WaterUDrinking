@@ -8,18 +8,22 @@
 import SwiftUI
 
 struct PremiumButtonToggle<Label: View>: View {
+    @Environment(DrinkListVM.self) private var drinkListVM
+    @Environment(\.dismiss) private var dismiss  // Add dismiss environment
+
     let action: () -> Void
     let label: () -> Label
     let purchaseManager: PurchaseManager
-
-    @Environment(DrinkListVM.self) private var drinkListVM
 
     var body: some View {
         Button {
             if purchaseManager.hasProAccess {
                 action()
             } else {
-                drinkListVM.navPath.append(.purchaseView)
+                dismiss()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    drinkListVM.navPath.append(.purchaseView)
+                }
             }
         } label: {
             label()
