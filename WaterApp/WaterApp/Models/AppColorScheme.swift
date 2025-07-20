@@ -7,12 +7,22 @@
 
 import SwiftUI
 
-struct AppColorScheme: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+enum AppColorScheme: String, CaseIterable {
+    case system, light, dark
 
-#Preview {
-    AppColorScheme()
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .system: return nil
+        case .light: return .light
+        case .dark: return .dark
+        }
+    }
+
+    var displayName: String {
+        switch self {
+        case .system: return "System"
+        case .light: return "Light"
+        case .dark: return "Dark"
+        }
+    }
 }
