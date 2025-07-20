@@ -13,35 +13,40 @@ struct CustomOzButton: View {
     @Environment(DrinkListVM.self) private var drinkListVM
 
     @Binding var text: String
-    
     let item: DrinkItem
-    
+    let purchaseManager: PurchaseManager
+
     var body: some View {
-        Button("+ Custom Amount ", systemImage: "lock") {
-            guard let customAmount = Double(text), customAmount > 0 else {
-                drinkListVM.showAlert = true
-                return
-            }
-
-            if let newItem = drinkListVM.parseNewCachedItem(for: item, volume: customAmount) {
-                modelContext.insert(newItem)
-                do {
-                    try modelContext.save()
-                    drinkListVM.refreshFromCache(for: newItem.date, modelContext: modelContext)
-                } catch {
-                    print("Failed to save: \(error.localizedDescription)")
+        PremiumButtonToggle(
+            action: {
+                guard let customAmount = Double(text), customAmount > 0 else {
+                    drinkListVM.showAlert = true
+                    return
                 }
 
-                text = ""
-                dismiss()
+                if let newItem = drinkListVM.parseNewCachedItem(for: item, volume: customAmount) {
+                    modelContext.insert(newItem)
+                    do {
+                        try modelContext.save()
+                        drinkListVM.refreshFromCache(for: newItem.date, modelContext: modelContext)
+                    } catch {
+                        print("Failed to save: \(error.localizedDescription)")
+                    }
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                    drinkListVM.navPath.removeLast()
+                    text = ""
+                    dismiss()
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                        drinkListVM.navPath.removeLast()
+                    }
+                } else {
+                    drinkListVM.showAlert = true
                 }
-            } else {
-                drinkListVM.showAlert = true
-            }
+            },
+            purchaseManager: purchaseManager
+        ) {
+            Label("+ Custom Amount", systemImage: "lock")
+                .button1()
         }
-        .button1()
     }
 }

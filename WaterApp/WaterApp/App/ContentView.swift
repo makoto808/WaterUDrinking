@@ -11,10 +11,11 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(NotificationVM.self) private var notificationVM
-    @EnvironmentObject private var purchaseManager: PurchaseManager
 
     @State private var drinkListVM = DrinkListVM()
     @State private var calendarHomeVM = CalendarHomeVM()
+    
+    let purchaseManager: PurchaseManager
 
     var body: some View {
         NavigationStack(path: $drinkListVM.navPath) {
@@ -22,12 +23,12 @@ struct ContentView: View {
                 .navigationDestination(for: NavPath.self) { navPath in
                     switch navPath {
                     case .calendar:
-                        CalendarHomeView()
+                        CalendarHomeView(purchaseManager: purchaseManager)
                             .environment(calendarHomeVM)
                     case .settings:
                         SettingsListView()
                     case .drinkFillView(let drink):
-                        DrinkFillView(item: drink)
+                        DrinkFillView(item: drink, purchaseManager: purchaseManager)
                     case .dailyWaterGoal:
                         GoalView()
                     case .resetView:
@@ -47,6 +48,10 @@ struct ContentView: View {
         .onAppear {
             drinkListVM.loadFromCache(modelContext)
             drinkListVM.loadUserGoal(context: modelContext)
+        }
+        // Add this to update the view when hasProAccess changes
+        .onChange(of: purchaseManager.hasProAccess) { newValue, oldValue in
+            // React to change, have both new and old values if needed
         }
     }
 }

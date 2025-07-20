@@ -77,6 +77,15 @@ extension Text {
             .minimumScaleFactor(0.80)
     }
     
+    func fontProTitle2() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 22))
+            .foregroundStyle(.primary)
+            .fontWeight(.heavy)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
+            .minimumScaleFactor(0.50)
+    }
+    
     func fontProDescription() -> some View {
         self.font(.custom("ArialRoundedMTBold", size: 12))
             .foregroundStyle(.secondary)

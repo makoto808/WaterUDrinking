@@ -14,6 +14,7 @@ import SwiftUI
     var selectedItemIndex: Int?
     var selectedCalendarDate: Date? = nil
     var settingsDetent = PresentationDetent.medium
+    var customOzDetent = PresentationDetent.fraction(2/6)
     var showCustomOzView = false
     var showCustomDrinkView = false
     var showPastDrinkSheet = false

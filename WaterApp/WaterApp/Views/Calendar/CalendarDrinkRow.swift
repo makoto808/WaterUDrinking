@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CalendarDrinkRow: View {
+    @Environment(DrinkListVM.self) private var drinkListVM
+
+    let purchaseManager: PurchaseManager
     let drink: CachedDrinkItem
     let onDelete: () -> Void
 
@@ -15,22 +18,32 @@ struct CalendarDrinkRow: View {
         HStack(alignment: .center, spacing: 12) {
             Image(drink.img)
                 .calendarDrinkRowImage()
-
+            
             VStack(alignment: .leading, spacing: 4) {
                 Text(drink.name)
                     .fontBarLabel()
-
+                
                 Text("\(drink.volume, specifier: "%.1f") oz")
                     .fontBarLabel2()
             }
-
+            
             Spacer()
-
-            Button {
-                onDelete()
-            } label: {
-                Image(systemName: "trash")
-                    .buttonTrash()
+            
+            PremiumButtonToggle(
+                action: {
+                    onDelete()
+                },
+                purchaseManager: purchaseManager
+            ) {
+                HStack(spacing: 2) {
+                    if !purchaseManager.hasProAccess {
+                        Image(systemName: "lock.fill")
+                            .foregroundColor(.red)
+                            .font(.caption2)
+                    }
+                    Image(systemName: "trash")
+                        .buttonTrash()
+                }
             }
         }
     }

@@ -13,6 +13,7 @@ struct EmptyCalendarDrinkListView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
     let selectedDate: Date
+    let purchaseManager: PurchaseManager
     
     var body: some View {
         ScrollView {
@@ -25,13 +26,25 @@ struct EmptyCalendarDrinkListView: View {
                     .fontMediumTitle()
                     .multilineTextAlignment(.center)
                 
-                Button("+ Add") {
-                    drinkListVM.selectedCalendarDate = selectedDate
-                    drinkListVM.refreshFromCache(for: selectedDate, modelContext: modelContext)  // << Add this line
-                    dismiss()
+                PremiumButtonToggle(
+                    action: {
+                        drinkListVM.selectedCalendarDate = selectedDate
+                        drinkListVM.refreshFromCache(for: selectedDate, modelContext: modelContext)
+                        dismiss()
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                        drinkListVM.showPastDrinkSheet = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                            drinkListVM.showPastDrinkSheet = true
+                        }
+                    },
+                    purchaseManager: purchaseManager
+                ) {
+                    HStack(spacing: 4) {
+                        Text("+ Add")
+                        if !purchaseManager.hasProAccess {
+                            Image(systemName: "lock.fill")
+                                .foregroundColor(.red)
+                                .font(.caption2)
+                        }
                     }
                 }
                 .button1()

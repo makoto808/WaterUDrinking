@@ -13,6 +13,7 @@ struct CustomDrinkButtonRow: View {
     @Bindable var drinkListVM: DrinkListVM
 
     let item: DrinkItem
+    let purchaseManager: PurchaseManager
     
     var body: some View {
         HStack {
@@ -57,8 +58,8 @@ struct CustomDrinkButtonRow: View {
                     .customDrinkButton()
             }
             .sheet(isPresented: $drinkListVM.showCustomOzView) {
-                CustomOzView(item: item)
-                    .presentationDetents([.fraction(2/6)], selection: $drinkListVM.settingsDetent)
+                CustomOzView(item: item, purchaseManager: purchaseManager)
+                    .presentationDetents([.fraction(2/6)], selection: $drinkListVM.customOzDetent)
             }
         }
         .padding(20)
