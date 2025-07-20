@@ -30,24 +30,19 @@ struct CalendarDrinkRow: View {
             
             Spacer()
             
-            ZStack {
-                PremiumButtonToggle(action: {
-                    onDelete()
-                }) {
-                    HStack(spacing: 2) {
-                        if !purchaseManager.hasProAccess {
-                            Image(systemName: "lock.fill")
-                                .foregroundColor(.red)
-                                .font(.caption2)
-                        }
-                        Image(systemName: "trash")
-                            .buttonTrash()
+            PremiumButtonToggle(action: {
+                onDelete()
+            }, useButton1Style: false) {
+                HStack(spacing: 2) {
+                    if !purchaseManager.hasProAccess {
+                        Image(systemName: "lock.fill")
+                            .foregroundColor(.red)
+                            .font(.caption2)
                     }
+                    Image(systemName: "trash")
+                        .buttonTrash()
                 }
             }
-            .clipShape(Rectangle())
-            .background(Color.clear)
-            .padding(0)
         }
     }
 }

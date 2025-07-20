@@ -17,24 +17,31 @@ struct PremiumButtonToggle<Label: View>: View {
     let label: Label?
     let title: String?
 
+    // New parameter to control whether .button1() style is applied
+    var useButton1Style: Bool = true
+
     // Init for title-only usage
     init(
         action: @escaping () -> Void,
-        title: String
+        title: String,
+        useButton1Style: Bool = true
     ) where Label == EmptyView {
         self.action = action
         self.title = title
         self.label = nil
+        self.useButton1Style = useButton1Style
     }
 
     // Init for custom label usage
     init(
         action: @escaping () -> Void,
+        useButton1Style: Bool = true,
         @ViewBuilder label: () -> Label
     ) {
         self.action = action
         self.label = label()
         self.title = nil
+        self.useButton1Style = useButton1Style
     }
 
     var body: some View {
@@ -60,6 +67,20 @@ struct PremiumButtonToggle<Label: View>: View {
                 EmptyView()
             }
         }
-        .button1()
+        .applyIf(useButton1Style) {
+            $0.button1()
+        }
+    }
+}
+
+// Helper View extension for conditionally applying modifiers
+extension View {
+    @ViewBuilder
+    func applyIf<T: View>(_ condition: Bool, transform: (Self) -> T) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
     }
 }
