@@ -30,7 +30,11 @@ struct CustomOzButton: View {
                     modelContext.insert(newItem)
                     do {
                         try modelContext.save()
-                        drinkListVM.refreshFromCache(for: newItem.date, modelContext: modelContext)
+
+                        if Calendar.current.isDateInToday(newItem.date) {
+                            drinkListVM.refreshFromCache(modelContext)
+                        }
+
                     } catch {
                         print("Failed to save: \(error.localizedDescription)")
                     }

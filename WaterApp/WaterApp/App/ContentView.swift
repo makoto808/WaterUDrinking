@@ -46,7 +46,8 @@ struct ContentView: View {
         }
         .environment(drinkListVM)
         .onAppear {
-            drinkListVM.loadFromCache(modelContext)
+            drinkListVM.modelContext = modelContext
+            drinkListVM.refreshTodayItems(modelContext: modelContext)
             drinkListVM.loadUserGoal(context: modelContext)
         }
         .onChange(of: purchaseManager.hasProAccess) { newValue, _ in

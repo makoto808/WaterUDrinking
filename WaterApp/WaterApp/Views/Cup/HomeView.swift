@@ -60,6 +60,10 @@ struct HomeView: View {
                 }
             }
         }
+        .onAppear {
+            drinkListVM.modelContext = modelContext
+            drinkListVM.refreshTodayItems(modelContext: modelContext)
+        }
         .navigationBarBackButtonHidden(true)
     }
 }
