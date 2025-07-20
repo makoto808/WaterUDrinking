@@ -11,11 +11,13 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(NotificationVM.self) private var notificationVM
+    
+    @EnvironmentObject var purchaseManager: PurchaseManager
 
     @State private var drinkListVM = DrinkListVM()
     @State private var calendarHomeVM = CalendarHomeVM()
     
-    @EnvironmentObject var purchaseManager: PurchaseManager
+    
 
     var body: some View {
         NavigationStack(path: $drinkListVM.navPath) {
