@@ -8,7 +8,7 @@ import Combine
 
 @MainActor
 final class PurchaseManager: ObservableObject {
-    @Published var hasProAccess = true
+    @Published var hasProAccess = false
 
     static let shared = PurchaseManager()
     

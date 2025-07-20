@@ -46,9 +46,8 @@ struct CustomOzButton: View {
             }
         ) {
             HStack(spacing: 4) {
-                if purchaseManager.hasProAccess {
-                    Text("+ Custom Amount")
-                } else {
+                Text("+ Custom Amount")
+                if !purchaseManager.hasProAccess {
                     Image(systemName: "lock.fill")
                         .foregroundColor(.red)
                         .font(.caption2)
