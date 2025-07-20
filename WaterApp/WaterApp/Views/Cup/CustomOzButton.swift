@@ -14,7 +14,7 @@ struct CustomOzButton: View {
 
     @Binding var text: String
     let item: DrinkItem
-    let purchaseManager: PurchaseManager  // 🔑 Add this externally
+    let purchaseManager: PurchaseManager
 
     var body: some View {
         PremiumButtonToggle(
@@ -43,11 +43,10 @@ struct CustomOzButton: View {
                     drinkListVM.showAlert = true
                 }
             },
-            label: {
-                Label("+ Custom Amount", systemImage: "lock")
-                    .button1()
-            },
             purchaseManager: purchaseManager
-        )
+        ) {
+            Label("+ Custom Amount", systemImage: "lock")
+                .button1()
+        }
     }
 }

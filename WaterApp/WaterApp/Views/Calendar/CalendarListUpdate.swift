@@ -24,7 +24,7 @@ struct CalendarListUpdate: View {
     var body: some View {
         VStack {
             if drinks.isEmpty {
-                EmptyCalendarDrinkListView(selectedDate: selectedDate)
+                EmptyCalendarDrinkListView(selectedDate: selectedDate, purchaseManager: purchaseManager)
             } else {
                 Spacer(minLength: 40)
                 
@@ -34,15 +34,27 @@ struct CalendarListUpdate: View {
                 
                 Spacer(minLength: 30)
                 
-                Button("+ Add") {
-                    drinkListVM.selectedCalendarDate = selectedDate
-                    dismiss()
+                PremiumButtonToggle(
+                    action: {
+                        drinkListVM.selectedCalendarDate = selectedDate
+                        dismiss()
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                        drinkListVM.showPastDrinkSheet = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                            drinkListVM.showPastDrinkSheet = true
+                        }
+                    },
+                    purchaseManager: purchaseManager
+                ) {
+                    HStack(spacing: 4) {
+                        Text("+ Add")
+                        if !purchaseManager.hasProAccess {
+                            Image(systemName: "lock.fill")
+                                .foregroundColor(.red)
+                                .font(.caption2)
+                        }
                     }
+                    .button1()
                 }
-                .button1()
                 
                 ScrollView {
                     Spacer(minLength: 20)
