@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct IdeaCenterView: View {
+    @Environment(DrinkListVM.self) private var drinkListVM
+    
     @State private var dailyWaterGoal: String = ""
     @State private var waveOffset = Angle(degrees: 0)
     
@@ -44,12 +46,13 @@ struct IdeaCenterView: View {
                 Spacer()
             }
         }
+        .backChevronButton(using: drinkListVM)
     }
     
     func sendEmail() {
         let email = "waterudrinkingapp@gmail.com"
-        let subject = "Idea for WaterUDrinking"
-        let body = "Hi,\n\nI’d like to share an idea..."
+        let subject = "Idea for WaterUDrinking?"
+        let body = "Hi,\nI’d like to share an idea..."
         
         // Prepare the URL string with proper encoding
         let urlString = "mailto:\(email)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&body=\(body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
@@ -64,4 +67,5 @@ struct IdeaCenterView: View {
 
 #Preview {
     IdeaCenterView()
+        .environment(DrinkListVM())
 }
