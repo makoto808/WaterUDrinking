@@ -11,6 +11,7 @@ enum NavPath: Hashable {
     case calendar
     case dailyWaterGoal
     case drinkFillView(DrinkItem)
+    case ideaCenterView
     case lightDarkModeView
     case notificationAlarm
     case notificationView

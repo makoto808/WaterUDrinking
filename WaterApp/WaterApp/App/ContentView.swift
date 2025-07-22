@@ -29,6 +29,8 @@ struct ContentView: View {
                         GoalView()
                     case .drinkFillView(let drink):
                         DrinkFillView(item: drink)
+                    case .ideaCenterView:
+                        IdeaCenterView()
                     case .lightDarkModeView:
                         LightDarkModeView()
                     case .notificationView:

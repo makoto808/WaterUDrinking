@@ -24,7 +24,7 @@ struct SettingsListView: View {
                     
                     SettingsNavRow(title: " Give Us A Review") {
                         UIApplication.shared.open(appStoreReviewURL)
-                        }
+                    }
                 }
                 .textCase(nil)
                 
@@ -43,6 +43,19 @@ struct SettingsListView: View {
                     
                     SettingsNavRow(title: " App Appearance") {
                         drinkListVM.navPath.append(.lightDarkModeView)
+                    }
+                }
+                .textCase(nil)
+                
+                Section(header: Text("Help & Support").fontSmallTitle()) {
+                    SettingsNavRow(title: " Need Help?") {
+                        if let url = URL(string: "https://makoto808.github.io/waterudrinking-support/") {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                    
+                    SettingsNavRow(title: " Idea Center") {
+                        drinkListVM.navPath.append(.ideaCenterView)
                     }
                 }
                 .textCase(nil)

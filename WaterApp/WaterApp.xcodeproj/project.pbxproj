@@ -41,6 +41,7 @@
 		079F4CC62E28AAFD001884FA /* PurchasedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CC52E28AAFD001884FA /* PurchasedView.swift */; };
 		079F4CCA2E28AB41001884FA /* PurchaseOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */; };
 		079F4CCC2E28B948001884FA /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CCB2E28B948001884FA /* PurchaseManager.swift */; };
+		07A049992E2F7A5F00366E77 /* IdeaCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049982E2F7A5F00366E77 /* IdeaCenterView.swift */; };
 		07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */; };
 		07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0032D9DF79100000BF2 /* DrinkItem.swift */; };
 		07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */; };
@@ -117,6 +118,7 @@
 		079F4CC52E28AAFD001884FA /* PurchasedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasedView.swift; sourceTree = "<group>"; };
 		079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOptionsView.swift; sourceTree = "<group>"; };
 		079F4CCB2E28B948001884FA /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		07A049982E2F7A5F00366E77 /* IdeaCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaCenterView.swift; sourceTree = "<group>"; };
 		07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkFillView.swift; sourceTree = "<group>"; };
 		07B3A0032D9DF79100000BF2 /* DrinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkItem.swift; sourceTree = "<group>"; };
 		07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkListVM.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				07645B8D2DFA93840020BF31 /* GoalView.swift */,
+				07A049982E2F7A5F00366E77 /* IdeaCenterView.swift */,
 				0781EDC12E2C93550026500F /* LightDarkModeView.swift */,
 				07680FF72E01302E0030108F /* ResetView.swift */,
 				07CED0322D96925C00498D17 /* SettingsListView.swift */,
@@ -513,6 +516,7 @@
 				07FBA8B62DAA53A000133F70 /* NavPath.swift in Sources */,
 				077ED5AB2E0A9B9E00CBCC33 /* CupViewOverride.swift in Sources */,
 				077A39FE2E1A9A6B00D086BA /* AlarmSetView.swift in Sources */,
+				07A049992E2F7A5F00366E77 /* IdeaCenterView.swift in Sources */,
 				079F4CB92E27DCFE001884FA /* PurchaseRow.swift in Sources */,
 				077A39FC2E1A97DA00D086BA /* NotificationView.swift in Sources */,
 				077A3A022E1BA69100D086BA /* NotificationVM.swift in Sources */,
