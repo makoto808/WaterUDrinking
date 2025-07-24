@@ -13,28 +13,27 @@ struct CloudSync: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
     @State private var isSyncing = false
+    
     @AppStorage("lastSyncDate") private var lastSyncDate: Double = 0
     
     var body: some View {
         ZStack {
-            // Sky background
             LinearGradient(colors: [.blue.opacity(0.5), .blue], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
-            // Cloud animation layer
             CloudMotionView()
             
-            VStack(spacing: 24) {
-                Spacer()
-                
+            VStack(spacing: 12) {
                 VStack(spacing: 8) {
                     HStack {
                         Text("iCloud Backup Status")
                             .fontProTitle()
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 15)
                         Spacer()
                     }
                     
-                    HStack {
+                    HStack(spacing: 15) {
                         if isSyncing {
                             ProgressView()
                         } else if lastSyncDate > 0 {
@@ -52,19 +51,30 @@ struct CloudSync: View {
                         }
                         Spacer()
                     }
+                    .padding(.horizontal, 15)
                     .padding(.bottom, 25)
                     
                     Button(action: {
                         Task { await triggerSync() }
                     }) {
-                        Text("Backup Bottles")
-                            .button1()
+                        if isSyncing {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                .padding()
+                        } else {
+                            Text("Backup Bottles")
+                                .font(.custom("ArialRoundedMTBold", size: 18))
+                                .fontWeight(.semibold)
+                                .padding()
+                        }
                     }
+                    .disabled(isSyncing)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
+                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
                 }
                 .padding(.horizontal)
-                
-                Spacer()
-                Spacer()
             }
         }
         .backChevronButton(using: drinkListVM)
@@ -77,6 +87,8 @@ struct CloudSync: View {
     
     func triggerSync() async {
         isSyncing = true
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
+        
         do {
             try modelContext.save()
             lastSyncDate = Date().timeIntervalSince1970
