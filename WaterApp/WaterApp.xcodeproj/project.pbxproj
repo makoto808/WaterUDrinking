@@ -42,6 +42,7 @@
 		079F4CCA2E28AB41001884FA /* PurchaseOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */; };
 		079F4CCC2E28B948001884FA /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CCB2E28B948001884FA /* PurchaseManager.swift */; };
 		07A049992E2F7A5F00366E77 /* IdeaCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049982E2F7A5F00366E77 /* IdeaCenterView.swift */; };
+		07A0499C2E3208E200366E77 /* CloudSyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0499B2E3208E200366E77 /* CloudSyncStatusView.swift */; };
 		07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */; };
 		07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0032D9DF79100000BF2 /* DrinkItem.swift */; };
 		07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */; };
@@ -119,6 +120,7 @@
 		079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOptionsView.swift; sourceTree = "<group>"; };
 		079F4CCB2E28B948001884FA /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		07A049982E2F7A5F00366E77 /* IdeaCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaCenterView.swift; sourceTree = "<group>"; };
+		07A0499B2E3208E200366E77 /* CloudSyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSyncStatusView.swift; sourceTree = "<group>"; };
 		07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkFillView.swift; sourceTree = "<group>"; };
 		07B3A0032D9DF79100000BF2 /* DrinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkItem.swift; sourceTree = "<group>"; };
 		07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkListVM.swift; sourceTree = "<group>"; };
@@ -233,6 +235,14 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
+		07A0499A2E3208C200366E77 /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				07A0499B2E3208E200366E77 /* CloudSyncStatusView.swift */,
+			);
+			path = CloudKit;
+			sourceTree = "<group>";
+		};
 		07CED0252D94C32700498D17 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +352,7 @@
 		07F3C7482D8EEE1700427A9A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				07A0499A2E3208C200366E77 /* CloudKit */,
 				077A39FA2E1A97C800D086BA /* Notification */,
 				07CED0252D94C32700498D17 /* Settings */,
 				072787292D94C15C00D56B96 /* Cup */,
@@ -525,6 +536,7 @@
 				07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */,
 				077ED5C32E127B9400CBCC33 /* CalendarDrinkRow.swift in Sources */,
 				072787282D94C14700D56B96 /* CalendarView.swift in Sources */,
+				07A0499C2E3208E200366E77 /* CloudSyncStatusView.swift in Sources */,
 				0781EDC22E2C93550026500F /* LightDarkModeView.swift in Sources */,
 				07F1271C2E1F3C2E00DFDAB1 /* PurchaseView.swift in Sources */,
 				0781EDC42E2CADD10026500F /* PremiumButtonToggle.swift in Sources */,
