@@ -10,10 +10,11 @@ import SwiftUI
 
 @main
 struct WaterAppApp: App {
-    @AppStorage("selectedAppearance") private var selectedAppearance: String = AppColorScheme.system.rawValue
+    @StateObject private var purchaseManager = PurchaseManager.shared
     
     @State private var notificationVM: NotificationVM
-    @StateObject private var purchaseManager = PurchaseManager.shared
+    
+    @AppStorage("selectedAppearance") private var selectedAppearance: String = AppColorScheme.system.rawValue
     
     let modelContainer: ModelContainer
     

@@ -11,6 +11,7 @@ import ConfettiSwiftUI
 
 struct PurchaseView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
+    
     @State private var purchaseViewVM = PurchaseViewVM()
     @State private var confettiCounter = 0
     
@@ -26,9 +27,8 @@ struct PurchaseView: View {
                     // Show PurchasedView if user owns lifetime or subscription
                     if purchaseViewVM.ownsLifetimeUnlock || purchaseViewVM.currentSubscription != nil {
                         PurchasedView(
-                            ownsLifetimeUnlock: purchaseViewVM.ownsLifetimeUnlock,
-                            currentSubscription: purchaseViewVM.currentSubscription,
-                            confettiCounter: $confettiCounter
+                            confettiCounter: $confettiCounter, ownsLifetimeUnlock: purchaseViewVM.ownsLifetimeUnlock,
+                            currentSubscription: purchaseViewVM.currentSubscription
                         )
                         
                         // Show lifetime unlock purchase option here

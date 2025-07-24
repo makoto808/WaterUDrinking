@@ -11,6 +11,7 @@ struct TitleView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
     private let dayOfWeek = Calendar.current.component(.weekday, from: Date())
+    
     var totalOzGoal: Double = 120.0
     
     var body: some View {

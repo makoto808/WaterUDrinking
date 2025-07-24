@@ -11,12 +11,12 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(NotificationVM.self) private var notificationVM
-
-    @State private var drinkListVM = DrinkListVM()
-    @State private var calendarHomeVM = CalendarHomeVM()
     
     @EnvironmentObject var purchaseManager: PurchaseManager
 
+    @State private var calendarHomeVM = CalendarHomeVM()
+    @State private var drinkListVM = DrinkListVM()
+    
     var body: some View {
         NavigationStack(path: $drinkListVM.navPath) {
             HomeView()
@@ -25,20 +25,22 @@ struct ContentView: View {
                     case .calendar:
                         CalendarHomeView()
                             .environment(calendarHomeVM)
-                    case .settings:
-                        SettingsListView()
-                    case .drinkFillView(let drink):
-                        DrinkFillView(item: drink)
                     case .dailyWaterGoal:
                         GoalView()
-                    case .resetView:
-                        ResetView()
-                    case .purchaseView:
-                        PurchaseView()
-                    case .notificationView:
-                        NotificationView()
+                    case .drinkFillView(let drink):
+                        DrinkFillView(item: drink)
+                    case .ideaCenterView:
+                        IdeaCenterView()
                     case .lightDarkModeView:
                         LightDarkModeView()
+                    case .notificationView:
+                        NotificationView()
+                    case .purchaseView:
+                        PurchaseView()
+                    case .resetView:
+                        ResetView()
+                    case .settings:
+                        SettingsListView()
                     default:
                         EmptyView()
                     }
@@ -46,7 +48,8 @@ struct ContentView: View {
         }
         .environment(drinkListVM)
         .onAppear {
-            drinkListVM.loadFromCache(modelContext)
+            drinkListVM.modelContext = modelContext
+            drinkListVM.refreshTodayItems(modelContext: modelContext)
             drinkListVM.loadUserGoal(context: modelContext)
         }
         .onChange(of: purchaseManager.hasProAccess) { newValue, _ in

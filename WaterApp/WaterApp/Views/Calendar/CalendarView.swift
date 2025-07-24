@@ -10,8 +10,9 @@ import SwiftUI
 
 struct CalendarView: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(DrinkListVM.self) private var drinkListVM
+    
     @Environment(CalendarHomeVM.self) private var calendarVM
+    @Environment(DrinkListVM.self) private var drinkListVM
     
     @EnvironmentObject var purchaseManager: PurchaseManager
 

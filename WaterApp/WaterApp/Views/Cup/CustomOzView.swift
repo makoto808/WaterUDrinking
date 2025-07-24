@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CustomOzView: View {
-    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) private var modelContext
     @Environment(DrinkListVM.self) private var drinkListVM
     
     @EnvironmentObject var purchaseManager: PurchaseManager

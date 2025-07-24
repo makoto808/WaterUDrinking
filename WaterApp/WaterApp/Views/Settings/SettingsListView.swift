@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+//TODO: - Add Idea Center under Help & Support, Change Language
+
 struct SettingsListView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
@@ -22,7 +24,7 @@ struct SettingsListView: View {
                     
                     SettingsNavRow(title: " Give Us A Review") {
                         UIApplication.shared.open(appStoreReviewURL)
-                        }
+                    }
                 }
                 .textCase(nil)
                 
@@ -45,27 +47,18 @@ struct SettingsListView: View {
                 }
                 .textCase(nil)
                 
-//                Section(header: Text("Notifications").fontSmallTitle()) {
-//                    SettingsNavRow(title: " Push Notifications") {
-//                        
-//                    }
-//                    
-//                    SettingsNavRow(title: " Set A Reminder") {
-//                        drinkListVM.navPath.append(.notificationView)
-//                    }
-//                }
-//                .textCase(nil)
-                
-//                Section(header: Text("Customer Support").fontSmallTitle()) {
-//                    SettingsNavRow(title: " Give Us A Review") {
-//                        UIApplication.shared.open(appStoreReviewURL)
-//                        }
-
-//                    SettingsNavRow(title: " Help & Support") {
-//                        
-//                    }
-//                }
-//                .textCase(nil)
+                Section(header: Text("Help & Support").fontSmallTitle()) {
+                    SettingsNavRow(title: " Need Help?") {
+                        if let url = URL(string: "https://makoto808.github.io/waterudrinking-support/") {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                    
+                    SettingsNavRow(title: " Idea Center") {
+                        drinkListVM.navPath.append(.ideaCenterView)
+                    }
+                }
+                .textCase(nil)
                 
                 Section(header: Text("Legal").fontSmallTitle()) {
                     SettingsNavRow(title: " Privacy Notice") {

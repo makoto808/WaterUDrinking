@@ -10,7 +10,9 @@ import SwiftData
 import SwiftUI
 
 @Observable final class DrinkListVM {
+    var modelContext: ModelContext!
     var navPath: [NavPath] = []
+    var todayItems: [DrinkItem] = []
     var selectedItemIndex: Int?
     var selectedCalendarDate: Date? = nil
     var settingsDetent = PresentationDetent.medium
@@ -204,4 +206,47 @@ import SwiftUI
         return try modelContext.fetch(fetchDescriptor)
     }
 
+    var totalOuncesToday: Double {
+        let today = Calendar.current.startOfDay(for: Date())
+        let endOfToday = Calendar.current.date(byAdding: .day, value: 1, to: today)!
+
+        let predicate = #Predicate<CachedDrinkItem> { $0.date >= today && $0.date < endOfToday }
+        let fetchDescriptor = FetchDescriptor<CachedDrinkItem>(predicate: predicate)
+
+        do {
+            let cached = try modelContext.fetch(fetchDescriptor)
+            return cached.reduce(0.0) { $0 + $1.volume }
+        } catch {
+            print("Error fetching today's drinks: \(error)")
+            return 0.0
+        }
+    }
+    
+    func refreshTodayItems(modelContext: ModelContext) {
+        do {
+            let cached = try fetchTodaysCachedDrinks(modelContext)
+            let cachedDrinks = cached.map { DrinkItem($0) }
+            let updatedItems = items.map { originalItem -> DrinkItem in
+                let volumeFromCache = cachedDrinks
+                    .filter { $0.name == originalItem.name }
+                    .reduce(0.0) { $0 + $1.volume }
+                return DrinkItem(
+                    name: originalItem.name,
+                    img: originalItem.img,
+                    volume: volumeFromCache
+                )
+            }
+            todayItems = updatedItems
+            // update totals based on todayItems:
+            totalOz = todayItems.reduce(0) { $0 + $1.volume }
+            percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
+        } catch {
+            print("Failed to refresh today's drinks: \(error)")
+            todayItems = items.map { item in
+                DrinkItem(name: item.name, img: item.img, volume: 0.0)
+            }
+            totalOz = 0
+            percentTotal = 0
+        }
+    }
 }

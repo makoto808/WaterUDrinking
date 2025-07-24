@@ -9,8 +9,9 @@ import SwiftData
 import SwiftUI
 
 struct CalendarListUpdate: View {
-    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
+    
     @Environment(CalendarHomeVM.self) private var calendarVM
     @Environment(DrinkListVM.self) private var drinkListVM
     

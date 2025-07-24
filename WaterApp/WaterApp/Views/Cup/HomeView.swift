@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(\.modelContext) private var modelContext
+    
     @Environment(DrinkListVM.self) private var drinkListVM
     
     @EnvironmentObject var purchaseManager: PurchaseManager
@@ -58,6 +59,10 @@ struct HomeView: View {
                         .padding(.top, 6)
                 }
             }
+        }
+        .onAppear {
+            drinkListVM.modelContext = modelContext
+            drinkListVM.refreshTodayItems(modelContext: modelContext)
         }
         .navigationBarBackButtonHidden(true)
     }

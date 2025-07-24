@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct PremiumButtonToggle<Label: View>: View {
-    @Environment(DrinkListVM.self) private var drinkListVM
     @Environment(\.dismiss) private var dismiss
-
+    
+    @Environment(DrinkListVM.self) private var drinkListVM
+    
     @EnvironmentObject var purchaseManager: PurchaseManager
 
     let action: () -> Void
     let label: Label?
     let title: String?
 
-    // New parameter to control whether .button1() style is applied
     var useButton1Style: Bool = true
 
-    // Init for title-only usage
+    // NOTE: Init for title-only usage
     init(
         action: @escaping () -> Void,
         title: String,
@@ -32,7 +32,7 @@ struct PremiumButtonToggle<Label: View>: View {
         self.useButton1Style = useButton1Style
     }
 
-    // Init for custom label usage
+    // NOTE: Init for custom label usage
     init(
         action: @escaping () -> Void,
         useButton1Style: Bool = true,
@@ -73,7 +73,7 @@ struct PremiumButtonToggle<Label: View>: View {
     }
 }
 
-// Helper View extension for conditionally applying modifiers
+// NOTE: Helper View extension for conditionally applying modifiers
 extension View {
     @ViewBuilder
     func applyIf<T: View>(_ condition: Bool, transform: (Self) -> T) -> some View {

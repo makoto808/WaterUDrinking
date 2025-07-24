@@ -46,7 +46,6 @@ struct LightDarkModeView: View {
                 Spacer()
             }
             .padding(.top, 30)
-            .navigationBarBackButtonHidden(true)
             .backChevronButton(using: drinkListVM)
             .toolbar {
                 ToolbarItem(placement: .principal) {
