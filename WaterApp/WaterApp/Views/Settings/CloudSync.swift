@@ -13,26 +13,16 @@ struct CloudSync: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     
     @State private var isSyncing = false
-    @State private var waveOffset = Angle(degrees: 0)
-    
     @AppStorage("lastSyncDate") private var lastSyncDate: Double = 0
     
     var body: some View {
         ZStack {
-            Color("AppBackgroundColor").ignoresSafeArea()
+            // Sky background
+            LinearGradient(colors: [.blue.opacity(0.5), .blue], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
             
-            GeometryReader { geo in
-                WaveMotion(offset: waveOffset, percent: 3.9 / 8.0)
-                    .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
-                    .frame(width: geo.size.width + 100)
-                    .offset(x: -50)
-                    .ignoresSafeArea()
-                    .onAppear {
-                        withAnimation(.linear(duration: 3.5).repeatForever(autoreverses: false)) {
-                            waveOffset = Angle(degrees: 360)
-                        }
-                    }
-            }
+            // Cloud animation layer
+            CloudMotionView()
             
             VStack(spacing: 24) {
                 Spacer()
