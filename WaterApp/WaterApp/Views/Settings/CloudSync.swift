@@ -37,7 +37,6 @@ struct CloudSync: View {
             VStack(spacing: 24) {
                 Spacer()
                 
-                // ✅ iCloud Sync Status Indicator
                 VStack(spacing: 8) {
                     HStack {
                         Text("iCloud Backup Status")
@@ -49,46 +48,30 @@ struct CloudSync: View {
                         if isSyncing {
                             ProgressView()
                         } else if lastSyncDate > 0 {
-                            Image(systemName: "checkmark.circle.fill")
+                            Image(systemName: "checkmark.icloud.fill")
                                 .foregroundColor(.green)
                             Text("Last synced: \(formattedDate)")
-                                .font(.caption)
+                                .fontSmallTitle2()
                                 .foregroundColor(.secondary)
                         } else {
-                            Image(systemName: "exclamationmark.triangle")
-                                .foregroundColor(.orange)
+                            Image(systemName: "xmark.icloud.fill")
+                                .foregroundColor(.red)
                             Text("Never synced")
-                                .font(.caption)
+                                .fontSmallTitle2()
                                 .foregroundColor(.secondary)
                         }
                         Spacer()
                     }
+                    .padding(.bottom, 25)
                     
                     Button(action: {
                         Task { await triggerSync() }
                     }) {
-                        Text("Force Sync Now")
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background(Color.blue.opacity(0.2))
-                            .cornerRadius(10)
+                        Text("Backup Bottles")
+                            .button1()
                     }
                 }
                 .padding(.horizontal)
-                
-                Spacer()
-                
-                // 💌 Feedback Section
-                Text("Tap Here to Email Us Your Ideas!")
-                    .fontProTitle()
-                    .padding(.bottom, 20)
-                
-                Button(action: {
-                    // Add email action if desired
-                }) {
-                    Text("💌")
-                        .font(.title)
-                }
                 
                 Spacer()
                 Spacer()
