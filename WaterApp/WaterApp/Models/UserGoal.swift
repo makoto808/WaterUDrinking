@@ -10,10 +10,10 @@ import SwiftData
 
 @Model
 class UserGoal {
-    @Attribute(.unique) var id: String
-    var goal: Double
-    
-    init(goal: Double, id: String = "uniqueUserGoal") {
+    var id: String = "uniqueUserGoal"
+    var goal: Double = 0.0
+
+    init(goal: Double = 0.0, id: String = "uniqueUserGoal") {
         self.goal = goal
         self.id = id
     }

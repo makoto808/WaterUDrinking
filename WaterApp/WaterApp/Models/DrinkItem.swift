@@ -31,15 +31,16 @@ struct DrinkItem: Identifiable, Hashable {
 }
 
 // NOTE: Used to cache the drink data
-@Model class CachedDrinkItem: Identifiable, Hashable {
-    var id: String
-    var date: Date
-    var name: String
-    var img: String
-    var volume: Double
-    var arrayOrderValue: Int
+@Model
+class CachedDrinkItem: Identifiable, Hashable {
+    var id: String = UUID().uuidString
+    var date: Date = Date()
+    var name: String = ""
+    var img: String = ""
+    var volume: Double = 0.0
+    var arrayOrderValue: Int = 0
 
-    init(date: Date, name: String, img: String, volume: Double, arrayOrderValue: Int) {
+    init(date: Date = Date(), name: String = "", img: String = "", volume: Double = 0.0, arrayOrderValue: Int = 0) {
         self.id = UUID().uuidString
         self.date = date
         self.name = name
@@ -50,10 +51,18 @@ struct DrinkItem: Identifiable, Hashable {
 
     init(_ item: DrinkItem) {
         self.id = item.id
-        self.date = .now
+        self.date = Date()
         self.name = item.name
         self.img = item.img
         self.volume = item.volume
         self.arrayOrderValue = 0
+    }
+
+    static func == (lhs: CachedDrinkItem, rhs: CachedDrinkItem) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }

@@ -57,6 +57,10 @@ struct SettingsListView: View {
                     SettingsNavRow(title: " Idea Center") {
                         drinkListVM.navPath.append(.ideaCenterView)
                     }
+                    
+                    SettingsNavRow(title: " Cloud Sync") {
+                        drinkListVM.navPath.append(.cloudSync)
+                    }
                 }
                 .textCase(nil)
                 

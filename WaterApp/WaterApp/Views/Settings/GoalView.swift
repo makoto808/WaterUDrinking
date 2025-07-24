@@ -9,17 +9,20 @@ import SwiftUI
 
 struct GoalView: View {
     @Environment(\.modelContext) private var modelContext
-    
-    @Environment(DrinkListVM.self) private var drinkListVM
-    
+    @Environment(\.dismiss) private var dismiss
+
     @State private var dailyWaterGoal: String = ""
     @State private var waveOffset = Angle(degrees: 0)
     
     @FocusState private var keyboardFocused: Bool
-    
+
+    var isOnboarding: Bool = false
+    let drinkListVM: DrinkListVM
+
     var body: some View {
         ZStack {
             Color("AppBackgroundColor").ignoresSafeArea()
+            
             GeometryReader { geo in
                 WaveMotion(offset: waveOffset, percent: 3.9 / 8.0)
                     .fill(Color(red: 0, green: 0.5, blue: 0.75, opacity: 0.5))
@@ -32,7 +35,7 @@ struct GoalView: View {
                         }
                     }
             }
-            
+
             VStack {
                 Spacer()
                 
@@ -56,12 +59,13 @@ struct GoalView: View {
                 Spacer()
                 Spacer()
                 Spacer()
-                
+
                 if !dailyWaterGoal.isEmpty {
                     Button("Right On!") {
                         keyboardFocused = false
                         if let goal = Double(dailyWaterGoal) {
                             drinkListVM.setGoalAndDismiss(goal, context: modelContext)
+                            dismiss()
                         }
                     }
                     .button2()
@@ -70,11 +74,24 @@ struct GoalView: View {
             .frame(maxWidth: .infinity)
             .padding()
         }
-        .backChevronButton(using: drinkListVM)
+        // Only show back button if not onboarding
+        .modifier(ConditionalBackChevron(showBackButton: !isOnboarding, drinkListVM: drinkListVM))
+    }
+}
+
+private struct ConditionalBackChevron: ViewModifier {
+    let showBackButton: Bool
+    let drinkListVM: DrinkListVM
+
+    func body(content: Content) -> some View {
+        if showBackButton {
+            content.backChevronButton(using: drinkListVM)
+        } else {
+            content
+        }
     }
 }
 
 #Preview {
-    GoalView()
-        .environment(DrinkListVM())
+    GoalView(isOnboarding: true, drinkListVM: DrinkListVM())
 }

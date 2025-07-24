@@ -16,7 +16,10 @@ struct ContentView: View {
 
     @State private var calendarHomeVM = CalendarHomeVM()
     @State private var drinkListVM = DrinkListVM()
+    @State private var showGoalSetup: Bool = false
     
+    @AppStorage("hasSeenGoalSetup") private var hasSeenGoalSetup: Bool = false
+
     var body: some View {
         NavigationStack(path: $drinkListVM.navPath) {
             HomeView()
@@ -25,8 +28,10 @@ struct ContentView: View {
                     case .calendar:
                         CalendarHomeView()
                             .environment(calendarHomeVM)
+                    case .cloudSync:
+                        CloudSync()
                     case .dailyWaterGoal:
-                        GoalView()
+                        GoalView(drinkListVM: drinkListVM)
                     case .drinkFillView(let drink):
                         DrinkFillView(item: drink)
                     case .ideaCenterView:
@@ -51,9 +56,17 @@ struct ContentView: View {
             drinkListVM.modelContext = modelContext
             drinkListVM.refreshTodayItems(modelContext: modelContext)
             drinkListVM.loadUserGoal(context: modelContext)
+
+            if !hasSeenGoalSetup {
+                showGoalSetup = true
+                hasSeenGoalSetup = true
+            }
         }
         .onChange(of: purchaseManager.hasProAccess) { newValue, _ in
             print("💡 hasProAccess changed to \(newValue)")
+        }
+        .fullScreenCover(isPresented: $showGoalSetup) {
+            GoalView(isOnboarding: true, drinkListVM: drinkListVM)
         }
     }
 }
