@@ -9,6 +9,7 @@ import Foundation
 
 enum NavPath: Hashable {
     case calendar
+    case cloudSync
     case dailyWaterGoal
     case drinkFillView(DrinkItem)
     case ideaCenterView

@@ -25,6 +25,8 @@ struct ContentView: View {
                     case .calendar:
                         CalendarHomeView()
                             .environment(calendarHomeVM)
+                    case .cloudSync:
+                        CloudSync()
                     case .dailyWaterGoal:
                         GoalView()
                     case .drinkFillView(let drink):

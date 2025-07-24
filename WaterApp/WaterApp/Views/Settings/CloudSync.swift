@@ -116,6 +116,10 @@ struct CloudSync: View {
 
 #Preview {
     CloudSync()
-        .modelContainer(for: [UserGoal.self, CachedDrinkItem.self, NotificationModel.self])
+        .modelContainer(
+            try! ModelContainer(
+                for: Schema([CachedDrinkItem.self, UserGoal.self, NotificationModel.self])
+            )
+        )
         .environment(DrinkListVM())
 }

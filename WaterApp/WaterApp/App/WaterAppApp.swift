@@ -15,7 +15,7 @@ struct WaterAppApp: App {
     @State private var notificationVM: NotificationVM
 
     @AppStorage("selectedAppearance") private var selectedAppearance: String = AppColorScheme.system.rawValue
-    @AppStorage("lastSyncDate") private var lastSyncDate: Double = 0 // Used for sync status display
+    @AppStorage("lastSyncDate") private var lastSyncDate: Double = 0
 
     let modelContainer: ModelContainer
 
@@ -49,3 +49,4 @@ struct WaterAppApp: App {
         }
     }
 }
+

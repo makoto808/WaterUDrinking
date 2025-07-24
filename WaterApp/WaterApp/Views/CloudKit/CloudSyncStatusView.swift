@@ -5,11 +5,12 @@
 //  Created by Gregg Abe on 7/23/25.
 //
 
-import CloudKit
 import SwiftData
 import SwiftUI
 
 struct CloudSyncStatusView: View {
+    @Environment(\.modelContext) private var modelContext
+
     @State private var lastSync: Date? = nil
     @State private var isSyncing = false
     @State private var error: Error?
@@ -48,25 +49,18 @@ struct CloudSyncStatusView: View {
         isSyncing = true
         error = nil
 
-        Task {
-            do {
-                try await ModelContext.current?.container?.triggerCloudSync()
-                lastSync = Date()
-            } catch {
-                self.error = error
-            }
-            isSyncing = false
+        do {
+            try modelContext.save()
+            lastSync = Date()
+        } catch {
+            self.error = error
         }
+        
+        isSyncing = false
     }
 
     func fetchSyncStatus() {
-        // There's no official API for last sync time in SwiftData yet,
-        // so we simulate by storing a "last sync" manually or assuming success on button press.
-        // You can persist `lastSync` with @AppStorage or other persistent flag.
+        // You can load last sync from a persisted source if you have one,
+        // or leave this empty for now.
     }
-}
-
-
-#Preview {
-    CloudSyncStatusView()
 }
