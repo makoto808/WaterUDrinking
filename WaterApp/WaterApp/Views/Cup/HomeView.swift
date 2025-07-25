@@ -73,11 +73,12 @@ struct HomeView: View {
 //    mockVM.totalOz = 60
 //    mockVM.totalOzGoal = 100
 //
-//    let mockPurchaseManager = PurchaseManager.shared // or mock if needed
+//    let mockPurchaseManager = PurchaseManager.shared // or create a mock instance if you have one
 //
 //    return NavigationStack {
 //        HomeView()
 //            .environment(mockVM)
+//            .environmentObject(mockPurchaseManager)
 //    }
 //    .modelContainer(for: [UserGoal.self])
 //}
