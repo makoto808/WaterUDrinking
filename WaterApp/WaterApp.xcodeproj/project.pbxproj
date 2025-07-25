@@ -45,6 +45,7 @@
 		07A0499C2E3208E200366E77 /* CloudSyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0499B2E3208E200366E77 /* CloudSyncStatusView.swift */; };
 		07A0499F2E320B3B00366E77 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0499E2E320B3B00366E77 /* CloudSync.swift */; };
 		07A049A12E32183800366E77 /* CloudMotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049A02E32183800366E77 /* CloudMotionView.swift */; };
+		07A049A32E3311EE00366E77 /* DrinkMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049A22E3311EE00366E77 /* DrinkMenuView.swift */; };
 		07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */; };
 		07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0032D9DF79100000BF2 /* DrinkItem.swift */; };
 		07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */; };
@@ -126,6 +127,7 @@
 		07A0499D2E32097F00366E77 /* WaterApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WaterApp.entitlements; sourceTree = "<group>"; };
 		07A0499E2E320B3B00366E77 /* CloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSync.swift; sourceTree = "<group>"; };
 		07A049A02E32183800366E77 /* CloudMotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudMotionView.swift; sourceTree = "<group>"; };
+		07A049A22E3311EE00366E77 /* DrinkMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkMenuView.swift; sourceTree = "<group>"; };
 		07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkFillView.swift; sourceTree = "<group>"; };
 		07B3A0032D9DF79100000BF2 /* DrinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkItem.swift; sourceTree = "<group>"; };
 		07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkListVM.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				07A0499E2E320B3B00366E77 /* CloudSync.swift */,
+				07A049A22E3311EE00366E77 /* DrinkMenuView.swift */,
 				07645B8D2DFA93840020BF31 /* GoalView.swift */,
 				07A049982E2F7A5F00366E77 /* IdeaCenterView.swift */,
 				0781EDC12E2C93550026500F /* LightDarkModeView.swift */,
@@ -555,6 +558,7 @@
 				079F4CBD2E27DD29001884FA /* PurchaseOptionsSection.swift in Sources */,
 				07A049A12E32183800366E77 /* CloudMotionView.swift in Sources */,
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
+				07A049A32E3311EE00366E77 /* DrinkMenuView.swift in Sources */,
 				077ED5C52E1372C700CBCC33 /* CustomOzButton.swift in Sources */,
 				077ED5C72E1375FB00CBCC33 /* CustomDrinkButtonRow.swift in Sources */,
 				077ED5B92E0D4C5F00CBCC33 /* CalendarListUpdate.swift in Sources */,

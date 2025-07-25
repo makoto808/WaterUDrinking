@@ -29,6 +29,10 @@ struct SettingsListView: View {
                 .textCase(nil)
                 
                 Section(header: Text("App Settings").fontSmallTitle()) {
+                    SettingsNavRow(title: " Edit My Drink List") {
+                        drinkListVM.navPath.append(.drinkMenuView)
+                    }
+                    
                     SettingsNavRow(title: " Set A Reminder") {
                         drinkListVM.navPath.append(.notificationView)
                     }
@@ -48,18 +52,18 @@ struct SettingsListView: View {
                 .textCase(nil)
                 
                 Section(header: Text("Help & Support").fontSmallTitle()) {
-                    SettingsNavRow(title: " Need Help?") {
-                        if let url = URL(string: "https://makoto808.github.io/waterudrinking-support/") {
-                            UIApplication.shared.open(url)
-                        }
+                    SettingsNavRow(title: " Cloud Sync") {
+                        drinkListVM.navPath.append(.cloudSync)
                     }
                     
                     SettingsNavRow(title: " Idea Center") {
                         drinkListVM.navPath.append(.ideaCenterView)
                     }
                     
-                    SettingsNavRow(title: " Cloud Sync") {
-                        drinkListVM.navPath.append(.cloudSync)
+                    SettingsNavRow(title: " Need Help?") {
+                        if let url = URL(string: "https://makoto808.github.io/waterudrinking-support/") {
+                            UIApplication.shared.open(url)
+                        }
                     }
                 }
                 .textCase(nil)

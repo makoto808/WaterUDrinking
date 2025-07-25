@@ -34,6 +34,8 @@ struct ContentView: View {
                         GoalView(drinkListVM: drinkListVM)
                     case .drinkFillView(let drink):
                         DrinkFillView(item: drink)
+                    case .drinkMenuView:
+                        DrinkMenuView()
                     case .ideaCenterView:
                         IdeaCenterView()
                     case .lightDarkModeView:
