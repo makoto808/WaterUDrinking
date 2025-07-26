@@ -50,6 +50,8 @@
 		07A049A72E337CF100366E77 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049A62E337CF100366E77 /* GradientBackgroundView.swift */; };
 		07A049A92E337D9F00366E77 /* StarryOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049A82E337D9F00366E77 /* StarryOverlayView.swift */; };
 		07A049AF2E34FB5500366E77 /* UserArrangedDrinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049AE2E34FB5500366E77 /* UserArrangedDrinkItem.swift */; };
+		07A049B12E34FC9700366E77 /* ManageDrinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049B02E34FC9700366E77 /* ManageDrinksView.swift */; };
+		07A049B32E34FCB500366E77 /* AddDrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049B22E34FCB500366E77 /* AddDrinkView.swift */; };
 		07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */; };
 		07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0032D9DF79100000BF2 /* DrinkItem.swift */; };
 		07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */; };
@@ -136,6 +138,8 @@
 		07A049A62E337CF100366E77 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		07A049A82E337D9F00366E77 /* StarryOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarryOverlayView.swift; sourceTree = "<group>"; };
 		07A049AE2E34FB5500366E77 /* UserArrangedDrinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserArrangedDrinkItem.swift; sourceTree = "<group>"; };
+		07A049B02E34FC9700366E77 /* ManageDrinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageDrinksView.swift; sourceTree = "<group>"; };
+		07A049B22E34FCB500366E77 /* AddDrinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDrinkView.swift; sourceTree = "<group>"; };
 		07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkFillView.swift; sourceTree = "<group>"; };
 		07B3A0032D9DF79100000BF2 /* DrinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkItem.swift; sourceTree = "<group>"; };
 		07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkListVM.swift; sourceTree = "<group>"; };
@@ -237,8 +241,10 @@
 				07381C232D998381003216FA /* CustomOzView.swift */,
 				07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */,
 				07F3C7552D90CA1700427A9A /* DrinkSelectionView.swift */,
+				07A049B02E34FC9700366E77 /* ManageDrinksView.swift */,
 				073BC1742DAF2FB000863F93 /* TitleView.swift */,
 				07F3C7512D8EF69500427A9A /* WaveMotion.swift */,
+				07A049B22E34FCB500366E77 /* AddDrinkView.swift */,
 			);
 			path = Cup;
 			sourceTree = "<group>";
@@ -551,6 +557,7 @@
 				077ED5AB2E0A9B9E00CBCC33 /* CupViewOverride.swift in Sources */,
 				077A39FE2E1A9A6B00D086BA /* AlarmSetView.swift in Sources */,
 				07A049992E2F7A5F00366E77 /* IdeaCenterView.swift in Sources */,
+				07A049B32E34FCB500366E77 /* AddDrinkView.swift in Sources */,
 				079F4CB92E27DCFE001884FA /* PurchaseRow.swift in Sources */,
 				077A39FC2E1A97DA00D086BA /* NotificationView.swift in Sources */,
 				077A3A022E1BA69100D086BA /* NotificationVM.swift in Sources */,
@@ -572,6 +579,7 @@
 				07A049A12E32183800366E77 /* CloudMotionView.swift in Sources */,
 				07A049AF2E34FB5500366E77 /* UserArrangedDrinkItem.swift in Sources */,
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
+				07A049B12E34FC9700366E77 /* ManageDrinksView.swift in Sources */,
 				07A049A32E3311EE00366E77 /* DrinkMenuView.swift in Sources */,
 				077ED5C52E1372C700CBCC33 /* CustomOzButton.swift in Sources */,
 				077ED5C72E1375FB00CBCC33 /* CustomDrinkButtonRow.swift in Sources */,

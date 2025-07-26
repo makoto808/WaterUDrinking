@@ -11,11 +11,12 @@ import SwiftData
 @Model
 class UserArrangedDrinkItem: Identifiable, Hashable {
     var id: String = UUID().uuidString
-    var name: String
-    var img: String
-    var arrayOrderValue: Int
+    
+    var name: String = ""
+    var img: String = ""
+    var arrayOrderValue: Int = 0 
 
-    init(name: String, img: String, arrayOrderValue: Int) {
+    init(name: String = "", img: String = "", arrayOrderValue: Int = 0) {
         self.name = name
         self.img = img
         self.arrayOrderValue = arrayOrderValue
