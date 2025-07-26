@@ -9,6 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct CloudSyncStatusView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.modelContext) private var modelContext
 
     @State private var lastSync: Date? = nil
@@ -16,36 +17,48 @@ struct CloudSyncStatusView: View {
     @State private var error: Error?
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text("iCloud Backup")
                 Spacer()
-                if isSyncing {
-                    ProgressView()
-                } else if let lastSync = lastSync {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.green)
-                    Text("Last sync: \(lastSync.formatted(.dateTime.hour().minute()))")
-                        .font(.caption)
-                } else {
-                    Image(systemName: "exclamationmark.triangle")
-                        .foregroundColor(.yellow)
-                    Text("Not yet synced")
-                        .font(.caption)
-                }
+                syncStatusView
             }
 
-            Button("Force Sync Now") {
-                triggerSync()
-            }
+            Button("Force Sync Now", action: triggerSync)
         }
         .padding()
-        .onAppear {
-            fetchSyncStatus()
+        .onAppear(perform: fetchSyncStatus)
+    }
+
+    @ViewBuilder
+    private var syncStatusView: some View {
+        if isSyncing {
+            ProgressView()
+        } else if let lastSync = lastSync {
+            Label {
+                Text("Last sync: \(lastSync.formatted(.dateTime.hour().minute()))")
+                    .font(.caption)
+            } icon: {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(checkmarkColor)
+            }
+        } else {
+            Label {
+                Text("Not yet synced")
+                    .font(.caption)
+            } icon: {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .foregroundColor(.yellow)
+            }
         }
     }
 
-    func triggerSync() {
+    private var checkmarkColor: Color {
+        colorScheme == .light
+            ? Color(red: 0.0, green: 0.25, blue: 0.0) : .green
+    }
+
+    private func triggerSync() {
         isSyncing = true
         error = nil
 
@@ -55,12 +68,11 @@ struct CloudSyncStatusView: View {
         } catch {
             self.error = error
         }
-        
+
         isSyncing = false
     }
 
-    func fetchSyncStatus() {
-        // You can load last sync from a persisted source if you have one,
-        // or leave this empty for now.
+    private func fetchSyncStatus() {
+        // Load persisted sync state if applicable
     }
 }

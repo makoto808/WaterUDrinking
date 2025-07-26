@@ -23,8 +23,8 @@ struct StarryOverlayView: View {
             }
         }
         .ignoresSafeArea()
-        .blendMode(.screen) // Makes stars blend nicely over the background
-        .allowsHitTesting(false) // So taps pass through
+        .blendMode(.screen)
+        .allowsHitTesting(false)
     }
 }
 
