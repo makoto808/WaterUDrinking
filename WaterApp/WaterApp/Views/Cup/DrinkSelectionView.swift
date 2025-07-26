@@ -32,6 +32,7 @@ struct DrinkSelectionView: View {
                             Text(drink.name)
                                 .fontSmallTitle2()
                         }
+                        .padding(.bottom, 40)
                     }
                     .scrollTransition { content, phase in
                         content
@@ -48,14 +49,13 @@ struct DrinkSelectionView: View {
         }
     }
 }
-//
-//#Preview {
-//    let purchaseManager = PurchaseManager()
-//    let drinkListVM = DrinkListVM()
-//
-//    DrinkSelectionView(purchaseManager: purchaseManager)
-//        .environment(drinkListVM)
-//}
+
+#Preview {
+    let drinkListVM = DrinkListVM()
+
+    DrinkSelectionView(isFromHome: true)
+        .environment(drinkListVM)
+}
 
 // TODO: Ability to reorder and add new drinks to DrinkSelectionView
 
