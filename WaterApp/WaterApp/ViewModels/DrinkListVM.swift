@@ -249,4 +249,51 @@ import SwiftUI
             percentTotal = 0
         }
     }
+    
+    
+    func loadUserDrinkItems(_ context: ModelContext) {
+        do {
+            let descriptor = FetchDescriptor<UserArrangedDrinkItem>(
+                sortBy: [SortDescriptor(\.arrayOrderValue)]
+            )
+            let userDrinks = try context.fetch(descriptor)
+
+            if userDrinks.isEmpty {
+                // First-time setup fallback to hardcoded
+                items = defaultDrinks()
+                saveDefaultDrinksToUserDrinks(context)
+            } else {
+                items = userDrinks.map { DrinkItem(name: $0.name, img: $0.img, volume: 0.0) }
+            }
+        } catch {
+            print("Failed to load UserDrinkItems: \(error)")
+        }
+    }
+
+    private func saveDefaultDrinksToUserDrinks(_ context: ModelContext) {
+        let defaultItems = defaultDrinks()
+        for (index, drink) in defaultItems.enumerated() {
+            let newUserDrink = UserArrangedDrinkItem(name: drink.name, img: drink.img, arrayOrderValue: index)
+            context.insert(newUserDrink)
+        }
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save default UserDrinkItems: \(error)")
+        }
+    }
+
+    private func defaultDrinks() -> [DrinkItem] {
+        [
+            DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
+            DrinkItem(name: "Tea", img: "tea", volume: 0.0),
+            DrinkItem(name: "Coffee", img: "coffee", volume: 0.0),
+            DrinkItem(name: "Soda", img: "soda", volume: 0.0),
+            DrinkItem(name: "Juice", img: "juice", volume: 0.0),
+            DrinkItem(name: "Milk", img: "milk", volume: 0.0),
+            DrinkItem(name: "Energy Drink", img: "energyDrink", volume: 0.0),
+            DrinkItem(name: "Beer", img: "beer", volume: 0.0)
+        ]
+    }
+
 }

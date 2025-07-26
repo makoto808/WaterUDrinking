@@ -21,7 +21,13 @@ struct WaterAppApp: App {
 
     init() {
         do {
-            let schema = Schema([CachedDrinkItem.self, UserGoal.self, NotificationModel.self])
+            let schema = Schema([
+                CachedDrinkItem.self,
+                UserGoal.self,
+                NotificationModel.self,
+                UserArrangedDrinkItem.self
+            ])
+
             let config = ModelConfiguration(
                 "WaterAppData",
                 schema: schema,

@@ -18,6 +18,8 @@ struct DrinkSelectionView: View {
         @Bindable var drinkListVM = drinkListVM
 
         VStack {
+            Spacer(minLength: 30)
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: -20) {
                     ForEach($drinkListVM.items) { $drink in
@@ -33,12 +35,27 @@ struct DrinkSelectionView: View {
                                 .fontSmallTitle2()
                         }
                     }
+
+                    VStack(spacing: 10) {
+                        Button {
+                            drinkListVM.navPath.append(.drinkMenuView)
+                        } label: {
+                            // TODO: Make plus image icon on photoshop
+                            Image(systemName: "plus.circle.fill")
+                                .drinkFillSelectionResize()
+                                .foregroundStyle(.blue)
+                        }
+
+                        Text("Add Drink")
+                            .fontSmallTitle2()
+                    }
                     .scrollTransition { content, phase in
                         content
                             .opacity(phase.isIdentity ? 1.0 : 0.0)
                             .offset(y: phase.isIdentity ? 0 : 50)
                     }
                 }
+                .padding(.bottom, 40)
             }
             .onAppear {
                 if isFromHome {
@@ -46,16 +63,16 @@ struct DrinkSelectionView: View {
                 }
             }
         }
+        .frame(height: 160)
     }
 }
-//
-//#Preview {
-//    let purchaseManager = PurchaseManager()
-//    let drinkListVM = DrinkListVM()
-//
-//    DrinkSelectionView(purchaseManager: purchaseManager)
-//        .environment(drinkListVM)
-//}
+
+#Preview {
+    let drinkListVM = DrinkListVM()
+
+    DrinkSelectionView(isFromHome: true)
+        .environment(drinkListVM)
+}
 
 // TODO: Ability to reorder and add new drinks to DrinkSelectionView
 
