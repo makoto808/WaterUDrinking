@@ -17,7 +17,7 @@ struct HomeView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Spacer(minLength: 30)
+            Spacer(minLength: 35)
             
             TitleView()
             
@@ -25,11 +25,11 @@ struct HomeView: View {
             
             CupView()
             
-            Spacer(minLength: 20)
+            Spacer(minLength: 10)
             
             DrinkSelectionView(isFromHome: true)
             
-            Spacer(minLength: 40)
+            Spacer(minLength: 10)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("AppBackgroundColor"))
@@ -68,17 +68,17 @@ struct HomeView: View {
     }
 }
 
-//#Preview {
-//    let mockVM = DrinkListVM()
-//    mockVM.totalOz = 60
-//    mockVM.totalOzGoal = 100
-//
-//    let mockPurchaseManager = PurchaseManager.shared // or create a mock instance if you have one
-//
-//    return NavigationStack {
-//        HomeView()
-//            .environment(mockVM)
-//            .environmentObject(mockPurchaseManager)
-//    }
-//    .modelContainer(for: [UserGoal.self])
-//}
+#Preview {
+    let mockVM = DrinkListVM()
+    mockVM.totalOz = 60
+    mockVM.totalOzGoal = 100
+
+    let mockPurchaseManager = PurchaseManager.shared
+
+    return NavigationStack {
+        HomeView()
+            .environment(mockVM)
+            .environmentObject(mockPurchaseManager)
+    }
+    .modelContainer(for: [UserGoal.self])
+}

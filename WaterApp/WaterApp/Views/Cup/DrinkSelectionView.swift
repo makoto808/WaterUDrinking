@@ -32,7 +32,7 @@ struct DrinkSelectionView: View {
                             Text(drink.name)
                                 .fontSmallTitle2()
                         }
-                        .padding(.bottom, 40)
+//                        .padding(.bottom, 40)
                     }
                     .scrollTransition { content, phase in
                         content
@@ -40,13 +40,17 @@ struct DrinkSelectionView: View {
                             .offset(y: phase.isIdentity ? 0 : 50)
                     }
                 }
+                .padding(.bottom, 40)
             }
             .onAppear {
                 if isFromHome {
                     drinkListVM.selectedCalendarDate = nil
                 }
             }
+            
+            Spacer()
         }
+        .frame(height: 160)
     }
 }
 
