@@ -18,7 +18,7 @@ struct WaterAppApp: App {
     @AppStorage("lastSyncDate") private var lastSyncDate: Double = 0
 
     let modelContainer: ModelContainer
-
+ 
     init() {
         do {
             let schema = Schema([CachedDrinkItem.self, UserGoal.self, NotificationModel.self])
