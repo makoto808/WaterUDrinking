@@ -18,8 +18,7 @@ struct CloudSync: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(colors: [.blue.opacity(0.5), .blue], startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
+            GradientBackgroundView()
             
             CloudMotionView()
             

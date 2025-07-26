@@ -29,6 +29,7 @@ struct DrinkFillView: View {
             
             Text("\(drinkListVM.value.formatted()) oz")
                 .fontTitle()
+                .padding(.bottom, 20)
             
             Image(item.img)
                 .drinkFillResize()
@@ -36,17 +37,18 @@ struct DrinkFillView: View {
                     CustomDrinkView()
                 }
             
-            Slider(value: $drinkListVM.value, in: 0...20, step: 0.1)
-                .padding(30)
-                .onChange(of: drinkListVM.value) { oldValue, newValue in
-                    let roundedValue = (newValue * 10).rounded() / 10.0
-                    if abs(roundedValue - lastHapticValue) >= 0.1 {
-                        feedbackGenerator.impactOccurred()
-                        lastHapticValue = roundedValue
-                    }
+            CapsuleSlider(value: $drinkListVM.value, range: 0...20, step: 0.1) { newValue in
+                let roundedValue = (newValue * 10).rounded() / 10.0
+                if abs(roundedValue - lastHapticValue) >= 0.1 {
+                    feedbackGenerator.impactOccurred()
+                    lastHapticValue = roundedValue
                 }
+            }
+            .padding(.top, 50)
+            .padding(.horizontal, 25)
             
             CustomDrinkButtonRow(drinkListVM: drinkListVM, item: item)
+                .padding(.horizontal, 15)
 
             Spacer()
         }
@@ -62,12 +64,12 @@ struct DrinkFillView: View {
     }
 }
 
-//#Preview {
-//    let mockItem = DrinkItem(name: "Water", img: "waterBottle", volume: 8.0)
-//    
-//    let mockVM = DrinkListVM()
-//    mockVM.items = [mockItem]
-//    
-//    return DrinkFillView(item: mockItem)
-//        .environment(mockVM)
-//}
+#Preview {
+    let mockItem = DrinkItem(name: "Water", img: "waterBottle", volume: 8.0)
+    
+    let mockVM = DrinkListVM()
+    mockVM.items = [mockItem]
+    
+    return DrinkFillView(item: mockItem)
+        .environment(mockVM)
+}

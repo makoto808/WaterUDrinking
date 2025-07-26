@@ -28,7 +28,8 @@ struct CloudMotionView: View {
                         baseOpacity: baseOpacity[i],
                         duration: speed,
                         initialX: initialX,
-                        cloudIndex: i
+                        cloudIndex: i,
+                        screenWidth: geo.size.width
                     )
                 }
             }
@@ -44,6 +45,7 @@ struct CloudView: View {
     let duration: Double
     let initialX: CGFloat
     let cloudIndex: Int
+    let screenWidth: CGFloat
 
     @State private var xPosition: CGFloat = 0
 
@@ -59,12 +61,13 @@ struct CloudView: View {
                 let startDelay = Double(cloudIndex) * 0.8 + Double.random(in: 0...0.5)
                 DispatchQueue.main.asyncAfter(deadline: .now() + startDelay) {
                     withAnimation(.linear(duration: duration).repeatForever(autoreverses: false)) {
-                        xPosition = -size
+                        xPosition = -screenWidth - size
                     }
                 }
             }
     }
 }
+
 
 #Preview {
     ZStack {

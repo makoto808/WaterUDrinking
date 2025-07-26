@@ -45,6 +45,10 @@
 		07A0499C2E3208E200366E77 /* CloudSyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0499B2E3208E200366E77 /* CloudSyncStatusView.swift */; };
 		07A0499F2E320B3B00366E77 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0499E2E320B3B00366E77 /* CloudSync.swift */; };
 		07A049A12E32183800366E77 /* CloudMotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049A02E32183800366E77 /* CloudMotionView.swift */; };
+		07A049A32E3311EE00366E77 /* DrinkMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049A22E3311EE00366E77 /* DrinkMenuView.swift */; };
+		07A049A52E3372F400366E77 /* CapsuleSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049A42E3372F400366E77 /* CapsuleSlider.swift */; };
+		07A049A72E337CF100366E77 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049A62E337CF100366E77 /* GradientBackgroundView.swift */; };
+		07A049A92E337D9F00366E77 /* StarryOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049A82E337D9F00366E77 /* StarryOverlayView.swift */; };
 		07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */; };
 		07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0032D9DF79100000BF2 /* DrinkItem.swift */; };
 		07B3A0062D9DF82E00000BF2 /* DrinkListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */; };
@@ -126,6 +130,10 @@
 		07A0499D2E32097F00366E77 /* WaterApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WaterApp.entitlements; sourceTree = "<group>"; };
 		07A0499E2E320B3B00366E77 /* CloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSync.swift; sourceTree = "<group>"; };
 		07A049A02E32183800366E77 /* CloudMotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudMotionView.swift; sourceTree = "<group>"; };
+		07A049A22E3311EE00366E77 /* DrinkMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkMenuView.swift; sourceTree = "<group>"; };
+		07A049A42E3372F400366E77 /* CapsuleSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleSlider.swift; sourceTree = "<group>"; };
+		07A049A62E337CF100366E77 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
+		07A049A82E337D9F00366E77 /* StarryOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarryOverlayView.swift; sourceTree = "<group>"; };
 		07A83A442D98F4AC007F9B11 /* DrinkFillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkFillView.swift; sourceTree = "<group>"; };
 		07B3A0032D9DF79100000BF2 /* DrinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkItem.swift; sourceTree = "<group>"; };
 		07B3A0052D9DF82E00000BF2 /* DrinkListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkListVM.swift; sourceTree = "<group>"; };
@@ -218,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				07F3C74B2D8EEF4600427A9A /* HomeView.swift */,
+				07A049A42E3372F400366E77 /* CapsuleSlider.swift */,
 				07F3C7532D8EF8DF00427A9A /* CupView.swift */,
 				077ED5C62E1375FB00CBCC33 /* CustomDrinkButtonRow.swift */,
 				07381C262D9B78E6003216FA /* CustomDrinkView.swift */,
@@ -245,6 +254,8 @@
 			children = (
 				07A0499B2E3208E200366E77 /* CloudSyncStatusView.swift */,
 				07A049A02E32183800366E77 /* CloudMotionView.swift */,
+				07A049A62E337CF100366E77 /* GradientBackgroundView.swift */,
+				07A049A82E337D9F00366E77 /* StarryOverlayView.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -253,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				07A0499E2E320B3B00366E77 /* CloudSync.swift */,
+				07A049A22E3311EE00366E77 /* DrinkMenuView.swift */,
 				07645B8D2DFA93840020BF31 /* GoalView.swift */,
 				07A049982E2F7A5F00366E77 /* IdeaCenterView.swift */,
 				0781EDC12E2C93550026500F /* LightDarkModeView.swift */,
@@ -547,6 +559,7 @@
 				072787282D94C14700D56B96 /* CalendarView.swift in Sources */,
 				07A0499C2E3208E200366E77 /* CloudSyncStatusView.swift in Sources */,
 				0781EDC22E2C93550026500F /* LightDarkModeView.swift in Sources */,
+				07A049A72E337CF100366E77 /* GradientBackgroundView.swift in Sources */,
 				07F1271C2E1F3C2E00DFDAB1 /* PurchaseView.swift in Sources */,
 				0781EDC42E2CADD10026500F /* PremiumButtonToggle.swift in Sources */,
 				079F4CCC2E28B948001884FA /* PurchaseManager.swift in Sources */,
@@ -555,12 +568,14 @@
 				079F4CBD2E27DD29001884FA /* PurchaseOptionsSection.swift in Sources */,
 				07A049A12E32183800366E77 /* CloudMotionView.swift in Sources */,
 				07F3C74C2D8EEF4600427A9A /* HomeView.swift in Sources */,
+				07A049A32E3311EE00366E77 /* DrinkMenuView.swift in Sources */,
 				077ED5C52E1372C700CBCC33 /* CustomOzButton.swift in Sources */,
 				077ED5C72E1375FB00CBCC33 /* CustomDrinkButtonRow.swift in Sources */,
 				077ED5B92E0D4C5F00CBCC33 /* CalendarListUpdate.swift in Sources */,
 				079F4CC62E28AAFD001884FA /* PurchasedView.swift in Sources */,
 				07F3C7562D90CA1700427A9A /* DrinkSelectionView.swift in Sources */,
 				07EA0BE02DBCC4E8001033AB /* ExtensionsText.swift in Sources */,
+				07A049A92E337D9F00366E77 /* StarryOverlayView.swift in Sources */,
 				07A83A452D98F4AC007F9B11 /* DrinkFillView.swift in Sources */,
 				07F3C7432D8EEDFE00427A9A /* ContentView.swift in Sources */,
 				07381C242D998381003216FA /* CustomOzView.swift in Sources */,
@@ -570,6 +585,7 @@
 				07B3A0042D9DF79100000BF2 /* DrinkItem.swift in Sources */,
 				079F4CAD2E2780A6001884FA /* PastDrinkView.swift in Sources */,
 				077ED5BD2E0E882700CBCC33 /* EmptyCalendarDrinkListView.swift in Sources */,
+				07A049A52E3372F400366E77 /* CapsuleSlider.swift in Sources */,
 				079F4CBB2E27DD14001884FA /* PurchaseLegalSection.swift in Sources */,
 				07F3C7542D8EF8DF00427A9A /* CupView.swift in Sources */,
 				07381C272D9B78E6003216FA /* CustomDrinkView.swift in Sources */,
@@ -740,7 +756,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WaterApp/WaterApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 5M79DDHHKU;
 				ENABLE_PREVIEWS = YES;
@@ -758,7 +774,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greggyphenom.WaterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -776,7 +792,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WaterApp/WaterApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WaterApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 5M79DDHHKU;
 				ENABLE_PREVIEWS = YES;
@@ -794,7 +810,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.greggyphenom.WaterApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

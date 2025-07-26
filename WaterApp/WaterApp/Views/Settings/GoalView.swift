@@ -65,7 +65,6 @@ struct GoalView: View {
                         keyboardFocused = false
                         if let goal = Double(dailyWaterGoal) {
                             drinkListVM.setGoalAndDismiss(goal, context: modelContext)
-                            dismiss()
                         }
                     }
                     .button2()
