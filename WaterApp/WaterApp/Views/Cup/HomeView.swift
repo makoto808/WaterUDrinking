@@ -21,11 +21,11 @@ struct HomeView: View {
             
             TitleView()
             
-            Spacer(minLength: 40)
+            Spacer(minLength: 50)
             
             CupView()
             
-            Spacer(minLength: 10)
+            Spacer(minLength: 1)
             
             DrinkSelectionView(isFromHome: true)
             

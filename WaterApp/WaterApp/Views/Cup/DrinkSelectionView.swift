@@ -18,6 +18,8 @@ struct DrinkSelectionView: View {
         @Bindable var drinkListVM = drinkListVM
 
         VStack {
+            Spacer(minLength: 30)
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: -20) {
                     ForEach($drinkListVM.items) { $drink in
@@ -32,7 +34,20 @@ struct DrinkSelectionView: View {
                             Text(drink.name)
                                 .fontSmallTitle2()
                         }
-//                        .padding(.bottom, 40)
+                    }
+
+                    VStack(spacing: 10) {
+                        Button {
+                            drinkListVM.navPath.append(.drinkMenuView)
+                        } label: {
+                            // TODO: Make plus image icon on photoshop
+                            Image(systemName: "plus.circle.fill")
+                                .drinkFillSelectionResize()
+                                .foregroundStyle(.blue)
+                        }
+
+                        Text("Add Drink")
+                            .fontSmallTitle2()
                     }
                     .scrollTransition { content, phase in
                         content
@@ -47,8 +62,6 @@ struct DrinkSelectionView: View {
                     drinkListVM.selectedCalendarDate = nil
                 }
             }
-            
-            Spacer()
         }
         .frame(height: 160)
     }
