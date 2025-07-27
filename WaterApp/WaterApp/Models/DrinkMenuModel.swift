@@ -25,12 +25,6 @@ struct DrinkMenuModel: View {
                 .fontSmallTitle()
             
             Spacer()
-            
-            Image(systemName: "line.3.horizontal")
-                .foregroundStyle(.secondary)
-                .padding(.trailing, 15)
-                .contentShape(Rectangle())
-                .padding(10)
         }
         .contentShape(Rectangle())
         .frame(height: 65)
@@ -40,7 +34,7 @@ struct DrinkMenuModel: View {
             : Color.black.opacity(0.07)
         )
         .cornerRadius(13)
-        .padding(.vertical, 3)
+        .padding(.vertical, 1)
         .padding(.horizontal, 20)
     }
 }
