@@ -16,7 +16,7 @@ struct DrinkMenuView: View {
     @State private var dragOffset: CGFloat = 0
     @State private var accumulatedOffset: CGFloat = 0
     @State private var lastSwapIndex: Int? = nil
-    
+ 
     var body: some View {
         VStack {
             Text("The Top 8 Drinks from Your List Are Displayed on the Home Screen")
