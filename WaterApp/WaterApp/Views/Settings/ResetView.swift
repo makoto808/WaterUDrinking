@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ResetView: View {
     @Environment(\.modelContext) private var modelContext
-    
     @Environment(DrinkListVM.self) private var drinkListVM
     
     @State private var showAlert = false

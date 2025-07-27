@@ -13,6 +13,7 @@ import SwiftUI
 struct WaterAppApp: App {
     @StateObject private var purchaseManager = PurchaseManager.shared
     @State private var notificationVM: NotificationVM
+    @State private var drinkMenuVM: DrinkMenuVM
 
     @AppStorage("selectedAppearance") private var selectedAppearance: String = AppColorScheme.system.rawValue
     @AppStorage("lastSyncDate") private var lastSyncDate: Double = 0
@@ -35,6 +36,7 @@ struct WaterAppApp: App {
             )
             let container = try ModelContainer(for: schema, configurations: [config])
             _notificationVM = State(wrappedValue: NotificationVM(context: container.mainContext))
+            _drinkMenuVM = State(wrappedValue: DrinkMenuVM(context: container.mainContext))
             self.modelContainer = container
         } catch {
             fatalError("Failed to create model container: \(error)")
@@ -47,6 +49,7 @@ struct WaterAppApp: App {
                 .preferredColorScheme(AppColorScheme(rawValue: selectedAppearance)?.colorScheme)
                 .modelContainer(modelContainer)
                 .environment(notificationVM)
+                .environment(drinkMenuVM) 
                 .environmentObject(purchaseManager)
                 .task {
                     await purchaseManager.updatePurchaseStatus()

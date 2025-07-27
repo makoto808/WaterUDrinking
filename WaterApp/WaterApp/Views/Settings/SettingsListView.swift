@@ -86,7 +86,6 @@ struct SettingsListView: View {
             .listStyle(.automatic)
             .scrollContentBackground(.hidden)
             .background(Color("AppBackgroundColor"))
-            .navigationBarBackButtonHidden(true)
             .backChevronButton(using: drinkListVM)
             .toolbar {
                 ToolbarItem(placement: .principal) {
