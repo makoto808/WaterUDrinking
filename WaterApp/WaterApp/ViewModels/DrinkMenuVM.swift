@@ -64,16 +64,27 @@ class DrinkMenuVM {
         try? context.save()
     }
     
-    func moveDrink(fromOffsets: IndexSet, toOffset: Int) {
-        menuItems.move(fromOffsets: fromOffsets, toOffset: toOffset)
-        for (index, item) in menuItems.enumerated() {
-            item.arrayOrderValue = index
-        }
-        try? context.save()
-    }
-    
     func isValid() -> Bool {
         menuItems.count == 8
+    }
+    
+    
+    func moveAvailableDrink(from: Int, to: Int) {
+        guard from != to,
+              to >= 0,
+              to < availableDrinks.count else { return }
+        var drinks = availableDrinks
+        let item = drinks.remove(at: from)
+        drinks.insert(item, at: to)
+        availableDrinks = drinks
+    }
+    
+    func indexForDrag(translation: CGFloat, from currentIndex: Int) -> Int? {
+        let rowHeight: CGFloat = 71 // match your UI row height
+        let dragCount = Int((translation / rowHeight).rounded())
+        let newIndex = currentIndex + dragCount
+        guard newIndex >= 0 && newIndex < availableDrinks.count else { return nil }
+        return newIndex
     }
 }
 

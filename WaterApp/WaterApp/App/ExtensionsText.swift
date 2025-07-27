@@ -117,6 +117,15 @@ extension Text {
             .minimumScaleFactor(0.8)
     }
     
+    func fontDrinkMenuDescription() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 19))
+            .foregroundStyle(.secondary)
+            .lineLimit(2)
+            .minimumScaleFactor(0.80)
+            .multilineTextAlignment(.center)
+            .padding(.vertical, 8)
+    }
+    
     // MARK: - Custom Labels
     
     func fontOzLabel() -> some View {
