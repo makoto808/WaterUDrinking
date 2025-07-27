@@ -23,6 +23,7 @@ struct DrinkMenuView: View {
                     DrinkMenuModel(drink: drink)
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)  // removes white capsule background
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
                 .onMove { indices, newOffset in
                     drinkMenuVM.availableDrinks.move(fromOffsets: indices, toOffset: newOffset)

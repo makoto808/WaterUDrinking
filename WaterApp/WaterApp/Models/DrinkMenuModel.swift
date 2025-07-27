@@ -27,6 +27,9 @@ struct DrinkMenuModel: View {
             Spacer()
         }
         .contentShape(Rectangle())
+        .listRowBackground(Color.clear)
+        .listRowSeparator(.hidden)
+        .allowsHitTesting(true)
         .frame(height: 65)
         .background(
             colorScheme == .dark
@@ -34,7 +37,7 @@ struct DrinkMenuModel: View {
             : Color.black.opacity(0.07)
         )
         .cornerRadius(13)
-        .padding(.vertical, 1)
+        .padding(.vertical, 3)
         .padding(.horizontal, 20)
     }
 }
