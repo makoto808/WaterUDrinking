@@ -22,6 +22,7 @@ struct DrinkMenuRowView: View {
         )
 
         ZStack(alignment: .leading) {
+            // Your actual row content
             DrinkMenuModel(
                 drink: DrinkItem(item),
                 isBeingDragged: isBeingDragged,
@@ -41,9 +42,10 @@ struct DrinkMenuRowView: View {
                 }
             )
 
+            // Invisible drag handle zone — this prevents ghosting
             Color.clear
                 .frame(width: 44, height: 44)
-                .contentShape(Rectangle())
+                .contentShape(Rectangle()) // Ensures the drag gesture is catchable
                 .onDrag {
                     withAnimation(.easeInOut(duration: 0.15)) {
                         draggingItem = item

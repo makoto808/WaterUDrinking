@@ -13,17 +13,24 @@ struct DrinkMenuView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
     @Environment(DrinkMenuVM.self) private var drinkMenuVM
 
+    @State private var draggingItem: CachedDrinkItem?
+
     var body: some View {
         ZStack {
             Color("AppBackgroundColor").ignoresSafeArea()
 
             ScrollView {
-                LazyVStack(spacing: 6) {
-                    ForEach(drinkMenuVM.availableDrinks) { drink in
-                        DrinkMenuModel(drink: drink)
+                VStack(spacing: 0) {
+                    ForEach(drinkMenuVM.menuItems) { item in
+                        DrinkMenuRowView(
+                            item: item,
+                            draggingItem: $draggingItem,
+                            drinkMenuVM: drinkMenuVM
+                        )
                     }
                 }
-                .padding(.top, 12)
+                .transaction { $0.disablesAnimations = true }
+                .padding(.top, 10)
             }
         }
         .background(Color("AppBackgroundColor"))
