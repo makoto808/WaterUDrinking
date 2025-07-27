@@ -37,7 +37,7 @@ struct DrinkMenuModel: View {
         .padding(.vertical, 1)
         .padding(.horizontal, 20)
     }
-}
+} 
 
 
 //#Preview {
