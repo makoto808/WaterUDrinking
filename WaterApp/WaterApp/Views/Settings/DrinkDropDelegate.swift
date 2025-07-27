@@ -13,12 +13,13 @@ struct DrinkDropDelegate: DropDelegate {
     @Binding var currentItem: CachedDrinkItem?
 
     func performDrop(info: DropInfo) -> Bool {
-        withAnimation(.easeInOut(duration: 0.15)) {
-            currentItem = nil
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation {
+                currentItem = nil
+            }
         }
         return true
     }
-
 
     func dropEntered(info: DropInfo) {
         guard let currentItem = currentItem,
@@ -28,8 +29,12 @@ struct DrinkDropDelegate: DropDelegate {
             return
         }
 
-        withAnimation {
-            drinkMenuVM.menuItems.move(fromOffsets: IndexSet(integer: fromIndex), toOffset: toIndex > fromIndex ? toIndex + 1 : toIndex)
+        if fromIndex != toIndex {
+            withAnimation {
+                drinkMenuVM.menuItems.move(fromOffsets: IndexSet(integer: fromIndex), toOffset: toIndex > fromIndex ? toIndex + 1 : toIndex)
+            }
+            // Medium impact on each move
+            Haptics.impact(style: .light)
         }
     }
 

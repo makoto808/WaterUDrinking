@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct DrinkMenuModel: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     let drink: DrinkItem
     var isBeingDragged: Bool = false
 
@@ -55,7 +57,9 @@ struct DrinkMenuModel: View {
             }
             .contentShape(Rectangle())
             .frame(height: 65)
-            .background(Color.black.opacity(0.07))
+            .background(
+                Color.black.opacity(colorScheme == .dark ? 0.15 : 0.07)
+            )
             .cornerRadius(13)
             .padding(.vertical, 3)
             .padding(.horizontal, 20)
@@ -64,3 +68,15 @@ struct DrinkMenuModel: View {
         .buttonStyle(.plain)
     }
 }
+
+#Preview {
+    DrinkMenuModel(
+        drink: DrinkItem(name: "Water", img: "waterBottle", volume: 8.0),
+        isBeingDragged: false
+    )
+    .previewLayout(.sizeThatFits)
+    .padding()
+    .background(Color(.systemBackground)) // Match system background
+    .environment(\.colorScheme, .light) // Change to .dark to preview dark mode
+}
+

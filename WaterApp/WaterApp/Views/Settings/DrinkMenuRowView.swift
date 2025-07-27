@@ -21,42 +21,36 @@ struct DrinkMenuRowView: View {
             currentItem: $draggingItem
         )
 
-        ZStack(alignment: .leading) {
-            // Your actual row content
-            DrinkMenuModel(
-                drink: DrinkItem(item),
-                isBeingDragged: isBeingDragged,
-                onDragStart: {
-                    if draggingItem?.id != item.id {
-                        withAnimation(.easeInOut(duration: 0.15)) {
-                            draggingItem = item
-                        }
-                    }
-                },
-                onDragEnd: {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                        withAnimation(.easeInOut(duration: 0.15)) {
-                            draggingItem = nil
-                        }
-                    }
-                }
-            )
-
-            // Invisible drag handle zone — this prevents ghosting
-            Color.clear
-                .frame(width: 44, height: 44)
-                .contentShape(Rectangle()) // Ensures the drag gesture is catchable
-                .onDrag {
+        DrinkMenuModel(
+            drink: DrinkItem(item),
+            isBeingDragged: isBeingDragged,
+            onDragStart: {
+                // Stronger feedback on drag start
+                Haptics.impact(style: .heavy)
+                if draggingItem?.id != item.id {
                     withAnimation(.easeInOut(duration: 0.15)) {
                         draggingItem = item
                     }
-                    return NSItemProvider(object: item.id as NSString)
-                } preview: {
-                    Image(systemName: "circle.fill")
-                        .resizable()
-                        .frame(width: 1, height: 1)
-                        .opacity(0.01)
                 }
+            },
+            onDragEnd: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    withAnimation(.easeInOut(duration: 0.15)) {
+                        draggingItem = nil
+                    }
+                }
+            }
+        )
+        .onDrag {
+            withAnimation(.easeInOut(duration: 0.15)) {
+                draggingItem = item
+            }
+            return NSItemProvider(object: item.id as NSString)
+        } preview: {
+            Image(systemName: "circle.fill")
+                .resizable()
+                .frame(width: 1, height: 1)
+                .opacity(0.001)
         }
         .onDrop(of: [.text], delegate: dropDelegate)
     }
