@@ -18,7 +18,7 @@ extension Binding where Value == String {
         }
         return self
     }
-}
+} 
 
 // MARK: - App Color Schemes
 
