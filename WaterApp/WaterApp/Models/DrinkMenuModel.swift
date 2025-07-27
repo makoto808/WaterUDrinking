@@ -17,7 +17,7 @@ struct DrinkMenuModel: View {
             HStack {
                 Image(drink.img)
                     .resizable()
-                    .frame(width: 37, height: 37)
+                    .frame(width: 45, height: 45)
                     .padding(.leading, 15)
                     .padding(.trailing, 10)
 
@@ -25,12 +25,16 @@ struct DrinkMenuModel: View {
                     .fontSmallTitle()
 
                 Spacer()
+                
+                Image(systemName: "line.3.horizontal")
+                    .foregroundStyle(.secondary)
+                    .padding(.trailing, 15)
             }
             .contentShape(Rectangle())
-            .frame(height: 70)
+            .frame(height: 65)
             .background(Color.black.opacity(0.07))
             .cornerRadius(13)
-            .padding(.vertical, 12)
+            .padding(.vertical, 3)
             .padding(.horizontal, 20)
         }
         .buttonStyle(.plain)

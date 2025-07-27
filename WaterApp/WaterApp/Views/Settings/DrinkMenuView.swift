@@ -17,15 +17,13 @@ struct DrinkMenuView: View {
         ZStack {
             Color("AppBackgroundColor").ignoresSafeArea()
 
-            VStack {
-                List {
+            ScrollView {
+                LazyVStack(spacing: 6) {
                     ForEach(drinkMenuVM.availableDrinks) { drink in
                         DrinkMenuModel(drink: drink)
-                            .listRowSeparator(.hidden)
-                            .listRowBackground(Color.clear)
                     }
                 }
-                .listStyle(.plain)
+                .padding(.top, 12)
             }
         }
         .background(Color("AppBackgroundColor"))
@@ -37,4 +35,17 @@ struct DrinkMenuView: View {
             }
         }
     }
+}
+
+#Preview {
+    let modelContainer = try! ModelContainer(for: CachedDrinkItem.self)
+    let modelContext = modelContainer.mainContext
+
+    let mockDrinkMenuVM = DrinkMenuVM(context: modelContext)
+    let mockDrinkListVM = DrinkListVM()
+
+    DrinkMenuView()
+        .modelContainer(modelContainer)
+        .environment(mockDrinkListVM)
+        .environment(mockDrinkMenuVM)
 }
