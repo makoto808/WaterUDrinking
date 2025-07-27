@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DrinkSelectionView: View {
     @Environment(DrinkListVM.self) private var drinkListVM
-    
+    @Environment(DrinkMenuVM.self) private var drinkMenuVM
     @EnvironmentObject var purchaseManager: PurchaseManager
     
     var isFromHome: Bool
@@ -33,6 +33,11 @@ struct DrinkSelectionView: View {
 
                             Text(drink.name)
                                 .fontSmallTitle2()
+                        }
+                        .scrollTransition { content, phase in
+                            content
+                                .opacity(phase.isIdentity ? 1.0 : 0.0)
+                                .offset(y: phase.isIdentity ? 0 : 50)
                         }
                     }
 
