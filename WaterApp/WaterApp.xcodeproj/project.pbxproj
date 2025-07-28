@@ -252,6 +252,15 @@
 			path = Cup;
 			sourceTree = "<group>";
 		};
+		075944352E376429009F2DE1 /* DrinkMenu */ = {
+			isa = PBXGroup;
+			children = (
+				07A049A22E3311EE00366E77 /* DrinkMenuView.swift */,
+				07A049C72E35E7D900366E77 /* DrinkMenuRowView.swift */,
+			);
+			path = DrinkMenu;
+			sourceTree = "<group>";
+		};
 		077A39FA2E1A97C800D086BA /* Notification */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,14 +284,13 @@
 		07CED0252D94C32700498D17 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				075944352E376429009F2DE1 /* DrinkMenu */,
 				07A0499E2E320B3B00366E77 /* CloudSync.swift */,
-				07A049A22E3311EE00366E77 /* DrinkMenuView.swift */,
 				07645B8D2DFA93840020BF31 /* GoalView.swift */,
 				07A049982E2F7A5F00366E77 /* IdeaCenterView.swift */,
 				0781EDC12E2C93550026500F /* LightDarkModeView.swift */,
 				07680FF72E01302E0030108F /* ResetView.swift */,
 				07CED0322D96925C00498D17 /* SettingsListView.swift */,
-				07A049C72E35E7D900366E77 /* DrinkMenuRowView.swift */,
 				07A049CA2E35EB4200366E77 /* Haptics.swift */,
 			);
 			path = Settings;

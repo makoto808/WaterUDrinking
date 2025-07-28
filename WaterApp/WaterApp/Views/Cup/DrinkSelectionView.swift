@@ -22,7 +22,7 @@ struct DrinkSelectionView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: -20) {
-                    ForEach(drinkMenuVM.arrangedDrinks.prefix(4)) { drink in
+                    ForEach(drinkMenuVM.arrangedDrinks.prefix(8)) { drink in
                         VStack(spacing: 10) {
                             Button {
                                 let drinkItem = DrinkItem(name: drink.name, img: drink.img, volume: 0)
