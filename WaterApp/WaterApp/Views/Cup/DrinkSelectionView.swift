@@ -22,10 +22,11 @@ struct DrinkSelectionView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: -20) {
-                    ForEach($drinkListVM.items) { $drink in
+                    ForEach(drinkMenuVM.arrangedDrinks.prefix(8)) { drink in
                         VStack(spacing: 10) {
                             Button {
-                                drinkListVM.navPath.append(.drinkFillView(drink))
+                                let drinkItem = DrinkItem(name: drink.name, img: drink.img, volume: 0)
+                                drinkListVM.navPath.append(.drinkFillView(drinkItem))
                             } label: {
                                 Image(drink.img)
                                     .drinkFillSelectionResize()
