@@ -9,8 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct DrinkMenuView: View {
-    @Environment(DrinkListVM.self) private var drinkListVM
     @Environment(DrinkMenuVM.self) private var drinkMenuVM
+    @Environment(DrinkListVM.self) private var drinkListVM
     
     var body: some View {
         VStack {
@@ -19,19 +19,25 @@ struct DrinkMenuView: View {
                 .padding()
             
             List {
-                ForEach(drinkMenuVM.availableDrinks, id: \.name) { drink in
-                    DrinkMenuModel(drink: drink)
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)  // removes white capsule background
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                ForEach(drinkMenuVM.arrangedDrinks, id: \.id) { drink in
+                    DrinkMenuModel(
+                        drink: DrinkItem(
+                            name: drink.name,
+                            img: drink.img,
+                            volume: 0.0 // or load volume if needed
+                        )
+                    )
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets())
                 }
                 .onMove { indices, newOffset in
-                    drinkMenuVM.availableDrinks.move(fromOffsets: indices, toOffset: newOffset)
+                    drinkMenuVM.moveDrink(fromOffsets: indices, toOffset: newOffset)
                 }
             }
-            .listStyle(.plain) // remove insetGrouped styling which adds background & padding
-            .scrollContentBackground(.hidden) // removes default list background
-            .background(Color.clear) // just in case
+            .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+            .background(Color.clear)
             .environment(\.editMode, .constant(.active))
         }
         .background(Color("AppBackgroundColor").ignoresSafeArea())
