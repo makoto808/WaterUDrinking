@@ -12,6 +12,7 @@
 		07381C242D998381003216FA /* CustomOzView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07381C232D998381003216FA /* CustomOzView.swift */; };
 		07381C272D9B78E6003216FA /* CustomDrinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07381C262D9B78E6003216FA /* CustomDrinkView.swift */; };
 		073BC1752DAF2FB000863F93 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BC1742DAF2FB000863F93 /* TitleView.swift */; };
+		075944372E386103009F2DE1 /* DrinkCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075944362E386103009F2DE1 /* DrinkCategory.swift */; };
 		07645B8E2DFA93840020BF31 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07645B8D2DFA93840020BF31 /* GoalView.swift */; };
 		07680FF82E01302E0030108F /* ResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07680FF72E01302E0030108F /* ResetView.swift */; };
 		077A39FC2E1A97DA00D086BA /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39FB2E1A97DA00D086BA /* NotificationView.swift */; };
@@ -102,6 +103,7 @@
 		07381C232D998381003216FA /* CustomOzView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOzView.swift; sourceTree = "<group>"; };
 		07381C262D9B78E6003216FA /* CustomDrinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDrinkView.swift; sourceTree = "<group>"; };
 		073BC1742DAF2FB000863F93 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		075944362E386103009F2DE1 /* DrinkCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkCategory.swift; sourceTree = "<group>"; };
 		07645B8D2DFA93840020BF31 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		07680FF72E01302E0030108F /* ResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetView.swift; sourceTree = "<group>"; };
 		077A39FB2E1A97DA00D086BA /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				07F127212E20A48C00DFDAB1 /* SettingsNavRow.swift */,
 				07A049AE2E34FB5500366E77 /* UserArrangedDrinkItem.swift */,
 				077ED5A82E06C8DD00CBCC33 /* UserGoal.swift */,
+				075944362E386103009F2DE1 /* DrinkCategory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				07CED0292D953BF300498D17 /* Extensions.swift in Sources */,
 				116283D02DB38FBF000ADC31 /* CalendarHomeVM.swift in Sources */,
 				07A0499F2E320B3B00366E77 /* CloudSync.swift in Sources */,
+				075944372E386103009F2DE1 /* DrinkCategory.swift in Sources */,
 				07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */,
 				077ED5C32E127B9400CBCC33 /* CalendarDrinkRow.swift in Sources */,
 				072787282D94C14700D56B96 /* CalendarView.swift in Sources */,
