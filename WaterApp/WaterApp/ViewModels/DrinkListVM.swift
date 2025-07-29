@@ -343,5 +343,4 @@ import SwiftUI
             DrinkItem(name: "Beer", img: "beer", volume: 0.0, hydrationRate: 50, category: .alcohol)
         ]
     }
-
 }
