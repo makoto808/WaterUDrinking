@@ -24,7 +24,9 @@ struct DrinkMenuView: View {
                         drink: DrinkItem(
                             name: drink.name,
                             img: drink.img,
-                            volume: 0.0 // or load volume if needed
+                            volume: 0.0,
+                            hydrationRate: drinkListVM.hydrationRateForDrink(named: drink.name),
+                            category: drinkListVM.categoryForDrink(named: drink.name)
                         )
                     )
                     .listRowSeparator(.hidden)

@@ -26,6 +26,7 @@ struct CustomDrinkView: View {
                         }
                     }
             }
+            
             VStack {
                 Spacer()
                 

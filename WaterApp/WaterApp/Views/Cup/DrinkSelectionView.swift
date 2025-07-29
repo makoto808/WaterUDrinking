@@ -25,7 +25,15 @@ struct DrinkSelectionView: View {
                     ForEach(drinkMenuVM.arrangedDrinks.prefix(8)) { drink in
                         VStack(spacing: 10) {
                             Button {
-                                let drinkItem = DrinkItem(name: drink.name, img: drink.img, volume: 0)
+                                let hydrationRate = drinkListVM.hydrationRateForDrink(named: drink.name)
+                                let category = drinkListVM.categoryForDrink(named: drink.name)
+                                let drinkItem = DrinkItem(
+                                    name: drink.name,
+                                    img: drink.img,
+                                    volume: 0,
+                                    hydrationRate: hydrationRate,
+                                    category: category
+                                )
                                 drinkListVM.navPath.append(.drinkFillView(drinkItem))
                             } label: {
                                 Image(drink.img)
