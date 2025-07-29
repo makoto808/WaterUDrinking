@@ -49,6 +49,19 @@ class DrinkMenuVM {
         }
     }
     
+    //NOTE: Used to clear drinkselection for debug purposes
+    func resetArrangedDrinks() {
+        let descriptor = FetchDescriptor<UserArrangedDrinkItem>()
+        if let existing = try? modelContext.fetch(descriptor) {
+            for drink in existing {
+                modelContext.delete(drink)
+            }
+            try? modelContext.save()
+            arrangedDrinks = []
+            loadArrangedDrinks()
+        }
+    }
+
     static let defaultDrinkItems: [DrinkItem] = [
         DrinkItem(name: "Water", img: "waterBottle", volume: 0.0, hydrationRate: 100, category: .water),
         DrinkItem(name: "Tea", img: "tea", volume: 0.0, hydrationRate: 90, category: .tea),

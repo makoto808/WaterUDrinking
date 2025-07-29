@@ -282,10 +282,13 @@ import SwiftUI
             let userDrinks = try context.fetch(descriptor)
 
             if userDrinks.isEmpty {
-                // First-time setup fallback to hardcoded
-                items = defaultDrinks()
+                // First-time setup fallback:
+                // Just save default drinks to persistence (once)
                 saveDefaultDrinksToUserDrinks(context)
+                // And set items to defaultDrinks, but ONLY ONCE here:
+                items = defaultDrinks()
             } else {
+                // Load from persisted data only, no duplication
                 items = userDrinks.map { userDrink in
                     DrinkItem(
                         name: userDrink.name,
