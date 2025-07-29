@@ -64,12 +64,12 @@ struct DrinkFillView: View {
     }
 }
 
-#Preview {
-    let mockItem = DrinkItem(name: "Water", img: "waterBottle", volume: 8.0)
-    
-    let mockVM = DrinkListVM()
-    mockVM.items = [mockItem]
-    
-    return DrinkFillView(item: mockItem)
-        .environment(mockVM)
-}
+//#Preview {
+//    let mockItem = DrinkItem(name: "Water", img: "waterBottle", volume: 8.0)
+//    
+//    let mockVM = DrinkListVM()
+//    mockVM.items = [mockItem]
+//    
+//    return DrinkFillView(item: mockItem)
+//        .environment(mockVM)
+//}

@@ -32,14 +32,14 @@ import SwiftUI
 
     // MARK: - Drink Items
     var items: [DrinkItem] = [
-        DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
-        DrinkItem(name: "Tea", img: "tea", volume: 0.0),
-        DrinkItem(name: "Coffee", img: "coffee", volume: 0.0),
-        DrinkItem(name: "Soda", img: "soda", volume: 0.0),
-        DrinkItem(name: "Juice", img: "juice", volume: 0.0),
-        DrinkItem(name: "Milk", img: "milk", volume: 0.0),
-        DrinkItem(name: "Energy Drink", img: "energyDrink", volume: 0.0),
-        DrinkItem(name: "Beer", img: "beer", volume: 0.0)
+        DrinkItem(name: "Water", img: "waterBottle", volume: 0.0, hydrationRate: 100, category: .water),
+        DrinkItem(name: "Tea", img: "tea", volume: 0.0, hydrationRate: 90, category: .tea),
+        DrinkItem(name: "Coffee", img: "coffee", volume: 0.0, hydrationRate: 60, category: .coffee),
+        DrinkItem(name: "Soda", img: "soda", volume: 0.0, hydrationRate: 70, category: .soda),
+        DrinkItem(name: "Juice", img: "juice", volume: 0.0, hydrationRate: 80, category: .juice),
+        DrinkItem(name: "Milk", img: "milk", volume: 0.0, hydrationRate: 85, category: .milk),
+        DrinkItem(name: "Energy Drink", img: "energyDrink", volume: 0.0, hydrationRate: 60, category: .energy),
+        DrinkItem(name: "Beer", img: "beer", volume: 0.0, hydrationRate: 50, category: .alcohol)
     ] {
         didSet {
             totalOz = items.reduce(0.0) { $0 + $1.volume }
@@ -161,14 +161,22 @@ import SwiftUI
                 return DrinkItem(
                     name: originalItem.name,
                     img: originalItem.img,
-                    volume: volumeFromCache
+                    volume: volumeFromCache,
+                    hydrationRate: originalItem.hydrationRate,
+                    category: originalItem.category
                 )
             }
             self.items = updatedItems
         } catch {
             print("Failed to refresh drinks: \(error)")
             let resetItems = items.map { item in
-                DrinkItem(name: item.name, img: item.img, volume: 0.0)
+                DrinkItem(
+                    name: item.name,
+                    img: item.img,
+                    volume: 0.0,
+                    hydrationRate: item.hydrationRate,
+                    category: item.category
+                )
             }
             self.items = resetItems
         }
@@ -185,14 +193,22 @@ import SwiftUI
                 return DrinkItem(
                     name: originalItem.name,
                     img: originalItem.img,
-                    volume: volumeFromCache
+                    volume: volumeFromCache,
+                    hydrationRate: originalItem.hydrationRate,
+                    category: originalItem.category
                 )
             }
             self.items = updatedItems
         } catch {
             print("Failed to refresh drinks for date: \(error)")
             let resetItems = items.map { item in
-                DrinkItem(name: item.name, img: item.img, volume: 0.0)
+                DrinkItem(
+                    name: item.name,
+                    img: item.img,
+                    volume: 0.0,
+                    hydrationRate: item.hydrationRate,
+                    category: item.category
+                )
             }
             self.items = resetItems
         }
@@ -233,7 +249,9 @@ import SwiftUI
                 return DrinkItem(
                     name: originalItem.name,
                     img: originalItem.img,
-                    volume: volumeFromCache
+                    volume: volumeFromCache,
+                    hydrationRate: originalItem.hydrationRate,
+                    category: originalItem.category
                 )
             }
             todayItems = updatedItems
@@ -243,13 +261,18 @@ import SwiftUI
         } catch {
             print("Failed to refresh today's drinks: \(error)")
             todayItems = items.map { item in
-                DrinkItem(name: item.name, img: item.img, volume: 0.0)
+                DrinkItem(
+                    name: item.name,
+                    img: item.img,
+                    volume: 0.0,
+                    hydrationRate: item.hydrationRate,
+                    category: item.category
+                )
             }
             totalOz = 0
             percentTotal = 0
         }
     }
-    
     
     func loadUserDrinkItems(_ context: ModelContext) {
         do {
@@ -263,7 +286,15 @@ import SwiftUI
                 items = defaultDrinks()
                 saveDefaultDrinksToUserDrinks(context)
             } else {
-                items = userDrinks.map { DrinkItem(name: $0.name, img: $0.img, volume: 0.0) }
+                items = userDrinks.map { userDrink in
+                    DrinkItem(
+                        name: userDrink.name,
+                        img: userDrink.img,
+                        volume: 0.0,
+                        hydrationRate: hydrationRateForDrink(named: userDrink.name),
+                        category: categoryForDrink(named: userDrink.name)
+                    )
+                }
             }
         } catch {
             print("Failed to load UserDrinkItems: \(error)")
@@ -283,16 +314,30 @@ import SwiftUI
         }
     }
 
+    // Helper methods to provide hydrationRate and category for user drinks loaded from persistence
+    func hydrationRateForDrink(named name: String) -> Int {
+        // Example: Lookup hydrationRate by name, or return default
+        defaultDrinks().first(where: { $0.name == name })?.hydrationRate ?? 100
+    }
+
+    func categoryForDrink(named name: String) -> DrinkCategory {
+        if let drink = defaultDrinks().first(where: { $0.name == name }) {
+            return drink.category
+        } else {
+            return .water 
+        }
+    }
+
     private func defaultDrinks() -> [DrinkItem] {
         [
-            DrinkItem(name: "Water", img: "waterBottle", volume: 0.0),
-            DrinkItem(name: "Tea", img: "tea", volume: 0.0),
-            DrinkItem(name: "Coffee", img: "coffee", volume: 0.0),
-            DrinkItem(name: "Soda", img: "soda", volume: 0.0),
-            DrinkItem(name: "Juice", img: "juice", volume: 0.0),
-            DrinkItem(name: "Milk", img: "milk", volume: 0.0),
-            DrinkItem(name: "Energy Drink", img: "energyDrink", volume: 0.0),
-            DrinkItem(name: "Beer", img: "beer", volume: 0.0)
+            DrinkItem(name: "Water", img: "waterBottle", volume: 0.0, hydrationRate: 100, category: .water),
+            DrinkItem(name: "Tea", img: "tea", volume: 0.0, hydrationRate: 90, category: .tea),
+            DrinkItem(name: "Coffee", img: "coffee", volume: 0.0, hydrationRate: 60, category: .coffee),
+            DrinkItem(name: "Soda", img: "soda", volume: 0.0, hydrationRate: 70, category: .soda),
+            DrinkItem(name: "Juice", img: "juice", volume: 0.0, hydrationRate: 80, category: .juice),
+            DrinkItem(name: "Milk", img: "milk", volume: 0.0, hydrationRate: 85, category: .milk),
+            DrinkItem(name: "Energy Drink", img: "energyDrink", volume: 0.0, hydrationRate: 60, category: .energy),
+            DrinkItem(name: "Beer", img: "beer", volume: 0.0, hydrationRate: 50, category: .alcohol)
         ]
     }
 
