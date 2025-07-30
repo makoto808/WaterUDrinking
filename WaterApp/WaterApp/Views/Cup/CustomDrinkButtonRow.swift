@@ -43,7 +43,7 @@ struct CustomDrinkButtonRow: View {
                     }
                 }
                 drinkListVM.value = 0
-                drinkListVM.navPath.removeLast()
+                drinkListVM.navPath.removeAll()
             }
             .drinkFilllViewButtonStyle()
             .alert("You Didn't Drink Anything!", isPresented: $drinkListVM.showAlert) {

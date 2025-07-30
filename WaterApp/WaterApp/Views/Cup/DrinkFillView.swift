@@ -10,11 +10,8 @@ import SwiftUI
 
 struct DrinkFillView: View {
     @Environment(\.modelContext) private var modelContext
-    
     @Environment(DrinkListVM.self) private var drinkListVM
-    
     @EnvironmentObject var purchaseManager: PurchaseManager
-    
     @State private var lastHapticValue: Double = 0.0
     
     private let feedbackGenerator = UIImpactFeedbackGenerator(style: .soft)
@@ -34,7 +31,8 @@ struct DrinkFillView: View {
             Image(item.img)
                 .drinkFillResize()
                 .sheet(isPresented: $drinkListVM.showCustomDrinkView) {
-                    CustomDrinkView()
+                    CustomDrinkView(currentItem: item, allItems: drinkListVM.items)
+                        .presentationDetents([.large])
                 }
             
             CapsuleSlider(value: $drinkListVM.value, range: 0...20, step: 0.1) { newValue in
@@ -53,7 +51,7 @@ struct DrinkFillView: View {
             Spacer()
         }
         .background(Color("AppBackgroundColor"))
-        .backChevronButton(using: drinkListVM)
+        .backChevronButtonHome(using: drinkListVM)
         .onAppear {
             drinkListVM.setSelectedItemIndex(for: item)
             feedbackGenerator.prepare()

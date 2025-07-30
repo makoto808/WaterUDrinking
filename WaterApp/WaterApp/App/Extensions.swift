@@ -223,4 +223,20 @@ extension View {
                 }
             }
     }
+    
+    func backChevronButtonHome(using drinkListVM: DrinkListVM) -> some View {
+        self
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        drinkListVM.navPath.removeAll() // navigates back to HomeView
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .backButton1()
+                    }
+                }
+            }
+    }
+
 }
