@@ -98,7 +98,7 @@ struct SettingsListView: View {
 }
 
 
-#Preview {
-    SettingsListView()
-        .environment(DrinkListVM())
-}
+//#Preview {
+//    SettingsListView()
+//        .environment(DrinkListVM())
+//}

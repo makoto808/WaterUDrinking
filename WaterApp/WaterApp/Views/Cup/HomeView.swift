@@ -54,7 +54,7 @@ struct HomeView: View {
                     Image("gearIcon")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 30, height: 30)
+                        .frame(width: 25, height: 25)
                         .padding(.horizontal, 6)
                         .padding(.top, 6)
                 }
@@ -68,17 +68,17 @@ struct HomeView: View {
     }
 }
 
-#Preview {
-    let mockVM = DrinkListVM()
-    mockVM.totalOz = 60
-    mockVM.totalOzGoal = 100
-
-    let mockPurchaseManager = PurchaseManager.shared
-
-    return NavigationStack {
-        HomeView()
-            .environment(mockVM)
-            .environmentObject(mockPurchaseManager)
-    }
-    .modelContainer(for: [UserGoal.self])
-}
+//#Preview {
+//    let mockVM = DrinkListVM()
+//    mockVM.totalOz = 60
+//    mockVM.totalOzGoal = 100
+//
+//    let mockPurchaseManager = PurchaseManager.shared
+//
+//    return NavigationStack {
+//        HomeView()
+//            .environment(mockVM)
+//            .environmentObject(mockPurchaseManager)
+//    }
+//    .modelContainer(for: [UserGoal.self])
+//}

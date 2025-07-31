@@ -98,12 +98,12 @@ struct CloudSync: View {
     }
 }
 
-#Preview {
-    CloudSync()
-        .modelContainer(
-            try! ModelContainer(
-                for: Schema([CachedDrinkItem.self, UserGoal.self, NotificationModel.self])
-            )
-        )
-        .environment(DrinkListVM())
-}
+//#Preview {
+//    CloudSync()
+//        .modelContainer(
+//            try! ModelContainer(
+//                for: Schema([CachedDrinkItem.self, UserGoal.self, NotificationModel.self])
+//            )
+//        )
+//        .environment(DrinkListVM())
+//}

@@ -54,10 +54,9 @@ struct DrinkSelectionView: View {
                         Button {
                             drinkListVM.navPath.append(.drinkMenuView)
                         } label: {
-                            // TODO: Make plus image icon on photoshop
-                            Image(systemName: "plus.circle.fill")
+                            Image("plusIcon")
                                 .drinkFillSelectionResize()
-                                .foregroundStyle(.blue)
+                                .scaleEffect(1.4)
                         }
 
                         Text("Add Drink")
@@ -81,12 +80,13 @@ struct DrinkSelectionView: View {
     }
 }
 
-#Preview {
-    let drinkListVM = DrinkListVM()
-
-    DrinkSelectionView(isFromHome: true)
-        .environment(drinkListVM)
-}
-
-// TODO: Ability to reorder and add new drinks to DrinkSelectionView
-
+//#Preview {
+//    let drinkListVM = DrinkListVM()
+//    let drinkMenuVM = DrinkMenuVM(context: ModelContext)
+//    let purchaseManager = PurchaseManager()
+//
+//    DrinkSelectionView(isFromHome: true)
+//        .environment(drinkListVM)
+//        .environment(drinkMenuVM)
+//        .environmentObject(purchaseManager)
+//}

@@ -131,12 +131,12 @@ struct BarChart: View {
     }
 }
 
-#Preview {
-    let vm = DrinkListVM()
-    vm.totalOzGoal = 64
-    return BarChart()
-        .environment(vm)
-}
+//#Preview {
+//    let vm = DrinkListVM()
+//    vm.totalOzGoal = 64
+//    return BarChart()
+//        .environment(vm)
+//}
 
 // MARK: - Support Structs
 
