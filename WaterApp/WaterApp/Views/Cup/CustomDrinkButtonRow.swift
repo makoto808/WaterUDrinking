@@ -32,6 +32,10 @@ struct CustomDrinkButtonRow: View {
                     drinkListVM.showAlert = true
                     return
                 }
+
+                drinkListVM.setSelectedItemIndex(for: item)
+                
+                print("Adding \(item.name) with volume \(drinkListVM.value)")
                 
                 if let newItem = drinkListVM.parseNewCachedItem(for: item) {
                     modelContext.insert(newItem)
@@ -41,7 +45,10 @@ struct CustomDrinkButtonRow: View {
                     } catch {
                         print("Failed to save: \(error.localizedDescription)")
                     }
+                } else {
+                    print("Failed to parse new cached item for \(item.name)")
                 }
+
                 drinkListVM.value = 0
                 drinkListVM.navPath.removeAll()
             }

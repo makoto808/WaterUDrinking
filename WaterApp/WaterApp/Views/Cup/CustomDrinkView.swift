@@ -25,20 +25,8 @@ struct CustomDrinkView: View {
             ForEach(relatedDrinks) { drink in
                 Section {
                     Button {
-                        let hydrationRate = drinkListVM.hydrationRateForDrink(named: drink.name)
-                        let category = drinkListVM.categoryForDrink(named: drink.name)
-                        let drinkItem = DrinkItem(
-                            name: drink.name,
-                            img: drink.img,
-                            volume: 0,
-                            hydrationRate: hydrationRate,
-                            category: category
-                        )
-                        
-                        // Push the new view first
-                        drinkListVM.navPath.append(.drinkFillView(drinkItem))
-                        
-                        // Then delay the dismiss slightly
+                        drinkListVM.navPath.append(.drinkFillView(drink))
+
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                             dismiss()
                         }
