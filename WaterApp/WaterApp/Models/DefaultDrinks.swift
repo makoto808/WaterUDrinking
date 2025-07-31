@@ -21,8 +21,11 @@ struct DefaultDrinks {
         DrinkItem(name: "Electrolyte Water", img: "electrolyteWater", volume: 0.0, hydrationRate: 100, category: .water),
         DrinkItem(name: "Coconut Water", img: "coconutWater", volume: 0.0, hydrationRate: 100, category: .water),
         DrinkItem(name: "Sake", img: "sake", volume: 0.0, hydrationRate: 90, category: .alcohol),
+        DrinkItem(name: "Soju", img: "soju", volume: 0.0, hydrationRate: 90, category: .alcohol),
         DrinkItem(name: "Red Wine", img: "redWine", volume: 0.0, hydrationRate: 90, category: .alcohol),
-        DrinkItem(name: "White Wine", img: "whiteWine", volume: 0.0, hydrationRate: 90, category: .alcohol)
+        DrinkItem(name: "White Wine", img: "whiteWine", volume: 0.0, hydrationRate: 90, category: .alcohol),
+        DrinkItem(name: "Martini", img: "martini", volume: 0.0, hydrationRate: 90, category: .alcohol),
+        DrinkItem(name: "Whiskey", img: "whiskey", volume: 0.0, hydrationRate: 90, category: .liquor)
         // Add more drinks here
     ]
 }

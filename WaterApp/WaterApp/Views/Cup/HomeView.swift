@@ -54,7 +54,7 @@ struct HomeView: View {
                     Image("gearIcon")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 25, height: 25)
+                        .frame(width: 30, height: 30)
                         .padding(.horizontal, 6)
                         .padding(.top, 6)
                 }
