@@ -68,17 +68,17 @@ struct HomeView: View {
     }
 }
 
-#Preview {
-    let mockVM = DrinkListVM()
-    mockVM.totalOz = 60
-    mockVM.totalOzGoal = 100
-
-    let mockPurchaseManager = PurchaseManager.shared
-
-    return NavigationStack {
-        HomeView()
-            .environment(mockVM)
-            .environmentObject(mockPurchaseManager)
-    }
-    .modelContainer(for: [UserGoal.self])
-}
+//#Preview {
+//    let mockVM = DrinkListVM()
+//    mockVM.totalOz = 60
+//    mockVM.totalOzGoal = 100
+//
+//    let mockPurchaseManager = PurchaseManager.shared
+//
+//    return NavigationStack {
+//        HomeView()
+//            .environment(mockVM)
+//            .environmentObject(mockPurchaseManager)
+//    }
+//    .modelContainer(for: [UserGoal.self])
+//}

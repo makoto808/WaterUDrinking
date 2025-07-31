@@ -91,6 +91,6 @@ private struct ConditionalBackChevron: ViewModifier {
     }
 }
 
-#Preview {
-    GoalView(isOnboarding: true, drinkListVM: DrinkListVM())
-}
+//#Preview {
+//    GoalView(isOnboarding: true, drinkListVM: DrinkListVM())
+//}

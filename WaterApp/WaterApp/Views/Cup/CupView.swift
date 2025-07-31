@@ -39,10 +39,10 @@ struct CupView: View {
     }
 }
 
-#Preview {
-    let mockVM = DrinkListVM()
-    mockVM.totalOz = 60
-    mockVM.totalOzGoal = 100
-    return CupView()
-        .environment(mockVM)
-}
+//#Preview {
+//    let mockVM = DrinkListVM()
+//    mockVM.totalOz = 60
+//    mockVM.totalOzGoal = 100
+//    return CupView()
+//        .environment(mockVM)
+//}

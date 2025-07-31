@@ -98,7 +98,7 @@ struct PurchaseView: View {
     }
 }
 
-#Preview {
-    PurchaseView()
-        .environment(DrinkListVM())
-}
+//#Preview {
+//    PurchaseView()
+//        .environment(DrinkListVM())
+//}

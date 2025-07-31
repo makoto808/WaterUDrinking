@@ -42,8 +42,7 @@ struct WaterAppApp: App {
             _notificationVM = State(wrappedValue: NotificationVM(context: container.mainContext))
             _drinkMenuVM = State(wrappedValue: DrinkMenuVM(context: container.mainContext))
             
-            let listVM = DrinkListVM()
-            listVM.modelContext = container.mainContext
+            let listVM = DrinkListVM(context: container.mainContext)
             _drinkListVM = State(wrappedValue: listVM)
 
             self.modelContainer = container
@@ -64,10 +63,7 @@ struct WaterAppApp: App {
                 .task {
                     await purchaseManager.updatePurchaseStatus()
                     purchaseManager.listenForUpdates()
-                    
-                    // Load user drinks and sync defaults on launch
-                    drinkListVM.loadUserDrinkItems(modelContainer.mainContext)
-                    drinkListVM.syncDefaultDrinks()
+                    print("💧 App launched. Today's total oz: \(drinkListVM.totalOz)")
                 }
         }
     }

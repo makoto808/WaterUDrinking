@@ -38,6 +38,14 @@ import SwiftUI
         }
     }
 
+    init(context: ModelContext) {
+        self.modelContext = context
+        self.loadUserGoal(context: context)
+        self.loadUserDrinkItems(context)
+        self.syncDefaultDrinks()
+        self.refreshTodayItems(modelContext: context)
+    }
+
     func setSelectedItemIndex(for drink: DrinkItem) {
         selectedItemIndex = items.firstIndex { $0.name == drink.name }
     }

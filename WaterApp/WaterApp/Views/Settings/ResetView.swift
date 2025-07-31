@@ -60,7 +60,7 @@ struct ResetView: View {
     }
 }
 
-#Preview {
-    ResetView()
-        .environment(DrinkListVM())
-}
+//#Preview {
+//    ResetView()
+//        .environment(DrinkListVM())
+//}

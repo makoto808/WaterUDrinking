@@ -65,7 +65,7 @@ struct IdeaCenterView: View {
     }
 }
 
-#Preview {
-    IdeaCenterView()
-        .environment(DrinkListVM())
-}
+//#Preview {
+//    IdeaCenterView()
+//        .environment(DrinkListVM())
+//}
