@@ -333,6 +333,4 @@ import SwiftUI
             items.append(contentsOf: newDrinks)
         }
     }
-
-    
 }
