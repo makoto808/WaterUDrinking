@@ -11,17 +11,20 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(NotificationVM.self) private var notificationVM
-    
+    @Environment(DrinkListVM.self) private var drinkListVM
+
     @EnvironmentObject var purchaseManager: PurchaseManager
 
     @State private var calendarHomeVM = CalendarHomeVM()
-    @State private var drinkListVM = DrinkListVM()
     @State private var showGoalSetup: Bool = false
-    
+
     @AppStorage("hasSeenGoalSetup") private var hasSeenGoalSetup: Bool = false
 
     var body: some View {
-        NavigationStack(path: $drinkListVM.navPath) {
+        NavigationStack(path: Binding(
+            get: { drinkListVM.navPath },
+            set: { drinkListVM.navPath = $0 }
+        )) {
             HomeView()
                 .navigationDestination(for: NavPath.self) { navPath in
                     switch navPath {
@@ -53,19 +56,25 @@ struct ContentView: View {
                     }
                 }
         }
-        .environment(drinkListVM)
         .onAppear {
             drinkListVM.modelContext = modelContext
             drinkListVM.refreshTodayItems(modelContext: modelContext)
             drinkListVM.loadUserGoal(context: modelContext)
+
+            // Remove this line because navPath is now bound directly
+            // navPath = drinkListVM.navPath
 
             if !hasSeenGoalSetup {
                 showGoalSetup = true
                 hasSeenGoalSetup = true
             }
         }
-        .onChange(of: purchaseManager.hasProAccess) { newValue, _ in
-            print("💡 hasProAccess changed to \(newValue)")
+        // Remove this onChange because navPath is no longer a local @State
+        // .onChange(of: navPath) {
+        //     drinkListVM.navPath = navPath
+        // }
+        .onChange(of: purchaseManager.hasProAccess) { oldValue, newValue in
+            print("Changed from \(oldValue) to \(newValue)")
         }
         .fullScreenCover(isPresented: $showGoalSetup) {
             GoalView(isOnboarding: true, drinkListVM: drinkListVM)

@@ -50,5 +50,8 @@ struct DrinkMenuView: View {
                     .fontBarLabel()
             }
         }
+        .onAppear {
+            drinkMenuVM.syncAndReloadDrinks()
+        }
     }
 }

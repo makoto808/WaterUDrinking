@@ -16,17 +16,18 @@ class DrinkMenuVM {
     
     init(context: ModelContext) {
         self.modelContext = context
-        loadArrangedDrinks()
+        syncAndReloadDrinks()
     }
     
     func loadArrangedDrinks() {
         let descriptor = FetchDescriptor<UserArrangedDrinkItem>(sortBy: [.init(\.arrayOrderValue)])
+        
         if let results = try? modelContext.fetch(descriptor), !results.isEmpty {
             arrangedDrinks = results
         } else {
             // Insert default drinks if none exist
             arrangedDrinks = []
-            for (index, drink) in Self.defaultDrinkItems.enumerated() {
+            for (index, drink) in DefaultDrinks.all.enumerated() {
                 let newItem = UserArrangedDrinkItem(name: drink.name, img: drink.img, arrayOrderValue: index)
                 modelContext.insert(newItem)
                 arrangedDrinks.append(newItem)
@@ -34,7 +35,7 @@ class DrinkMenuVM {
             try? modelContext.save()
         }
     }
-    
+
     func moveDrink(fromOffsets: IndexSet, toOffset: Int) {
         arrangedDrinks.move(fromOffsets: fromOffsets, toOffset: toOffset)
         
@@ -62,16 +63,27 @@ class DrinkMenuVM {
         }
     }
 
-    static let defaultDrinkItems: [DrinkItem] = [
-        DrinkItem(name: "Water", img: "waterBottle", volume: 0.0, hydrationRate: 100, category: .water),
-        DrinkItem(name: "Tea", img: "tea", volume: 0.0, hydrationRate: 90, category: .tea),
-        DrinkItem(name: "Coffee", img: "coffee", volume: 0.0, hydrationRate: 60, category: .coffee),
-        DrinkItem(name: "Soda", img: "soda", volume: 0.0, hydrationRate: 70, category: .soda),
-        DrinkItem(name: "Juice", img: "juice", volume: 0.0, hydrationRate: 80, category: .juice),
-        DrinkItem(name: "Milk", img: "milk", volume: 0.0, hydrationRate: 85, category: .milk),
-        DrinkItem(name: "Energy Drink", img: "energyDrink", volume: 0.0, hydrationRate: 60, category: .energy),
-        DrinkItem(name: "Beer", img: "beer", volume: 0.0, hydrationRate: 50, category: .alcohol),
-        DrinkItem(name: "Sparkling Water", img: "sparklingWater", volume: 0.0, hydrationRate: 100, category: .water),
-        DrinkItem(name: "Coconut Water", img: "coconutWater", volume: 0.0, hydrationRate: 100, category: .water)
-    ]
+    func syncDefaultDrinks() {
+        let currentNames = Set(arrangedDrinks.map { $0.name })
+        let newDrinks = DefaultDrinks.all.filter { !currentNames.contains($0.name) }
+        
+        if !newDrinks.isEmpty {
+            for (index, drink) in newDrinks.enumerated() {
+                let newItem = UserArrangedDrinkItem(
+                    name: drink.name,
+                    img: drink.img,
+                    arrayOrderValue: arrangedDrinks.count + index
+                )
+                modelContext.insert(newItem)
+                arrangedDrinks.append(newItem)
+            }
+            try? modelContext.save()
+        }
+    }
+    
+    func syncAndReloadDrinks() {
+        loadArrangedDrinks()
+        syncDefaultDrinks()
+        loadArrangedDrinks()
+    }
 }

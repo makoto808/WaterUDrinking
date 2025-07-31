@@ -31,18 +31,7 @@ import SwiftUI
     }
 
     // MARK: - Drink Items
-    var items: [DrinkItem] = [
-        DrinkItem(name: "Water", img: "waterBottle", volume: 0.0, hydrationRate: 100, category: .water),
-        DrinkItem(name: "Tea", img: "tea", volume: 0.0, hydrationRate: 90, category: .tea),
-        DrinkItem(name: "Coffee", img: "coffee", volume: 0.0, hydrationRate: 60, category: .coffee),
-        DrinkItem(name: "Soda", img: "soda", volume: 0.0, hydrationRate: 70, category: .soda),
-        DrinkItem(name: "Juice", img: "juice", volume: 0.0, hydrationRate: 80, category: .juice),
-        DrinkItem(name: "Milk", img: "milk", volume: 0.0, hydrationRate: 85, category: .milk),
-        DrinkItem(name: "Energy Drink", img: "energyDrink", volume: 0.0, hydrationRate: 60, category: .energy),
-        DrinkItem(name: "Beer", img: "beer", volume: 0.0, hydrationRate: 50, category: .alcohol),
-        DrinkItem(name: "Sparkling Water", img: "sparklingWater", volume: 0.0, hydrationRate: 100, category: .water),
-        DrinkItem(name: "Coconut Water", img: "coconutWater", volume: 0.0, hydrationRate: 100, category: .water)
-    ] {
+    var items: [DrinkItem] = [] {
         didSet {
             totalOz = items.reduce(0.0) { $0 + $1.volume }
             percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
@@ -288,7 +277,7 @@ import SwiftUI
                 // Just save default drinks to persistence (once)
                 saveDefaultDrinksToUserDrinks(context)
                 // And set items to defaultDrinks, but ONLY ONCE here:
-                items = defaultDrinks()
+                items = DefaultDrinks.all
             } else {
                 // Load from persisted data only, no duplication
                 items = userDrinks.map { userDrink in
@@ -307,7 +296,7 @@ import SwiftUI
     }
 
     private func saveDefaultDrinksToUserDrinks(_ context: ModelContext) {
-        let defaultItems = defaultDrinks()
+        let defaultItems = DefaultDrinks.all
         for (index, drink) in defaultItems.enumerated() {
             let newUserDrink = UserArrangedDrinkItem(name: drink.name, img: drink.img, arrayOrderValue: index)
             context.insert(newUserDrink)
@@ -320,29 +309,22 @@ import SwiftUI
     }
 
     // Helper methods to provide hydrationRate and category for user drinks loaded from persistence
+    // Example: Lookup hydrationRate by name, or return default
     func hydrationRateForDrink(named name: String) -> Int {
-        // Example: Lookup hydrationRate by name, or return default
-        defaultDrinks().first(where: { $0.name == name })?.hydrationRate ?? 100
+        DefaultDrinks.all.first(where: { $0.name == name })?.hydrationRate ?? 100
     }
 
     func categoryForDrink(named name: String) -> DrinkCategory {
-        if let drink = defaultDrinks().first(where: { $0.name == name }) {
-            return drink.category
-        } else {
-            return .water 
+        DefaultDrinks.all.first(where: { $0.name == name })?.category ?? .water
+    }
+    
+    func syncDefaultDrinks() {
+        let currentNames = Set(items.map { $0.name })
+        let newDrinks = DefaultDrinks.all.filter { !currentNames.contains($0.name) }
+        if !newDrinks.isEmpty {
+            items.append(contentsOf: newDrinks)
         }
     }
 
-    private func defaultDrinks() -> [DrinkItem] {
-        [
-            DrinkItem(name: "Water", img: "waterBottle", volume: 0.0, hydrationRate: 100, category: .water),
-            DrinkItem(name: "Tea", img: "tea", volume: 0.0, hydrationRate: 90, category: .tea),
-            DrinkItem(name: "Coffee", img: "coffee", volume: 0.0, hydrationRate: 60, category: .coffee),
-            DrinkItem(name: "Soda", img: "soda", volume: 0.0, hydrationRate: 70, category: .soda),
-            DrinkItem(name: "Juice", img: "juice", volume: 0.0, hydrationRate: 80, category: .juice),
-            DrinkItem(name: "Milk", img: "milk", volume: 0.0, hydrationRate: 85, category: .milk),
-            DrinkItem(name: "Energy Drink", img: "energyDrink", volume: 0.0, hydrationRate: 60, category: .energy),
-            DrinkItem(name: "Beer", img: "beer", volume: 0.0, hydrationRate: 50, category: .alcohol)
-        ]
-    }
+    
 }
