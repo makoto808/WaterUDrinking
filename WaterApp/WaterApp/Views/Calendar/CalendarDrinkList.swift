@@ -10,9 +10,7 @@ import SwiftUI
 struct CalendarDrinkList: View {
     @Environment(CalendarHomeVM.self) private var calendarVM
     @Environment(DrinkListVM.self) private var drinkListVM
-    
     @EnvironmentObject var purchaseManager: PurchaseManager
-    
     @State private var isShowingSheet = false
     @State private var isShowingPastDrinkSheet = false
     
