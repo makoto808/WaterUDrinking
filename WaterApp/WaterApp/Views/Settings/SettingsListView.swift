@@ -80,6 +80,10 @@ struct SettingsListView: View {
                             UIApplication.shared.open(url)
                         }
                     }
+                    
+                    SettingsNavRow(title: " Disclaimer") {
+                        drinkListVM.navPath.append(.disclaimer)
+                    }
                 }
                 .textCase(nil)
             }

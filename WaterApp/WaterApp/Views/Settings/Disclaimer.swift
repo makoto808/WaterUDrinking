@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Disclaimer: View {
-//    @Environment(DrinkListVM.self) private var drinkListVM
+    @Environment(DrinkListVM.self) private var drinkListVM
 
     var body: some View {
         ScrollView {
@@ -44,7 +44,7 @@ This app is intended for general wellness and hydration tracking purposes only. 
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .background(Color("AppBackgroundColor"))
-//        .backChevronButton(using: drinkListVM)
+        .backChevronButton(using: drinkListVM)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text("")
@@ -54,7 +54,6 @@ This app is intended for general wellness and hydration tracking purposes only. 
     }
 }
 
-
-#Preview {
-    Disclaimer()
-}
+//#Preview {
+//    Disclaimer()
+//}
