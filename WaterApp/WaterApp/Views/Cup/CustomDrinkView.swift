@@ -15,9 +15,9 @@ struct CustomDrinkView: View {
     let allItems: [DrinkItem]
 
     var relatedDrinks: [DrinkItem] {
-        allItems.filter {
-            $0.category == currentItem.category && $0.id != currentItem.id
-        }
+        allItems
+            .filter { $0.category == currentItem.category && $0.id != currentItem.id }
+            .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
 
     var body: some View {

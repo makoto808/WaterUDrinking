@@ -59,8 +59,17 @@ import SwiftUI
             return nil
         }
 
-        let usedDate = selectedCalendarDate ?? Date()
-        print("💧 Saving drink for date: \(usedDate)")
+        let currentTime = Date()
+        let usedDate = selectedCalendarDate.map { combine(date: $0, time: currentTime) } ?? currentTime
+
+        if let selectedDate = selectedCalendarDate {
+            print("💧 Saving drink:")
+            print("    📅 Selected day: \(selectedDate.formatted(date: .abbreviated, time: .omitted))")
+            print("    ⏰ Current time: \(currentTime.formatted(date: .omitted, time: .standard))")
+            print("    📌 Combined date: \(usedDate.formatted(date: .abbreviated, time: .standard))")
+        } else {
+            print("💧 Saving drink for today: \(usedDate.formatted(date: .abbreviated, time: .standard))")
+        }
 
         let newItem = CachedDrinkItem(
             date: usedDate,
@@ -73,6 +82,21 @@ import SwiftUI
         return newItem
     }
 
+    func combine(date: Date, time: Date) -> Date {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        let timeComponents = calendar.dateComponents([.hour, .minute, .second], from: time)
+
+        var combined = DateComponents()
+        combined.year = dateComponents.year
+        combined.month = dateComponents.month
+        combined.day = dateComponents.day
+        combined.hour = timeComponents.hour
+        combined.minute = timeComponents.minute
+        combined.second = timeComponents.second
+
+        return calendar.date(from: combined) ?? date
+    }
 
     // MARK: - Load from Cache
     func loadFromCache(_ modelContext: ModelContext) {
