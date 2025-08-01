@@ -155,7 +155,7 @@ import SwiftUI
         guard let selected = selectedDate else { return [] }
         return cachedItems
             .filter { calendar.isDate($0.date, inSameDayAs: selected) }
-            .sorted { $0.arrayOrderValue < $1.arrayOrderValue }
+            .sorted { $0.date > $1.date } // <- this line
     }
     
     var totalOunces: Double {
