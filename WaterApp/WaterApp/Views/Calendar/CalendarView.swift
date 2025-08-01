@@ -68,6 +68,8 @@ struct CalendarView: View {
         .animation(.easeInOut, value: calendarVM.currentMonth)
         .onAppear {
             calendarVM.setModelContext(modelContext)
+            calendarVM.selectedDate = nil
+            isShowingDrinkDetails = false
             calendarVM.fetchDrinkItemsForMonth()
         }
         .onChange(of: calendarVM.cachedItems) {
