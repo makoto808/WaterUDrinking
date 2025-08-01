@@ -35,6 +35,8 @@ struct ContentView: View {
                         CloudSync()
                     case .dailyWaterGoal:
                         GoalView(drinkListVM: drinkListVM)
+                    case .disclaimer:
+                        Disclaimer()
                     case .drinkFillView(let drink):
                         DrinkFillView(item: drink)
                     case .drinkMenuView:

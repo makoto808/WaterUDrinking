@@ -126,6 +126,22 @@ extension Text {
             .padding(.vertical, 8)
     }
     
+    func fontDisclaimerHeader() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 20))
+            .foregroundStyle(.primary)
+            .fontWeight(.semibold)
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
+    }
+    
+    func fontDisclaimerText() -> some View {
+        self.font(.custom("ArialRoundedMTBold", size: 18))
+            .foregroundStyle(.secondary)
+            .fontWeight(.semibold)
+//            .padding()
+//            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
     // MARK: - Custom Labels
     
     func fontOzLabel() -> some View {

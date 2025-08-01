@@ -14,6 +14,7 @@
 		073BC1752DAF2FB000863F93 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073BC1742DAF2FB000863F93 /* TitleView.swift */; };
 		075944372E386103009F2DE1 /* DrinkCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075944362E386103009F2DE1 /* DrinkCategory.swift */; };
 		075944392E3AE360009F2DE1 /* DefaultDrinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075944382E3AE35F009F2DE1 /* DefaultDrinks.swift */; };
+		0759443B2E3C4A47009F2DE1 /* Disclaimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0759443A2E3C4A47009F2DE1 /* Disclaimer.swift */; };
 		07645B8E2DFA93840020BF31 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07645B8D2DFA93840020BF31 /* GoalView.swift */; };
 		07680FF82E01302E0030108F /* ResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07680FF72E01302E0030108F /* ResetView.swift */; };
 		077A39FC2E1A97DA00D086BA /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077A39FB2E1A97DA00D086BA /* NotificationView.swift */; };
@@ -105,6 +106,7 @@
 		073BC1742DAF2FB000863F93 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		075944362E386103009F2DE1 /* DrinkCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkCategory.swift; sourceTree = "<group>"; };
 		075944382E3AE35F009F2DE1 /* DefaultDrinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDrinks.swift; sourceTree = "<group>"; };
+		0759443A2E3C4A47009F2DE1 /* Disclaimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disclaimer.swift; sourceTree = "<group>"; };
 		07645B8D2DFA93840020BF31 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		07680FF72E01302E0030108F /* ResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetView.swift; sourceTree = "<group>"; };
 		077A39FB2E1A97DA00D086BA /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			children = (
 				075944352E376429009F2DE1 /* DrinkMenu */,
 				07A0499E2E320B3B00366E77 /* CloudSync.swift */,
+				0759443A2E3C4A47009F2DE1 /* Disclaimer.swift */,
 				07645B8D2DFA93840020BF31 /* GoalView.swift */,
 				07A049982E2F7A5F00366E77 /* IdeaCenterView.swift */,
 				0781EDC12E2C93550026500F /* LightDarkModeView.swift */,
@@ -601,6 +604,7 @@
 				07A049A32E3311EE00366E77 /* DrinkMenuView.swift in Sources */,
 				077ED5C52E1372C700CBCC33 /* CustomOzButton.swift in Sources */,
 				077ED5C72E1375FB00CBCC33 /* CustomDrinkButtonRow.swift in Sources */,
+				0759443B2E3C4A47009F2DE1 /* Disclaimer.swift in Sources */,
 				077ED5B92E0D4C5F00CBCC33 /* CalendarListUpdate.swift in Sources */,
 				079F4CC62E28AAFD001884FA /* PurchasedView.swift in Sources */,
 				07F3C7562D90CA1700427A9A /* DrinkSelectionView.swift in Sources */,
