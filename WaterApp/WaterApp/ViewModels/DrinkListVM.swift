@@ -33,7 +33,7 @@ import SwiftUI
     // MARK: - Drink Items
     var items: [DrinkItem] = [] {
         didSet {
-            totalOz = items.reduce(0.0) { $0 + $1.volume }
+            totalOz = items.reduce(0.0) { $0 + $1.hydrationAdjustedVolume }
             percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
         }
     }
@@ -71,11 +71,16 @@ import SwiftUI
             print("💧 Saving drink for today: \(usedDate.formatted(date: .abbreviated, time: .standard))")
         }
 
+        print("Adding \(item.name) with volume \(volumeToUse)")
+        print("Hydration rate: \(item.hydrationRate), Adjusted volume: \(volumeToUse * Double(item.hydrationRate) / 100.0)")
+        
         let newItem = CachedDrinkItem(
             date: usedDate,
             name: item.name,
             img: item.img,
             volume: volumeToUse,
+            hydrationRate: item.hydrationRate,  // make sure hydrationRate is passed here
+            category: item.category,
             arrayOrderValue: index
         )
 
@@ -279,7 +284,7 @@ import SwiftUI
             }
             todayItems = updatedItems
             // update totals based on todayItems:
-            totalOz = todayItems.reduce(0) { $0 + $1.volume }
+            totalOz = todayItems.reduce(0.0) { $0 + $1.hydrationAdjustedVolume }
             percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
         } catch {
             print("Failed to refresh today's drinks: \(error)")

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CupViewOverride: View {
+    @Environment(CalendarHomeVM.self) private var calendarVM
     @State private var waveOffset = Angle(degrees: 0)
     
     var oz: Double
@@ -38,25 +39,35 @@ struct CupViewOverride: View {
     }
 }
 
-struct CupGoalSummaryView: View {
-    let oz: Double
-    let goal: Double
-
-    private var percentage: Int {
-        guard goal > 0 else { return 0 }
-        return Int(min((oz / goal) * 100, 999))
-    }
-
-    var body: some View {
-        VStack(spacing: 8) {
-            CupViewOverride(oz: oz, goal: goal)
-                .frame(width: 200, height: 200)
-
-            Text("\(percentage)% of goal")
-                .fontSmallTitle2()
-        }
-    }
-}
+//struct CupGoalSummaryView: View {
+//    @Environment(DrinkListVM.self) private var drinkListVM
+//    @Bindable var calendarVM: CalendarHomeVM
+//
+//    let selectedDate: Date
+//
+//    private var oz: Double {
+//        calendarVM.totalOunces(for: selectedDate)
+//    }
+//
+//    private var goal: Double {
+//        drinkListVM.totalOzGoal
+//    }
+//
+//    private var percentage: Int {
+//        guard goal > 0 else { return 0 }
+//        return Int(min((oz / goal) * 100, 999))
+//    }
+//
+//    var body: some View {
+//        VStack(spacing: 8) {
+//            CupViewOverride(oz: oz, goal: goal)
+//                .frame(width: 200, height: 200)
+//
+//            Text("\(percentage)% of goal")
+//                .fontSmallTitle2()
+//        }
+//    }
+//}
 
 //#Preview {
 //    CupViewOverride()

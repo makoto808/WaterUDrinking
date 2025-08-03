@@ -32,7 +32,7 @@ struct PurchaseOptionsView: View {
                    currentSubscription?.id != annualProduct?.id {
                     purchaseOption(
                         title: "Pro Monthly Plan",
-                        description: "Track unlimited days and get personalized insights.",
+                        description: "Flexible tracking and access to personalized insights.",
                         price: monthly.displayPrice,
                         product: monthly
                     )
