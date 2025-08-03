@@ -49,10 +49,10 @@ struct CalendarDrinkList: View {
                     .padding(.top)
                     .padding(10)
                 
-                ForEach(drinks.sorted(by: { $0.date < $1.date }), id: \.id) { drink in
-                    HStack(spacing: 12) {
-                        Image(drink.img)
-                            .CDVresize2()
+                ForEach(drinks.sorted(by: { $0.date > $1.date }), id: \.id) { drink in
+                            HStack(spacing: 12) {
+                                Image(drink.img)
+                                    .CDVresize2()
                         
                         VStack(alignment: .leading) {
                             Text(drink.name)
@@ -87,6 +87,12 @@ struct CalendarDrinkList: View {
             }
             .transition(.opacity)
             .padding(.top)
+        }
+        .onAppear {
+            let sortedDrinks = drinks.sorted(by: { $0.date < $1.date })
+            for drink in sortedDrinks {
+                print("Drink: \(drink.name), Date: \(drink.date)")
+            }
         }
         .onChange(of: drinkListVM.showPastDrinkSheet) {
             if drinkListVM.showPastDrinkSheet {
