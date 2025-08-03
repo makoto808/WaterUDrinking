@@ -94,3 +94,15 @@ class CachedDrinkItem: Identifiable, Hashable {
         hasher.combine(id)
     }
 }
+
+extension DrinkItem {
+    var hydrationAdjustedVolume: Double {
+        return volume * (Double(hydrationRate) / 100.0)
+    }
+}
+
+extension CachedDrinkItem {
+    var hydrationAdjustedVolume: Double {
+        volume * (Double(hydrationRate) / 100.0)
+    }
+}

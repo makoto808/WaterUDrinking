@@ -10,9 +10,7 @@ import SwiftUI
 struct CalendarDrinkList: View {
     @Environment(CalendarHomeVM.self) private var calendarVM
     @Environment(DrinkListVM.self) private var drinkListVM
-    
     @EnvironmentObject var purchaseManager: PurchaseManager
-    
     @State private var isShowingSheet = false
     @State private var isShowingPastDrinkSheet = false
     
@@ -20,21 +18,29 @@ struct CalendarDrinkList: View {
     let selectedDate: Date
     
     private var oz: Double {
-        calendarVM.totalOunces(for: selectedDate)
+        let total = drinks.reduce(0) { partialResult, item in
+            print("Drink: \(item.name), hydrationAdjustedVolume: \(item.hydrationAdjustedVolume)")
+            return partialResult + item.hydrationAdjustedVolume
+        }
+        print("Total oz for date: \(total)")
+        return total
     }
+
     
-    private var percentage: Int {
-        calendarVM.percentageOfGoal(for: selectedDate, goal: drinkListVM.totalOzGoal)
+    private var percentage: Double {
+        let goal = drinkListVM.totalOzGoal
+        return goal == 0 ? 0 : (oz / goal * 100)
     }
     
     var body: some View {
         VStack(spacing: 8) {
             Spacer(minLength: 20)
             
-            CupViewOverride(oz: oz, goal: drinkListVM.totalOzGoal)
+            let hydrationAdjusted = calendarVM.totalOunces(for: selectedDate)
+            CupViewOverride(oz: hydrationAdjusted, goal: drinkListVM.totalOzGoal)
                 .frame(width: 200, height: 200)
             
-            Text("\(percentage)% of goal")
+            Text("\(percentage, specifier: "%.0f")% of goal")
                 .fontSmallTitle2()
             
             VStack(alignment: .leading, spacing: 8) {
@@ -44,14 +50,14 @@ struct CalendarDrinkList: View {
                     .padding(10)
                 
                 ForEach(drinks.sorted(by: { $0.date > $1.date }), id: \.id) { drink in
-                    HStack(spacing: 12) {
-                        Image(drink.img)
-                            .CDVresize2()
+                            HStack(spacing: 12) {
+                                Image(drink.img)
+                                    .CDVresize2()
                         
                         VStack(alignment: .leading) {
                             Text(drink.name)
                                 .fontSmallTitle2()
-                            Text("\(drink.volume, specifier: "%.0f") oz")
+                            Text("\(drink.hydrationAdjustedVolume, specifier: "%.0f") oz")
                                 .fontSmallTitle2()
                         }
                         
@@ -81,6 +87,12 @@ struct CalendarDrinkList: View {
             }
             .transition(.opacity)
             .padding(.top)
+        }
+        .onAppear {
+            let sortedDrinks = drinks.sorted(by: { $0.date < $1.date })
+            for drink in sortedDrinks {
+                print("Drink: \(drink.name), Date: \(drink.date)")
+            }
         }
         .onChange(of: drinkListVM.showPastDrinkSheet) {
             if drinkListVM.showPastDrinkSheet {

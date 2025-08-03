@@ -26,6 +26,12 @@ import SwiftUI
         return cal
     }()
     
+    var drinksByDate: [Date: [CachedDrinkItem]] {
+        Dictionary(grouping: cachedItems) { item in
+            calendar.startOfDay(for: item.date)
+        }
+    }
+
     // MARK: - Setup
     func setModelContext(_ modelContext: ModelContext) {
         self.modelContext = modelContext
@@ -42,11 +48,13 @@ import SwiftUI
     
     // MARK: - Computed Properties
     func totalOunces(for date: Date) -> Double {
-        cachedItems
-            .filter { calendar.isDate($0.date, inSameDayAs: date) }
-            .reduce(0) { $0 + $1.volume }
+        let filtered = cachedItems.filter { calendar.isDate($0.date, inSameDayAs: date) }
+        for item in filtered {
+            print("Item: \(item.name), volume: \(item.volume), hydrationRate: \(item.hydrationRate), adjusted: \(hydrationAdjustedVolume(for: item))")
+        }
+        return filtered.reduce(0) { $0 + hydrationAdjustedVolume(for: $1) }
     }
-    
+
     func percentageOfGoal(for date: Date, goal: Double) -> Int {
         let oz = totalOunces(for: date)
         guard goal > 0 else { return 0 }
@@ -159,12 +167,16 @@ import SwiftUI
     }
     
     var totalOunces: Double {
-        drinksForSelectedDate.reduce(0) { $0 + $1.volume }
+        drinksForSelectedDate.reduce(0) { $0 + $1.hydrationAdjustedVolume }
     }
     
     //NOTE: Might delete later, must ask user for a starting goal
     var userGoal: Double {
         userGoalModel?.goal ?? 64
+    }
+    
+    private func hydrationAdjustedVolume(for item: CachedDrinkItem) -> Double {
+        return item.volume * (Double(item.hydrationRate) / 100.0)
     }
 }
 
