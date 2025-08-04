@@ -84,7 +84,7 @@ struct CloudSync: View {
         return date.formatted(.dateTime.hour().minute())
     }
     
-    func trigggerSync() async {
+    func triggerSync() async {
         isSyncing = true
         try? await Task.sleep(nanoseconds: 1_000_000_000)
         
