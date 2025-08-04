@@ -45,7 +45,6 @@
 		079F4CCA2E28AB41001884FA /* PurchaseOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */; };
 		079F4CCC2E28B948001884FA /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F4CCB2E28B948001884FA /* PurchaseManager.swift */; };
 		07A049992E2F7A5F00366E77 /* IdeaCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049982E2F7A5F00366E77 /* IdeaCenterView.swift */; };
-		07A0499C2E3208E200366E77 /* CloudSyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0499B2E3208E200366E77 /* CloudSyncStatusView.swift */; };
 		07A0499F2E320B3B00366E77 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A0499E2E320B3B00366E77 /* CloudSync.swift */; };
 		07A049A12E32183800366E77 /* CloudMotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049A02E32183800366E77 /* CloudMotionView.swift */; };
 		07A049A32E3311EE00366E77 /* DrinkMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A049A22E3311EE00366E77 /* DrinkMenuView.swift */; };
@@ -136,7 +135,6 @@
 		079F4CC92E28AB41001884FA /* PurchaseOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOptionsView.swift; sourceTree = "<group>"; };
 		079F4CCB2E28B948001884FA /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
 		07A049982E2F7A5F00366E77 /* IdeaCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaCenterView.swift; sourceTree = "<group>"; };
-		07A0499B2E3208E200366E77 /* CloudSyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSyncStatusView.swift; sourceTree = "<group>"; };
 		07A0499D2E32097F00366E77 /* WaterApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WaterApp.entitlements; sourceTree = "<group>"; };
 		07A0499E2E320B3B00366E77 /* CloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSync.swift; sourceTree = "<group>"; };
 		07A049A02E32183800366E77 /* CloudMotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudMotionView.swift; sourceTree = "<group>"; };
@@ -278,7 +276,7 @@
 		07A0499A2E3208C200366E77 /* CloudKit */ = {
 			isa = PBXGroup;
 			children = (
-				07A0499B2E3208E200366E77 /* CloudSyncStatusView.swift */,
+				07A0499E2E320B3B00366E77 /* CloudSync.swift */,
 				07A049A02E32183800366E77 /* CloudMotionView.swift */,
 				07A049A62E337CF100366E77 /* GradientBackgroundView.swift */,
 				07A049A82E337D9F00366E77 /* StarryOverlayView.swift */,
@@ -289,8 +287,8 @@
 		07CED0252D94C32700498D17 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				07A0499A2E3208C200366E77 /* CloudKit */,
 				075944352E376429009F2DE1 /* DrinkMenu */,
-				07A0499E2E320B3B00366E77 /* CloudSync.swift */,
 				0759443A2E3C4A47009F2DE1 /* Disclaimer.swift */,
 				07645B8D2DFA93840020BF31 /* GoalView.swift */,
 				07A049982E2F7A5F00366E77 /* IdeaCenterView.swift */,
@@ -401,7 +399,6 @@
 		07F3C7482D8EEE1700427A9A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				07A0499A2E3208C200366E77 /* CloudKit */,
 				077A39FA2E1A97C800D086BA /* Notification */,
 				07CED0252D94C32700498D17 /* Settings */,
 				072787292D94C15C00D56B96 /* Cup */,
@@ -588,7 +585,6 @@
 				07F3C7522D8EF69500427A9A /* WaveMotion.swift in Sources */,
 				077ED5C32E127B9400CBCC33 /* CalendarDrinkRow.swift in Sources */,
 				072787282D94C14700D56B96 /* CalendarView.swift in Sources */,
-				07A0499C2E3208E200366E77 /* CloudSyncStatusView.swift in Sources */,
 				0781EDC22E2C93550026500F /* LightDarkModeView.swift in Sources */,
 				07A049A72E337CF100366E77 /* GradientBackgroundView.swift in Sources */,
 				07F1271C2E1F3C2E00DFDAB1 /* PurchaseView.swift in Sources */,
