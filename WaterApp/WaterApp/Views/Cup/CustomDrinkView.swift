@@ -10,7 +10,8 @@ import SwiftUI
 struct CustomDrinkView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(DrinkListVM.self) private var drinkListVM
-    
+    @EnvironmentObject var purchaseManager: PurchaseManager
+
     let currentItem: DrinkItem
     let allItems: [DrinkItem]
 
@@ -25,21 +26,35 @@ struct CustomDrinkView: View {
             ForEach(relatedDrinks) { drink in
                 Section {
                     Button {
-                        drinkListVM.navPath.append(.drinkFillView(drink))
+                        if purchaseManager.hasProAccess {
+                            // Navigate to DrinkFillView
+                            drinkListVM.navPath.append(.drinkFillView(drink))
 
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            // Dismiss sheet
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                dismiss()
+                            }
+                        } else {
+                            // Dismiss sheet first
                             dismiss()
+
+                            // Then push to PurchaseView
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                drinkListVM.navPath.append(.purchaseView)
+                            }
                         }
                     } label: {
                         HStack {
                             Image(drink.img)
                                 .CDVresize()
-                            
+
                             VStack(alignment: .leading, spacing: 5) {
-                                Text(drink.name).fontSmallTitle()
+                                Text(drink.name)
+                                    .fontSmallTitle()
                                     .padding(.bottom, 5)
-                                
-                                Text("\(drink.hydrationRate)% Rate of Hydration").fontSmallTitle2()
+
+                                Text("\(drink.hydrationRate)% Rate of Hydration")
+                                    .fontSmallTitle2()
                             }
                         }
                         .contentShape(Rectangle())
@@ -50,6 +65,7 @@ struct CustomDrinkView: View {
         }
     }
 }
+
 
 #Preview {
     let sampleItem = DrinkItem(

@@ -77,7 +77,7 @@ struct PurchaseView: View {
                 .disabled(purchaseViewVM.isLoading)
                 .opacity(purchaseViewVM.isLoading ? 0.5 : 1)
                 .padding()
-                .backChevronButton(using: drinkListVM)
+                .backChevronButtonHome(using: drinkListVM)
                 .task {
                     await purchaseViewVM.loadProducts()
                     await purchaseViewVM.refreshSubscriptions()

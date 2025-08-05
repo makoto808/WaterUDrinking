@@ -59,3 +59,21 @@ struct DefaultDrinks {
  
  20% ABV will be 40
 */
+
+/* MARK: - Future Drink Ideas?
+
+ Yerba Mate
+ Matcha
+ Iced Tea
+ Boba Tea
+ Kombucha
+ 
+ Hot Cocoa
+ 
+ Soy Milk
+ Almond Milk
+ Oat Milk
+ 
+ //        DrinkItem(name: "Diet Soda", img: "dietSoda", volume: 0.0, hydrationRate: 80, category: .soda),
+ //        DrinkItem(name: "Non-Caffeinated Soda", img: "nonCaffeinatedSoda", volume: 0.0, hydrationRate: 90, category: .soda),
+*/

@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct DrinkMenuView: View {
+    @EnvironmentObject var purchaseManager: PurchaseManager
     @Environment(DrinkMenuVM.self) private var drinkMenuVM
     @Environment(DrinkListVM.self) private var drinkListVM
     
@@ -34,7 +35,16 @@ struct DrinkMenuView: View {
                     .listRowInsets(EdgeInsets())
                 }
                 .onMove { indices, newOffset in
-                    drinkMenuVM.moveDrink(fromOffsets: indices, toOffset: newOffset)
+                    if purchaseManager.hasProAccess {
+                        drinkMenuVM.moveDrink(fromOffsets: indices, toOffset: newOffset)
+                    } else {
+                        let generator = UIImpactFeedbackGenerator(style: .heavy)
+                        generator.impactOccurred()
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            drinkListVM.navPath.append(.purchaseView)
+                        }
+                    }
                 }
             }
             .listStyle(.plain)
