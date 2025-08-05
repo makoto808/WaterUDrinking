@@ -13,6 +13,16 @@ struct Disclaimer: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
+                Text("⚠️ Disclaimer")
+                    .fontDisclaimerHeader()
+
+                Text("""
+        This app is intended for general wellness and hydration tracking purposes only. It does **not** diagnose, treat, cure, or prevent any medical condition. Please consult with a licensed medical professional for personalized health advice.
+        """)
+                .fontDisclaimerText()
+                
+                Divider()
+                
                 Text("📚 Research Reference & Attribution")
                     .fontDisclaimerHeader()
                 
@@ -40,16 +50,6 @@ struct Disclaimer: View {
         PMCID: PMC8465972 PMID: 34578811
 
         We include this research as a supporting academic reference. Views expressed are those of the authors and do not necessarily represent those of the licensee or publisher.
-        """)
-                .fontDisclaimerText()
-
-                Divider()
-                
-                Text("⚠️ Disclaimer")
-                    .fontDisclaimerHeader()
-
-                Text("""
-        This app is intended for general wellness and hydration tracking purposes only. It does **not** diagnose, treat, cure, or prevent any medical condition. Please consult with a licensed medical professional for personalized health advice.
         """)
                 .fontDisclaimerText()
             }
