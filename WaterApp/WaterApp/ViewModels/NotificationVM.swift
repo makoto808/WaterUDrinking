@@ -14,7 +14,6 @@ import UserNotifications
 @Observable
 class NotificationVM {
     var reminders: [NotificationModel] = []
-
     private var context: ModelContext
 
     init(context: ModelContext) {
@@ -22,6 +21,9 @@ class NotificationVM {
         loadReminders()
     }
 
+    // MARK: - Load Data
+    
+    // Fetch reminders from the SwiftData store and update the `reminders` array
     func loadReminders() {
         do {
             let fetchDescriptor = FetchDescriptor<NotificationModel>(sortBy: [SortDescriptor(\.time)])
@@ -37,17 +39,7 @@ class NotificationVM {
         }
     }
 
-    func toggleReminder(_ reminder: NotificationModel, isOn: Bool) {
-        reminder.isEnabled = isOn
-        saveContext()
-
-        if isOn {
-            scheduleNotification(for: reminder)
-        } else {
-            cancelNotification(for: reminder)
-        }
-    }
-    
+    // MARK: - Insert / Delete / Save
     func insertReminder(_ reminder: NotificationModel) {
         context.insert(reminder)
         saveContext()
@@ -72,7 +64,24 @@ class NotificationVM {
             print("Failed to save context: \(error)")
         }
     }
+    
+    // MARK: - Toggle
+    
+    // Enable or disable a reminder and update local notification accordingly
+    func toggleReminder(_ reminder: NotificationModel, isOn: Bool) {
+        reminder.isEnabled = isOn
+        saveContext()
 
+        if isOn {
+            scheduleNotification(for: reminder)
+        } else {
+            cancelNotification(for: reminder)
+        }
+    }
+    
+    // MARK: - Notification Handling
+
+    // Schedule a local notification for the given reminder
     func scheduleNotification(for model: NotificationModel) {
         let content = UNMutableNotificationContent()
         content.title = "💧 Time to Hydrate!"
@@ -85,7 +94,8 @@ class NotificationVM {
         let request = UNNotificationRequest(identifier: model.id.uuidString, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
     }
-
+    
+    // Request notification permissions and schedule the reminder
     func requestPermissionAndSchedule(for model: NotificationModel) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             if settings.authorizationStatus == .authorized {
@@ -104,6 +114,7 @@ class NotificationVM {
         }
     }
 
+    // Cancel the local notification associated with a reminder
     func cancelNotification(for model: NotificationModel) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [model.id.uuidString])
     }

@@ -13,12 +13,14 @@ import SwiftUI
 @Observable final class CalendarHomeVM {
     private var modelContext: ModelContext?
     
-    var currentMonth: Date = Date()
-    var selectedDate: Date? = nil
     var cachedItems: [CachedDrinkItem] = []
-    var userGoalModel: UserGoal?
-    var showAlert = false
+    var currentMonth: Date = Date()
     var drinkToDelete: CachedDrinkItem? = nil
+    var selectedDate: Date? = nil
+    var showAlert = false
+    var userGoalModel: UserGoal?
+    
+    // MARK: - Calendar Configuration
     
     private let calendar: Calendar = {
         var cal = Calendar.current
@@ -26,13 +28,17 @@ import SwiftUI
         return cal
     }()
     
+    // MARK: - Computed Cache Mapping
+    
+    // Groups drink items by the start of each day
     var drinksByDate: [Date: [CachedDrinkItem]] {
         Dictionary(grouping: cachedItems) { item in
             calendar.startOfDay(for: item.date)
         }
     }
 
-    // MARK: - Setup
+    // MARK: - ModelContext Setup
+    
     func setModelContext(_ modelContext: ModelContext) {
         self.modelContext = modelContext
         self.modelContext?.autosaveEnabled = true
@@ -46,7 +52,9 @@ import SwiftUI
         }
     }
     
-    // MARK: - Computed Properties
+    // MARK: - Computed Totals
+    
+    // Calculates total adjusted ounces for a specific date
     func totalOunces(for date: Date) -> Double {
         let filtered = cachedItems.filter { calendar.isDate($0.date, inSameDayAs: date) }
         for item in filtered {
@@ -55,13 +63,16 @@ import SwiftUI
         return filtered.reduce(0) { $0 + hydrationAdjustedVolume(for: $1) }
     }
 
+    // Returns hydration goal percentage for a specific date
     func percentageOfGoal(for date: Date, goal: Double) -> Int {
         let oz = totalOunces(for: date)
         guard goal > 0 else { return 0 }
         return Int(min((oz / goal) * 100, 999))
     }
     
-    // MARK: - Fetching
+    // MARK: - Fetching Methods
+    
+    // Fetches drink items only for the given day
     func fetchDrinks(for date: Date) -> [CachedDrinkItem] {
         guard let context = modelContext else { return [] }
         
@@ -82,6 +93,7 @@ import SwiftUI
         }
     }
     
+    // Fetches all drink items for the currently selected month
     func fetchDrinkItemsForMonth() {
         guard let context = modelContext else { return }
         
@@ -99,7 +111,8 @@ import SwiftUI
         }
     }
     
-    // MARK: - Calendar
+    // MARK: - Calendar Display Helpers
+    
     var dayFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "d"
@@ -112,6 +125,7 @@ import SwiftUI
         return formatter
     }
     
+    // Generates 35–42 grid dates for currentMonth, including padding
     var monthDates: [Date] {
         let calendar = Calendar(identifier: .gregorian)
         let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentMonth))!
@@ -126,6 +140,7 @@ import SwiftUI
         return dates
     }
 
+    // Toggle a selected calendar date; deselects if same date tapped
     func toggleSelectedDate(_ date: Date) {
         if let selected = selectedDate, calendar.isDate(selected, inSameDayAs: date) {
             selectedDate = nil
@@ -134,6 +149,7 @@ import SwiftUI
         }
     }
     
+    // Shifts calendar month forward or backward by value (e.g. ±1)
     func changeMonth(by value: Int) {
         if let newMonth = calendar.date(byAdding: .month, value: value, to: currentMonth) {
             currentMonth = newMonth
@@ -142,6 +158,8 @@ import SwiftUI
     }
     
     // MARK: - Actions
+    
+    // Deletes drink and refreshes cache in associated view model
     func deleteDrink(_ drink: CachedDrinkItem, drinkListVM: DrinkListVM) {
         guard let context = modelContext else { return }
         context.delete(drink)
@@ -155,10 +173,13 @@ import SwiftUI
     }
     
     // MARK: - Helpers
+    
+    // All unique dates that contain drinks
     var drinkDates: Set<Date> {
         Set(cachedItems.map { calendar.startOfDay(for: $0.date) })
     }
     
+    // Returns drinks for selected date, sorted newest first
     var drinksForSelectedDate: [CachedDrinkItem] {
         guard let selected = selectedDate else { return [] }
         return cachedItems
@@ -166,17 +187,18 @@ import SwiftUI
             .sorted { $0.date > $1.date } // <- this line
     }
     
+    // Total adjusted ounces for selected day
     var totalOunces: Double {
         drinksForSelectedDate.reduce(0) { $0 + $1.hydrationAdjustedVolume }
     }
     
-    //NOTE: Might delete later, must ask user for a starting goal
+    // Returns user goal (default 64oz if not found)
     var userGoal: Double {
         userGoalModel?.goal ?? 64
     }
     
+    // Adjusts volume for drink hydration rate (e.g. coffee counts as less)
     private func hydrationAdjustedVolume(for item: CachedDrinkItem) -> Double {
         return item.volume * (Double(item.hydrationRate) / 100.0)
     }
 }
-

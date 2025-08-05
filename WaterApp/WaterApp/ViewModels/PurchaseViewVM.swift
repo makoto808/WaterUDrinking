@@ -14,24 +14,28 @@ import SwiftUI
     var oneTimeProduct: Product?
     var monthlyProduct: Product?
     var annualProduct: Product?
-    
     var currentSubscription: Product?
-    
     var showingSignIn = false
+    var showNoPurchasesFoundAlert = false
+    var showRestoreErrorAlert = false
+    
     var isLoading = false {
         didSet { print("isLoading: \(isLoading)") }
     }
+    
     var isPurchased = false {
         didSet { print("isPurchased: \(isPurchased)") }
     }
+    
     var isPurchasing = false {
         didSet { print("isPurchasing: \(isPurchasing)") }
     }
-    var showNoPurchasesFoundAlert = false
-    var showRestoreErrorAlert = false
+    
     var ownsLifetimeUnlock = false {
         didSet { print("ownsLifetimeUnlock: \(ownsLifetimeUnlock)") }
     }
+    
+    // MARK: - Product IDs
     
     let productIDs = [
         "com.greggyphenom.waterudrinking.annual",
@@ -47,7 +51,8 @@ import SwiftUI
         }
     }
     
-    @MainActor
+    // MARK: - Transaction Handler
+    
     private func handle(transactionVerificationResult: VerificationResult<StoreKit.Transaction>) async {
         switch transactionVerificationResult {
         case .unverified(_, let error):
@@ -63,6 +68,8 @@ import SwiftUI
             await transaction.finish()
         }
     }
+    
+    // MARK: - Product Loading
     
     func loadProducts() async {
         isLoading = true
@@ -83,6 +90,8 @@ import SwiftUI
             print("❌ Product loading failed: \(error.localizedDescription)")
         }
     }
+    
+    // MARK: - Subscription Check
     
     func checkCurrentSubscription() async {
         currentSubscription = nil
@@ -117,7 +126,8 @@ import SwiftUI
         print("No active subscription found")
     }
 
-
+    // MARK: - Purchase
+    
     func purchase(_ product: Product) async {
         guard !isPurchasing else { return }
         isPurchasing = true
@@ -150,6 +160,8 @@ import SwiftUI
         }
     }
     
+    // MARK: - Refresh Subscriptions
+    
     func refreshSubscriptions() async {
         isLoading = true
         defer { isLoading = false }
@@ -165,6 +177,8 @@ import SwiftUI
         await checkCurrentSubscription()
         await checkOwnedProducts()
     }
+    
+    // MARK: - Restore Purchases
     
     func restorePurchases() async {
         do {
@@ -227,6 +241,8 @@ import SwiftUI
         await checkOwnedProducts()
     }
 
+    // MARK: - Check Ownership
+    
     func checkOwnedProducts() async {
         ownsLifetimeUnlock = false
         currentSubscription = nil // Reset to avoid stale state
@@ -270,6 +286,7 @@ import SwiftUI
         print("Final: ownsLifetimeUnlock=\(ownsLifetimeUnlock), currentSubscription=\(currentSubscription?.displayName ?? "nil")")
     }
 
+    // MARK: - Refresh Ownership (Combined Check)
     
     func refreshOwnership() async {
         var ownsLifetime = false
