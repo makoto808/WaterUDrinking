@@ -18,7 +18,7 @@ struct HomeView: View {
     var body: some View {
         VStack(spacing: 0) {
             TitleView()
-                .padding(.top, 10)
+                .padding(.top, 13)
             
             Spacer(minLength: 50)
             
