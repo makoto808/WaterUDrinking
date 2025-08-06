@@ -27,13 +27,13 @@ struct TitleView: View {
         // Otherwise, pick a new title
         let titlesForDay: [String]
         switch day {
-        case 1: titlesForDay = ["Sunday Sips", "Soothing Sunday", "Slow Sip Sunday"]
-        case 2: titlesForDay = ["Motivational Monday"]
-        case 3: titlesForDay = ["Tonic Tuesday", "Tipsy Tuesday"]
-        case 4: titlesForDay = ["Water Wednesday", "Wave Wednesday", "Wet Wednesday"]
-        case 5: titlesForDay = ["Thirsty Thursday"]
-        case 6: titlesForDay = ["Friday Fizz", "Fuel-Up Friday"]
-        case 7: titlesForDay = ["Saturday Sips"]
+        case 1: titlesForDay = ["Sunday Sips", "Soothing Sunday", "Slow Sip Sunday","Sip & Chill Sunday", "Self-Care Sunday", "Sippin’ Saturday"]
+        case 2: titlesForDay = ["Motivational Monday", "Mindful Monday", "Momentum Monday"]
+        case 3: titlesForDay = ["Tonic Tuesday", "Tipsy Tuesday", "Take-A-Sip Tuesday"]
+        case 4: titlesForDay = ["Water Wednesday", "Wellness Wednesday"]
+        case 5: titlesForDay = ["Thirsty Thursday", "Tumbler Thursday"]
+        case 6: titlesForDay = ["Friday Fizz", "Fuel-Up Friday", "Fluid Friday", "Fillin’ Fine Friday"]
+        case 7: titlesForDay = ["Saturday Sips", "Sippin’ Saturday", "Sip Happens Saturday"]
         default: titlesForDay = ["Stay Hydrated"]
         }
         
