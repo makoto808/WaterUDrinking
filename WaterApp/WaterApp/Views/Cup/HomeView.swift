@@ -17,9 +17,8 @@ struct HomeView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Spacer(minLength: 35)
-            
             TitleView()
+                .padding(.top, 13)
             
             Spacer(minLength: 50)
             
@@ -67,18 +66,3 @@ struct HomeView: View {
         .navigationBarBackButtonHidden(true)
     }
 }
-
-//#Preview {
-//    let mockVM = DrinkListVM()
-//    mockVM.totalOz = 60
-//    mockVM.totalOzGoal = 100
-//
-//    let mockPurchaseManager = PurchaseManager.shared
-//
-//    return NavigationStack {
-//        HomeView()
-//            .environment(mockVM)
-//            .environmentObject(mockPurchaseManager)
-//    }
-//    .modelContainer(for: [UserGoal.self])
-//}

@@ -11,7 +11,7 @@
  add haptic touches when tapping drinks and adding drinks
  
  
+ reorganzie VM and put notes
  
- 
- 
+  
  */

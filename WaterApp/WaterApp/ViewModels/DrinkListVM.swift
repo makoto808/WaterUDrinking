@@ -10,20 +10,21 @@ import SwiftData
 import SwiftUI
 
 @Observable final class DrinkListVM {
+    var customOzDetent = PresentationDetent.fraction(2/6)
     var modelContext: ModelContext!
     var navPath: [NavPath] = []
-    var todayItems: [DrinkItem] = []
-    var selectedItemIndex: Int?
-    var selectedCalendarDate: Date? = nil
-    var settingsDetent = PresentationDetent.medium
-    var customOzDetent = PresentationDetent.fraction(2/6)
-    var showCustomOzView = false
-    var showCustomDrinkView = false
-    var showPastDrinkSheet = false
-    var showAlert = false
-    var value = 0.0
-    var totalOz: Double = 0.0
     var percentTotal: Double = 0.0
+    var selectedCalendarDate: Date? = nil
+    var selectedItemIndex: Int?
+    var settingsDetent = PresentationDetent.medium
+    var showAlert = false
+    var showCustomDrinkView = false
+    var showCustomOzView = false
+    var showPastDrinkSheet = false
+    var todayItems: [DrinkItem] = []
+    var totalOz: Double = 0.0
+    var value = 0.0
+    
     var totalOzGoal: Double = 120 {
         didSet {
             percentTotal = totalOzGoal == 0 ? 0 : totalOz / totalOzGoal * 100
@@ -31,6 +32,7 @@ import SwiftUI
     }
 
     // MARK: - Drink Items
+    
     var items: [DrinkItem] = [] {
         didSet {
             totalOz = items.reduce(0.0) { $0 + $1.hydrationAdjustedVolume }
@@ -46,10 +48,14 @@ import SwiftUI
         self.refreshTodayItems(modelContext: context)
     }
 
+    // MARK: - Drink Selection
+    
     func setSelectedItemIndex(for drink: DrinkItem) {
         selectedItemIndex = items.firstIndex { $0.name == drink.name }
     }
 
+    // MARK: - Creating Cached Drink Item
+    
     func parseNewCachedItem(for item: DrinkItem, volume customVolume: Double? = nil) -> CachedDrinkItem? {
         guard selectedItemIndex != nil else { return nil }
         let volumeToUse = customVolume ?? value
@@ -87,6 +93,7 @@ import SwiftUI
         return newItem
     }
 
+    // Combines selected date and time for a drink entry
     func combine(date: Date, time: Date) -> Date {
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: date)
@@ -103,7 +110,8 @@ import SwiftUI
         return calendar.date(from: combined) ?? date
     }
 
-    // MARK: - Load from Cache
+    // MARK: - Caching (Fetch, Delete, Refresh)
+    
     func loadFromCache(_ modelContext: ModelContext) {
         do {
             let cached = try fetchTodaysCachedDrinks(modelContext)
@@ -134,48 +142,6 @@ import SwiftUI
         } catch {
             print("Error deleting cached drinks: \(error)")
         }
-    }
-    
-    // MARK: - User Goal
-    func fetchUserGoal(_ context: ModelContext) -> UserGoal? {
-        var descriptor = FetchDescriptor<UserGoal>(
-            predicate: #Predicate { $0.id == "uniqueUserGoal" }
-        )
-        descriptor.fetchLimit = 1
-
-        return (try? context.fetch(descriptor).first) ?? nil
-    }
-
-    func setGoalAndDismiss(_ goal: Double, context: ModelContext) {
-        self.totalOzGoal = goal
-        self.navPath = []
-
-        do {
-            if let existing = fetchUserGoal(context) {
-                existing.goal = goal
-            } else {
-                let newGoal = UserGoal(goal: goal)
-                context.insert(newGoal)
-            }
-            try context.save()
-        } catch {
-            print("Failed to save goal: \(error)")
-        }
-    }
-
-    func loadUserGoal(context: ModelContext) {
-        if let savedGoal = fetchUserGoal(context) {
-            self.totalOzGoal = savedGoal.goal
-        }
-    }
-
-    // MARK: - Cache
-    private func fetchTodaysCachedDrinks(_ modelContext: ModelContext) throws -> [CachedDrinkItem] {
-        let today = Calendar.current.startOfDay(for: Date())
-        let predicate = #Predicate<CachedDrinkItem> { $0.date >= today }
-        let fetchDescriptor = FetchDescriptor<CachedDrinkItem>(predicate: predicate)
-        let cached = try modelContext.fetch(fetchDescriptor)
-        return cached
     }
     
     func refreshFromCache(_ modelContext: ModelContext) {
@@ -242,30 +208,6 @@ import SwiftUI
         }
     }
 
-    private func fetchCachedDrinks(for date: Date, _ modelContext: ModelContext) throws -> [CachedDrinkItem] {
-        let startOfDay = Calendar.current.startOfDay(for: date)
-        let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay)!
-        let predicate = #Predicate<CachedDrinkItem> { $0.date >= startOfDay && $0.date < endOfDay }
-        let fetchDescriptor = FetchDescriptor<CachedDrinkItem>(predicate: predicate)
-        return try modelContext.fetch(fetchDescriptor)
-    }
-
-    var totalOuncesToday: Double {
-        let today = Calendar.current.startOfDay(for: Date())
-        let endOfToday = Calendar.current.date(byAdding: .day, value: 1, to: today)!
-
-        let predicate = #Predicate<CachedDrinkItem> { $0.date >= today && $0.date < endOfToday }
-        let fetchDescriptor = FetchDescriptor<CachedDrinkItem>(predicate: predicate)
-
-        do {
-            let cached = try modelContext.fetch(fetchDescriptor)
-            return cached.reduce(0.0) { $0 + $1.volume }
-        } catch {
-            print("Error fetching today's drinks: \(error)")
-            return 0.0
-        }
-    }
-    
     func refreshTodayItems(modelContext: ModelContext) {
         do {
             let cached = try fetchTodaysCachedDrinks(modelContext)
@@ -301,6 +243,75 @@ import SwiftUI
             percentTotal = 0
         }
     }
+    
+    private func fetchTodaysCachedDrinks(_ modelContext: ModelContext) throws -> [CachedDrinkItem] {
+        let today = Calendar.current.startOfDay(for: Date())
+        let predicate = #Predicate<CachedDrinkItem> { $0.date >= today }
+        let fetchDescriptor = FetchDescriptor<CachedDrinkItem>(predicate: predicate)
+        let cached = try modelContext.fetch(fetchDescriptor)
+        return cached
+    }
+    
+
+    private func fetchCachedDrinks(for date: Date, _ modelContext: ModelContext) throws -> [CachedDrinkItem] {
+        let startOfDay = Calendar.current.startOfDay(for: date)
+        let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay)!
+        let predicate = #Predicate<CachedDrinkItem> { $0.date >= startOfDay && $0.date < endOfDay }
+        let fetchDescriptor = FetchDescriptor<CachedDrinkItem>(predicate: predicate)
+        return try modelContext.fetch(fetchDescriptor)
+    }
+    
+    var totalOuncesToday: Double {
+        let today = Calendar.current.startOfDay(for: Date())
+        let endOfToday = Calendar.current.date(byAdding: .day, value: 1, to: today)!
+
+        let predicate = #Predicate<CachedDrinkItem> { $0.date >= today && $0.date < endOfToday }
+        let fetchDescriptor = FetchDescriptor<CachedDrinkItem>(predicate: predicate)
+
+        do {
+            let cached = try modelContext.fetch(fetchDescriptor)
+            return cached.reduce(0.0) { $0 + $1.volume }
+        } catch {
+            print("Error fetching today's drinks: \(error)")
+            return 0.0
+        }
+    }
+    
+    // MARK: - User Goal
+    
+    func fetchUserGoal(_ context: ModelContext) -> UserGoal? {
+        var descriptor = FetchDescriptor<UserGoal>(
+            predicate: #Predicate { $0.id == "uniqueUserGoal" }
+        )
+        descriptor.fetchLimit = 1
+
+        return (try? context.fetch(descriptor).first) ?? nil
+    }
+
+    func setGoalAndDismiss(_ goal: Double, context: ModelContext) {
+        self.totalOzGoal = goal
+        self.navPath = []
+
+        do {
+            if let existing = fetchUserGoal(context) {
+                existing.goal = goal
+            } else {
+                let newGoal = UserGoal(goal: goal)
+                context.insert(newGoal)
+            }
+            try context.save()
+        } catch {
+            print("Failed to save goal: \(error)")
+        }
+    }
+
+    func loadUserGoal(context: ModelContext) {
+        if let savedGoal = fetchUserGoal(context) {
+            self.totalOzGoal = savedGoal.goal
+        }
+    }
+
+    // MARK: - Load User Drinks
     
     func loadUserDrinkItems(_ context: ModelContext) {
         do {
@@ -345,8 +356,8 @@ import SwiftUI
         }
     }
 
-    // Helper methods to provide hydrationRate and category for user drinks loaded from persistence
-    // Example: Lookup hydrationRate by name, or return default
+    // MARK: - Drink Defaults / Hydration Lookup
+    
     func hydrationRateForDrink(named name: String) -> Int {
         DefaultDrinks.all.first(where: { $0.name == name })?.hydrationRate ?? 100
     }

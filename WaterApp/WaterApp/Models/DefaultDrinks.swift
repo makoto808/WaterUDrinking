@@ -17,14 +17,13 @@ struct DefaultDrinks {
         
         // TEAS
         DrinkItem(name: "Tea", img: "tea", volume: 0.0, hydrationRate: 90, category: .tea),
+        DrinkItem(name: "Yerba Mate", img: "yerbaMate", volume: 0.0, hydrationRate: 90, category: .tea),
         
         // COFFEES
         DrinkItem(name: "Coffee", img: "coffee", volume: 0.0, hydrationRate: 70, category: .coffee),
         
         // SODAS
         DrinkItem(name: "Soda", img: "soda", volume: 0.0, hydrationRate: 80, category: .soda),
-//        DrinkItem(name: "Diet Soda", img: "dietSoda", volume: 0.0, hydrationRate: 80, category: .soda),
-//        DrinkItem(name: "Non-Caffeinated Soda", img: "nonCaffeinatedSoda", volume: 0.0, hydrationRate: 90, category: .soda),
         
         // JUICES
         DrinkItem(name: "Juice", img: "juice", volume: 0.0, hydrationRate: 90, category: .juice),
@@ -62,7 +61,6 @@ struct DefaultDrinks {
 
 /* MARK: - Future Drink Ideas?
 
- Yerba Mate
  Matcha
  Iced Tea
  Boba Tea
@@ -74,6 +72,8 @@ struct DefaultDrinks {
  Almond Milk
  Oat Milk
  
- //        DrinkItem(name: "Diet Soda", img: "dietSoda", volume: 0.0, hydrationRate: 80, category: .soda),
- //        DrinkItem(name: "Non-Caffeinated Soda", img: "nonCaffeinatedSoda", volume: 0.0, hydrationRate: 90, category: .soda),
+ DrinkItem(name: "Diet Soda", img: "dietSoda", volume: 0.0, hydrationRate: 80, category: .soda),
+ DrinkItem(name: "Non-Caffeinated Soda", img: "nonCaffeinatedSoda", volume: 0.0, hydrationRate: 90, category: .soda),
+ 
+ 
 */
