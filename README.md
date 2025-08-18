@@ -56,15 +56,9 @@
 * 🔁 **Monthly Subscription**: Ongoing access with support for future features.
 * 🛠 Includes:
 
-  * Wave animation progress views
-  * Unlimited drink history
-  * Custom reminder options
-
----
-
-## 📲 Screenshots
-
-> *Add your screenshots here (e.g., subscription screen, calendar view, progress visualization).*
+  * Add and delete past drink logs
+  * Access to all drink menu items
+  * Access to all future features and updates
 
 ---
 
@@ -76,9 +70,8 @@
 
 ## 📦 Coming Soon
 
-* ☁️ iCloud sync
 * 🧊 More drink types and icons
-* 🎯 Goal streaks and badges
+* 🎯 Monthly goal streaks and reports
 
 ---
 
