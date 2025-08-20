@@ -67,13 +67,13 @@
 * **Terms of Use (EULA)**: [Apple Standard EULA](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/)
 
 ---
-
+<img src="https://user-images.githubusercontent.com/link-to-your-image.png" width="200" />
 ## 📸 Screenshots
 ![Simulator Screenshot - iPhone 16 Pro - 2025-08-03 at 04 42 21](https://github.com/user-attachments/assets/6e05dd9c-1917-4ba5-8783-1cdc25285b43)
-<img width="1242" height="2688" alt="Simulator Screenshot - iPhone 16 Pro - 2025-07-21 at 14 00 59" src="https://github.com/user-attachments/assets/01902810-e9fd-4ecf-a978-1f837dc944bf" />
-<img width="1242" height="2688" alt="Simulator Screenshot - iPhone 16 Pro - 2025-07-21 at 14 00 14" src="https://github.com/user-attachments/assets/79b64506-1160-437a-9a3e-ebe26afa4f5a" />
-<img width="1242" height="2688" alt="Simulator Screenshot - iPhone 16 Pro - 2025-07-21 at 13 57 34" src="https://github.com/user-attachments/assets/f773974a-78d5-4c01-91d7-c95e58b1669c" />
-<img width="1242" height="2688" alt="Simulator Screenshot - iPhone 16 Pro - 2025-07-21 at 13 54 51" src="https://github.com/user-attachments/assets/660343b8-835d-4f95-911b-1453ec78dee8" />
+<img src="https://github.com/user-attachments/assets/01902810-e9fd-4ecf-a978-1f837dc944bf" width="200" />
+<img src="https://github.com/user-attachments/assets/79b64506-1160-437a-9a3e-ebe26afa4f5a" width="200" />
+<img src="https://github.com/user-attachments/assets/f773974a-78d5-4c01-91d7-c95e58b1669c" width="200" />
+<img src="https://github.com/user-attachments/assets/660343b8-835d-4f95-911b-1453ec78dee8" width="200" />
 
 ---
 
