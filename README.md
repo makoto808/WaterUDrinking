@@ -67,9 +67,9 @@
 * **Terms of Use (EULA)**: [Apple Standard EULA](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/)
 
 ---
-<img src="https://user-images.githubusercontent.com/link-to-your-image.png" width="200" />
+
 ## 📸 Screenshots
-![Simulator Screenshot - iPhone 16 Pro - 2025-08-03 at 04 42 21](https://github.com/user-attachments/assets/6e05dd9c-1917-4ba5-8783-1cdc25285b43)
+
 <img src="https://github.com/user-attachments/assets/01902810-e9fd-4ecf-a978-1f837dc944bf" width="200" />
 <img src="https://github.com/user-attachments/assets/79b64506-1160-437a-9a3e-ebe26afa4f5a" width="200" />
 <img src="https://github.com/user-attachments/assets/f773974a-78d5-4c01-91d7-c95e58b1669c" width="200" />
